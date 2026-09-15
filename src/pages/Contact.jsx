@@ -1,47 +1,404 @@
+
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 function Contact() {
   return (
-    <main>
-      <section>
-        <h1>Contact Us</h1>
-        <p>
-          Get in touch with EACHRights. We welcome enquiries, partnerships,
-          collaboration, and community engagement.
-        </p>
+    <main className="min-h-screen bg-white">
 
-        <div>
-          <h2>Send Us a Message</h2>
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-forest py-20 text-white lg:py-28">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[40px] border-white" />
+          <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full border-[50px] border-white" />
+        </div>
 
-          <form>
-            <input
-              type="text"
-              placeholder="Your Name"
-              name="name"
-            />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
+          >
+            <Link
+              to="/"
+              className="mb-8 inline-block text-sm font-medium text-white/80 transition hover:text-white"
+            >
+              ← Back to Home
+            </Link>
 
-            <input
-              type="email"
-              placeholder="Your Email"
-              name="email"
-            />
+            <p className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white/80">
+              Get In Touch
+            </p>
 
-            <input
-              type="text"
-              placeholder="Subject"
-              name="subject"
-            />
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              Contact EACHRights
+            </h1>
 
-            <textarea
-              placeholder="Your Message"
-              name="message"
-              rows="6"
-            />
-
-            <button type="submit">
-              Send Message
-            </button>
-          </form>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">
+              We welcome your inquiries, feedback, partnership opportunities
+              and engagement as we work together to advance human rights and
+              social justice in East Africa.
+            </p>
+          </motion.div>
         </div>
       </section>
+
+      {/* INTRO */}
+      <section className="py-16 lg:py-20">
+        <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
+              We Would Love to Hear From You
+            </span>
+
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              Let’s Connect
+            </h2>
+
+            <p className="mt-5 text-lg leading-8 text-gray-600">
+              Thank you for your interest in reaching out to the East African
+              Centre for Human Rights (EACHRights).
+            </p>
+
+            <p className="mt-4 text-lg leading-8 text-gray-600">
+              Please feel free to reach out to us using the contact information
+              provided below. We welcome any inquiries, feedback, or
+              collaboration opportunities.
+            </p>
+
+            <p className="mt-4 text-lg leading-8 text-gray-600">
+              We value your engagement and look forward to hearing from you.
+              Together, we can make a difference in advancing human rights
+              across East Africa.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CONTACT INFORMATION + FORM */}
+      <section className="bg-forest-soft py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+
+            {/* CONTACT DETAILS */}
+            <motion.div
+              initial={{ opacity: 0, x: -25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
+                Contact Information
+              </p>
+
+              <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
+                Our Head Office
+              </h2>
+
+              <p className="mt-4 max-w-xl leading-7 text-gray-600">
+                You can reach the EACHRights team through our office,
+                telephone or email contacts below.
+              </p>
+
+              <div className="mt-10 space-y-8">
+
+                {/* ADDRESS */}
+                <div className="border-b border-gray-200 pb-7">
+                  <p className="text-sm font-bold uppercase tracking-wide text-forest">
+                    Our Head Office Address
+                  </p>
+
+                  <p className="mt-2 text-lg leading-8 text-ink">
+                    Apartment N5
+                    <br />
+                    Nine Planets Apartments
+                    <br />
+                    Kabarnet Road
+                    <br />
+                    Nairobi, Kenya
+                  </p>
+                </div>
+
+                {/* POSTAL */}
+                <div className="border-b border-gray-200 pb-7">
+                  <p className="text-sm font-bold uppercase tracking-wide text-forest">
+                    EACHRights Postal Address
+                  </p>
+
+                  <p className="mt-2 text-lg text-ink">
+                    P.O. Box 19494-00100
+                    <br />
+                    Nairobi, Kenya
+                  </p>
+                </div>
+
+                {/* PHONE */}
+                <div className="border-b border-gray-200 pb-7">
+                  <p className="text-sm font-bold uppercase tracking-wide text-forest">
+                    Call Us
+                  </p>
+
+                  <a
+                    href="tel:+254701670090"
+                    className="mt-2 inline-block text-lg font-semibold text-ink transition hover:text-forest"
+                  >
+                    +254-701-670090
+                  </a>
+                </div>
+
+                {/* EMAIL */}
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wide text-forest">
+                    Mail Us for Information
+                  </p>
+
+                  <a
+                    href="mailto:info@eachrights.or.ke"
+                    className="mt-2 inline-block text-lg font-semibold text-ink transition hover:text-forest"
+                  >
+                    info@eachrights.or.ke
+                  </a>
+                </div>
+
+              </div>
+            </motion.div>
+
+            {/* CONTACT FORM */}
+            <motion.div
+              initial={{ opacity: 0, x: 25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-3xl bg-white p-7 shadow-lg sm:p-10"
+            >
+              <div className="mb-8">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
+                  Send Us a Message
+                </p>
+
+                <h2 className="mt-2 text-3xl font-bold text-ink">
+                  How Can We Help?
+                </h2>
+
+                <p className="mt-3 leading-7 text-gray-600">
+                  Complete the form below and our team will get back to you.
+                </p>
+              </div>
+
+              <form className="space-y-6">
+
+                {/* NAME */}
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-semibold text-ink"
+                  >
+                    Name <span className="text-red-500">*</span>
+                  </label>
+
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Enter your name"
+                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                  />
+                </div>
+
+                {/* EMAIL */}
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-semibold text-ink"
+                  >
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Enter your email address"
+                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                  />
+                </div>
+
+                {/* PHONE */}
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="mb-2 block text-sm font-semibold text-ink"
+                  >
+                    Phone
+                    <span className="ml-1 font-normal text-gray-400">
+                      (Optional)
+                    </span>
+                  </label>
+
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Enter your phone number"
+                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                  />
+                </div>
+
+                {/* SUBJECT */}
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="mb-2 block text-sm font-semibold text-ink"
+                  >
+                    Subject <span className="text-red-500">*</span>
+                  </label>
+
+                  <select
+                    id="subject"
+                    name="subject"
+                    required
+                    defaultValue=""
+                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/10"
+                  >
+                    <option value="" disabled>
+                      Select a subject
+                    </option>
+
+                    <option value="partnership">
+                      Partnership Collaboration
+                    </option>
+
+                    <option value="invitation">
+                      Invitation
+                    </option>
+
+                    <option value="donation">
+                      Making a Donation
+                    </option>
+
+                    <option value="education">
+                      Right to Education Programme
+                    </option>
+
+                    <option value="business-human-rights">
+                      Business and Human Rights Programme
+                    </option>
+
+                    <option value="health">
+                      Right to Health Programme
+                    </option>
+
+                    <option value="inquiry">
+                      General Inquiry
+                    </option>
+                  </select>
+                </div>
+
+                {/* MESSAGE */}
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-sm font-semibold text-ink"
+                  >
+                    Your Message <span className="text-red-500">*</span>
+                  </label>
+
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    required
+                    placeholder="Write your message here..."
+                    className="w-full resize-none rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                  />
+                </div>
+
+                {/* SUBMIT */}
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-forest px-6 py-4 font-semibold text-white transition hover:bg-forest-dark focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                >
+                  Send Message
+                </button>
+
+              </form>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* MAP / LOCATION */}
+      <section className="py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+
+          <div className="mb-8">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
+              Find Us
+            </p>
+
+            <h2 className="mt-2 text-3xl font-bold text-ink sm:text-4xl">
+              Our Nairobi Office
+            </h2>
+
+            <p className="mt-3 max-w-2xl leading-7 text-gray-600">
+              Apartment N5, Nine Planets Apartments, Kabarnet Road, Nairobi.
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-sm">
+            <iframe
+              title="EACHRights Office Location"
+              src="https://www.google.com/maps?q=Kabarnet%20Road%2C%20Nairobi%2C%20Kenya&output=embed"
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-forest py-16 text-white lg:py-20">
+        <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
+
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/70">
+            Human Rights • Justice • Dignity
+          </p>
+
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+            Let’s Work Together
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/80">
+            Whether you are interested in partnering with EACHRights,
+            supporting our programmes or learning more about our work, we
+            welcome the opportunity to connect.
+          </p>
+
+          <a
+            href="mailto:info@eachrights.or.ke"
+            className="mt-8 inline-block rounded-xl bg-white px-7 py-3.5 font-semibold text-forest transition hover:bg-gray-100"
+          >
+            Email EACHRights
+          </a>
+
+        </div>
+      </section>
+
     </main>
   );
 }
