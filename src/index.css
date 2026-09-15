@@ -240,3 +240,377 @@
     font-size: 10px;
   }
 }
+/* =========================================================
+   OUR WORK DROPDOWN
+========================================================= */
+
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.nav-dropdown:hover .dropdown-trigger svg {
+  transform: rotate(180deg);
+}
+
+.dropdown-trigger svg {
+  transition: transform 0.2s ease;
+}
+
+
+/* =========================================================
+   FIRST DROPDOWN
+========================================================= */
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+
+  width: 330px;
+
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.10),
+    0 5px 15px rgba(0, 0, 0, 0.05);
+
+  transform: translateX(-50%) translateY(8px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+  z-index: 1000;
+}
+
+.nav-dropdown:hover > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* =========================================================
+   DROPDOWN ITEMS
+========================================================= */
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  width: 100%;
+
+  padding: 14px;
+
+  color: #12372a;
+
+  text-decoration: none;
+
+  border-radius: 9px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #f3faf6;
+}
+
+.dropdown-item-content {
+  min-width: 0;
+}
+
+.dropdown-item-title {
+  display: block;
+
+  color: #12372a;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.dropdown-item-description {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.dropdown-arrow {
+  flex-shrink: 0;
+
+  color: #0b5d3b;
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   NESTED PROGRAMMES DROPDOWN
+========================================================= */
+
+.nested-dropdown {
+  position: relative;
+}
+
+.programme-trigger {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.nested-arrow {
+  flex-shrink: 0;
+
+  color: #0b5d3b;
+
+  transition: transform 0.2s ease;
+}
+
+.nested-dropdown:hover .nested-arrow {
+  transform: translateX(3px);
+}
+
+.nested-menu {
+  position: absolute;
+
+  top: -8px;
+  left: calc(100% + 8px);
+
+  width: 320px;
+
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.10),
+    0 5px 15px rgba(0, 0, 0, 0.05);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateX(8px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+  z-index: 1100;
+}
+
+.nested-dropdown:hover .nested-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   PROGRAMME ITEMS
+========================================================= */
+
+.nested-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 11px 13px;
+
+  color: #374151;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  border-radius: 8px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nested-menu-item:hover {
+  background: #f3faf6;
+  color: #0b5d3b;
+}
+
+.nested-menu-item svg {
+  flex-shrink: 0;
+
+  color: #0b5d3b;
+
+  transition: transform 0.2s ease;
+}
+
+.nested-menu-item:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   MOBILE DROPDOWN
+========================================================= */
+
+.mobile-dropdown {
+  width: 100%;
+}
+
+.mobile-dropdown-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  font: inherit;
+  text-align: left;
+}
+
+.mobile-dropdown-button svg {
+  transition: transform 0.2s ease;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   MOBILE OUR WORK ITEMS
+========================================================= */
+
+.mobile-dropdown-menu {
+  margin: 3px 0 8px 12px;
+
+  padding-left: 12px;
+
+  border-left: 2px solid #e8f5ef;
+}
+
+.mobile-dropdown-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 11px 12px;
+
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 7px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.mobile-dropdown-item:hover {
+  background: #f3faf6;
+  color: #0b5d3b;
+}
+
+
+/* =========================================================
+   MOBILE PROGRAMMES
+========================================================= */
+
+.mobile-programmes-menu {
+  margin: 2px 0 6px 12px;
+
+  padding-left: 12px;
+
+  border-left: 1px solid #d9eee4;
+}
+
+.mobile-programme-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding: 9px 10px;
+
+  color: #6b7280;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  border-radius: 6px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.mobile-programme-item:hover {
+  background: #f3faf6;
+  color: #0b5d3b;
+}
+
+.mobile-programme-item svg {
+  flex-shrink: 0;
+  color: #0b5d3b;
+}
