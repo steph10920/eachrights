@@ -12,7 +12,6 @@ import {
   BookOpen,
   Gavel,
 } from "lucide-react";
-import Footer from "../components/Footer.jsx";
 
 /* =========================================================
    CORE VALUES
@@ -638,12 +637,6 @@ export default function About() {
         </section>
 
       </main>
-
-      {/* =========================================================
-          FOOTER
-      ========================================================= */}
-
-      <Footer />
     </>
   );
 }
