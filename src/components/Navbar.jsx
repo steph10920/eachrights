@@ -142,6 +142,7 @@ function Navbar() {
             ================================================= */}
 
             <div className="dropdown-menu our-work-menu">
+              <div className="dropdown-menu-panel">
 
               {/* PROGRAMMES */}
               <div className="nested-dropdown">
@@ -174,6 +175,7 @@ function Navbar() {
                 ================================================= */}
 
                 <div className="nested-menu">
+                  <div className="nested-menu-panel">
 
                   {programmeLinks.map((programme) => (
                     <Link
@@ -186,6 +188,7 @@ function Navbar() {
                     </Link>
                   ))}
 
+                  </div>
                 </div>
 
               </div>
@@ -215,6 +218,7 @@ function Navbar() {
                 </span>
               </Link>
 
+              </div>
             </div>
 
           </div>

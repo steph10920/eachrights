@@ -16,13 +16,11 @@ import {
   Megaphone,
   Gavel,
   Handshake,
-  BookOpen,
   ShieldCheck,
   Landmark,
 } from "lucide-react";
 import { Helmet } from "react-helmet";
 import CountUp from "../components/CountUp.jsx";
-import Footer from "../components/Footer.jsx";
 
 /* =========================================================
    EACHRIGHTS CONTENT

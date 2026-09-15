@@ -273,21 +273,14 @@
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 12px);
+  top: 100%;
   left: 50%;
 
   width: 330px;
 
-  padding: 8px;
-
-  background: #ffffff;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.10),
-    0 5px 15px rgba(0, 0, 0, 0.05);
+  /* invisible buffer — keeps the box (and hover state) continuous
+     between the trigger and the visible card below */
+  padding-top: 12px;
 
   transform: translateX(-50%) translateY(8px);
 
@@ -309,6 +302,19 @@
   pointer-events: auto;
 
   transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu-panel {
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.10),
+    0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -405,20 +411,13 @@
   position: absolute;
 
   top: -8px;
-  left: calc(100% + 8px);
+  left: 100%;
 
   width: 320px;
 
-  padding: 8px;
-
-  background: #ffffff;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.10),
-    0 5px 15px rgba(0, 0, 0, 0.05);
+  /* invisible buffer — keeps the box (and hover state) continuous
+     between the trigger and the visible card beside it */
+  padding-left: 8px;
 
   opacity: 0;
   visibility: hidden;
@@ -440,6 +439,19 @@
   pointer-events: auto;
 
   transform: translateX(0);
+}
+
+.nested-menu-panel {
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.10),
+    0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 
