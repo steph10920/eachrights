@@ -1,3 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — matched to the real eachrights.or.ke green (#0b5d3b),
+     already used in Navbar.jsx's own hardcoded CSS below */
+  --color-paper: #f1edd9;
+  --color-ink: #16291f;
+  --color-forest: #0b5d3b;
+  --color-forest-dark: #08472e;
+  --color-forest-light: #eae3cc;
+  --color-gold: #e3a73b;
+  --color-clay: #b8462f;
+
+  /* Fonts — font-display for headlines, font-script for the Eyebrow accent */
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-script: "Caveat", cursive;
+}
+
 /* ================================
    EACHRights Navbar
 ================================ */
