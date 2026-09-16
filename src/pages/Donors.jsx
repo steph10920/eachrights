@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const currentDonors = [
   {
     name: "Oxfam IBIS",
-    logo: "public/donors/oxfam.jpg",
+    logo: "/donors/OXFAM.jpg",
     description:
       "A current development partner supporting efforts that advance social justice, equality and human rights.",
   },

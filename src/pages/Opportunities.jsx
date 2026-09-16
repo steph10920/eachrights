@@ -60,8 +60,8 @@ function Opportunities() {
       {/* =========================================================
           HERO
       ========================================================= */}
-      <section className="relative overflow-hidden bg-[#0b5d3b] text-white">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0b5d3b] to-[#08472e]" />
+      <section className="relative overflow-hidden bg-forest text-white">
+        <div className="absolute inset-0 bg-gradient-to-br from-forest to-forest-dark" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
           <div className="max-w-4xl">
@@ -97,15 +97,15 @@ function Opportunities() {
 
             {/* CURRENT STATUS */}
             <motion.div
-              className="mt-10 max-w-3xl bg-white text-[#12372a] rounded-2xl p-6 md:p-7 shadow-xl"
+              className="mt-10 max-w-3xl bg-white text-forest-dark rounded-2xl p-6 md:p-7 shadow-xl"
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
             >
               <div className="flex items-start gap-4">
 
-                <div className="shrink-0 w-11 h-11 rounded-full bg-[#e8f5ef] flex items-center justify-center">
-                  <Bell className="w-5 h-5 text-[#0b5d3b]" />
+                <div className="shrink-0 w-11 h-11 rounded-full bg-forest-soft flex items-center justify-center">
+                  <Bell className="w-5 h-5 text-forest" />
                 </div>
 
                 <div>
@@ -136,11 +136,11 @@ function Opportunities() {
           <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20">
 
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0b5d3b]">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-forest">
                 Opportunities at EACHRights
               </p>
 
-              <h2 className="mt-4 text-3xl md:text-4xl font-bold text-[#12372a]">
+              <h2 className="mt-4 text-3xl md:text-4xl font-bold text-forest-dark">
                 Building a community of changemakers
               </h2>
             </div>
@@ -175,16 +175,16 @@ function Opportunities() {
       {/* =========================================================
           OPPORTUNITY TYPES
       ========================================================= */}
-      <section className="bg-[#f3faf6] py-20 lg:py-24">
+      <section className="bg-forest-soft py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
           <div className="max-w-3xl">
 
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0b5d3b]">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-forest">
               Ways to engage
             </p>
 
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold text-[#12372a]">
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold text-forest-dark">
               Explore opportunities with EACHRights
             </h2>
 
@@ -211,11 +211,11 @@ function Opportunities() {
                   className="bg-white border border-gray-200 rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow"
                 >
 
-                  <div className="w-12 h-12 rounded-xl bg-[#e8f5ef] flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-[#0b5d3b]" />
+                  <div className="w-12 h-12 rounded-xl bg-forest-soft flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-forest" />
                   </div>
 
-                  <h3 className="mt-6 text-xl font-bold text-[#12372a]">
+                  <h3 className="mt-6 text-xl font-bold text-forest-dark">
                     {item.title}
                   </h3>
 
@@ -239,15 +239,15 @@ function Opportunities() {
 
           <div className="rounded-3xl border border-gray-200 bg-white shadow-sm overflow-hidden">
 
-            <div className="h-2 bg-[#0b5d3b]" />
+            <div className="h-2 bg-forest" />
 
             <div className="p-8 md:p-12 text-center">
 
-              <div className="mx-auto w-16 h-16 rounded-full bg-[#e8f5ef] flex items-center justify-center">
-                <BriefcaseBusiness className="w-7 h-7 text-[#0b5d3b]" />
+              <div className="mx-auto w-16 h-16 rounded-full bg-forest-soft flex items-center justify-center">
+                <BriefcaseBusiness className="w-7 h-7 text-forest" />
               </div>
 
-              <h2 className="mt-6 text-3xl font-bold text-[#12372a]">
+              <h2 className="mt-6 text-3xl font-bold text-forest-dark">
                 Current Vacancies
               </h2>
 
@@ -256,7 +256,7 @@ function Opportunities() {
                 EACHRights.
               </p>
 
-              <div className="mt-7 flex items-center justify-center gap-3 text-[#0b5d3b] font-medium">
+              <div className="mt-7 flex items-center justify-center gap-3 text-forest font-medium">
                 <CheckCircle2 className="w-5 h-5" />
                 <span>
                   New opportunities will be announced on this page.
@@ -272,7 +272,7 @@ function Opportunities() {
       {/* =========================================================
           STAY UPDATED
       ========================================================= */}
-      <section className="bg-[#0b5d3b] text-white py-20 lg:py-24">
+      <section className="bg-forest text-white py-20 lg:py-24">
 
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
 
@@ -294,7 +294,7 @@ function Opportunities() {
 
             <Link
               to="/resources"
-              className="inline-flex items-center gap-2 bg-white text-[#0b5d3b] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="inline-flex items-center gap-2 bg-white text-forest px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
             >
               Explore Resources
               <ArrowRight className="w-4 h-4" />
@@ -320,17 +320,17 @@ function Opportunities() {
 
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
 
-          <div className="rounded-3xl bg-[#f3faf6] p-8 md:p-12">
+          <div className="rounded-3xl bg-forest-soft p-8 md:p-12">
 
             <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center">
 
               <div>
 
-                <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#0b5d3b]">
+                <p className="text-sm font-bold uppercase tracking-[0.16em] text-forest">
                   Get involved
                 </p>
 
-                <h2 className="mt-3 text-3xl font-bold text-[#12372a]">
+                <h2 className="mt-3 text-3xl font-bold text-forest-dark">
                   Want to contribute to our work?
                 </h2>
 
@@ -344,7 +344,7 @@ function Opportunities() {
 
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#0b5d3b] text-white px-7 py-3.5 rounded-lg font-semibold hover:bg-[#08472e] transition whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 bg-forest text-white px-7 py-3.5 rounded-lg font-semibold hover:bg-forest-dark transition whitespace-nowrap"
               >
                 Get Involved
                 <ArrowRight className="w-4 h-4" />
@@ -363,9 +363,9 @@ function Opportunities() {
 
         <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">
 
-          <Mail className="w-7 h-7 text-[#0b5d3b] mx-auto" />
+          <Mail className="w-7 h-7 text-forest mx-auto" />
 
-          <h2 className="mt-4 text-2xl font-bold text-[#12372a]">
+          <h2 className="mt-4 text-2xl font-bold text-forest-dark">
             Important Application Information
           </h2>
 

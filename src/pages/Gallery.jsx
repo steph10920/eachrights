@@ -101,7 +101,7 @@ function Gallery() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
       {/* HERO */}
-      <section className="bg-[#0b5d3b] text-white">
+      <section className="bg-forest text-white">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -136,11 +136,11 @@ function Gallery() {
       {/* INTRO */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0b5d3b]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
             Our Gallery
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#12372a] sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-forest-dark sm:text-4xl">
             Watch our work in action
           </h2>
 
@@ -153,7 +153,7 @@ function Gallery() {
       </section>
 
       {/* FILTER */}
-      <section className="border-y border-gray-100 bg-[#f3faf6]">
+      <section className="border-y border-gray-100 bg-forest-soft">
         <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-6 lg:px-8">
           {categories.map((category) => (
             <button
@@ -161,8 +161,8 @@ function Gallery() {
               onClick={() => setActiveCategory(category)}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 activeCategory === category
-                  ? "bg-[#0b5d3b] text-white"
-                  : "bg-white text-[#0b5d3b] ring-1 ring-[#0b5d3b]/20 hover:bg-[#e8f5ef]"
+                  ? "bg-forest text-white"
+                  : "bg-white text-forest ring-1 ring-forest/20 hover:bg-forest-soft"
               }`}
             >
               {category}
@@ -174,11 +174,11 @@ function Gallery() {
       {/* VIDEOS */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="mb-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0b5d3b]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
             Videos
           </p>
 
-          <h2 className="mt-2 text-3xl font-bold text-[#12372a]">
+          <h2 className="mt-2 text-3xl font-bold text-forest-dark">
             From our work
           </h2>
         </div>
@@ -218,7 +218,7 @@ function Gallery() {
                   {/* VIDEO DETAILS */}
                   <div className="p-6">
                     <div className="mb-3 flex items-center justify-between gap-4">
-                      <span className="rounded-full bg-[#e8f5ef] px-3 py-1 text-xs font-semibold text-[#0b5d3b]">
+                      <span className="rounded-full bg-forest-soft px-3 py-1 text-xs font-semibold text-forest">
                         Video
                       </span>
 
@@ -227,7 +227,7 @@ function Gallery() {
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-[#12372a]">
+                    <h3 className="text-xl font-bold text-forest-dark">
                       {video.title}
                     </h3>
 
@@ -241,7 +241,7 @@ function Gallery() {
           </div>
         ) : (
           <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-6 py-16 text-center">
-            <h3 className="text-xl font-bold text-[#12372a]">
+            <h3 className="text-xl font-bold text-forest-dark">
               No videos available
             </h3>
 
@@ -253,13 +253,13 @@ function Gallery() {
       </section>
 
       {/* YOUTUBE CTA */}
-      <section className="bg-[#f3faf6]">
+      <section className="bg-forest-soft">
         <div className="mx-auto max-w-7xl px-6 py-16 text-center lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0b5d3b]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
             Stay Connected
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-[#12372a]">
+          <h2 className="mt-3 text-3xl font-bold text-forest-dark">
             Follow our work
           </h2>
 
@@ -273,14 +273,14 @@ function Gallery() {
               href="https://www.youtube.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-[#0b5d3b] px-6 py-3 font-semibold text-white transition hover:bg-[#08472e]"
+              className="rounded-full bg-forest px-6 py-3 font-semibold text-white transition hover:bg-forest-dark"
             >
               Visit YouTube Channel
             </a>
 
             <Link
               to="/contact"
-              className="rounded-full border border-[#0b5d3b] px-6 py-3 font-semibold text-[#0b5d3b] transition hover:bg-[#e8f5ef]"
+              className="rounded-full border border-forest px-6 py-3 font-semibold text-forest transition hover:bg-forest-soft"
             >
               Contact EACHRights
             </Link>

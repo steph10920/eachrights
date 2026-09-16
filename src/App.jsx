@@ -31,6 +31,7 @@ function App() {
         {/* Main Pages */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/our-work" element={<OurWork />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/opportunities" element={<Opportunities />} />
