@@ -37,12 +37,42 @@ import { Helmet } from "react-helmet";
 import CountUp from "../components/CountUp.jsx";
 
 const focusAreas = [
-  { title: "Education Justice", description: "Advancing equitable access to quality education and strengthening the right to learn.", icon: GraduationCap },
-  { title: "Gender Justice", description: "Promoting gender equality, dignity and protection for women, girls and vulnerable groups.", icon: Scale },
-  { title: "Health Justice", description: "Advocating for equitable access to health and the realization of the right to health.", icon: HeartPulse },
-  { title: "Environmental & Climate Justice", description: "Supporting communities to address environmental challenges and climate-related injustices.", icon: Leaf },
-  { title: "Economic Justice", description: "Advancing economic and social rights for vulnerable and marginalized communities.", icon: BriefcaseBusiness },
-  { title: "Business & Human Rights", description: "Promoting responsible business practices and respect for human rights.", icon: Building2 },
+  {
+    title: "Education Justice",
+    description: "Advancing equitable access to quality education and strengthening the right to learn.",
+    icon: GraduationCap,
+    link: "/our-work/programmes/education-justice",
+  },
+  {
+    title: "Gender Justice",
+    description: "Promoting gender equality, dignity and protection for women, girls and vulnerable groups.",
+    icon: Scale,
+    link: "/our-work/programmes/gender-justice",
+  },
+  {
+    title: "Health Justice",
+    description: "Advocating for equitable access to health and the realization of the right to health.",
+    icon: HeartPulse,
+    link: "/our-work/programmes/health-justice",
+  },
+  {
+    title: "Environmental & Climate Justice",
+    description: "Supporting communities to address environmental challenges and climate-related injustices.",
+    icon: Leaf,
+    link: "/our-work/programmes/environmental-climate-justice",
+  },
+  {
+    title: "Economic Justice",
+    description: "Advancing economic and social rights for vulnerable and marginalized communities.",
+    icon: BriefcaseBusiness,
+    link: "/our-work/programmes/economic-justice",
+  },
+  {
+    title: "Business & Human Rights",
+    description: "Promoting responsible business practices and respect for human rights.",
+    icon: Building2,
+    link: "/our-work/programmes/business-human-rights",
+  },
 ];
 
 const approaches = [
@@ -515,7 +545,7 @@ export default function Home() {
                   <IconBox icon={Icon} />
                   <h3 className="mt-6 text-xl font-bold text-forest font-display">{area.title}</h3>
                   <p className="mt-3 text-sm leading-7 text-ink/65">{area.description}</p>
-                  <Link to="/our-work" className="mt-5 inline-flex items-center gap-2 font-semibold text-forest-dark">
+                  <Link to={area.link} className="mt-5 inline-flex items-center gap-2 font-semibold text-forest-dark">
                     Learn more
                     <ArrowRight size={16} />
                   </Link>
