@@ -101,12 +101,12 @@ function Gallery() {
           HERO — sized down to match Home's proportions
       ===================================================== */}
 
-      <header className="relative h-[52vh] min-h-[440px] max-h-[560px] overflow-hidden bg-forest text-paper">
+      <header className="relative h-[38vh] min-h-[300px] max-h-[380px] overflow-hidden bg-forest text-paper sm:h-[52vh] sm:min-h-[440px] sm:max-h-[560px]">
 
         <img
           src={storiesHero}
           alt="Stories, Voices & Moments"
-          className="absolute inset-0 h-full w-full object-cover object-bottom"
+          className="absolute inset-0 h-full w-full object-cover object-center sm:object-bottom"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
@@ -114,14 +114,14 @@ function Gallery() {
 
         <Link
           to="/"
-          className="absolute left-6 top-6 z-20 inline-flex text-sm font-medium text-white/85 transition hover:text-white lg:left-8 lg:top-8"
+          className="absolute left-4 top-4 z-20 inline-flex text-xs font-medium text-white/85 transition hover:text-white sm:left-6 sm:top-6 sm:text-sm lg:left-8 lg:top-8"
         >
           ← Back to Home
         </Link>
 
         <h1 className="sr-only">Stories, Voices &amp; Moments — EACHRights Gallery</h1>
 
-        <div className="relative z-10 mx-auto flex h-full max-w-7xl items-end px-6 pb-8 lg:px-8 lg:pb-10">
+        <div className="relative z-10 mx-auto flex h-full max-w-7xl items-end px-4 pb-5 sm:px-6 sm:pb-8 lg:px-8 lg:pb-10">
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,23 +130,23 @@ function Gallery() {
             className="max-w-2xl"
           >
 
-            <p className="max-w-xl text-sm leading-7 text-white/90 sm:text-base">
+            <p className="max-w-xl text-xs leading-6 text-white/90 sm:text-sm sm:leading-7 sm:text-base">
               Videos and visual stories from EACHRights' programmes, community engagement and work to advance
               human rights across East Africa.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
 
               <a
                 href="#videos"
-                className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
+                className="inline-flex items-center gap-2 bg-accent px-4 py-2 text-xs font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105 sm:px-6 sm:py-3 sm:text-sm"
               >
                 Explore Videos
               </a>
 
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 border-2 border-white bg-white/5 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-forest"
+                className="inline-flex items-center gap-2 border-2 border-white bg-white/5 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-forest sm:px-6 sm:py-3 sm:text-sm"
               >
                 Get Involved
               </Link>
