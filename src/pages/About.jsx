@@ -172,7 +172,7 @@ export default function About() {
         </motion.div>
       </section>
 
-      {/* VISION & MISSION */}
+      {/* VISION & MISSION & DIRECTION */}
       <section className="bg-forest-light px-6 py-24">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
           <motion.article
@@ -184,9 +184,10 @@ export default function About() {
           >
             <IconBox icon={Eye} />
             <Eyebrow dark>Our Vision</Eyebrow>
-            <p className="mt-4 truncate text-lg text-forest font-display" title="A just society that respects and upholds human rights and inherent dignity.">
-              A just society that respects and upholds <br>
-              </br>human rights and inherent dignity.
+            <p className="mt-4 text-lg leading-snug text-forest font-display">
+              A just society that respects and upholds
+              <br />
+              human rights and inherent dignity.
             </p>
           </motion.article>
 
@@ -199,8 +200,14 @@ export default function About() {
           >
             <IconBox icon={Target} />
             <Eyebrow dark>Our Mission</Eyebrow>
-            <p className="mt-4 truncate text-lg text-forest font-display" title="To promote and protect human dignity through the realization of social and economic rights for vulnerable and marginalized groups and communities.">
-              To promote and protect human dignity <br></br>through the realization of social and <br></br>economic rights for vulnerable and <br></br>marginalized groups and communities.
+            <p className="mt-4 text-lg leading-snug text-forest font-display">
+              To promote and protect human dignity
+              <br />
+              through the realization of social and
+              <br />
+              economic rights for vulnerable and
+              <br />
+              marginalized groups and communities.
             </p>
           </motion.article>
 
@@ -213,7 +220,7 @@ export default function About() {
           >
             <IconBox icon={Handshake} />
             <Eyebrow dark>Our Direction</Eyebrow>
-            <p className="mt-4 truncate text-lg text-forest font-display" title="Building a more just and equitable society for every person to live with dignity.">
+            <p className="mt-4 text-lg leading-snug text-forest font-display">
               Building a more just and equitable society.
             </p>
           </motion.article>
@@ -329,7 +336,6 @@ export default function About() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-              
               <Link
                 to="/about/team"
                 className="inline-flex items-center justify-center gap-2 border-2 border-forest px-6 py-3.5 text-sm font-semibold text-forest transition hover:bg-forest/5"
