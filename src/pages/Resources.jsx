@@ -126,7 +126,7 @@ export default function Publications() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
 
           <Link
             to="/resources"
@@ -136,21 +136,21 @@ export default function Publications() {
             Resources
           </Link>
 
-          <div className="mt-10 max-w-3xl">
+          <div className="mt-6 max-w-3xl">
 
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
-              <BookOpen size={30} strokeWidth={1.7} />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <BookOpen size={24} strokeWidth={1.7} />
             </div>
 
-            <p className="mt-7 text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
+            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
               Resources
             </p>
 
-            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+            <h1 className="mt-3 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
               Publications
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
               Explore publications, reports and programme documents produced
               by EACHRights to advance human rights, justice and human dignity.
             </p>

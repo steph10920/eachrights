@@ -104,19 +104,19 @@ const approach = [
 export default function About() {
   return (
     <main className="bg-paper font-sans text-ink">
-      {/* PAGE HERO — mirrors Home's forest hero band */}
+      {/* PAGE HERO — mirrors Home's forest hero band, kept compact */}
       <section className="relative overflow-hidden bg-forest text-paper">
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-accent/10" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <div className="max-w-3xl">
             <Eyebrow>About EACHRights</Eyebrow>
-            <h1 className="mt-4 font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
               Advancing human rights,
               <span className="block text-accent">justice and human dignity.</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
               The East African Centre for Human Rights works to promote and protect human dignity through the
               realization of social and economic rights for vulnerable and marginalized groups and communities.
             </p>
