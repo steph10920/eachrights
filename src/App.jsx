@@ -22,6 +22,9 @@ import EconomicJustice from "./pages/programmes/EconomicJustice";
 import BusinessHumanRights from "./pages/programmes/BusinessHumanRights";
 import TheoryOfChange from "./pages/programmes/TheoryOfChange";
 
+// Processes
+import UniversalPeriodicReview from "./pages/processes/UniversalPeriodicReview";
+
 function App() {
   return (
     <BrowserRouter>
@@ -73,6 +76,12 @@ function App() {
         <Route
           path="/our-work/programmes/theory-of-change"
           element={<TheoryOfChange />}
+        />
+
+        {/* Processes */}
+        <Route
+          path="/processes/universal-periodic-review"
+          element={<UniversalPeriodicReview />}
         />
       </Routes>
 

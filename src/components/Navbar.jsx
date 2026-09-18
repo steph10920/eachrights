@@ -6,6 +6,7 @@ function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
   const [mobileProgrammesOpen, setMobileProgrammesOpen] = useState(false);
+  const [mobileProcessesOpen, setMobileProcessesOpen] = useState(false);
 
   // =========================================================
   // MAIN NAVIGATION
@@ -57,6 +58,17 @@ function Navbar() {
   ];
 
   // =========================================================
+  // PROCESSES
+  // =========================================================
+
+  const processLinks = [
+    {
+      name: "Universal Periodic Review",
+      path: "/processes/universal-periodic-review",
+    },
+  ];
+
+  // =========================================================
   // CLOSE MOBILE MENU
   // =========================================================
 
@@ -64,6 +76,7 @@ function Navbar() {
     setMobileMenuOpen(false);
     setMobileWorkOpen(false);
     setMobileProgrammesOpen(false);
+    setMobileProcessesOpen(false);
   };
 
   return (
@@ -197,26 +210,53 @@ function Navbar() {
                   PROCESSES
               ================================================= */}
 
-              <Link
-                to="/our-work/processes"
-                className="dropdown-item"
-              >
-                <div className="dropdown-item-content">
+              <div className="nested-dropdown">
 
-                  <span className="dropdown-item-title">
-                    Processes
-                  </span>
+                <button
+                  type="button"
+                  className="dropdown-item processes-trigger"
+                  aria-haspopup="true"
+                >
+                  <div className="dropdown-item-content">
 
-                  <span className="dropdown-item-description">
-                    How we work to advance human rights and justice
-                  </span>
+                    <span className="dropdown-item-title">
+                      Processes
+                    </span>
 
+                    <span className="dropdown-item-description">
+                      How we work to advance human rights and justice
+                    </span>
+
+                  </div>
+
+                  <ChevronRight
+                    size={17}
+                    className="nested-arrow"
+                  />
+                </button>
+
+                {/* =================================================
+                    PROCESSES SUBMENU
+                ================================================= */}
+
+                <div className="nested-menu">
+                  <div className="nested-menu-panel">
+
+                  {processLinks.map((process) => (
+                    <Link
+                      key={process.path}
+                      to={process.path}
+                      className="nested-menu-item"
+                    >
+                      <span>{process.name}</span>
+                      <ChevronRight size={15} />
+                    </Link>
+                  ))}
+
+                  </div>
                 </div>
 
-                <span className="dropdown-arrow">
-                  →
-                </span>
-              </Link>
+              </div>
 
               </div>
             </div>
@@ -403,14 +443,56 @@ function Navbar() {
                     PROCESSES
                 ================================================= */}
 
-                <Link
-                  to="/our-work/processes"
-                  onClick={closeMobileMenu}
-                  className="mobile-dropdown-item"
-                >
-                  <span>Processes</span>
-                  <ChevronRight size={17} />
-                </Link>
+                <div className="mobile-nested-dropdown">
+
+                  <button
+                    type="button"
+                    className="mobile-dropdown-item mobile-processes-button"
+                    onClick={() =>
+                      setMobileProcessesOpen(
+                        !mobileProcessesOpen
+                      )
+                    }
+                    aria-expanded={mobileProcessesOpen}
+                  >
+                    <span>Processes</span>
+
+                    <ChevronRight
+                      size={17}
+                      className={
+                        mobileProcessesOpen
+                          ? "rotate-90"
+                          : ""
+                      }
+                    />
+                  </button>
+
+                  {/* =================================================
+                      PROCESS PAGES
+                  ================================================= */}
+
+                  {mobileProcessesOpen && (
+                    <div className="mobile-programmes-menu">
+
+                      {processLinks.map((process) => (
+                        <Link
+                          key={process.path}
+                          to={process.path}
+                          onClick={closeMobileMenu}
+                          className="mobile-programme-item"
+                        >
+                          <span>
+                            {process.name}
+                          </span>
+
+                          <ChevronRight size={14} />
+                        </Link>
+                      ))}
+
+                    </div>
+                  )}
+
+                </div>
 
               </div>
             )}
