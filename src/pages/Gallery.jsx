@@ -94,6 +94,28 @@ const videos = [
     date: "Oct 18, 2024",
     url: "https://www.youtube.com/watch?v=HHrP9cCvo5U",
   },
+  {
+    title: "KIKAMBALA ECO JUSTICE CLUB",
+    description:
+      "Eco-Justice Clubs empower learners to understand environmental challenges and adopt eco-friendly practices. This documentary highlights Kikambala Primary School’s Eco-Justice Club as they create an eco-garden and promote environmental stewardship.",
+    date: "Oct 18, 2024",
+    url: "https://www.youtube.com/watch?v=ZDb-C8ryo2M",
+  },
+  {
+    title: "CHILD PARTICIPATION FORUM.",
+    description:
+      "Children have the right to participate in matters affecting their lives. Their inclusion in programs addressing their needs is crucial. This documentary illustrates children educating their children against Child marriage in Bubisa,Marsabit county. Transcript and supporting the launch of an Eco Justice Club.",
+    date: "Oct 18, 2024",
+    url: "https://www.youtube.com/watch?v=4c_tLTLp3Hk",
+  },
+  {
+    title: "Tunza Watoto Campaign",
+    description:
+      "EachRights in partnership with Standard Group carried out Tunza Watoto wetu Media Campaign. The Campaign focused on the effect of Covid -19 Pandemic on Child Rights violation.",
+    date: "Dec 4, 2023",
+    url: "https://www.youtube.com/watch?v=A442sUby8To",
+  },
+  
 ];
 
 /*
