@@ -36,7 +36,7 @@ export default function Footer() {
           {/* About */}
           <div>
             <h5 className="mb-2 text-xs font-semibold text-gray-500">
-              About
+              ABOUT
             </h5>
 
             <ul className="space-y-1">
