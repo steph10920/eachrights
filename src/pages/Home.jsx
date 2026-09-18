@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import hero1 from "../assets/hero/hero-1.jpg";
@@ -102,6 +102,9 @@ const impactImages = [
   { image: impact4, eyebrow: "ADVANCING JUSTICE", title: "Working together for lasting change." },
 ];
 
+const HERO_INTERVAL = 6000;
+const IMPACT_INTERVAL = 5000;
+
 function Eyebrow({ children, dark = false }) {
   return (
     <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-accent"}`}>
@@ -122,20 +125,51 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentImpactImage, setCurrentImpactImage] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const heroTimerRef = useRef(null);
+  const impactTimerRef = useRef(null);
+
+  // --- Hero slider: auto-advance + manual controls that reset the timer ---
+  const startHeroTimer = useCallback(() => {
+    clearInterval(heroTimerRef.current);
+    heroTimerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
-    return () => clearInterval(timer);
+    }, HERO_INTERVAL);
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    startHeroTimer();
+    return () => clearInterval(heroTimerRef.current);
+  }, [startHeroTimer]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+    startHeroTimer();
+  };
+  const prevSlide = () => goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length);
+  const nextSlide = () => goToSlide((currentSlide + 1) % heroSlides.length);
+
+  // --- Impact carousel: auto-advance + manual controls that reset the timer ---
+  const startImpactTimer = useCallback(() => {
+    clearInterval(impactTimerRef.current);
+    impactTimerRef.current = setInterval(() => {
       setCurrentImpactImage((prev) => (prev + 1) % impactImages.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    }, IMPACT_INTERVAL);
   }, []);
+
+  useEffect(() => {
+    startImpactTimer();
+    return () => clearInterval(impactTimerRef.current);
+  }, [startImpactTimer]);
+
+  const goToImpactImage = (index) => {
+    setCurrentImpactImage(index);
+    startImpactTimer();
+  };
+  const prevImpactImage = () =>
+    goToImpactImage((currentImpactImage - 1 + impactImages.length) % impactImages.length);
+  const nextImpactImage = () => goToImpactImage((currentImpactImage + 1) % impactImages.length);
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -143,12 +177,57 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Preload every hero/impact image up front. Without this, the crossfade
+  // for an image the browser hasn't fetched yet shows through as a plain
+  // grey box for a frame or two before the pixels arrive.
+  useEffect(() => {
+    [...heroSlides.map((s) => s.image), ...impactImages.map((i) => i.image)].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   const slide = heroSlides[currentSlide];
   const impactSlide = impactImages[currentImpactImage];
 
-  const nextImpactImage = () => setCurrentImpactImage((prev) => (prev + 1) % impactImages.length);
-  const prevImpactImage = () =>
-    setCurrentImpactImage((prev) => (prev - 1 + impactImages.length) % impactImages.length);
+  // Crossfade + slow zoom instead of a hard slide; collapses to a plain
+  // cut when the visitor has requested reduced motion.
+  const heroImageMotion = prefersReducedMotion
+    ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        exit: { opacity: 1 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, scale: 1.08 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.98 },
+        transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
+      };
+
+  const heroTextMotion = prefersReducedMotion
+    ? { initial: { opacity: 1, x: 0 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 1, x: 0 }, transition: { duration: 0 } }
+    : {
+        initial: { opacity: 0, x: -30 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -18 },
+        transition: { duration: 0.55, delay: 0.2 },
+      };
+
+  const impactImageMotion = prefersReducedMotion
+    ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        exit: { opacity: 1 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, scale: 1.08 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.98 },
+        transition: { duration: 1, ease: "easeInOut" },
+      };
 
   return (
     <div className="min-h-screen bg-paper font-sans text-ink">
@@ -162,17 +241,14 @@ export default function Home() {
 
       {/* HERO */}
       <header className="relative h-[52vh] min-h-[440px] max-h-[560px] overflow-hidden bg-transparent text-paper">
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden bg-forest-dark">
           <AnimatePresence initial={false} mode="sync">
             <motion.img
               key={currentSlide}
               src={slide.image}
               alt={slide.title}
               className="absolute inset-0 h-full w-full object-cover"
-              initial={{ x: "100%", scale: 1.05 }}
-              animate={{ x: "0%", scale: 1 }}
-              exit={{ x: "-100%", scale: 1.05 }}
-              transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+              {...heroImageMotion}
             />
           </AnimatePresence>
         </div>
@@ -184,14 +260,7 @@ export default function Home() {
 
         <div className="relative z-20 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-8">
           <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -18 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="max-w-2xl"
-            >
+            <motion.div key={currentSlide} {...heroTextMotion} className="max-w-2xl">
               <span className="inline-block border-l-4 border-accent pl-3 text-xs font-bold uppercase tracking-[0.2em] text-accent">
                 {slide.eyebrow}
               </span>
@@ -224,7 +293,7 @@ export default function Home() {
 
         <button
           type="button"
-          onClick={() => setCurrentSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length)}
+          onClick={prevSlide}
           className="absolute left-4 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/35 bg-black/20 text-white backdrop-blur-md transition hover:border-accent hover:bg-black/40 hover:text-accent sm:flex lg:left-6"
           aria-label="Previous slide"
         >
@@ -233,7 +302,7 @@ export default function Home() {
 
         <button
           type="button"
-          onClick={() => setCurrentSlide((currentSlide + 1) % heroSlides.length)}
+          onClick={nextSlide}
           className="absolute right-4 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/35 bg-black/20 text-white backdrop-blur-md transition hover:border-accent hover:bg-black/40 hover:text-accent sm:flex lg:right-6"
           aria-label="Next slide"
         >
@@ -245,7 +314,7 @@ export default function Home() {
             <button
               key={item.title}
               type="button"
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
               className="group flex items-center gap-2"
             >
@@ -345,18 +414,15 @@ export default function Home() {
               </div>
 
               <div className="relative">
-                <div className="group relative overflow-hidden rounded-xl border border-paper/10 bg-black/20 shadow-xl">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <AnimatePresence initial={false} mode="wait">
+                <div className="group relative overflow-hidden rounded-xl border border-paper/10 bg-forest-dark shadow-xl">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-forest-dark">
+                    <AnimatePresence initial={false} mode="sync">
                       <motion.img
                         key={currentImpactImage}
                         src={impactSlide.image}
                         alt={impactSlide.title}
                         className="absolute inset-0 h-full w-full object-cover"
-                        initial={{ opacity: 0, scale: 1.08 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.04 }}
-                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                        {...impactImageMotion}
                       />
                     </AnimatePresence>
 
@@ -405,7 +471,7 @@ export default function Home() {
                     <button
                       key={item.title}
                       type="button"
-                      onClick={() => setCurrentImpactImage(index)}
+                      onClick={() => goToImpactImage(index)}
                       aria-label={`Go to impact image ${index + 1}`}
                       className="group flex items-center justify-center p-1"
                     >
