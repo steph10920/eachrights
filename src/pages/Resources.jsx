@@ -1,5 +1,13 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
+import strategicPlan2026 from "../assets/publications/STRATEGIC PLAN 2026-2030.pdf";
+import educationSchools from "../assets/publications/Build Us More Schools (Full Version).pdf";
+import surveyReport from "../assets/publications/EACHRights Perception Survey Report.pdf";
+import strategicPlan2023 from "../assets/publications/EACHRights Trust Strategic Plan 4 (2019-2023).pdf";
+import strategicPlan2011 from "../assets/publications/EACHRights_Trust_Strategic_Plan_2011-2012.pdf";
+import annualReport2020 from "../assets/publications/EACHRights-Annual-Report-2020.pdf";
+import ssnfgm from "../assets/publications/PRINT Updated  VERSION SSN and PA with FGM 27102025.pdf";
 import {
   FileText,
   Download,
@@ -13,70 +21,63 @@ import {
 import { useState } from "react";
 
 const publications = [
-  {
-    title: "EACHRights Annual Report 2025",
-    category: "Annual Reports",
-    year: "2025",
-    description:
-      "An overview of EACHRights programmes, activities, achievements, partnerships and organizational priorities during 2025.",
-    pdf: "/publications/eachrights-annual-report-2025.pdf",
-  },
-  {
-    title: "Education Justice Programme",
-    category: "Programme Publications",
-    year: "2026",
-    description:
-      "An overview of the Education Justice Programme and its commitment to advancing the right to accessible, inclusive and equitable education.",
-    pdf: "/publications/education-justice-programme.pdf",
-  },
-  {
-    title: "Gender Justice Programme",
-    category: "Programme Publications",
-    year: "2026",
-    description:
-      "An overview of EACHRights' approach to advancing gender equality and addressing structural inequalities affecting women and girls.",
-    pdf: "/publications/gender-justice-programme.pdf",
-  },
-  {
-    title: "Health Justice Programme",
-    category: "Programme Publications",
-    year: "2026",
-    description:
-      "A programme overview focused on advancing the right to health and improving access to equitable and quality healthcare.",
-    pdf: "/publications/health-justice-programme.pdf",
-  },
-  {
-    title: "Environmental & Climate Justice Programme",
-    category: "Programme Publications",
-    year: "2026",
-    description:
-      "An overview of efforts to address environmental and climate vulnerabilities affecting marginalized communities.",
-    pdf: "/publications/environmental-climate-justice.pdf",
-  },
-  {
-    title: "Economic Justice Programme",
-    category: "Programme Publications",
-    year: "2026",
-    description:
-      "A programme overview addressing economic inequalities and promoting the realization of economic and social rights.",
-    pdf: "/publications/economic-justice-programme.pdf",
-  },
-  {
-    title: "Business and Human Rights Programme",
-    category: "Programme Publications",
-    year: "2026",
-    description:
-      "An overview of the relationship between business activities, human rights and corporate accountability.",
-    pdf: "/publications/business-human-rights-programme.pdf",
-  },
-  {
-    title: "Strategic Plan",
+   {
+    title: "STRATEGIC PLAN 2026-2030",
     category: "Strategy & Planning",
     year: "2026",
     description:
-      "EACHRights' strategic direction, priorities and institutional commitments for advancing human rights and social justice.",
-    pdf: "/publications/eachrights-strategic-plan.pdf",
+      "EACHRights Strategic Plan 2026-2030 is a 5-year roadmap to create a just society that upholds human rights and dignity.Its mission is to protect social and economic rights for vulnerable and marginalized communities, focusing on health, education, gender equality, and climate change.",
+    pdf: strategicPlan2026,
   },
+  {
+    title: "Build Us More Schools (Full Version)",
+    category: "Programme Publications",
+    year: "2026",
+    description:
+      "'Build Us More Schools!' - June 2024 research report on the lack of quality free public schools in Mabatini & Ngei Wards, Mathare, Nairobi.Community voices calling on the government to build more public schools.",
+    pdf: educationSchools,
+  },
+  {
+    title: "EACHRights Perception Survey Report",
+    category: "Programme Publications",
+    year: "2026",
+    description:
+    "A 2011 survey by EACHRights on how well Kenyans (govt, NGOs, public in Kibera, Kawangware, Jericho) understand ECOSOC rights - finds awareness is low, civil/political rights get more attention than economic/social rights, and most people don't know how to claim ECOSOC rights.",
+    pdf: surveyReport,
+  },
+  {
+    title: "EACHRights Trust Strategic Plan 4 (2019-2023)",
+    category: "Strategy & Planning",
+    year: "2023",
+    description:
+    "Strategic Plan 2019-2023 - EACHRights 4th plan.Goal: A society that respects human rights & dignity.Focused on 5 pillars: ECOSOC rights advocacy, capacity building, knowledge management, partnerships, and institutional growth to promote ECOSOC rights for vulnerable groups in Kenya, Uganda & Tanzania.",
+    pdf: strategicPlan2023,
+  },
+  {
+    title: "EACHRights_Trust_Strategic_Plan_2011-2012",
+    category: "Strategy & Planning",
+    year: "2012",
+    description:
+    "First-ever EACHRights plan (2011).Vision: To be the leading human rights org in East Africa.Mission: Promote human rights with focus on economic, social & cultural rights for social justice.Goals: 1) Build visibility nationally/regionally/internationally 2) Institutional strengthening & capacity building.",
+    pdf: strategicPlan2011,
+  },
+  {
+    title: "EACHRights-Annual-Report-2020",
+    category: "Annual Reports",
+    year: "2020",
+    description:
+    "Annual Report 2020 - EACHRights first ever annual report.Despite COVID-19, delivered on Strategic Plan 2019-2023: child rights advocacy, education barazas in Homa Bay, #TunzaWatotoWetu campaign on teen pregnancies/FGM, UPR reports, ACERWC engagement, and partnerships with U of Stirling, GI-ESCR, ERIKS & OSF.",
+    pdf: annualReport2020,
+  },
+  {
+    title: "PRINT Updated  VERSION SSN and PA with FGM 27102025",
+    category: "Programme Publications",
+    year: "2025",
+    description:
+    "July 2025 Study: Shifts in Social Norms on FGM/C in Garissa County.16 FGDs found FGM/C still widespread due to beliefs on purity/marriageability, but shifting from severe Type III (Pharaonic) to Type I (Sunna) and medicalized cuts. Older generations defend it; younger, educated urban youth increasingly oppose. Recommends community dialogue, youth advocacy, religious engagement.",
+    pdf: ssnfgm,
+  },
+  
 ];
 
 const categories = [
