@@ -172,85 +172,85 @@ function Gallery() {
       </section>
 
       {/* VIDEOS */}
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="mb-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
-            Videos
-          </p>
+<section className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
+  <div className="mb-8">
+    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
+      Videos
+    </p>
 
-          <h2 className="mt-2 text-3xl font-bold text-forest-dark">
-            From our work
-          </h2>
-        </div>
+    <h2 className="mt-2 text-3xl font-bold text-forest-dark">
+      From our work
+    </h2>
+  </div>
 
-        {filteredVideos.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2">
-            {filteredVideos.map((video, index) => {
-              const embedUrl = getYouTubeEmbedUrl(video.url);
+  {filteredVideos.length > 0 ? (
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {filteredVideos.map((video, index) => {
+        const embedUrl = getYouTubeEmbedUrl(video.url);
 
-              return (
-                <motion.article
-                  key={`${video.title}-${index}`}
-                  initial={{ opacity: 0, y: 25 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-                >
-                  {/* VIDEO */}
-                  <div className="aspect-video bg-black">
-                    {embedUrl ? (
-                      <iframe
-                        src={embedUrl}
-                        title={video.title}
-                        className="h-full w-full"
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center px-6 text-center text-sm text-white/70">
-                        Add a valid YouTube URL to display this video.
-                      </div>
-                    )}
-                  </div>
+        return (
+          <motion.article
+            key={`${video.title}-${index}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.05 }}
+            className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          >
+            {/* VIDEO */}
+            <div className="aspect-video bg-black">
+              {embedUrl ? (
+                <iframe
+                  src={embedUrl}
+                  title={video.title}
+                  className="h-full w-full"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center px-4 text-center text-sm text-white/70">
+                  Add a valid YouTube URL to display this video.
+                </div>
+              )}
+            </div>
 
-                  {/* VIDEO DETAILS */}
-                  <div className="p-6">
-                    <div className="mb-3 flex items-center justify-between gap-4">
-                      <span className="rounded-full bg-forest-soft px-3 py-1 text-xs font-semibold text-forest">
-                        Video
-                      </span>
+            {/* VIDEO DETAILS */}
+            <div className="p-4">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <span className="rounded-full bg-forest-soft px-2.5 py-1 text-[11px] font-semibold text-forest">
+                  Video
+                </span>
 
-                      <span className="text-sm text-gray-500">
-                        {video.date}
-                      </span>
-                    </div>
+                <span className="text-xs text-gray-500">
+                  {video.date}
+                </span>
+              </div>
 
-                    <h3 className="text-xl font-bold text-forest-dark">
-                      {video.title}
-                    </h3>
+              <h3 className="text-lg font-bold leading-snug text-forest-dark">
+                {video.title}
+              </h3>
 
-                    <p className="mt-3 leading-7 text-gray-600">
-                      {video.description}
-                    </p>
-                  </div>
-                </motion.article>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 px-6 py-16 text-center">
-            <h3 className="text-xl font-bold text-forest-dark">
-              No videos available
-            </h3>
+              <p className="mt-2 line-clamp-3 text-sm leading-6 text-gray-600">
+                {video.description}
+              </p>
+            </div>
+          </motion.article>
+        );
+      })}
+    </div>
+  ) : (
+    <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 px-6 py-12 text-center">
+      <h3 className="text-xl font-bold text-forest-dark">
+        No videos available
+      </h3>
 
-            <p className="mt-2 text-gray-600">
-              Videos will appear here when they are added.
-            </p>
-          </div>
-        )}
-      </section>
+      <p className="mt-2 text-gray-600">
+        Videos will appear here when they are added.
+      </p>
+    </div>
+  )}
+</section>
 
       {/* YOUTUBE CTA */}
       <section className="bg-forest-soft">
