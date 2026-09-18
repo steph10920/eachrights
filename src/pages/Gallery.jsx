@@ -1,20 +1,14 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { PlayCircle } from "lucide-react";
+
+import storiesHero from "../assets/gallery/stories-voices-moments.png";
 
 /*
 |--------------------------------------------------------------------------
 | ADD YOUR YOUTUBE VIDEOS HERE
 |--------------------------------------------------------------------------
-|
-| You can paste either:
-|
-| https://www.youtube.com/watch?v=VIDEO_ID
-|
-| or:
-|
-| https://youtu.be/VIDEO_ID
-|
 */
 
 const videos = [
@@ -25,7 +19,6 @@ const videos = [
     date: "2026",
     url: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
   },
-
   {
     title: "EACHRights Community Engagement",
     description:
@@ -33,7 +26,6 @@ const videos = [
     date: "2026",
     url: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
   },
-
   {
     title: "Advancing Human Rights in East Africa",
     description:
@@ -54,35 +46,42 @@ function getYouTubeEmbedUrl(url) {
 
   try {
     const parsedUrl = new URL(url);
-
     let videoId = "";
 
-    // Standard YouTube URL
     if (parsedUrl.hostname.includes("youtube.com")) {
       videoId = parsedUrl.searchParams.get("v") || "";
 
-      // YouTube Shorts
       if (!videoId && parsedUrl.pathname.startsWith("/shorts/")) {
         videoId = parsedUrl.pathname.split("/shorts/")[1]?.split("/")[0];
       }
 
-      // YouTube embed URL
       if (!videoId && parsedUrl.pathname.startsWith("/embed/")) {
         videoId = parsedUrl.pathname.split("/embed/")[1]?.split("/")[0];
       }
     }
 
-    // Short YouTube URL
     if (parsedUrl.hostname === "youtu.be") {
       videoId = parsedUrl.pathname.replace("/", "").split("/")[0];
     }
 
-    if (!videoId) return "";
-
-    return `https://www.youtube.com/embed/${videoId}`;
+    return videoId
+      ? `https://www.youtube.com/embed/${videoId}`
+      : "";
   } catch {
     return "";
   }
+}
+
+/* =========================================================
+   SHARED HELPERS — match Home.jsx / About.jsx design language
+========================================================= */
+
+function Eyebrow({ children, dark = false }) {
+  return (
+    <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-accent"}`}>
+      {children}
+    </span>
+  );
 }
 
 function Gallery() {
@@ -91,202 +90,296 @@ function Gallery() {
   const categories = ["All", "Videos"];
 
   const filteredVideos = useMemo(() => {
-    if (activeCategory === "All") {
-      return videos;
-    }
-
+    if (activeCategory === "All") return videos;
     return videos;
   }, [activeCategory]);
 
   return (
-    <main className="min-h-screen bg-white text-gray-900">
-      {/* HERO */}
-      <section className="bg-forest text-white">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+    <main className="min-h-screen bg-paper font-sans text-ink">
+
+      {/* =====================================================
+          HERO — sized down to match Home's proportions
+      ===================================================== */}
+
+      <header className="relative h-[52vh] min-h-[440px] max-h-[560px] overflow-hidden bg-forest text-paper">
+
+        <img
+          src={storiesHero}
+          alt="Stories, Voices & Moments"
+          className="absolute inset-0 h-full w-full object-cover object-bottom"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+        <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-accent" />
+
+        <Link
+          to="/"
+          className="absolute left-6 top-6 z-20 inline-flex text-sm font-medium text-white/85 transition hover:text-white lg:left-8 lg:top-8"
+        >
+          ← Back to Home
+        </Link>
+
+        <h1 className="sr-only">Stories, Voices &amp; Moments — EACHRights Gallery</h1>
+
+        <div className="relative z-10 mx-auto flex h-full max-w-7xl items-end px-6 pb-8 lg:px-8 lg:pb-10">
+
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl"
+            className="max-w-2xl"
           >
-            <Link
-              to="/"
-              className="mb-8 inline-flex text-sm font-medium text-white/80 transition hover:text-white"
-            >
-              ← Back to Home
-            </Link>
 
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-              Gallery
+            <p className="max-w-xl text-sm leading-7 text-white/90 sm:text-base">
+              Videos and visual stories from EACHRights' programmes, community engagement and work to advance
+              human rights across East Africa.
             </p>
 
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Stories, Voices &amp; Moments
-            </h1>
+            <div className="mt-6 flex flex-wrap gap-3">
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/85">
-              Explore videos and visual stories that showcase EACHRights'
-              programmes, community engagement, advocacy and work to advance
-              human rights and social justice in East Africa.
-            </p>
+              <a
+                href="#videos"
+                className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
+              >
+                Explore Videos
+              </a>
+
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 border-2 border-white bg-white/5 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-forest"
+              >
+                Get Involved
+              </Link>
+
+            </div>
+
           </motion.div>
+
         </div>
-      </section>
+      </header>
 
-      {/* INTRO */}
+
+      {/* =====================================================
+          INTRO
+      ===================================================== */}
+
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
-            Our Gallery
-          </p>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-forest-dark sm:text-4xl">
-            Watch our work in action
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl"
+        >
+
+          <Eyebrow dark>Our Gallery</Eyebrow>
+
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-forest sm:text-4xl">
+            Watch our work in action.
           </h2>
 
-          <p className="mt-5 text-lg leading-8 text-gray-600">
-            Our gallery brings together stories, events, programme activities
-            and conversations that reflect the experiences of the communities
-            and people we work with.
+          <p className="mt-5 leading-8 text-ink/70">
+            Our gallery brings together stories, events, programme activities and conversations that reflect the
+            experiences of the communities and people we work with.
           </p>
-        </div>
+
+        </motion.div>
+
       </section>
 
-      {/* FILTER */}
-      <section className="border-y border-gray-100 bg-forest-soft">
-        <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-6 lg:px-8">
+
+      {/* =====================================================
+          FILTER
+      ===================================================== */}
+
+      <section className="border-y border-forest/10 bg-forest-light">
+
+        <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-5 lg:px-8">
+
           {categories.map((category) => (
+
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+              className={`px-5 py-2.5 text-sm font-semibold transition ${
                 activeCategory === category
-                  ? "bg-forest text-white"
-                  : "bg-white text-forest ring-1 ring-forest/20 hover:bg-forest-soft"
+                  ? "bg-forest text-paper"
+                  : "bg-white text-forest-dark ring-1 ring-forest/15 hover:bg-white/70"
               }`}
             >
               {category}
             </button>
+
           ))}
+
         </div>
+
       </section>
 
-      {/* VIDEOS */}
-<section className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
-  <div className="mb-8">
-    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
-      Videos
-    </p>
 
-    <h2 className="mt-2 text-3xl font-bold text-forest-dark">
-      From our work
-    </h2>
-  </div>
+      {/* =====================================================
+          VIDEOS
+      ===================================================== */}
 
-  {filteredVideos.length > 0 ? (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {filteredVideos.map((video, index) => {
-        const embedUrl = getYouTubeEmbedUrl(video.url);
+      <section
+        id="videos"
+        className="mx-auto max-w-7xl px-6 py-20 lg:px-8"
+      >
 
-        return (
-          <motion.article
-            key={`${video.title}-${index}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-            className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            {/* VIDEO */}
-            <div className="aspect-video bg-black">
-              {embedUrl ? (
-                <iframe
-                  src={embedUrl}
-                  title={video.title}
-                  className="h-full w-full"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center px-4 text-center text-sm text-white/70">
-                  Add a valid YouTube URL to display this video.
-                </div>
-              )}
-            </div>
-
-            {/* VIDEO DETAILS */}
-            <div className="p-4">
-              <div className="mb-2 flex items-center justify-between gap-3">
-                <span className="rounded-full bg-forest-soft px-2.5 py-1 text-[11px] font-semibold text-forest">
-                  Video
-                </span>
-
-                <span className="text-xs text-gray-500">
-                  {video.date}
-                </span>
-              </div>
-
-              <h3 className="text-lg font-bold leading-snug text-forest-dark">
-                {video.title}
-              </h3>
-
-              <p className="mt-2 line-clamp-3 text-sm leading-6 text-gray-600">
-                {video.description}
-              </p>
-            </div>
-          </motion.article>
-        );
-      })}
-    </div>
-  ) : (
-    <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 px-6 py-12 text-center">
-      <h3 className="text-xl font-bold text-forest-dark">
-        No videos available
-      </h3>
-
-      <p className="mt-2 text-gray-600">
-        Videos will appear here when they are added.
-      </p>
-    </div>
-  )}
-</section>
-
-      {/* YOUTUBE CTA */}
-      <section className="bg-forest-soft">
-        <div className="mx-auto max-w-7xl px-6 py-16 text-center lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-forest">
-            Stay Connected
-          </p>
-
-          <h2 className="mt-3 text-3xl font-bold text-forest-dark">
-            Follow our work
+        <div className="mb-10">
+          <Eyebrow dark>Videos</Eyebrow>
+          <h2 className="mt-2 font-display text-3xl font-bold text-forest">
+            From our work
           </h2>
+        </div>
 
-          <p className="mx-auto mt-4 max-w-2xl leading-7 text-gray-600">
-            Follow EACHRights for updates, stories, events and conversations
-            about human rights and social justice across East Africa.
-          </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+        {filteredVideos.length > 0 ? (
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            {filteredVideos.map((video, index) => {
+
+              const embedUrl = getYouTubeEmbedUrl(video.url);
+
+              return (
+
+                <motion.article
+                  key={`${video.title}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  whileHover={{ y: -6 }}
+                  className="group overflow-hidden bg-white shadow-sm transition hover:shadow-xl"
+                >
+
+                  {/* VIDEO */}
+
+                  <div className="relative aspect-video bg-forest">
+
+                    {embedUrl ? (
+
+                      <iframe
+                        src={embedUrl}
+                        title={video.title}
+                        className="h-full w-full"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+
+                    ) : (
+
+                      <div className="flex h-full flex-col items-center justify-center gap-2 px-4 text-center text-sm text-white/70">
+                        <PlayCircle size={28} strokeWidth={1.5} />
+                        Add a valid YouTube URL to display this video.
+                      </div>
+
+                    )}
+
+                  </div>
+
+
+                  {/* VIDEO DETAILS */}
+
+                  <div className="p-5">
+
+                    <div className="mb-2 flex items-center justify-between gap-3">
+
+                      <span className="bg-accent/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-forest-dark">
+                        Video
+                      </span>
+
+                      <span className="text-xs text-ink/50">
+                        {video.date}
+                      </span>
+
+                    </div>
+
+                    <h3 className="text-lg font-bold leading-snug text-forest font-display">
+                      {video.title}
+                    </h3>
+
+                    <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink/65">
+                      {video.description}
+                    </p>
+
+                  </div>
+
+                </motion.article>
+
+              );
+            })}
+
+          </div>
+
+        ) : (
+
+          <div className="border border-dashed border-forest/20 bg-forest-light px-6 py-12 text-center">
+
+            <h3 className="text-xl font-bold text-forest font-display">
+              No videos available
+            </h3>
+
+            <p className="mt-2 text-ink/65">
+              Videos will appear here when they are added.
+            </p>
+
+          </div>
+
+        )}
+
+      </section>
+
+
+      {/* =====================================================
+          YOUTUBE CTA — mirrors Home's partnership CTA
+      ===================================================== */}
+
+      <section className="relative overflow-hidden bg-forest-dark px-6 py-16 text-paper">
+
+        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border-[25px] border-paper/10" />
+
+        <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
+
+          <div>
+            <Eyebrow>Stay Connected</Eyebrow>
+            <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+              Follow our work.
+            </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-paper/80">
+              Follow EACHRights for updates, stories, events and conversations about human rights and social
+              justice across East Africa.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 flex-wrap justify-center gap-3">
+
             <a
               href="https://www.youtube.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-forest px-6 py-3 font-semibold text-white transition hover:bg-forest-dark"
+              className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 font-bold text-forest shadow-lg transition hover:brightness-105"
             >
+              <PlayCircle size={18} />
               Visit YouTube Channel
             </a>
 
             <Link
               to="/contact"
-              className="rounded-full border border-forest px-6 py-3 font-semibold text-forest transition hover:bg-forest-soft"
+              className="inline-flex items-center gap-2 border-2 border-paper/70 px-6 py-3.5 font-bold text-paper transition hover:bg-paper hover:text-forest-dark"
             >
               Contact EACHRights
             </Link>
+
           </div>
+
         </div>
+
       </section>
+
     </main>
   );
 }
