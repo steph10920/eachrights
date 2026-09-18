@@ -45,47 +45,10 @@
 
 /* Logo */
 
-.navbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-mark {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #006b38;
-  color: white;
-
-  font-size: 24px;
-  font-weight: 800;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-
-.logo-text span {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: #12372a;
-}
-
-.logo-text small {
-  margin-top: 4px;
-  font-size: 12px;
-  color: #006b38;
-  font-weight: 600;
+.navbar-logo-image {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
 /* Desktop Navigation */

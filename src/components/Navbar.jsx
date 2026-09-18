@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import logo from "../assets/logo.jpeg";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -92,12 +93,11 @@ function Navbar() {
           className="navbar-logo"
           onClick={closeMobileMenu}
         >
-          <div className="logo-mark">E</div>
-
-          <div className="logo-text">
-            <span>EACH</span>
-            <small>Rights</small>
-          </div>
+          <img
+            src={logo}
+            alt="EACH Rights"
+            className="navbar-logo-image"
+          />
         </Link>
 
         {/* =====================================================
