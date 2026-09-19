@@ -17,14 +17,6 @@ import {
    SHARED HELPERS — match Home.jsx's design language
 ========================================================= */
 
-function Eyebrow({ children, dark = false }) {
-  return (
-    <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-accent"}`}>
-      {children}
-    </span>
-  );
-}
-
 function IconBox({ icon: Icon, large = false, onDark = false }) {
   return (
     <div
@@ -111,8 +103,7 @@ export default function About() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <div className="max-w-3xl">
-            <Eyebrow>About EACHRights</Eyebrow>
-            <h1 className="mt-3 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h1 className="font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
               Advancing human rights,
               <span className="block text-accent">justice and human dignity.</span>
             </h1>
@@ -132,8 +123,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <Eyebrow dark>Who We Are</Eyebrow>
-          <h2 className="mt-3 font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
+          <h2 className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
             The East African Centre
             <br />
             <span className="text-forest-dark">for Human Rights.</span>
@@ -160,8 +150,7 @@ export default function About() {
           className="bg-forest-light p-8 sm:p-10"
         >
           <IconBox icon={ShieldCheck} large />
-          <Eyebrow dark>Our Commitment</Eyebrow>
-          <h3 className="mt-4 text-2xl font-bold leading-snug text-forest sm:text-3xl font-display">
+          <h3 className="mt-6 text-2xl font-bold leading-snug text-forest sm:text-3xl font-display">
             Rights for everyone. Dignity for all.
           </h3>
           <p className="mt-5 leading-7 text-ink/70">
@@ -172,58 +161,42 @@ export default function About() {
         </motion.div>
       </section>
 
-      {/* VISION & MISSION & DIRECTION */}
+      {/* VISION & MISSION & DIRECTION — one shared panel with internal
+          dividers instead of three identical shadow cards. The small
+          caps label here is structural (it's the only thing naming which
+          column is which), not decoration, so it stays. */}
       <section className="bg-forest-light px-6 py-24">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
-          <motion.article
+        <div className="mx-auto max-w-7xl">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-white p-8 shadow-sm"
+            className="grid divide-y divide-forest/10 bg-white shadow-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0"
           >
-            <IconBox icon={Eye} />
-            <Eyebrow dark>Our Vision</Eyebrow>
-            <p className="mt-4 text-lg leading-snug text-forest font-display">
-              A just society that respects and upholds
-              <br />
-              human rights and inherent dignity.
-            </p>
-          </motion.article>
-
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.06 }}
-            className="bg-white p-8 shadow-sm"
-          >
-            <IconBox icon={Target} />
-            <Eyebrow dark>Our Mission</Eyebrow>
-            <p className="mt-4 text-lg leading-snug text-forest font-display">
-              To promote and protect human dignity
-              <br />
-              through the realization of social and
-              <br />
-              economic rights for vulnerable and
-              <br />
-              marginalized groups and communities.
-            </p>
-          </motion.article>
-
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.12 }}
-            className="bg-white p-8 shadow-sm"
-          >
-            <IconBox icon={Handshake} />
-            <Eyebrow dark>Our Direction</Eyebrow>
-            <p className="mt-4 text-lg leading-snug text-forest font-display">
-              Building a more just and equitable society.
-            </p>
-          </motion.article>
+            <div className="p-8 sm:p-10">
+              <IconBox icon={Eye} />
+              <p className="mt-5 text-xs font-bold uppercase tracking-[0.15em] text-forest-dark">Our Vision</p>
+              <p className="mt-3 text-lg leading-snug text-forest font-display">
+                A just society that respects and upholds human rights and inherent dignity.
+              </p>
+            </div>
+            <div className="p-8 sm:p-10">
+              <IconBox icon={Target} />
+              <p className="mt-5 text-xs font-bold uppercase tracking-[0.15em] text-forest-dark">Our Mission</p>
+              <p className="mt-3 text-lg leading-snug text-forest font-display">
+                To promote and protect human dignity through the realization of social and economic rights for
+                vulnerable and marginalized groups and communities.
+              </p>
+            </div>
+            <div className="p-8 sm:p-10">
+              <IconBox icon={Handshake} />
+              <p className="mt-5 text-xs font-bold uppercase tracking-[0.15em] text-forest-dark">Our Direction</p>
+              <p className="mt-3 text-lg leading-snug text-forest font-display">
+                Building a more just and equitable society.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -234,8 +207,7 @@ export default function About() {
           <div className="grid gap-10 lg:grid-cols-[0.3fr_0.7fr] lg:items-start">
             <IconBox icon={Target} large onDark />
             <div>
-              <Eyebrow>Goal Statement</Eyebrow>
-              <h2 className="mt-4 text-2xl leading-9 text-white sm:text-3xl lg:text-4xl font-display">
+              <h2 className="text-2xl leading-9 text-white sm:text-3xl lg:text-4xl font-display">
                 To achieve a just and equitable society where vulnerable and marginalized groups and communities
                 can fully realize their rights.
               </h2>
@@ -249,11 +221,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* CORE VALUES */}
+      {/* CORE VALUES — a divided two-column list instead of five identical
+          shadow-hover cards. */}
       <section className="mx-auto max-w-7xl px-6 py-24 sm:py-28">
         <div className="mb-12 max-w-2xl">
-          <Eyebrow dark>Core Values</Eyebrow>
-          <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
+          <h2 className="text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
             The principles that guide everything we do.
           </h2>
           <p className="mt-4 leading-7 text-ink/65">
@@ -261,35 +233,36 @@ export default function About() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-12 border-t border-forest/10 sm:grid-cols-2">
           {coreValues.map((value, index) => {
             const Icon = value.icon;
             return (
-              <motion.article
+              <motion.div
                 key={value.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                whileHover={{ y: -6 }}
-                className="group relative bg-white p-7 shadow-sm transition hover:shadow-xl"
+                transition={{ duration: 0.35, delay: index * 0.05 }}
+                className="flex gap-5 border-b border-forest/10 py-7"
               >
-                <div className="absolute left-0 top-0 h-full w-1 bg-accent opacity-0 transition group-hover:opacity-100" />
-                <IconBox icon={Icon} />
-                <h3 className="mt-6 text-xl font-bold leading-snug text-forest font-display">{value.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-ink/65">{value.description}</p>
-              </motion.article>
+                <Icon size={26} className="mt-1 shrink-0 text-forest-dark" strokeWidth={1.7} />
+                <div>
+                  <h3 className="text-lg font-bold leading-snug text-forest font-display">{value.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-ink/65">{value.description}</p>
+                </div>
+              </motion.div>
             );
           })}
         </div>
       </section>
 
-      {/* HOW WE ADVANCE OUR MISSION */}
+      {/* HOW WE ADVANCE OUR MISSION — numbered, same as Home's Our Approach:
+          research → capacity building → advocacy → litigation is a real
+          sequence, so the numbering earns its place here too. */}
       <section className="bg-forest-light px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow dark>Our Approach</Eyebrow>
-            <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
+            <h2 className="text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
               Turning commitment into action.
             </h2>
             <p className="mt-4 leading-7 text-ink/65">
@@ -310,7 +283,12 @@ export default function About() {
                   transition={{ duration: 0.45, delay: index * 0.05 }}
                   className="bg-paper p-6 shadow-sm"
                 >
-                  <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
+                  <div className="flex items-center justify-between">
+                    <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
+                    <span className="font-display text-sm font-bold text-accent">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
                   <h3 className="mt-5 text-lg font-bold text-forest font-display">{item.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-ink/65">{item.text}</p>
                 </motion.div>
@@ -325,8 +303,7 @@ export default function About() {
         <div className="bg-white p-8 shadow-lg sm:p-10 lg:p-14">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <Eyebrow dark>Learn More</Eyebrow>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-forest sm:text-4xl font-display">
+              <h2 className="text-3xl font-bold tracking-tight text-forest sm:text-4xl font-display">
                 Discover more about EACHRights.
               </h2>
               <p className="mt-4 max-w-2xl leading-7 text-ink/65">
