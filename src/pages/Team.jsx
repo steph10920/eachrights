@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Handshake, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, Handshake, Mail } from "lucide-react";
+
+/*
+|--------------------------------------------------------------------------
+| ADD YOUR BOARD MEMBERS HERE
+|--------------------------------------------------------------------------
+| Board members are volunteer governance leaders, shown separately from
+| paid Leadership/Staff below. photo: same convention as staff — an
+| imported image path, or leave null for an initials badge.
+*/
+
+const board = [
+  { name: "Margaret Wanjiru", role: "Board Chairperson", photo: null },
+  { name: "Samuel Kiptoo", role: "Vice Chairperson", photo: null },
+  { name: "Esther Nyambura", role: "Treasurer", photo: null },
+  { name: "Daniel Omollo", role: "Secretary", photo: null },
+  { name: "Fatuma Hassan", role: "Board Member", photo: null },
+  { name: "Robert Mutiso", role: "Board Member", photo: null },
+];
 
 /*
 |--------------------------------------------------------------------------
@@ -70,21 +88,15 @@ const staff = [
    SHARED HELPERS — match Home.jsx / About.jsx design language
 ========================================================= */
 
-function Eyebrow({ children, dark = false }) {
-  return (
-    <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-accent"}`}>
-      {children}
-    </span>
-  );
-}
-
-function Avatar({ name, photo, large = false }) {
-  const initials = name
+function getInitials(name) {
+  return name
     .split(" ")
     .map((part) => part[0])
     .slice(0, 2)
     .join("");
+}
 
+function Avatar({ name, photo, large = false }) {
   if (photo) {
     return (
       <img
@@ -101,7 +113,7 @@ function Avatar({ name, photo, large = false }) {
         large ? "aspect-[4/5]" : "aspect-square"
       }`}
     >
-      <span className="font-display text-4xl font-bold">{initials}</span>
+      <span className="font-display text-4xl font-bold">{getInitials(name)}</span>
     </div>
   );
 }
@@ -122,12 +134,11 @@ export default function Team() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
           <Link
             to="/about"
-            className="mb-6 inline-flex text-sm font-medium text-white/75 transition hover:text-white"
+            className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-white/75 transition hover:text-white"
           >
-            ← Back to About
+            <ArrowLeft size={16} />
+            Back to About
           </Link>
-
-          <Eyebrow>Meet Our Team</Eyebrow>
 
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
             The people advancing
@@ -135,20 +146,23 @@ export default function Team() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
-            EACHRights is powered by a team of researchers, advocates, legal experts and programme staff working
-            together to advance Economic, Social and Cultural Rights across East Africa.
+            EACHRights is powered by a board, leadership team and staff of researchers, advocates, legal experts
+            and programme staff working together to advance Economic, Social and Cultural Rights across East
+            Africa.
           </p>
         </div>
       </header>
 
       {/* =====================================================
-          LEADERSHIP
+          LEADERSHIP + BOARD — share one paper-coloured band; the
+          board is a compact list rather than a third identical
+          photo-card grid.
       ===================================================== */}
 
       <section className="mx-auto max-w-7xl px-6 py-24 sm:py-28">
+
         <div className="mb-12 max-w-2xl">
-          <Eyebrow dark>Leadership</Eyebrow>
-          <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
+          <h2 className="text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
             Guiding our mission.
           </h2>
         </div>
@@ -189,6 +203,46 @@ export default function Team() {
             </motion.article>
           ))}
         </div>
+
+        <div className="mb-10 mt-20 max-w-2xl sm:mt-24">
+          <h2 className="text-3xl font-bold tracking-tight text-forest sm:text-4xl font-display">
+            Our Board of Directors
+          </h2>
+          <p className="mt-3 leading-7 text-ink/65">
+            Volunteer governance leaders who set EACHRights' strategic direction and hold the organisation
+            accountable.
+          </p>
+        </div>
+
+        <div className="grid gap-x-12 border-t border-forest/10 sm:grid-cols-2">
+          {board.map((person, index) => (
+            <motion.div
+              key={person.name}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
+              className="flex items-center gap-4 border-b border-forest/10 py-5"
+            >
+              {person.photo ? (
+                <img
+                  src={person.photo}
+                  alt={person.name}
+                  className="h-12 w-12 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-forest-light text-sm font-bold text-forest-dark font-display">
+                  {getInitials(person.name)}
+                </div>
+              )}
+
+              <div>
+                <h3 className="text-base font-bold text-forest font-display">{person.name}</h3>
+                <p className="text-xs font-semibold uppercase tracking-wide text-forest-dark">{person.role}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* =====================================================
@@ -198,8 +252,7 @@ export default function Team() {
       <section className="bg-forest-light px-6 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl">
-            <Eyebrow dark>Our Staff</Eyebrow>
-            <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
+            <h2 className="text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
               A multidisciplinary team.
             </h2>
             <p className="mt-4 leading-7 text-ink/65">
@@ -243,8 +296,7 @@ export default function Team() {
 
         <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
           <div>
-            <Eyebrow>Join Us</Eyebrow>
-            <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold sm:text-4xl">
               Want to work with EACHRights?
             </h2>
             <p className="mt-3 max-w-2xl leading-7 text-paper/80">

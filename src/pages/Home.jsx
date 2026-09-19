@@ -12,6 +12,7 @@ import impact3 from "../assets/impact/impact-3.jpg";
 import impact4 from "../assets/impact/impact-4.jpg";
 
 import commitmentVideo from "../assets/videos/commitment.mp4";
+import educationJusticeVideo from "../assets/videos/education-justice.mp4";
 
 import {
   ArrowLeft,
@@ -42,6 +43,7 @@ const focusAreas = [
     description: "Advancing equitable access to quality education and strengthening the right to learn.",
     icon: GraduationCap,
     link: "/our-work/programmes/education-justice",
+    video: educationJusticeVideo,
   },
   {
     title: "Gender Justice",
@@ -527,22 +529,41 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col justify-between bg-forest p-8 text-paper lg:p-10"
+              className="relative flex min-h-[380px] flex-col justify-end overflow-hidden bg-forest text-paper lg:min-h-[440px]"
             >
-              <div>
-                <div className="flex items-center justify-center rounded-full bg-accent/10 text-accent h-16 w-16">
-                  <FeaturedIcon size={30} strokeWidth={1.7} />
+              {featuredArea.video && (
+                <>
+                  <video
+                    src={featuredArea.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest via-forest/70 to-forest/10" />
+                </>
+              )}
+
+              {!featuredArea.video && (
+                <div className="absolute left-8 top-8 lg:left-10 lg:top-10">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 text-accent">
+                    <FeaturedIcon size={30} strokeWidth={1.7} />
+                  </div>
                 </div>
-                <h3 className="mt-8 text-2xl font-bold font-display sm:text-3xl">{featuredArea.title}</h3>
+              )}
+
+              <div className="relative z-10 p-8 lg:p-10">
+                <h3 className="text-2xl font-bold font-display sm:text-3xl">{featuredArea.title}</h3>
                 <p className="mt-4 text-base leading-7 text-paper/75">{featuredArea.description}</p>
+                <Link
+                  to={featuredArea.link}
+                  className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-accent pb-1 font-semibold text-accent transition hover:gap-3"
+                >
+                  Learn more
+                  <ArrowRight size={16} />
+                </Link>
               </div>
-              <Link
-                to={featuredArea.link}
-                className="mt-8 inline-flex w-fit items-center gap-2 border-b-2 border-accent pb-1 font-semibold text-accent transition hover:gap-3"
-              >
-                Learn more
-                <ArrowRight size={16} />
-              </Link>
             </motion.div>
 
             <div className="divide-y divide-forest/10 border-t border-forest/10 lg:border-t-0">
