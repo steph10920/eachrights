@@ -48,10 +48,7 @@ function Navbar() {
       name: "Economic Justice",
       path: "/our-work/programmes/economic-justice",
     },
-    {
-      name: "Business and Human Rights Programme",
-      path: "/our-work/programmes/business-human-rights",
-    },
+    
     {
       name: "Theory of Change",
       path: "/our-work/programmes/theory-of-change",

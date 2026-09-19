@@ -20,7 +20,6 @@ import GenderJustice from "./pages/programmes/GenderJustice";
 import HealthJustice from "./pages/programmes/HealthJustice";
 import EnvironmentalClimateJustice from "./pages/programmes/EnvironmentalClimateJustice";
 import EconomicJustice from "./pages/programmes/EconomicJustice";
-import BusinessHumanRights from "./pages/programmes/BusinessHumanRights";
 import TheoryOfChange from "./pages/programmes/TheoryOfChange";
 
 // Processes
@@ -70,10 +69,7 @@ function App() {
           element={<EconomicJustice />}
         />
 
-        <Route
-          path="/our-work/programmes/business-human-rights"
-          element={<BusinessHumanRights />}
-        />
+        
 
         <Route
           path="/our-work/programmes/theory-of-change"
