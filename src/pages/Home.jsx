@@ -135,14 +135,6 @@ const impactImages = [
 const HERO_INTERVAL = 6000;
 const IMPACT_INTERVAL = 5000;
 
-function Eyebrow({ children, dark = false }) {
-  return (
-    <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-accent"}`}>
-      {children}
-    </span>
-  );
-}
-
 function IconBox({ icon: Icon, large = false }) {
   return (
     <div className={`flex items-center justify-center rounded-full bg-accent/10 text-accent ${large ? "h-24 w-24" : "h-14 w-14"}`}>
@@ -219,6 +211,9 @@ export default function Home() {
 
   const slide = heroSlides[currentSlide];
   const impactSlide = impactImages[currentImpactImage];
+
+  const [featuredArea, ...secondaryAreas] = focusAreas;
+  const FeaturedIcon = featuredArea.icon;
 
   // Crossfade + slow zoom instead of a hard slide; collapses to a plain
   // cut when the visitor has requested reduced motion.
@@ -362,8 +357,7 @@ export default function Home() {
         {/* WHO WE ARE */}
         <section className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 sm:py-28 lg:grid-cols-2">
           <div>
-            <Eyebrow dark>Who we are</Eyebrow>
-            <h2 className="mt-3 text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
+            <h2 className="text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
               Human rights.
               <br />
               <span className="text-forest-dark">Community action.</span>
@@ -412,8 +406,7 @@ export default function Home() {
 
           <div className="relative z-10 mx-auto max-w-6xl">
             <div className="mx-auto max-w-2xl text-center">
-              <Eyebrow>Our Impact</Eyebrow>
-              <h2 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl font-display">
+              <h2 className="text-3xl font-bold leading-tight sm:text-4xl font-display">
                 Measurable outcomes, <span className="text-accent">real communities.</span>
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-paper/70">
@@ -518,50 +511,79 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OUR WORK */}
+        {/* OUR WORK — one featured area in a full panel, the remaining five
+            as a compact divided list, instead of six identical cards. */}
         <section className="mx-auto max-w-7xl px-6 py-24 sm:py-28">
           <div className="mb-12 text-center">
-            <Eyebrow>Our work</Eyebrow>
-            <h2 className="mt-3 text-4xl font-bold text-forest sm:text-5xl font-display">Six areas. One purpose.</h2>
+            <h2 className="text-4xl font-bold text-forest sm:text-5xl font-display">Six areas. One purpose.</h2>
             <p className="mx-auto mt-4 max-w-2xl leading-7 text-ink/65">
               We work across interconnected areas of Economic, Social and Cultural Rights to address the realities faced by vulnerable and marginalized communities.
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {focusAreas.map((area, index) => {
-              const Icon = area.icon;
-              return (
-                <motion.div
-                  key={area.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  whileHover={{ y: -6 }}
-                  className="group relative bg-white p-7 shadow-sm transition hover:shadow-xl"
-                >
-                  <div className="absolute left-0 top-0 h-full w-1 bg-accent opacity-0 transition group-hover:opacity-100" />
-                  <IconBox icon={Icon} />
-                  <h3 className="mt-6 text-xl font-bold text-forest font-display">{area.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-ink/65">{area.description}</p>
-                  <Link to={area.link} className="mt-5 inline-flex items-center gap-2 font-semibold text-forest-dark">
-                    Learn more
-                    <ArrowRight size={16} />
-                  </Link>
-                </motion.div>
-              );
-            })}
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-14">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col justify-between bg-forest p-8 text-paper lg:p-10"
+            >
+              <div>
+                <div className="flex items-center justify-center rounded-full bg-accent/10 text-accent h-16 w-16">
+                  <FeaturedIcon size={30} strokeWidth={1.7} />
+                </div>
+                <h3 className="mt-8 text-2xl font-bold font-display sm:text-3xl">{featuredArea.title}</h3>
+                <p className="mt-4 text-base leading-7 text-paper/75">{featuredArea.description}</p>
+              </div>
+              <Link
+                to={featuredArea.link}
+                className="mt-8 inline-flex w-fit items-center gap-2 border-b-2 border-accent pb-1 font-semibold text-accent transition hover:gap-3"
+              >
+                Learn more
+                <ArrowRight size={16} />
+              </Link>
+            </motion.div>
+
+            <div className="divide-y divide-forest/10 border-t border-forest/10 lg:border-t-0">
+              {secondaryAreas.map((area, index) => {
+                const Icon = area.icon;
+                return (
+                  <motion.div
+                    key={area.title}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.35, delay: index * 0.06 }}
+                    className="group flex items-start gap-5 py-6 first:pt-0"
+                  >
+                    <Icon size={24} className="mt-1 shrink-0 text-forest-dark transition group-hover:text-accent" strokeWidth={1.7} />
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                        <h3 className="text-lg font-bold text-forest font-display">{area.title}</h3>
+                        <Link
+                          to={area.link}
+                          className="text-sm font-semibold text-forest-dark underline decoration-transparent underline-offset-4 transition group-hover:decoration-forest-dark"
+                        >
+                          Learn more
+                        </Link>
+                      </div>
+                      <p className="mt-1.5 text-sm leading-6 text-ink/65">{area.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* OUR APPROACH */}
+        {/* OUR APPROACH — numbered, since research → advocacy → capacity
+            building → litigation is the organisation's actual sequence. */}
         <section className="bg-forest-light px-6 py-24">
           <div className="mx-auto max-w-7xl">
             <div className="grid items-center gap-14 lg:grid-cols-2">
               <div>
-                <Eyebrow dark>Our approach</Eyebrow>
-                <h2 className="mt-3 text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
+                <h2 className="text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
                   Evidence.
                   <br />
                   Advocacy.
@@ -574,11 +596,16 @@ export default function Home() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                {approaches.map((item) => {
+                {approaches.map((item, index) => {
                   const Icon = item.icon;
                   return (
                     <div key={item.title} className="bg-paper p-6 shadow-sm">
-                      <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
+                      <div className="flex items-center justify-between">
+                        <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
+                        <span className="font-display text-sm font-bold text-accent">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
                       <h3 className="mt-5 text-lg font-bold text-forest font-display">{item.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-ink/65">{item.description}</p>
                     </div>
@@ -592,8 +619,7 @@ export default function Home() {
         {/* WHERE WE WORK */}
         <section className="mx-auto max-w-7xl px-6 py-24">
           <div className="text-center">
-            <Eyebrow>Where we work</Eyebrow>
-            <h2 className="mt-3 text-4xl font-bold text-forest sm:text-5xl font-display">Working across East Africa.</h2>
+            <h2 className="text-4xl font-bold text-forest sm:text-5xl font-display">Working across East Africa.</h2>
             <p className="mx-auto mt-4 max-w-2xl leading-7 text-ink/65">
               Our regional work connects communities, partners and stakeholders across East Africa to advance Economic, Social and Cultural Rights.
             </p>
@@ -625,8 +651,7 @@ export default function Home() {
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border-[25px] border-paper/10" />
           <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
             <div>
-              <Eyebrow>Partner with EACHRights</Eyebrow>
-              <h2 className="mt-2 text-3xl font-bold sm:text-4xl font-display">Together, we can turn rights into action.</h2>
+              <h2 className="text-3xl font-bold sm:text-4xl font-display">Together, we can turn rights into action.</h2>
               <p className="mt-3 max-w-2xl text-paper/80">
                 Explore opportunities for institutional, research, funding, government, private-sector, community and technical partnerships.
               </p>
