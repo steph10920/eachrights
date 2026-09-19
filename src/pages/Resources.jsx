@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
@@ -32,14 +32,12 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 /* =========================================================
    LOAD QUEUE
-   Parsing a whole PDF client-side (just to show page 1 as a
-   thumbnail) is expensive, and this page has seven of them.
-   Mounting all seven <Document> instances at once blocks the
-   main thread hard enough to freeze the tab and trip browser-
-   extension timeouts ("message channel closed" errors are a
-   symptom of that, not a bug in this file). This queue caps
-   how many PDFs can be parsing at the same time; everything
-   else waits its turn.
+   Parsing a whole PDF client-side (just to show a page as a
+   thumbnail) is expensive, and this page can have several in
+   play at once (the hero slide plus the grid below). This
+   queue caps how many can be parsing at the same time; the
+   rest wait their turn rather than all hitting the main
+   thread together.
 ========================================================= */
 const MAX_CONCURRENT_PDF_LOADS = 2;
 let activeLoads = 0;
@@ -67,11 +65,12 @@ function releaseLoadSlot() {
 
 /* =========================================================
    PDF THUMBNAIL
-   Renders page 1 of a PDF as a small preview. Falls back to
-   a plain document icon while loading or if rendering fails
-   (e.g. a corrupt file, or the worker failing to load).
+   Renders page 1 of a PDF as a preview at the given width.
+   Falls back to a plain document icon while loading or if
+   rendering fails (e.g. a corrupt file, or the worker failing
+   to load).
 ========================================================= */
-function PdfThumbnail({ file, onSettled }) {
+function PdfThumbnail({ file, onSettled, width = 220 }) {
   const [failed, setFailed] = useState(false);
   const settledRef = useRef(false);
 
@@ -105,7 +104,7 @@ function PdfThumbnail({ file, onSettled }) {
     >
       <Page
         pageNumber={1}
-        width={220}
+        width={width}
         renderTextLayer={false}
         renderAnnotationLayer={false}
         onLoadError={() => {
@@ -124,7 +123,7 @@ function PdfThumbnail({ file, onSettled }) {
    parsed until the card is close to entering the viewport,
    and waits for a free slot in the load queue above.
 ========================================================= */
-function LazyPdfThumbnail({ file }) {
+function LazyPdfThumbnail({ file, width }) {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [canLoad, setCanLoad] = useState(false);
@@ -171,7 +170,7 @@ function LazyPdfThumbnail({ file }) {
   return (
     <div ref={containerRef} className="h-full w-full">
       {canLoad ? (
-        <PdfThumbnail file={file} onSettled={releaseLoadSlot} />
+        <PdfThumbnail file={file} width={width} onSettled={releaseLoadSlot} />
       ) : (
         <div className="flex h-full w-full items-center justify-center bg-forest-soft">
           <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
@@ -248,9 +247,55 @@ const categories = [
   "Strategy & Planning",
 ];
 
+// A handful of publications to rotate through in the hero. Keeping this
+// short (not the whole list) keeps the carousel quick to cycle and keeps
+// the load queue light on a page that's already parsing PDFs below.
+const heroPublications = publications.slice(0, 4);
+
+const HERO_PUB_INTERVAL = 5000;
+
 export default function Publications() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentHeroPub, setCurrentHeroPub] = useState(0);
+  const heroPubTimerRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  const startHeroPubTimer = () => {
+    clearInterval(heroPubTimerRef.current);
+    heroPubTimerRef.current = setInterval(() => {
+      setCurrentHeroPub((prev) => (prev + 1) % heroPublications.length);
+    }, HERO_PUB_INTERVAL);
+  };
+
+  useEffect(() => {
+    startHeroPubTimer();
+    return () => clearInterval(heroPubTimerRef.current);
+  }, []);
+
+  const goToHeroPub = (index) => {
+    setCurrentHeroPub(index);
+    startHeroPubTimer();
+  };
+  const prevHeroPub = () =>
+    goToHeroPub((currentHeroPub - 1 + heroPublications.length) % heroPublications.length);
+  const nextHeroPub = () => goToHeroPub((currentHeroPub + 1) % heroPublications.length);
+
+  const activeHeroPub = heroPublications[currentHeroPub];
+
+  const heroPubMotion = prefersReducedMotion
+    ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        exit: { opacity: 1 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, scale: 1.04 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.98 },
+        transition: { duration: 0.6, ease: "easeInOut" },
+      };
 
   const filteredPublications = publications.filter((publication) => {
     const matchesCategory =
@@ -278,16 +323,16 @@ export default function Publications() {
       <section className="relative isolate overflow-hidden bg-forest text-white">
 
         <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full border border-white/10"
+          className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full border border-white/10"
           aria-hidden="true"
         />
 
         <div
-          className="pointer-events-none absolute -bottom-48 -left-48 h-[30rem] w-[30rem] rounded-full border border-white/10"
+          className="pointer-events-none absolute -bottom-36 -left-36 h-80 w-80 rounded-full border border-white/10"
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
+        <div className="relative mx-auto max-w-7xl px-6 py-7 sm:px-8 sm:py-9 lg:px-12 lg:py-10">
 
           <Link
             to="/resources"
@@ -297,30 +342,92 @@ export default function Publications() {
             Resources
           </Link>
 
-          <div className="mt-6 max-w-3xl">
+          <div className="mt-4 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
 
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-              <BookOpen size={24} strokeWidth={1.7} />
+            <div className="max-w-3xl">
+
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
+                <BookOpen size={18} strokeWidth={1.7} />
+              </div>
+
+              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                Resources
+              </p>
+
+              <h1 className="mt-2 text-2xl font-bold leading-[1.1] tracking-tight sm:text-3xl lg:text-4xl">
+                Publications
+              </h1>
+
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
+                Explore publications, reports and programme documents produced
+                by EACHRights to advance human rights, justice and human dignity.
+              </p>
+
             </div>
 
-            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-              Resources
-            </p>
+            {/* PDF PREVIEW CAROUSEL */}
+            <div className="mx-auto w-full max-w-[200px]">
+              <div className="group relative bg-white p-2 shadow-xl">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-50">
+                  <AnimatePresence initial={false} mode="sync">
+                    <motion.div key={currentHeroPub} {...heroPubMotion} className="absolute inset-0">
+                      <LazyPdfThumbnail file={activeHeroPub.pdf} width={190} />
+                    </motion.div>
+                  </AnimatePresence>
 
-            <h1 className="mt-3 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
-              Publications
-            </h1>
+                  <button
+                    type="button"
+                    onClick={prevHeroPub}
+                    aria-label="Previous publication"
+                    className="absolute left-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+                  >
+                    <ArrowLeft size={13} />
+                  </button>
 
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
-              Explore publications, reports and programme documents produced
-              by EACHRights to advance human rights, justice and human dignity.
-            </p>
+                  <button
+                    type="button"
+                    onClick={nextHeroPub}
+                    aria-label="Next publication"
+                    className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+                  >
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+
+                <div className="p-2.5">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-forest/60">
+                    {activeHeroPub.category}
+                  </p>
+                  <h3 className="mt-1 text-xs font-bold leading-snug text-forest">
+                    {activeHeroPub.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="mt-2 flex justify-center gap-2">
+                {heroPublications.map((publication, index) => (
+                  <button
+                    key={publication.title}
+                    type="button"
+                    onClick={() => goToHeroPub(index)}
+                    aria-label={`Go to publication ${index + 1}`}
+                    className="group/dot flex items-center justify-center p-1"
+                  >
+                    <span
+                      className={`block h-1.5 rounded-full transition-all duration-300 ${
+                        currentHeroPub === index ? "w-6 bg-accent" : "w-1.5 bg-white/30 group-hover/dot:bg-white/60"
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
 
           </div>
         </div>
 
         <div
-          className="absolute bottom-0 left-0 h-8 w-full bg-white"
+          className="absolute bottom-0 left-0 h-6 w-full bg-white"
           style={{
             clipPath: "polygon(0 100%, 100% 0, 100% 100%)",
           }}
@@ -419,7 +526,7 @@ export default function Publications() {
                   {/* PDF PAGE-1 PREVIEW */}
 
                   <div className="relative aspect-[4/3] w-full border-b border-gray-100">
-                    <LazyPdfThumbnail file={publication.pdf} />
+                    <LazyPdfThumbnail file={publication.pdf} width={220} />
 
                     <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-600 shadow-sm">
                       PDF
