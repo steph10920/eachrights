@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -31,13 +31,55 @@ import {
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 /* =========================================================
+   LOAD QUEUE
+   Parsing a whole PDF client-side (just to show page 1 as a
+   thumbnail) is expensive, and this page has seven of them.
+   Mounting all seven <Document> instances at once blocks the
+   main thread hard enough to freeze the tab and trip browser-
+   extension timeouts ("message channel closed" errors are a
+   symptom of that, not a bug in this file). This queue caps
+   how many PDFs can be parsing at the same time; everything
+   else waits its turn.
+========================================================= */
+const MAX_CONCURRENT_PDF_LOADS = 2;
+let activeLoads = 0;
+const loadQueue = [];
+
+function requestLoadSlot() {
+  return new Promise((resolve) => {
+    const tryStart = () => {
+      if (activeLoads < MAX_CONCURRENT_PDF_LOADS) {
+        activeLoads += 1;
+        resolve();
+      } else {
+        loadQueue.push(tryStart);
+      }
+    };
+    tryStart();
+  });
+}
+
+function releaseLoadSlot() {
+  activeLoads = Math.max(0, activeLoads - 1);
+  const next = loadQueue.shift();
+  if (next) next();
+}
+
+/* =========================================================
    PDF THUMBNAIL
    Renders page 1 of a PDF as a small preview. Falls back to
    a plain document icon while loading or if rendering fails
    (e.g. a corrupt file, or the worker failing to load).
 ========================================================= */
-function PdfThumbnail({ file }) {
+function PdfThumbnail({ file, onSettled }) {
   const [failed, setFailed] = useState(false);
+  const settledRef = useRef(false);
+
+  const settle = () => {
+    if (settledRef.current) return;
+    settledRef.current = true;
+    onSettled?.();
+  };
 
   if (failed) {
     return (
@@ -55,7 +97,10 @@ function PdfThumbnail({ file }) {
           <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
         </div>
       }
-      onLoadError={() => setFailed(true)}
+      onLoadError={() => {
+        setFailed(true);
+        settle();
+      }}
       className="flex h-full w-full items-center justify-center overflow-hidden bg-gray-50"
     >
       <Page
@@ -63,9 +108,76 @@ function PdfThumbnail({ file }) {
         width={220}
         renderTextLayer={false}
         renderAnnotationLayer={false}
-        onLoadError={() => setFailed(true)}
+        onLoadError={() => {
+          setFailed(true);
+          settle();
+        }}
+        onRenderSuccess={settle}
       />
     </Document>
+  );
+}
+
+/* =========================================================
+   LAZY PDF THUMBNAIL
+   Wraps PdfThumbnail so the underlying PDF isn't fetched or
+   parsed until the card is close to entering the viewport,
+   and waits for a free slot in the load queue above.
+========================================================= */
+function LazyPdfThumbnail({ file }) {
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [canLoad, setCanLoad] = useState(false);
+
+  useEffect(() => {
+    if (isVisible) return undefined;
+    const node = containerRef.current;
+    if (!node) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) return undefined;
+    let cancelled = false;
+    let gotSlot = false;
+
+    requestLoadSlot().then(() => {
+      if (cancelled) {
+        releaseLoadSlot();
+        return;
+      }
+      gotSlot = true;
+      setCanLoad(true);
+    });
+
+    return () => {
+      cancelled = true;
+      if (gotSlot) releaseLoadSlot();
+    };
+  }, [isVisible]);
+
+  return (
+    <div ref={containerRef} className="h-full w-full">
+      {canLoad ? (
+        <PdfThumbnail file={file} onSettled={releaseLoadSlot} />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-forest-soft">
+          <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -307,7 +419,7 @@ export default function Publications() {
                   {/* PDF PAGE-1 PREVIEW */}
 
                   <div className="relative aspect-[4/3] w-full border-b border-gray-100">
-                    <PdfThumbnail file={publication.pdf} />
+                    <LazyPdfThumbnail file={publication.pdf} />
 
                     <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-600 shadow-sm">
                       PDF
