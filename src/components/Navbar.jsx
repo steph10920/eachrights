@@ -56,7 +56,7 @@ function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
         {/* LOGO */}
         <Link to="/" onClick={closeMobileMenu} className="shrink-0">
-          <img src={logo} alt="EACHRights" className="h-11 w-auto object-contain" />
+          <img src={logo} alt="EACHRights" className="h-13 w-auto object-contain" />
         </Link>
 
         {/* DESKTOP NAVIGATION */}

@@ -46,15 +46,15 @@ const cycles = [
 ];
 
 const achievements = [
-  "Sustained dedication and commitment to the UPR process among Kenyan stakeholders throughout each cycle.",
+  "Sustained dedication and commitment to the Universal Periodic Review process among Kenyan stakeholders throughout each cycle.",
   "A growing number of CSOs and thematic groups joining the process ahead of the 3rd Cycle.",
   "Stronger recognition of the indivisibility and interrelatedness of human rights, bringing together organisations across different thematic areas.",
-  "Coordinated fundraising and resource mobilization that kept the UPR process running with support from multiple organisations.",
+  "Coordinated fundraising and resource mobilization that kept the Universal Periodic Review process running with support from multiple organisations.",
   "In-depth research for the Mid-Term Report that produced a credible baseline for the 3rd Cycle review.",
   "Evidence-based advocacy, using credible data to support assertions and propose solutions that benefit the people of Kenya.",
-  "Reinforcement that the UPR is a process, not an event — tracking issues from submission drafting through to implementation and the next Mid-Term Report.",
+  "Reinforcement that the Universal Periodic Review is a process, not an event — tracking issues from submission drafting through to implementation and the next Mid-Term Report.",
   "Expanded participation from previously underrepresented thematic groups, including Social Justice Centres, Persons with Disabilities, Counter Trafficking, and HIV/AIDS groups.",
-  "Growing recognition among organisations of the value of the UPR, leading more to seek funding to support the process.",
+  "Growing recognition among organisations of the value of the Universal Periodic Review, leading more to seek funding to support the process.",
 ];
 
 export default function UniversalPeriodicReview() {
@@ -88,7 +88,7 @@ export default function UniversalPeriodicReview() {
         </div>
       </section>
 
-      {/* WHAT IS THE UPR */}
+      {/* WHAT IS THE Universal Periodic Review */}
       <section className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 sm:py-28 lg:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, x: -25 }}
@@ -96,7 +96,7 @@ export default function UniversalPeriodicReview() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <Eyebrow dark>What Is the UPR</Eyebrow>
+          <Eyebrow dark>What Is the Universal Periodic Review.</Eyebrow>
           <h2 className="mt-3 font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
             A State-driven
             <br />
@@ -105,7 +105,7 @@ export default function UniversalPeriodicReview() {
           <p className="mt-6 text-base leading-8 text-ink/75">
             In 2006, the UN General Assembly adopted Resolution 60/251, establishing the Human Rights Council to
             promote universal respect for human rights and fundamental freedoms across Member States. One of its
-            key mandates is the Universal Periodic Review (UPR), which ensures the fulfilment of each State's
+            key mandates is the Universal Periodic Review (Universal Periodic Review), which ensures the fulfilment of each State's
             human rights obligations and commitments.
           </p>
           <p className="mt-4 text-base leading-8 text-ink/75">
@@ -129,18 +129,18 @@ export default function UniversalPeriodicReview() {
           </h3>
           <p className="mt-5 leading-7 text-ink/70">
             States must respond to every recommendation from their peers and report on the implementation of
-            recommendations they previously accepted. The UPR complements the work of UN treaty bodies and remains
+            recommendations they previously accepted. The Universal Periodic Review complements the work of UN treaty bodies and remains
             a cooperative process requiring the full participation of the State under review.
           </p>
           <div className="mt-6 h-1 w-16 bg-forest-dark" />
         </motion.div>
       </section>
 
-      {/* KENYA'S UPR PROCESS */}
+      {/* KENYA'S Universal Periodic Review PROCESS */}
       <section className="bg-forest-light px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl">
-            <Eyebrow dark>Kenya's UPR Process</Eyebrow>
+            <Eyebrow dark>Kenya's Universal Periodic Review Process</Eyebrow>
             <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
               Three cycles of review.
             </h2>
@@ -172,7 +172,7 @@ export default function UniversalPeriodicReview() {
           </div>
 
           <p className="mt-8 max-w-4xl leading-7 text-ink/70">
-            In 2019, Kenya Stakeholders on the UPR undertook in-depth research establishing the level of
+            In 2019, Kenya Stakeholders on the Universal Periodic Review undertook in-depth research establishing the level of
             implementation of accepted recommendations, captured in a Mid-Term Report launched and submitted to
             the Human Rights Council in Geneva. The Outcome Document of the 3rd Cycle review was formally adopted
             by the Council in June 2020.
@@ -193,15 +193,15 @@ export default function UniversalPeriodicReview() {
             <h2 className="mt-3 text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
               Kenya's Stakeholders
               <br />
-              <span className="text-forest-dark">Coalition on the UPR.</span>
+              <span className="text-forest-dark">Coalition on the Universal Periodic Review.</span>
             </h2>
             <p className="mt-6 leading-8 text-ink/75">
-              The Coalition, known as UPR Kenya, brings together a membership of over 200 NGOs. It is led by a
+              The Coalition, known as Universal Periodic Review Kenya, brings together a membership of over 200 NGOs. It is led by a
               Steering Committee with technical support from the Kenya National Commission on Human Rights
               (KNCHR) and the UN Office of the High Commissioner on Human Rights (OHCHR).
             </p>
             <p className="mt-4 leading-8 text-ink/75">
-              EACHRights serves as the Secretariat of the Kenya Stakeholders Coalition on the UPR.
+              EACHRights serves as the Secretariat of the Kenya Stakeholders Coalition on the Universal Periodic Review.
             </p>
           </motion.div>
 
@@ -242,7 +242,7 @@ export default function UniversalPeriodicReview() {
               What the Coalition has achieved.
             </h2>
             <p className="mt-4 leading-7 text-ink/65">
-              Progress made by Kenyan UPR Stakeholders during the 2nd Cycle process, including the development of
+              Progress made by Kenyan Universal Periodic Review Stakeholders during the 2nd Cycle process, including the development of
               the Mid-Term Report.
             </p>
           </div>
@@ -279,7 +279,7 @@ export default function UniversalPeriodicReview() {
                 Advancing human rights nationally, regionally and globally.
               </h2>
               <p className="mt-6 max-w-4xl text-base leading-8 text-paper/70 sm:text-lg">
-                No other universal mechanism of this kind exists. The UPR's ultimate aim is to improve the human
+                No other universal mechanism of this kind exists. The Universal Periodic Review's ultimate aim is to improve the human
                 rights situation in every country and address violations wherever they occur — and its success
                 depends on sustained follow-through, not a single review event.
               </p>
@@ -292,9 +292,9 @@ export default function UniversalPeriodicReview() {
       <section className="bg-forest px-6 py-24 text-center text-paper">
         <div className="mx-auto max-w-3xl">
           <Handshake size={48} strokeWidth={1.3} className="mx-auto text-accent" />
-          <h2 className="mt-6 text-4xl font-bold sm:text-5xl font-display">Get involved in the UPR process.</h2>
+          <h2 className="mt-6 text-4xl font-bold sm:text-5xl font-display">Get involved in the Universal Periodic Review process.</h2>
           <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
-            Learn how your organisation can join Kenya's Stakeholders Coalition on the UPR and contribute to
+            Learn how your organisation can join Kenya's Stakeholders Coalition on the Universal Periodic Review and contribute to
             advancing human rights across the country.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
