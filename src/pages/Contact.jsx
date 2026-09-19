@@ -1,6 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowLeft, Handshake } from "lucide-react";
 
 function Contact() {
   return (
@@ -22,14 +22,11 @@ function Contact() {
           >
             <Link
               to="/"
-              className="mb-8 inline-block text-sm font-medium text-white/80 transition hover:text-white"
+              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white"
             >
-              ← Back to Home
+              <ArrowLeft size={16} />
+              Back to Home
             </Link>
-
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white/80">
-              Get In Touch
-            </p>
 
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               Contact EACHRights
@@ -53,11 +50,7 @@ function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
-              We Would Love to Hear From You
-            </span>
-
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
               Let’s Connect
             </h2>
 
@@ -94,11 +87,7 @@ function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
-                Contact Information
-              </p>
-
-              <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
+              <h2 className="text-3xl font-bold text-ink sm:text-4xl">
                 Our Head Office
               </h2>
 
@@ -176,14 +165,10 @@ function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="rounded-3xl bg-white p-7 shadow-lg sm:p-10"
+              className="bg-white p-7 shadow-lg sm:p-10"
             >
               <div className="mb-8">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
-                  Send Us a Message
-                </p>
-
-                <h2 className="mt-2 text-3xl font-bold text-ink">
+                <h2 className="text-3xl font-bold text-ink">
                   How Can We Help?
                 </h2>
 
@@ -209,7 +194,7 @@ function Contact() {
                     type="text"
                     required
                     placeholder="Enter your name"
-                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                    className="w-full border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
                   />
                 </div>
 
@@ -228,7 +213,7 @@ function Contact() {
                     type="email"
                     required
                     placeholder="Enter your email address"
-                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                    className="w-full border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
                   />
                 </div>
 
@@ -249,7 +234,7 @@ function Contact() {
                     name="phone"
                     type="tel"
                     placeholder="Enter your phone number"
-                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                    className="w-full border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
                   />
                 </div>
 
@@ -267,7 +252,7 @@ function Contact() {
                     name="subject"
                     required
                     defaultValue=""
-                    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/10"
+                    className="w-full border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/10"
                   >
                     <option value="" disabled>
                       Select a subject
@@ -318,14 +303,14 @@ function Contact() {
                     rows="6"
                     required
                     placeholder="Write your message here..."
-                    className="w-full resize-none rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                    className="w-full resize-none border border-gray-300 bg-white px-4 py-3.5 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
                   />
                 </div>
 
                 {/* SUBMIT */}
                 <button
                   type="submit"
-                  className="w-full rounded-xl bg-forest px-6 py-4 font-semibold text-white transition hover:bg-forest-dark focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                  className="w-full bg-forest px-6 py-4 font-semibold text-white transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
                 >
                   Send Message
                 </button>
@@ -342,11 +327,7 @@ function Contact() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
           <div className="mb-8">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
-              Find Us
-            </p>
-
-            <h2 className="mt-2 text-3xl font-bold text-ink sm:text-4xl">
+            <h2 className="text-3xl font-bold text-ink sm:text-4xl">
               Our Nairobi Office
             </h2>
 
@@ -355,7 +336,7 @@ function Contact() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-sm">
+          <div className="overflow-hidden border border-gray-200 bg-gray-100">
             <iframe
               title="EACHRights Office Location"
               src="https://www.google.com/maps?q=Kabarnet%20Road%2C%20Nairobi%2C%20Kenya&output=embed"
@@ -371,15 +352,12 @@ function Contact() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-forest py-16 text-white lg:py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
+      {/* CTA — mirrors Home/About's final CTA */}
+      <section className="bg-forest py-16 text-center text-white lg:py-20">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <Handshake size={44} strokeWidth={1.3} className="mx-auto text-accent" />
 
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-white/70">
-            Human Rights • Justice • Dignity
-          </p>
-
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-5 text-3xl font-bold sm:text-4xl">
             Let’s Work Together
           </h2>
 
@@ -391,11 +369,10 @@ function Contact() {
 
           <a
             href="mailto:info@eachrights.or.ke"
-            className="mt-8 inline-block rounded-xl bg-white px-7 py-3.5 font-semibold text-forest transition hover:bg-gray-100"
+            className="mt-8 inline-block bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
           >
             Email EACHRights
           </a>
-
         </div>
       </section>
 
