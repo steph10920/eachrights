@@ -3,29 +3,75 @@ import { Link } from "react-router-dom";
 import {
   HeartPulse,
   Target,
-  CheckCircle2,
   ArrowRight,
   ArrowLeft,
+  Users,
+  Baby,
+  Scale,
+  Search,
 } from "lucide-react";
 
-const focusAreas = [
-  "Promote the realization of the right to the highest attainable standard of health.",
-  "Promote the realization of sexual and reproductive health and rights (SRHR).",
-  "Advocate for equitable access to quality, affordable, accessible, and acceptable healthcare services.",
-  "Address social, economic, geographical, and institutional barriers to healthcare.",
-  "Strengthen meaningful community participation in health governance and decision-making.",
-  "Promote accountability among health institutions and duty bearers.",
-  "Promote access to accurate, timely, and understandable health information.",
-  "Advocate for improved access to maternal, newborn, child, and adolescent health services.",
-  "Address the specific health needs of vulnerable and marginalized groups and communities.",
-  "Conduct research, advocacy, capacity building, and partnerships to advance health justice.",
+/* =========================================================
+   The ten focus areas grouped into the four pillars they
+   actually represent, rather than one flat list.
+========================================================= */
+
+const pillars = [
+  {
+    icon: Users,
+    title: "Access & Equity in Healthcare",
+    items: [
+      "Advocate for equitable access to quality, affordable, accessible, and acceptable healthcare services.",
+      "Address social, economic, geographical, and institutional barriers to healthcare.",
+      "Address the specific health needs of vulnerable and marginalized groups and communities.",
+    ],
+  },
+  {
+    icon: Baby,
+    title: "Sexual, Reproductive & Maternal Health",
+    items: [
+      "Promote the realization of sexual and reproductive health and rights (SRHR).",
+      "Advocate for improved access to maternal, newborn, child, and adolescent health services.",
+    ],
+  },
+  {
+    icon: Scale,
+    title: "Governance & Accountability",
+    items: [
+      "Strengthen meaningful community participation in health governance and decision-making.",
+      "Promote accountability among health institutions and duty bearers.",
+      "Promote access to accurate, timely, and understandable health information.",
+    ],
+  },
+  {
+    icon: Search,
+    title: "Rights, Research & Advocacy",
+    items: [
+      "Promote the realization of the right to the highest attainable standard of health.",
+      "Conduct research, advocacy, capacity building, and partnerships to advance health justice.",
+    ],
+  },
+];
+
+const outcomes = [
+  "Increased awareness of the right to health.",
+  "Improved access to quality and equitable healthcare services.",
+  "Greater awareness and protection of sexual and reproductive health and rights.",
+  "Increased community participation in health decision-making.",
+  "Strengthened accountability among health institutions and duty bearers.",
+  "Improved access to relevant and reliable health information.",
+  "Greater attention to the health needs of underserved communities.",
+  "Stronger implementation of health-related laws, policies, and budgets.",
+  "Increased evidence-based advocacy for health justice and equity.",
 ];
 
 export default function HealthJustice() {
   return (
     <main className="bg-white font-sans text-ink">
 
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
       <section className="relative isolate overflow-hidden bg-forest text-white">
         <div
           className="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full border border-white/10"
@@ -36,7 +82,7 @@ export default function HealthJustice() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <Link
             to="/our-work"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
@@ -45,24 +91,25 @@ export default function HealthJustice() {
             Our Work
           </Link>
 
-          <div className="mt-8 max-w-4xl">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/10">
-              <HeartPulse size={28} strokeWidth={1.7} />
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-3xl"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <HeartPulse size={24} strokeWidth={1.7} />
             </div>
 
-            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-              Our Work / Programmes
-            </p>
-
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Health Justice Programme
+            <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
+              Health Justice
             </h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
-              Promoting equitable access to healthcare and advancing the right
-              to health for vulnerable and marginalized communities.
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
+              Promoting equitable access to healthcare and advancing the
+              right to health for vulnerable and marginalized communities.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         <div
@@ -72,182 +119,155 @@ export default function HealthJustice() {
         />
       </section>
 
-      {/* INTRODUCTION */}
+      {/* =====================================================
+          INTRODUCTION — narrative alongside goal, rather than
+          a separate full-width statement section below it.
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-              Health Justice
-            </p>
-
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink sm:text-4xl">
+          <div>
+            <h2 className="max-w-xl text-3xl font-bold leading-tight text-ink sm:text-4xl">
               Advancing the right to health for all
             </h2>
 
-            <p className="mt-6 text-base leading-8 text-gray-600 sm:text-lg">
-              Article 43(1) of the Constitution of Kenya, 2010, guarantees
-              every person the right to the highest attainable standard of
-              health, which includes the right to healthcare services,
-              including reproductive healthcare.
-            </p>
-
-            <p className="mt-5 text-base leading-8 text-gray-600 sm:text-lg">
-              Despite these constitutional guarantees and other commitments to
-              the right to health, many people continue to experience barriers
-              to accessing quality, affordable, accessible, and appropriate
-              healthcare services. Vulnerable and marginalized groups and
-              communities are often disproportionately affected by these
-              barriers.
-            </p>
-
-            <p className="mt-5 text-base leading-8 text-gray-600 sm:text-lg">
-              Challenges such as poverty, geographical isolation,
-              discrimination, limited health infrastructure, inadequate
-              information, and unequal access to health services can prevent
-              individuals and communities from fully enjoying their right to
-              health.
-            </p>
-
-            <p className="mt-5 text-base leading-8 text-gray-600 sm:text-lg">
-              The Health Justice Programme seeks to contribute to a society
-              where healthcare is accessible to vulnerable and marginalized
-              groups and communities. The programme applies a{" "}
-              <strong className="text-ink">
-                human rights-based approach
-              </strong>{" "}
-              that promotes participation, equality, non-discrimination,
-              accountability, transparency, and access to information in
-              health-related decision-making.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* PROGRAMME GOAL */}
-      <section className="bg-forest-soft px-6 py-16 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col gap-6 rounded-2xl border border-forest/10 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:p-10"
-          >
-            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-forest text-white">
-              <Target size={28} strokeWidth={1.7} />
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-                Programme Goal
+            <div className="mt-8 max-w-2xl space-y-5 text-base leading-8 text-gray-600">
+              <p>
+                Article 43(1) of the Constitution of Kenya, 2010, guarantees
+                every person the right to the highest attainable standard of
+                health, which includes the right to healthcare services,
+                including reproductive healthcare.
               </p>
-
-              <h2 className="mt-3 text-2xl font-bold leading-snug text-ink sm:text-3xl">
-                To promote access to healthcare among vulnerable and
-                marginalized groups and communities.
-              </h2>
+              <p>
+                Despite these constitutional guarantees, many people
+                continue to experience barriers to accessing quality,
+                affordable, accessible, and appropriate healthcare
+                services. Vulnerable and marginalized groups and
+                communities are often disproportionately affected —
+                poverty, geographical isolation, discrimination, limited
+                health infrastructure, inadequate information, and unequal
+                access to services can prevent people from fully enjoying
+                their right to health.
+              </p>
+              <p>
+                The Health Justice Programme applies a{" "}
+                <strong className="text-ink">
+                  human rights-based approach
+                </strong>{" "}
+                that promotes participation, equality, non-discrimination,
+                accountability, transparency, and access to information in
+                health-related decision-making.
+              </p>
             </div>
-          </motion.div>
+          </div>
+
+          <aside className="lg:pt-1">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="rounded-2xl bg-forest p-7 text-white"
+            >
+              <div className="flex items-center gap-2.5 text-white/70">
+                <Target size={18} />
+                <span className="text-sm font-medium">Programme goal</span>
+              </div>
+              <p className="mt-4 text-xl font-semibold leading-8">
+                Promoting access to healthcare among vulnerable and
+                marginalized groups and communities.
+              </p>
+            </motion.div>
+          </aside>
+
         </div>
       </section>
 
-      {/* INTERVENTION FOCUS AREAS */}
+      {/* =====================================================
+          FOCUS AREAS — four pillars instead of one flat list
+      ===================================================== */}
+      <section className="bg-forest-soft px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            Four pillars of intervention
+          </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-gray-600">
+            Our interventions address the barriers that prevent vulnerable
+            and marginalized communities from fully realizing their right
+            to health.
+          </p>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="rounded-2xl bg-white p-7 sm:p-8"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-forest/10 text-forest">
+                    <Icon size={22} strokeWidth={1.7} />
+                  </div>
+
+                  <h3 className="mt-5 text-lg font-bold leading-snug text-forest">
+                    {pillar.title}
+                  </h3>
+
+                  <ul className="mt-4 space-y-3">
+                    {pillar.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-t border-gray-100 pt-3 text-sm leading-6 text-gray-600 first:border-t-0 first:pt-0"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          EXPECTED OUTCOMES — an editorial list, not a card grid
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-5xl">
-
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-            How We Work
-          </p>
-
-          <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
-            Intervention focus areas
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            What changes as a result
           </h2>
 
-          <div className="mt-4 h-1 w-16 rounded-full bg-forest" />
-
-          <p className="mt-5 max-w-3xl leading-7 text-gray-600">
-            Our interventions address the barriers that prevent vulnerable and
-            marginalized communities from fully realizing their right to
-            health.
-          </p>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {focusAreas.map((area, index) => (
-              <motion.div
-                key={area}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="flex items-start gap-4 rounded-xl border border-forest/10 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <CheckCircle2
-                  size={22}
-                  className="mt-0.5 flex-shrink-0 text-forest"
-                  strokeWidth={1.7}
-                />
-
-                <span className="text-base leading-7 text-gray-700">
-                  {area}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* EXPECTED CHANGE */}
-      <section className="bg-forest-soft px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-5xl">
-
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-            Expected Change
-          </p>
-
-          <h2 className="mt-4 text-3xl font-bold text-ink sm:text-4xl">
-            Advancing health justice
-          </h2>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Increased awareness of the right to health.",
-              "Improved access to quality and equitable healthcare services.",
-              "Greater awareness and protection of sexual and reproductive health and rights.",
-              "Increased community participation in health decision-making.",
-              "Strengthened accountability among health institutions and duty bearers.",
-              "Improved access to relevant and reliable health information.",
-              "Greater attention to the health needs of underserved communities.",
-              "Stronger implementation of health-related laws, policies, and budgets.",
-              "Increased evidence-based advocacy for health justice and equity.",
-            ].map((item, index) => (
-              <motion.div
+          <motion.ol
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 grid gap-x-10 sm:grid-cols-2"
+          >
+            {outcomes.map((item, index) => (
+              <li
                 key={item}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="rounded-xl bg-white p-6 shadow-sm"
+                className="flex gap-4 border-t border-gray-100 py-4 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-forest text-sm font-bold text-white">
-                  {index + 1}
-                </div>
-
-                <p className="mt-4 text-sm leading-6 text-gray-600">
-                  {item}
-                </p>
-              </motion.div>
+                <span className="text-sm text-gray-400">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="leading-7 text-gray-600">{item}</span>
+              </li>
             ))}
-          </div>
+          </motion.ol>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* =====================================================
+          CTA
+      ===================================================== */}
       <section className="bg-forest px-6 py-16 text-center text-white sm:px-8 lg:px-12">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold sm:text-3xl">
@@ -269,7 +289,6 @@ export default function HealthJustice() {
               <ArrowRight size={18} />
             </Link>
 
-           
           </div>
         </div>
       </section>

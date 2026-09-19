@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Document, Page, pdfjs } from "react-pdf";
+import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
 import strategicPlan2026 from "../assets/publications/STRATEGIC PLAN 2026-2030.pdf";
 import educationSchools from "../assets/publications/Build Us More Schools (Full Version).pdf";
@@ -18,7 +21,53 @@ import {
   BookOpen,
   Search,
 } from "lucide-react";
-import { useState } from "react";
+
+/* =========================================================
+   PDF.js worker — bundled by Vite from node_modules so the
+   worker always matches the exact pdfjs-dist version that
+   react-pdf ships with. Must be set once, outside the
+   component, before any <Document> renders.
+========================================================= */
+pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
+
+/* =========================================================
+   PDF THUMBNAIL
+   Renders page 1 of a PDF as a small preview. Falls back to
+   a plain document icon while loading or if rendering fails
+   (e.g. a corrupt file, or the worker failing to load).
+========================================================= */
+function PdfThumbnail({ file }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-forest-soft">
+        <FileText size={32} className="text-forest/40" strokeWidth={1.5} />
+      </div>
+    );
+  }
+
+  return (
+    <Document
+      file={file}
+      loading={
+        <div className="flex h-full w-full items-center justify-center bg-forest-soft">
+          <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
+        </div>
+      }
+      onLoadError={() => setFailed(true)}
+      className="flex h-full w-full items-center justify-center overflow-hidden bg-gray-50"
+    >
+      <Page
+        pageNumber={1}
+        width={220}
+        renderTextLayer={false}
+        renderAnnotationLayer={false}
+        onLoadError={() => setFailed(true)}
+      />
+    </Document>
+  );
+}
 
 const publications = [
    {
@@ -252,81 +301,77 @@ export default function Publications() {
                     duration: 0.45,
                     delay: index * 0.04,
                   }}
-                  className="group flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
 
-                  {/* PDF ICON */}
+                  {/* PDF PAGE-1 PREVIEW */}
 
-                  <div className="flex items-start justify-between">
+                  <div className="relative aspect-[4/3] w-full border-b border-gray-100">
+                    <PdfThumbnail file={publication.pdf} />
 
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-forest-soft text-forest">
-                      <FileText
-                        size={27}
-                        strokeWidth={1.7}
-                      />
-                    </div>
-
-                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
+                    <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-600 shadow-sm">
                       PDF
                     </span>
-
                   </div>
 
+                  <div className="flex flex-1 flex-col p-6">
 
-                  {/* CATEGORY */}
+                    {/* CATEGORY */}
 
-                  <p className="mt-7 text-xs font-semibold uppercase tracking-[0.15em] text-forest">
-                    {publication.category}
-                  </p>
-
-
-                  {/* TITLE */}
-
-                  <h3 className="mt-3 text-xl font-bold leading-snug text-ink">
-                    {publication.title}
-                  </h3>
+                    <p className="text-xs font-semibold uppercase tracking-[0.15em] text-forest">
+                      {publication.category}
+                    </p>
 
 
-                  {/* DATE */}
+                    {/* TITLE */}
 
-                  <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
-
-                    <CalendarDays size={16} />
-
-                    <span>{publication.year}</span>
-
-                  </div>
+                    <h3 className="mt-3 text-xl font-bold leading-snug text-ink">
+                      {publication.title}
+                    </h3>
 
 
-                  {/* DESCRIPTION */}
+                    {/* DATE */}
 
-                  <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-                    {publication.description}
-                  </p>
+                    <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
+
+                      <CalendarDays size={16} />
+
+                      <span>{publication.year}</span>
+
+                    </div>
 
 
-                  {/* ACTIONS */}
+                    {/* DESCRIPTION */}
 
-                  <div className="mt-7 flex flex-wrap gap-3 border-t border-gray-100 pt-5">
+                    <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+                      {publication.description}
+                    </p>
 
-                    <a
-                      href={publication.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-lg bg-forest px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-forest-dark"
-                    >
-                      <ExternalLink size={16} />
-                      View PDF
-                    </a>
 
-                    <a
-                      href={publication.pdf}
-                      download
-                      className="inline-flex items-center gap-2 rounded-lg border border-forest/20 px-4 py-2.5 text-sm font-semibold text-forest transition hover:bg-forest-soft"
-                    >
-                      <Download size={16} />
-                      Download
-                    </a>
+                    {/* ACTIONS */}
+
+                    <div className="mt-7 flex flex-wrap gap-3 border-t border-gray-100 pt-5">
+
+                      <a
+                        href={publication.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg bg-forest px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-forest-dark"
+                      >
+                        <ExternalLink size={16} />
+                        View PDF
+                      </a>
+
+                      <a
+                        href={publication.pdf}
+                        download
+                        className="inline-flex items-center gap-2 rounded-lg border border-forest/20 px-4 py-2.5 text-sm font-semibold text-forest transition hover:bg-forest-soft"
+                      >
+                        <Download size={16} />
+                        Download
+                      </a>
+
+                    </div>
 
                   </div>
 

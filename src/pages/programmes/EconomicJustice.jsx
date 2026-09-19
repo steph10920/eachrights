@@ -3,24 +3,56 @@ import { Link } from "react-router-dom";
 import {
   BriefcaseBusiness,
   Target,
-  CheckCircle2,
   ArrowRight,
   ArrowLeft,
+  Users,
+  Scale,
+  Handshake,
+  Search,
 } from "lucide-react";
 
-const focusAreas = [
-  "Promote the right to decent work and employment.",
-  "Enhance adherence to the Guiding Principles on Business and Human Rights.",
-  "Promote adherence to the Environmental, Social and Governance Framework.",
-  "Strengthen business and human rights accountability.",
-  "Promote community rights and meaningful participation.",
-  "Protect labour rights and workplace equality.",
-  "Promote access to remedy and justice for affected communities.",
-  "Encourage responsible investment and sustainable development.",
-  "Promote environmental responsibility and corporate accountability.",
-  "Conduct research, advocacy and policy engagement.",
-  "Build capacity and awareness on economic rights and responsible business.",
-  "Promote inclusive economic opportunities for vulnerable and marginalised groups.",
+/* =========================================================
+   The twelve focus areas grouped into the four pillars they
+   actually represent, rather than one flat list.
+========================================================= */
+
+const pillars = [
+  {
+    icon: Users,
+    title: "Decent Work & Economic Inclusion",
+    items: [
+      "Promote the right to decent work and employment.",
+      "Protect labour rights and workplace equality.",
+      "Promote inclusive economic opportunities for vulnerable and marginalised groups.",
+    ],
+  },
+  {
+    icon: Scale,
+    title: "Responsible Business & Corporate Accountability",
+    items: [
+      "Enhance adherence to the Guiding Principles on Business and Human Rights.",
+      "Promote adherence to the Environmental, Social and Governance Framework.",
+      "Strengthen business and human rights accountability.",
+      "Encourage responsible investment and sustainable development.",
+    ],
+  },
+  {
+    icon: Handshake,
+    title: "Community Rights & Access to Remedy",
+    items: [
+      "Promote community rights and meaningful participation.",
+      "Promote access to remedy and justice for affected communities.",
+      "Promote environmental responsibility and corporate accountability.",
+    ],
+  },
+  {
+    icon: Search,
+    title: "Knowledge, Advocacy & Capacity",
+    items: [
+      "Conduct research, advocacy and policy engagement.",
+      "Build capacity and awareness on economic rights and responsible business.",
+    ],
+  },
 ];
 
 const outcomes = [
@@ -42,7 +74,9 @@ export default function EconomicJustice() {
   return (
     <main className="bg-white font-sans text-ink">
 
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
       <section className="relative isolate overflow-hidden bg-forest text-white">
         <div
           className="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full border border-white/10"
@@ -53,7 +87,7 @@ export default function EconomicJustice() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <Link
             to="/our-work"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
@@ -62,24 +96,25 @@ export default function EconomicJustice() {
             Our Work
           </Link>
 
-          <div className="mt-8 max-w-4xl">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/10">
-              <BriefcaseBusiness size={28} strokeWidth={1.7} />
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-3xl"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <BriefcaseBusiness size={24} strokeWidth={1.7} />
             </div>
 
-            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-              Our Work / Programmes
-            </p>
-
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Economic Justice, Business & Human Rights Programme
+            <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
+              Economic Justice, Business &amp; Human Rights
             </h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
               Advancing economic rights, decent work and responsible business
               practices that respect people, communities and the environment.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         <div
@@ -89,158 +124,159 @@ export default function EconomicJustice() {
         />
       </section>
 
-      {/* INTRODUCTION */}
+      {/* =====================================================
+          INTRODUCTION — narrative alongside goal & frameworks,
+          rather than a floating full-width statement block.
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-              Economic Justice & Business
-            </p>
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
 
-            <h2 className="mt-4 max-w-4xl text-3xl font-bold leading-tight text-ink sm:text-4xl">
-              Advancing economic rights and responsible business
+          <div>
+            <h2 className="max-w-xl text-3xl font-bold leading-tight text-ink sm:text-4xl">
+              Where economic rights meet responsible business
             </h2>
 
-            <div className="mt-8 space-y-5 text-lg leading-8 text-gray-600">
+            <div className="mt-8 max-w-2xl space-y-5 text-base leading-8 text-gray-600">
               <p>
-                We recognise that the violation of economic rights can have a
-                profound impact on individuals, workers and communities.
-                Businesses in Kenya, as elsewhere in the world, can make
-                significant contributions to human rights and economic
-                development.
+                The violation of economic rights can have a profound impact
+                on individuals, workers and communities. Businesses in
+                Kenya, as elsewhere in the world, can make significant
+                contributions to human rights and economic development —
+                through employment creation, public revenue, goods and
+                services, and investments that improve people&rsquo;s
+                quality of life.
               </p>
-
               <p>
-                Businesses contribute positively through employment creation,
-                increased public revenue through tax payments, provision of
-                goods and services, innovation and investments that can improve
-                people's quality of life.
-              </p>
-
-              <p>
-                At the same time, business activities can have negative impacts
-                on human rights, including violations of labour rights,
-                displacement of communities, inadequate consultation or
-                compensation, unsafe working conditions and environmental
+                At the same time, business activities can have negative
+                impacts on human rights, including violations of labour
+                rights, displacement of communities, inadequate consultation
+                or compensation, unsafe working conditions and environmental
                 pollution.
               </p>
-
               <p>
                 The Economic Justice, Business and Human Rights Programme
-                therefore works at the intersection of economic rights,
-                responsible business conduct and human rights. The programme
-                is guided by the Guiding Principles on Business and Human
-                Rights and the Environmental, Social and Governance (ESG)
-                Framework.
-              </p>
-
-              <p>
-                Through research, advocacy, capacity building, community
-                engagement and accountability initiatives, EACHRights seeks to
-                promote economic opportunities and ensure that business
-                activities respect the rights, dignity and wellbeing of
-                individuals and communities.
+                works at this intersection. Through research, advocacy,
+                capacity building, community engagement and accountability
+                initiatives, EACHRights seeks to promote economic
+                opportunities and ensure that business activities respect
+                the rights, dignity and wellbeing of individuals and
+                communities.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* GOAL */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-14 rounded-2xl bg-forest p-8 text-white sm:p-10"
-          >
-            <div className="flex items-center gap-3">
-              <Target size={24} />
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-                Programme Goal
+          <aside className="space-y-6 lg:pt-1">
+            <div className="rounded-2xl bg-forest p-7 text-white">
+              <div className="flex items-center gap-2.5 text-white/70">
+                <Target size={18} />
+                <span className="text-sm font-medium">Programme goal</span>
+              </div>
+              <p className="mt-4 text-xl font-semibold leading-8">
+                A society with equal economic opportunities for all
+                individuals.
               </p>
             </div>
 
-            <p className="mt-5 text-2xl font-semibold leading-9 sm:text-3xl">
-              To contribute to a society where there are equal economic
-              opportunities for all individuals.
-            </p>
-          </motion.div>
+            <div className="rounded-2xl border border-gray-200 p-7">
+              <p className="text-sm font-medium text-gray-500">Guided by</p>
+              <ul className="mt-4 space-y-4">
+                <li className="border-t border-gray-100 pt-4 text-sm leading-6 text-gray-700">
+                  UN Guiding Principles on Business and Human Rights
+                </li>
+                <li className="border-t border-gray-100 pt-4 text-sm leading-6 text-gray-700">
+                  Environmental, Social and Governance (ESG) Framework
+                </li>
+              </ul>
+            </div>
+          </aside>
+
         </div>
       </section>
 
-      {/* FOCUS AREAS */}
+      {/* =====================================================
+          FOCUS AREAS — four pillars instead of one flat list
+      ===================================================== */}
       <section className="bg-forest-soft px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-6xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-              What We Do
-            </p>
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            Four pillars of intervention
+          </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-gray-600">
+            Our focus areas fall into four connected pillars of work, each
+            reinforcing the others.
+          </p>
 
-            <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
-              Intervention Focus Areas
-            </h2>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="rounded-2xl bg-white p-7 sm:p-8"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-forest/10 text-forest">
+                    <Icon size={22} strokeWidth={1.7} />
+                  </div>
 
-            <p className="mt-4 leading-7 text-gray-600">
-              We promote economic justice, decent work and responsible
-              business practices that respect human rights and communities.
-            </p>
-          </div>
+                  <h3 className="mt-5 text-lg font-bold leading-snug text-forest">
+                    {pillar.title}
+                  </h3>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {focusAreas.map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="flex gap-4 rounded-xl bg-white p-6 shadow-sm"
-              >
-                <CheckCircle2
-                  className="mt-1 shrink-0 text-forest"
-                  size={21}
-                />
-                <p className="font-medium leading-7 text-gray-700">
-                  {item}
-                </p>
-              </motion.div>
-            ))}
+                  <ul className="mt-4 space-y-3">
+                    {pillar.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-t border-gray-100 pt-3 text-sm leading-6 text-gray-600 first:border-t-0 first:pt-0"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* EXPECTED OUTCOMES */}
+      {/* =====================================================
+          EXPECTED OUTCOMES — an editorial list, not a card grid
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-              Our Impact
-            </p>
+        <div className="mx-auto max-w-5xl">
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            What changes as a result
+          </h2>
 
-            <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
-              Expected Change
-            </h2>
-          </div>
-
-          <div className="mt-10 grid gap-x-10 gap-y-5 md:grid-cols-2">
-            {outcomes.map((item) => (
-              <div key={item} className="flex gap-3">
-                <CheckCircle2
-                  className="mt-1 shrink-0 text-forest"
-                  size={20}
-                />
-                <p className="leading-7 text-gray-600">{item}</p>
-              </div>
+          <motion.ol
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 grid gap-x-10 sm:grid-cols-2"
+          >
+            {outcomes.map((item, index) => (
+              <li
+                key={item}
+                className="flex gap-4 border-t border-gray-100 py-4 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
+              >
+                <span className="text-sm text-gray-400">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="leading-7 text-gray-600">{item}</span>
+              </li>
             ))}
-          </div>
+          </motion.ol>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* =====================================================
+          CTA
+      ===================================================== */}
       <section className="bg-forest px-6 py-16 text-center text-white sm:px-8 lg:px-12">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold sm:text-3xl">
@@ -260,8 +296,6 @@ export default function EconomicJustice() {
               Get Involved
               <ArrowRight size={18} />
             </Link>
-
-            
           </div>
         </div>
       </section>

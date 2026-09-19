@@ -3,22 +3,54 @@ import { Link } from "react-router-dom";
 import {
   Leaf,
   Target,
-  CheckCircle2,
   ArrowRight,
   ArrowLeft,
+  Sprout,
+  Scale,
+  Users,
+  Search,
 } from "lucide-react";
 
-const focusAreas = [
-  "Promote environmental and climate adaptation and mitigation strategies.",
-  "Strengthen environmental and climate accountability.",
-  "Build climate resilience among vulnerable and marginalised communities.",
-  "Promote environmental rights and justice.",
-  "Increase climate change awareness and environmental education.",
-  "Promote youth and community participation in climate action.",
-  "Support sustainable natural resource management.",
-  "Advocate for effective environmental and climate policies and governance.",
-  "Conduct research, advocacy and evidence generation.",
-  "Support community-led environmental protection and conservation initiatives.",
+/* =========================================================
+   The ten focus areas grouped into the four pillars they
+   actually represent, rather than one flat list.
+========================================================= */
+
+const pillars = [
+  {
+    icon: Sprout,
+    title: "Climate Resilience & Adaptation",
+    items: [
+      "Promote environmental and climate adaptation and mitigation strategies.",
+      "Build climate resilience among vulnerable and marginalised communities.",
+      "Support sustainable natural resource management.",
+    ],
+  },
+  {
+    icon: Scale,
+    title: "Rights, Policy & Accountability",
+    items: [
+      "Strengthen environmental and climate accountability.",
+      "Promote environmental rights and justice.",
+      "Advocate for effective environmental and climate policies and governance.",
+    ],
+  },
+  {
+    icon: Users,
+    title: "Community & Youth Participation",
+    items: [
+      "Promote youth and community participation in climate action.",
+      "Support community-led environmental protection and conservation initiatives.",
+    ],
+  },
+  {
+    icon: Search,
+    title: "Awareness, Research & Advocacy",
+    items: [
+      "Increase climate change awareness and environmental education.",
+      "Conduct research, advocacy and evidence generation.",
+    ],
+  },
 ];
 
 const outcomes = [
@@ -37,7 +69,9 @@ export default function EnvironmentalClimateJustice() {
   return (
     <main className="bg-white font-sans text-ink">
 
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
       <section className="relative isolate overflow-hidden bg-forest text-white">
         <div
           className="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full border border-white/10"
@@ -48,7 +82,7 @@ export default function EnvironmentalClimateJustice() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <Link
             to="/our-work"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
@@ -57,24 +91,25 @@ export default function EnvironmentalClimateJustice() {
             Our Work
           </Link>
 
-          <div className="mt-8 max-w-4xl">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/10">
-              <Leaf size={28} strokeWidth={1.7} />
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-3xl"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <Leaf size={24} strokeWidth={1.7} />
             </div>
 
-            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-              Our Work / Programmes
-            </p>
-
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Environmental & Climate Justice Programme
+            <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
+              Environmental &amp; Climate Justice
             </h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
               Advancing environmental rights, climate resilience and
               accountability for vulnerable and marginalised communities.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         <div
@@ -84,147 +119,151 @@ export default function EnvironmentalClimateJustice() {
         />
       </section>
 
-      {/* INTRODUCTION */}
+      {/* =====================================================
+          INTRODUCTION — narrative alongside goal, rather than
+          a floating full-width statement block.
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-              Environmental & Climate Justice
-            </p>
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
 
-            <h2 className="mt-4 max-w-4xl text-3xl font-bold leading-tight text-ink sm:text-4xl">
+          <div>
+            <h2 className="max-w-xl text-3xl font-bold leading-tight text-ink sm:text-4xl">
               Protecting people, communities and the environment
             </h2>
 
-            <div className="mt-8 space-y-5 text-lg leading-8 text-gray-600">
+            <div className="mt-8 max-w-2xl space-y-5 text-base leading-8 text-gray-600">
               <p>
                 Climate change poses an existential threat to humanity and
                 threatens ecosystems, livelihoods, health, food security,
                 water resources and the enjoyment of human rights.
               </p>
-
               <p>
-                Vulnerable and marginalised groups and communities often bear
-                a disproportionate burden of environmental degradation and
-                climate change despite contributing the least to the problem.
-                Droughts, floods, rising temperatures, pollution, land
-                degradation and biodiversity loss can deepen poverty and
-                inequality.
+                Vulnerable and marginalised groups and communities often
+                bear a disproportionate burden of environmental degradation
+                and climate change despite contributing the least to the
+                problem. Droughts, floods, rising temperatures, pollution,
+                land degradation and biodiversity loss can deepen poverty
+                and inequality.
               </p>
-
               <p>
                 In response to Sustainable Development Goal 13 on Climate
                 Action, EACHRights, through the Environmental and Climate
-                Justice Programme, aims to contribute to reducing the impact
-                of environmental and climate change on vulnerable and
-                marginalised groups and communities.
-              </p>
-
-              <p>
-                The programme uses a human rights-based approach that promotes
-                participation, equality, non-discrimination, access to
-                information, accountability and meaningful community
-                engagement in environmental and climate action.
+                Justice Programme, aims to reduce the impact of
+                environmental and climate change on vulnerable and
+                marginalised groups and communities, using a human
+                rights-based approach that promotes participation,
+                equality, non-discrimination, access to information,
+                accountability and meaningful community engagement.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* GOAL */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-14 rounded-2xl bg-forest p-8 text-white sm:p-10"
-          >
-            <div className="flex items-center gap-3">
-              <Target size={24} />
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-                Programme Goal
+          <aside className="lg:pt-1">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="rounded-2xl bg-forest p-7 text-white"
+            >
+              <div className="flex items-center gap-2.5 text-white/70">
+                <Target size={18} />
+                <span className="text-sm font-medium">Programme goal</span>
+              </div>
+              <p className="mt-4 text-xl font-semibold leading-8">
+                Reducing the impact of environmental and climate change on
+                vulnerable and marginalised communities.
               </p>
-            </div>
+            </motion.div>
+          </aside>
 
-            <p className="mt-5 text-2xl font-semibold leading-9 sm:text-3xl">
-              To contribute to the reduction of the impact of environmental
-              and climate change on vulnerable and marginalised groups and
-              communities.
-            </p>
-          </motion.div>
         </div>
       </section>
 
-      {/* FOCUS AREAS */}
+      {/* =====================================================
+          FOCUS AREAS — four pillars instead of one flat list
+      ===================================================== */}
       <section className="bg-forest-soft px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-6xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-              What We Do
-            </p>
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            Four pillars of intervention
+          </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-gray-600">
+            We work with communities and partners to advance climate
+            resilience, environmental protection and accountability.
+          </p>
 
-            <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
-              Intervention Focus Areas
-            </h2>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="rounded-2xl bg-white p-7 sm:p-8"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-forest/10 text-forest">
+                    <Icon size={22} strokeWidth={1.7} />
+                  </div>
 
-            <p className="mt-4 leading-7 text-gray-600">
-              We work with communities and partners to advance climate
-              resilience, environmental protection and accountability.
-            </p>
-          </div>
+                  <h3 className="mt-5 text-lg font-bold leading-snug text-forest">
+                    {pillar.title}
+                  </h3>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {focusAreas.map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="flex gap-4 rounded-xl bg-white p-6 shadow-sm"
-              >
-                <CheckCircle2
-                  className="mt-1 shrink-0 text-forest"
-                  size={21}
-                />
-                <p className="font-medium leading-7 text-gray-700">{item}</p>
-              </motion.div>
-            ))}
+                  <ul className="mt-4 space-y-3">
+                    {pillar.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-t border-gray-100 pt-3 text-sm leading-6 text-gray-600 first:border-t-0 first:pt-0"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* EXPECTED OUTCOMES */}
+      {/* =====================================================
+          EXPECTED OUTCOMES — an editorial list, not a card grid
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-forest">
-              Our Impact
-            </p>
+        <div className="mx-auto max-w-5xl">
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            What changes as a result
+          </h2>
 
-            <h2 className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
-              Expected Change
-            </h2>
-          </div>
-
-          <div className="mt-10 grid gap-x-10 gap-y-5 md:grid-cols-2">
-            {outcomes.map((item) => (
-              <div key={item} className="flex gap-3">
-                <CheckCircle2
-                  className="mt-1 shrink-0 text-forest"
-                  size={20}
-                />
-                <p className="leading-7 text-gray-600">{item}</p>
-              </div>
+          <motion.ol
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 grid gap-x-10 sm:grid-cols-2"
+          >
+            {outcomes.map((item, index) => (
+              <li
+                key={item}
+                className="flex gap-4 border-t border-gray-100 py-4 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
+              >
+                <span className="text-sm text-gray-400">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="leading-7 text-gray-600">{item}</span>
+              </li>
             ))}
-          </div>
+          </motion.ol>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* =====================================================
+          CTA
+      ===================================================== */}
       <section className="bg-forest px-6 py-16 text-center text-white sm:px-8 lg:px-12">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold sm:text-3xl">
@@ -245,7 +284,6 @@ export default function EnvironmentalClimateJustice() {
               <ArrowRight size={18} />
             </Link>
 
-      
           </div>
         </div>
       </section>

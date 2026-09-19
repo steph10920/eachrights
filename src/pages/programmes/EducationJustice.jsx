@@ -3,31 +3,74 @@ import { Link } from "react-router-dom";
 import {
   GraduationCap,
   Target,
-  CheckCircle2,
   ArrowRight,
   ArrowLeft,
+  Users,
+  ShieldCheck,
+  BookOpen,
+  Search,
 } from "lucide-react";
 
-const focusAreas = [
-  "Promote access to education for vulnerable and marginalized groups and communities.",
-  "Promote girl-child education, including enrolment, retention, completion, and transition across levels of education.",
-  "Strengthen foundational learning and access to quality early childhood education.",
-  "Promote access to education for children and young people living in urban informal settlements.",
-  "Advance equitable access to education for children and communities in rural, arid, and semi-arid areas.",
-  "Promote inclusive education for learners facing disability, discrimination, exclusion, and other barriers.",
-  "Support education, skills development, vocational opportunities, and lifelong learning for young people.",
-  "Promote adult and continuing education, including literacy and skills development opportunities.",
-  "Advocate for safe, inclusive, accessible, and child-friendly learning environments.",
-  "Monitor and advocate for the implementation of education laws, policies, plans, programmes, and budgets.",
-  "Conduct research and advocacy on emerging and persistent education justice issues.",
-  "Strengthen the capacity and participation of communities, parents, learners, teachers, and other education stakeholders.",
+/* =========================================================
+   The twelve focus areas grouped into the four pillars they
+   actually represent, rather than one flat list.
+========================================================= */
+
+const pillars = [
+  {
+    icon: Users,
+    title: "Access & Equity in Learning",
+    items: [
+      "Promote access to education for vulnerable and marginalized groups and communities.",
+      "Promote access to education for children and young people living in urban informal settlements.",
+      "Advance equitable access to education for children and communities in rural, arid, and semi-arid areas.",
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Quality & Inclusive Learning",
+    items: [
+      "Strengthen foundational learning and access to quality early childhood education.",
+      "Promote inclusive education for learners facing disability, discrimination, exclusion, and other barriers.",
+      "Advocate for safe, inclusive, accessible, and child-friendly learning environments.",
+    ],
+  },
+  {
+    icon: BookOpen,
+    title: "Pathways Beyond the Classroom",
+    items: [
+      "Promote girl-child education, including enrolment, retention, completion, and transition across levels of education.",
+      "Support education, skills development, vocational opportunities, and lifelong learning for young people.",
+      "Promote adult and continuing education, including literacy and skills development opportunities.",
+    ],
+  },
+  {
+    icon: Search,
+    title: "Policy, Research & Accountability",
+    items: [
+      "Monitor and advocate for the implementation of education laws, policies, plans, programmes, and budgets.",
+      "Conduct research and advocacy on emerging and persistent education justice issues.",
+      "Strengthen the capacity and participation of communities, parents, learners, teachers, and other education stakeholders.",
+    ],
+  },
+];
+
+const outcomes = [
+  "Increased access to quality and inclusive education.",
+  "Improved enrolment, retention, completion, and transition.",
+  "Stronger foundational learning and early childhood education.",
+  "Improved opportunities for learners in underserved communities.",
+  "Greater access to vocational, adult, and continuing education.",
+  "Stronger community participation in education accountability.",
 ];
 
 export default function EducationJustice() {
   return (
     <main className="bg-white font-sans text-ink">
 
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
       <section className="relative isolate overflow-hidden bg-forest text-white">
         <div
           className="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full border border-white/10"
@@ -38,7 +81,7 @@ export default function EducationJustice() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <Link
             to="/our-work"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
@@ -47,24 +90,26 @@ export default function EducationJustice() {
             Our Work
           </Link>
 
-          <div className="mt-8 max-w-4xl">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/10">
-              <GraduationCap size={28} strokeWidth={1.7} />
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-3xl"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+              <GraduationCap size={24} strokeWidth={1.7} />
             </div>
 
-            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-              Our Work / Programmes
-            </p>
-
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Education Justice Programme
+            <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
+              Education Justice
             </h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
               Advancing the right to quality, inclusive, equitable, and
-              accessible education for vulnerable and marginalized communities.
+              accessible education for vulnerable and marginalized
+              communities.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         <div
@@ -74,7 +119,10 @@ export default function EducationJustice() {
         />
       </section>
 
-      {/* INTRODUCTION */}
+      {/* =====================================================
+          INTRODUCTION — the citation stays front and center;
+          it's the one place this page earns a distinct voice.
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-5xl">
 
@@ -94,37 +142,33 @@ export default function EducationJustice() {
               participate fully in their communities.&rdquo;
             </p>
 
-            <cite className="mt-6 block text-sm font-semibold not-italic uppercase tracking-[0.15em] text-forest">
+            <cite className="mt-6 block text-sm font-medium not-italic text-forest">
               General Comment No. 13 on the Right to Education, para. 1
             </cite>
           </motion.blockquote>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-10 space-y-5 text-base leading-8 text-gray-600 sm:text-lg"
-          >
+          <div className="mt-10 space-y-5 text-base leading-8 text-gray-600 sm:text-lg">
             <p>
               Education is both a fundamental human right and an essential
-              means of realizing other human rights. It enables economically
-              and socially marginalized children and adults to overcome
-              poverty and participate meaningfully in their communities. It
-              also plays an important role in empowering women, protecting
-              children from exploitative and hazardous labour and sexual
-              exploitation, promoting human rights and democracy, protecting
-              the environment, and advancing sustainable development.
+              means of realizing other human rights. It enables
+              economically and socially marginalized children and adults to
+              overcome poverty and participate meaningfully in their
+              communities. It also plays an important role in empowering
+              women, protecting children from exploitative and hazardous
+              labour and sexual exploitation, promoting human rights and
+              democracy, protecting the environment, and advancing
+              sustainable development.
             </p>
 
             <p>
-              The Education Justice Programme therefore seeks to promote the
-              right to quality, inclusive, equitable, and accessible education
-              for all, with particular attention to vulnerable and marginalized
-              groups and communities. The programme recognizes that barriers
-              to education are often interconnected with poverty, geographical
-              location, gender, disability, displacement, insecurity,
-              inadequate infrastructure, and other social and economic factors.
+              The Education Justice Programme therefore seeks to promote
+              the right to quality, inclusive, equitable, and accessible
+              education for all, with particular attention to vulnerable
+              and marginalized groups and communities. The programme
+              recognizes that barriers to education are often
+              interconnected with poverty, geographical location, gender,
+              disability, displacement, insecurity, inadequate
+              infrastructure, and other social and economic factors.
             </p>
 
             <p>
@@ -133,131 +177,117 @@ export default function EducationJustice() {
                 pre-primary, primary, junior, secondary and senior school,
                 vocational, adult, and continuing education
               </strong>
-              . It implements and supports initiatives around girl-child
-              education, foundational learning and early childhood education,
-              education for children in urban informal settlements, education
-              for children in rural, arid, and semi-arid areas, and education
-              among young people.
+              , spanning girl-child education, foundational learning and
+              early childhood education, education for children in urban
+              informal settlements, education for children in rural, arid,
+              and semi-arid areas, and education among young people.
+            </p>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-12 flex flex-col gap-6 rounded-2xl bg-forest p-8 text-white sm:flex-row sm:items-center sm:p-10"
+          >
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-white/10">
+              <Target size={22} strokeWidth={1.7} />
+            </div>
+
+            <p className="text-xl font-semibold leading-8 sm:text-2xl">
+              To enhance the right to education among vulnerable and
+              marginalized groups and communities.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* PROGRAMME GOAL */}
-      <section className="bg-forest-soft px-6 py-16 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col gap-6 rounded-2xl border border-forest/10 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:p-10"
-          >
-            <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-forest text-white">
-              <Target size={28} strokeWidth={1.7} />
-            </div>
+      {/* =====================================================
+          FOCUS AREAS — four pillars instead of one flat list
+      ===================================================== */}
+      <section className="bg-forest-soft px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            Four pillars of intervention
+          </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-gray-600">
+            Our interventions address the social, economic, geographical,
+            and institutional barriers that prevent children, young people,
+            and adults from accessing and benefiting from education.
+          </p>
 
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-                Programme Goal
-              </p>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {pillars.map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="rounded-2xl bg-white p-7 sm:p-8"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-forest/10 text-forest">
+                    <Icon size={22} strokeWidth={1.7} />
+                  </div>
 
-              <h2 className="mt-3 text-2xl font-bold leading-snug text-ink sm:text-3xl">
-                To enhance the right to education among vulnerable and
-                marginalized groups and communities.
-              </h2>
-            </div>
-          </motion.div>
+                  <h3 className="mt-5 text-lg font-bold leading-snug text-forest">
+                    {pillar.title}
+                  </h3>
+
+                  <ul className="mt-4 space-y-3">
+                    {pillar.items.map((item) => (
+                      <li
+                        key={item}
+                        className="border-t border-gray-100 pt-3 text-sm leading-6 text-gray-600 first:border-t-0 first:pt-0"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* INTERVENTION FOCUS AREAS */}
+      {/* =====================================================
+          EXPECTED OUTCOMES — an editorial list, not a card grid
+      ===================================================== */}
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto max-w-5xl">
-
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-            How We Work
-          </p>
-
-          <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
-            Intervention focus areas
+        <div className="mx-auto max-w-4xl">
+          <h2 className="max-w-xl text-3xl font-bold text-ink sm:text-4xl">
+            What changes as a result
           </h2>
 
-          <div className="mt-4 h-1 w-16 rounded-full bg-forest" />
-
-          <p className="mt-5 max-w-3xl leading-7 text-gray-600">
-            Our interventions address the social, economic, geographical, and
-            institutional barriers that prevent children, young people, and
-            adults from accessing and benefiting from education.
-          </p>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {focusAreas.map((area, index) => (
-              <motion.div
-                key={area}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="flex items-start gap-4 rounded-xl border border-forest/10 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <CheckCircle2
-                  size={22}
-                  className="mt-0.5 flex-shrink-0 text-forest"
-                  strokeWidth={1.7}
-                />
-
-                <span className="text-base leading-7 text-gray-700">
-                  {area}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* EXPECTED CHANGE */}
-      <section className="bg-forest-soft px-6 py-20 sm:px-8 lg:px-12">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-            Expected Change
-          </p>
-
-          <h2 className="mt-4 text-3xl font-bold text-ink sm:text-4xl">
-            Advancing education for all
-          </h2>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Increased access to quality and inclusive education.",
-              "Improved enrolment, retention, completion, and transition.",
-              "Stronger foundational learning and early childhood education.",
-              "Improved opportunities for learners in underserved communities.",
-              "Greater access to vocational, adult, and continuing education.",
-              "Stronger community participation in education accountability.",
-            ].map((item, index) => (
-              <motion.div
+          <motion.ol
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
+            className="mt-10 grid gap-x-10 sm:grid-cols-2"
+          >
+            {outcomes.map((item, index) => (
+              <li
                 key={item}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="rounded-xl bg-white p-6 shadow-sm"
+                className="flex gap-4 border-t border-gray-100 py-4 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-forest text-sm font-bold text-white">
-                  {index + 1}
-                </div>
-
-                <p className="mt-4 text-sm leading-6 text-gray-600">
-                  {item}
-                </p>
-              </motion.div>
+                <span className="text-sm text-gray-400">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="leading-7 text-gray-600">{item}</span>
+              </li>
             ))}
-          </div>
+          </motion.ol>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* =====================================================
+          CTA
+      ===================================================== */}
       <section className="bg-forest px-6 py-16 text-center text-white sm:px-8 lg:px-12">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold sm:text-3xl">
@@ -277,6 +307,8 @@ export default function EducationJustice() {
               Get Involved
               <ArrowRight size={18} />
             </Link>
+
+            
           </div>
         </div>
       </section>
