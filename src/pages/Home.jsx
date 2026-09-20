@@ -77,42 +77,43 @@ const focusAreas = [
   },
 ];
 
+// This sequence reflects EACHRights' actual working method, in order —
+// numbering is meaningful here, not decoration.
 const approaches = [
   { title: "Research", description: "Generating evidence and knowledge to understand rights challenges and inform action.", icon: Search },
   { title: "Advocacy", description: "Influencing policies, institutions and decision-makers to advance human rights.", icon: Megaphone },
-  { title: "Capacity Building", description: "Strengthening communities and partners with knowledge, skills and tools for action.", icon: Users },
-  { title: "Public Interest Litigation", description: "Using strategic legal action to protect rights and seek justice.", icon: Gavel },
+  { title: "Capacity building", description: "Strengthening communities and partners with knowledge, skills and tools for action.", icon: Users },
+  { title: "Public interest litigation", description: "Using strategic legal action to protect rights and seek justice.", icon: Gavel },
 ];
 
+// TODO: confirm these one-line descriptions with the programmes team —
+// drafted here to give each country a distinct role rather than a repeated card.
 const regions = [
-  { country: "Kenya", icon: Landmark },
-  { country: "Uganda", icon: Globe2 },
-  { country: "Tanzania", icon: Globe2 },
+  { country: "Kenya", icon: Landmark, description: "Home base for our national advocacy, research and litigation work." },
+  { country: "Uganda", icon: Globe2, description: "Partnerships supporting community-level rights education and monitoring." },
+  { country: "Tanzania", icon: Globe2, description: "Cross-border research and coalition work on shared regional challenges." },
 ];
 
 const heroSlides = [
   {
-    eyebrow: "HUMAN RIGHTS • SOCIAL JUSTICE • DIGNITY",
-    title: "Advancing Rights.",
-    highlight: "Empowering Communities.",
+    label: "Advancing human rights since 2010",
+    title: "Rights, realized —",
+    highlight: "not just recognized.",
     description: "EACHRights works to promote, protect and advance Economic, Social and Cultural Rights across East Africa.",
-    icon: Scale,
     image: hero1,
   },
   {
-    eyebrow: "EQUALITY & SOCIAL JUSTICE",
-    title: "Building a Future",
-    highlight: "Where Everyone Can Thrive.",
-    description: "We work with vulnerable and marginalized communities to create an enabling environment where people can enjoy their rights and live with dignity.",
-    icon: Users,
+    label: "Communities at the centre",
+    title: "Dignity begins",
+    highlight: "with equal opportunity.",
+    description: "We work with vulnerable and marginalized communities to build an environment where people can claim their rights and live with dignity.",
     image: hero2,
   },
   {
-    eyebrow: "EVIDENCE • ADVOCACY • ACTION",
-    title: "Turning Evidence",
-    highlight: "Into Meaningful Change.",
-    description: "Through research, advocacy, awareness, capacity building and public interest litigation, we turn human rights principles into action.",
-    icon: Megaphone,
+    label: "Evidence into action",
+    title: "Research becomes",
+    highlight: "policy that holds.",
+    description: "Through research, advocacy, capacity building and public interest litigation, we turn human rights principles into action.",
     image: hero3,
   },
 ];
@@ -121,17 +122,17 @@ const heroSlides = [
    are placeholders carried over from the previous draft — swap in verified
    numbers from the programmes team before this goes live. */
 const impactStats = [
-  { value: 120, suffix: "+", label: "Volunteers Engaged" },
-  { value: 4500, suffix: "", label: "Learners Reached", separator: "," },
-  { value: 32, suffix: "", label: "Projects Funded" },
-  { value: 98, suffix: "%", label: "Community Satisfaction" },
+  { value: 120, suffix: "+", label: "Volunteers engaged" },
+  { value: 4500, suffix: "", label: "Learners reached", separator: "," },
+  { value: 32, suffix: "", label: "Projects funded" },
+  { value: 98, suffix: "%", label: "Community satisfaction" },
 ];
 
 const impactImages = [
-  { image: impact1, eyebrow: "COMMUNITY IMPACT", title: "Creating change through action." },
-  { image: impact2, eyebrow: "EMPOWERING COMMUNITIES", title: "Putting rights into practice." },
-  { image: impact3, eyebrow: "BUILDING OPPORTUNITIES", title: "Strengthening communities." },
-  { image: impact4, eyebrow: "ADVANCING JUSTICE", title: "Working together for lasting change." },
+  { image: impact1, caption: "Community impact", title: "Creating change through action." },
+  { image: impact2, caption: "Empowering communities", title: "Putting rights into practice." },
+  { image: impact3, caption: "Building opportunities", title: "Strengthening communities." },
+  { image: impact4, caption: "Advancing justice", title: "Working together for lasting change." },
 ];
 
 const HERO_INTERVAL = 6000;
@@ -139,8 +140,8 @@ const IMPACT_INTERVAL = 5000;
 
 function IconBox({ icon: Icon, large = false }) {
   return (
-    <div className={`flex items-center justify-center rounded-full bg-accent/10 text-accent ${large ? "h-24 w-24" : "h-14 w-14"}`}>
-      <Icon size={large ? 42 : 26} strokeWidth={1.7} />
+    <div className={`flex items-center justify-center rounded-full bg-accent/10 text-accent ${large ? "h-16 w-16" : "h-14 w-14"}`}>
+      <Icon size={large ? 30 : 26} strokeWidth={1.7} />
     </div>
   );
 }
@@ -201,9 +202,8 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Preload every hero/impact image up front. Without this, the crossfade
-  // for an image the browser hasn't fetched yet shows through as a plain
-  // grey box for a frame or two before the pixels arrive.
+  // Preload every hero/impact image up front so the transition never shows
+  // a blank frame while the browser is still fetching the next photo.
   useEffect(() => {
     [...heroSlides.map((s) => s.image), ...impactImages.map((i) => i.image)].forEach((src) => {
       const img = new Image();
@@ -217,29 +217,31 @@ export default function Home() {
   const [featuredArea, ...secondaryAreas] = focusAreas;
   const FeaturedIcon = featuredArea.icon;
 
-  // Crossfade + slow zoom instead of a hard slide; collapses to a plain
-  // cut when the visitor has requested reduced motion.
+  // Hero: a true slide, not a crossfade. The outgoing and incoming photos
+  // stay edge-to-edge the whole time, so no background colour ever shows
+  // through mid-transition — it reads as one picture physically pushing
+  // the next one off-screen.
   const heroImageMotion = prefersReducedMotion
     ? {
-        initial: { opacity: 1 },
-        animate: { opacity: 1 },
-        exit: { opacity: 1 },
+        initial: { x: "0%" },
+        animate: { x: "0%" },
+        exit: { x: "0%" },
         transition: { duration: 0 },
       }
     : {
-        initial: { opacity: 0, scale: 1.08 },
-        animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 0.98 },
-        transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] },
+        initial: { x: "100%" },
+        animate: { x: "0%" },
+        exit: { x: "-100%" },
+        transition: { duration: 0.9, ease: [0.65, 0, 0.35, 1] },
       };
 
   const heroTextMotion = prefersReducedMotion
     ? { initial: { opacity: 1, x: 0 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 1, x: 0 }, transition: { duration: 0 } }
     : {
-        initial: { opacity: 0, x: -30 },
+        initial: { opacity: 0, x: -24 },
         animate: { opacity: 1, x: 0 },
-        exit: { opacity: 0, x: -18 },
-        transition: { duration: 0.55, delay: 0.2 },
+        exit: { opacity: 0, x: -16 },
+        transition: { duration: 0.5, delay: 0.25 },
       };
 
   const impactImageMotion = prefersReducedMotion
@@ -250,10 +252,10 @@ export default function Home() {
         transition: { duration: 0 },
       }
     : {
-        initial: { opacity: 0, scale: 1.08 },
-        animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 0.98 },
-        transition: { duration: 1, ease: "easeInOut" },
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.7, ease: "easeInOut" },
       };
 
   return (
@@ -266,9 +268,9 @@ export default function Home() {
         />
       </Helmet>
 
-      {/* HERO */}
-      <header className="relative h-[52vh] min-h-[440px] max-h-[560px] overflow-hidden bg-transparent text-paper">
-        <div className="absolute inset-0 overflow-hidden bg-forest-dark">
+      {/* HERO — single photograph at a time, sliding edge-to-edge */}
+      <header className="relative h-[58vh] min-h-[460px] max-h-[600px] overflow-hidden bg-forest-dark text-paper">
+        <div className="absolute inset-0 overflow-hidden">
           <AnimatePresence initial={false} mode="sync">
             <motion.img
               key={currentSlide}
@@ -280,19 +282,17 @@ export default function Home() {
           </AnimatePresence>
         </div>
 
-        <div className="absolute inset-0 z-10 bg-black/25" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/50 via-transparent to-black/5" />
-        <div className="absolute left-0 right-0 top-0 z-30 h-1 bg-accent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
 
         <div className="relative z-20 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-8">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={currentSlide} {...heroTextMotion} className="max-w-2xl">
-              <span className="inline-block border-l-4 border-accent pl-3 text-xs font-bold uppercase tracking-[0.2em] text-accent">
-                {slide.eyebrow}
+              <span className="inline-block border-l-2 border-accent pl-3 text-sm font-medium text-white/80">
+                {slide.label}
               </span>
 
-              <h1 className="mt-4 max-w-2xl font-display text-3xl font-bold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl">
+              <h1 className="mt-5 max-w-2xl font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
                 {slide.title}
                 <span className="block text-accent">{slide.highlight}</span>
               </h1>
@@ -304,14 +304,14 @@ export default function Home() {
                   to="/our-work"
                   className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
                 >
-                  Explore Our Work
+                  Explore our work
                   <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/contact"
                   className="inline-flex items-center gap-2 border-2 border-white bg-white/5 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-forest"
                 >
-                  Get Involved
+                  Get involved
                 </Link>
               </div>
             </motion.div>
@@ -356,91 +356,77 @@ export default function Home() {
       </header>
 
       <main>
-        {/* WHO WE ARE */}
+        {/* WHO WE ARE — the founding year does the work a decorative badge
+            would otherwise do: it's real content, not filler. */}
         <section className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 sm:py-28 lg:grid-cols-2">
           <div>
-            <h2 className="text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
-              Human rights.
-              <br />
-              <span className="text-forest-dark">Community action.</span>
+            <p className="text-sm font-medium text-forest-dark/70">Who we are</p>
+            <h2 className="mt-3 text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
+              Human rights, made real in daily life.
             </h2>
             <p className="mt-6 text-base leading-8 text-ink/75">
-              The East African Centre for Human Rights (EACHRights) is a non-partisan regional non-governmental organisation founded in 2010. We work to promote, protect and advance Economic, Social and Cultural Rights for vulnerable and marginalized communities.
+              The East African Centre for Human Rights (EACHRights) is a non-partisan regional non-governmental organisation. We work to promote, protect and advance Economic, Social and Cultural Rights for vulnerable and marginalized communities.
             </p>
             <p className="mt-4 text-base leading-8 text-ink/75">
-              Our work spans Kenya, Uganda and Tanzania, with a focus on creating an enabling environment where people can enjoy their rights and live with dignity.
+              Our work spans Kenya, Uganda and Tanzania, focused on building an environment where people can claim their rights and live with dignity — not just where rights exist on paper.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link to="/about" className="bg-forest px-6 py-3 font-semibold text-paper shadow transition hover:brightness-110">
                 About EACHRights
               </Link>
               <Link to="/contact" className="border-2 border-forest px-6 py-3 font-semibold text-forest transition hover:bg-forest/5">
-                Contact Us
+                Contact us
               </Link>
             </div>
           </div>
 
-          <motion.div
-            whileHover={{ rotate: 1, y: -5 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            className="relative mx-auto w-full max-w-lg bg-white p-3 shadow-xl"
-          >
-            <div className="absolute -top-3 left-1/2 h-6 w-20 -translate-x-1/2 rotate-[-2deg] bg-accent/70" />
-            <video src={commitmentVideo} autoPlay muted loop playsInline className="h-72 w-full object-cover" />
-            <div className="p-5">
-              <div className="flex items-center gap-4">
-                <IconBox icon={ShieldCheck} large />
-                <h3 className="text-2xl font-bold text-forest font-display">Our commitment</h3>
-              </div>
-              <p className="mt-5 text-lg leading-8 text-ink/70">
-                We believe that every person deserves equality, justice, dignity and the opportunity to enjoy their fundamental rights.
+          <div>
+            <video
+              src={commitmentVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="h-80 w-full object-cover sm:h-96"
+            />
+            <div className="mt-6 flex items-start gap-5 border-t border-forest/15 pt-6">
+              <span className="shrink-0 font-display text-4xl font-bold text-forest-dark">2010</span>
+              <p className="text-sm leading-6 text-ink/65">
+                <ShieldCheck size={15} className="mb-0.5 mr-1 inline text-accent" />
+                The year EACHRights was founded — the starting point for the research, advocacy and litigation that follow.
               </p>
-              <div className="mt-6 h-1 w-20 bg-forest-dark" />
             </div>
-          </motion.div>
+          </div>
         </section>
 
-        {/* OUR IMPACT — compact: stats and image side by side in one row,
-            tighter spacing than the previous full-width stacked layout. */}
-        <section className="relative overflow-hidden bg-forest px-6 py-16 text-paper">
-          <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full border-[35px] border-accent/10" />
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
-
-          <div className="relative z-10 mx-auto max-w-6xl">
+        {/* OUR IMPACT — figures as a ledger, not a grid of cards */}
+        <section className="bg-forest px-6 py-16 text-paper">
+          <div className="mx-auto max-w-6xl">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold leading-tight sm:text-4xl font-display">
-                Measurable outcomes, <span className="text-accent">real communities.</span>
+                Measurable outcomes, real communities.
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-paper/70">
                 For more than a decade, EACHRights has worked with communities, institutions and partners to advance Economic, Social and Cultural Rights across East Africa.
               </p>
             </div>
 
-            <div className="mt-9 grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
-              <div className="grid grid-cols-2 gap-3">
-                {impactStats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.06 }}
-                    className="border border-paper/15 bg-paper/5 p-4 text-center backdrop-blur-sm transition hover:border-accent/50"
-                  >
+            <div className="mt-9 grid items-center gap-10 lg:grid-cols-2">
+              <div className="grid grid-cols-2 divide-x divide-y divide-paper/15 border border-paper/15 sm:divide-y-0">
+                {impactStats.map((stat) => (
+                  <div key={stat.label} className="px-5 py-6">
                     <div className="font-display text-2xl font-bold text-accent sm:text-3xl">
                       <CountUp end={stat.value} duration={2} separator={stat.separator || ""} />
                       {stat.suffix}
                     </div>
-                    <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-paper/65">
-                      {stat.label}
-                    </p>
-                  </motion.div>
+                    <p className="mt-1.5 text-sm text-paper/65">{stat.label}</p>
+                  </div>
                 ))}
               </div>
 
               <div className="relative">
-                <div className="group relative overflow-hidden rounded-xl border border-paper/10 bg-forest-dark shadow-xl">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-forest-dark">
+                <div className="group relative overflow-hidden bg-forest-dark">
+                  <div className="relative aspect-[16/10] overflow-hidden">
                     <AnimatePresence initial={false} mode="sync">
                       <motion.img
                         key={currentImpactImage}
@@ -451,20 +437,18 @@ export default function Home() {
                       />
                     </AnimatePresence>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent" />
 
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={currentImpactImage}
-                        initial={{ opacity: 0, y: 12 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.45, delay: 0.12 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
                         className="absolute bottom-0 left-0 right-0 p-4"
                       >
-                        <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-accent">
-                          {impactSlide.eyebrow}
-                        </p>
+                        <p className="text-xs font-medium text-accent">{impactSlide.caption}</p>
                         <h3 className="mt-0.5 text-base font-bold font-display text-white sm:text-lg">
                           {impactSlide.title}
                         </h3>
@@ -513,8 +497,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OUR WORK — one featured area in a full panel, the remaining five
-            as a compact divided list, instead of six identical cards. */}
+        {/* OUR WORK — one featured area, the rest as a divided list */}
         <section className="mx-auto max-w-7xl px-6 py-24 sm:py-28">
           <div className="mb-12 text-center">
             <h2 className="text-4xl font-bold text-forest sm:text-5xl font-display">Six areas. One purpose.</h2>
@@ -547,9 +530,7 @@ export default function Home() {
 
               {!featuredArea.video && (
                 <div className="absolute left-8 top-8 lg:left-10 lg:top-10">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 text-accent">
-                    <FeaturedIcon size={30} strokeWidth={1.7} />
-                  </div>
+                  <IconBox icon={FeaturedIcon} large />
                 </div>
               )}
 
@@ -598,11 +579,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OUR APPROACH — numbered, since research → advocacy → capacity
-            building → litigation is the organisation's actual sequence. */}
+        {/* OUR APPROACH — a real four-step working method, shown as a
+            connected sequence rather than four identical cards */}
         <section className="bg-forest-light px-6 py-24">
           <div className="mx-auto max-w-7xl">
-            <div className="grid items-center gap-14 lg:grid-cols-2">
+            <div className="grid items-start gap-14 lg:grid-cols-2">
               <div>
                 <h2 className="text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
                   Evidence.
@@ -612,23 +593,25 @@ export default function Home() {
                   <span className="text-forest-dark">Action.</span>
                 </h2>
                 <p className="mt-6 max-w-xl leading-8 text-ink/70">
-                  EACHRights uses a rights-based approach to address structural inequalities and strengthen the ability of communities and institutions to advance human rights.
+                  EACHRights uses a rights-based approach to address structural inequalities and strengthen the ability of communities and institutions to advance human rights. Each stage builds on the one before it.
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="divide-y divide-forest-dark/10 border-t border-forest-dark/10">
                 {approaches.map((item, index) => {
                   const Icon = item.icon;
                   return (
-                    <div key={item.title} className="bg-paper p-6 shadow-sm">
-                      <div className="flex items-center justify-between">
-                        <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
+                    <div key={item.title} className="flex items-start gap-5 py-6 first:pt-0">
+                      <div className="flex shrink-0 flex-col items-center gap-2 pt-0.5">
                         <span className="font-display text-sm font-bold text-accent">
                           {String(index + 1).padStart(2, "0")}
                         </span>
+                        <Icon size={20} className="text-forest-dark" strokeWidth={1.7} />
                       </div>
-                      <h3 className="mt-5 text-lg font-bold text-forest font-display">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-ink/65">{item.description}</p>
+                      <div>
+                        <h3 className="text-lg font-bold text-forest font-display">{item.title}</h3>
+                        <p className="mt-1.5 text-sm leading-6 text-ink/65">{item.description}</p>
+                      </div>
                     </div>
                   );
                 })}
@@ -637,30 +620,29 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHERE WE WORK */}
+        {/* WHERE WE WORK — each country given a distinct role, not a
+            repeated icon-in-a-circle card */}
         <section className="mx-auto max-w-7xl px-6 py-24">
-          <div className="text-center">
+          <div className="max-w-2xl">
             <h2 className="text-4xl font-bold text-forest sm:text-5xl font-display">Working across East Africa.</h2>
-            <p className="mx-auto mt-4 max-w-2xl leading-7 text-ink/65">
+            <p className="mt-4 leading-7 text-ink/65">
               Our regional work connects communities, partners and stakeholders across East Africa to advance Economic, Social and Cultural Rights.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 divide-y divide-forest/10 border-y border-forest/10">
             {regions.map((region) => {
               const Icon = region.icon;
               return (
                 <div
                   key={region.country}
-                  className="group flex items-center gap-5 border border-forest/10 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                  className="flex flex-col gap-3 py-7 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                 >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-forest text-accent">
-                    <Icon size={30} />
+                  <div className="flex items-center gap-5">
+                    <Icon size={26} className="text-forest-dark" strokeWidth={1.6} />
+                    <h3 className="text-2xl font-bold text-forest font-display">{region.country}</h3>
                   </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-forest-dark">East Africa</p>
-                    <h3 className="mt-1 text-2xl font-bold text-forest font-display">{region.country}</h3>
-                  </div>
+                  <p className="max-w-sm text-sm leading-6 text-ink/60 sm:text-right">{region.description}</p>
                 </div>
               );
             })}
@@ -668,9 +650,8 @@ export default function Home() {
         </section>
 
         {/* PARTNERSHIP CTA */}
-        <section className="relative overflow-hidden bg-forest-dark px-6 py-16 text-paper">
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border-[25px] border-paper/10" />
-          <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
+        <section className="bg-forest-dark px-6 py-16 text-paper">
+          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 md:flex-row">
             <div>
               <h2 className="text-3xl font-bold sm:text-4xl font-display">Together, we can turn rights into action.</h2>
               <p className="mt-3 max-w-2xl text-paper/80">
@@ -681,7 +662,7 @@ export default function Home() {
               to="/contact"
               className="inline-flex shrink-0 items-center gap-2 bg-paper px-7 py-3.5 font-bold text-forest-dark shadow-lg transition hover:brightness-95"
             >
-              Discuss a Partnership
+              Discuss a partnership
               <ArrowRight size={18} />
             </Link>
           </div>
@@ -690,7 +671,7 @@ export default function Home() {
         {/* FINAL CTA */}
         <section className="bg-forest px-6 py-24 text-center text-paper">
           <div className="mx-auto max-w-3xl">
-            <Handshake size={48} strokeWidth={1.3} className="mx-auto text-accent" />
+            <Handshake size={44} strokeWidth={1.3} className="mx-auto text-accent" />
             <h2 className="mt-6 text-4xl font-bold sm:text-5xl font-display">Be part of the change.</h2>
             <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
               Whether through partnership, advocacy, research or support, there is a role for everyone in advancing human rights and social justice.
@@ -700,14 +681,14 @@ export default function Home() {
                 to="/contact"
                 className="inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
               >
-                Get Involved
+                Get involved
                 <ArrowRight size={18} />
               </Link>
               <Link
                 to="/donors"
-                className="inline-flex items-center gap-2 border-2 border-dashed border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
+                className="inline-flex items-center gap-2 border-2 border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
               >
-                Support Our Work
+                Support our work
               </Link>
             </div>
           </div>
