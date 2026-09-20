@@ -1,9 +1,47 @@
-import { useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { PlayCircle } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { PlayCircle, ArrowLeft, ArrowRight } from "lucide-react";
 
 import storiesHero from "../assets/gallery/stories-voices-moments.png";
+
+/*
+|--------------------------------------------------------------------------
+| ADD YOUR LOCAL PHOTOS HERE
+|--------------------------------------------------------------------------
+| Import each photo from your assets folder, then reference it below with
+| a short title and description for the caption.
+*/
+
+import photo1 from "../assets/gallery/photo-1.jpg";
+import photo2 from "../assets/gallery/photo-2.jpg";
+import photo3 from "../assets/gallery/photo-3.png";
+import photo4 from "../assets/gallery/photo-4.jpg";
+
+const photos = [
+  {
+    image: photo1,
+    title: "Community Dialogue Session",
+    description: "Community members and EACHRights staff discussing local rights priorities.",
+  },
+  {
+    image: photo2,
+    title: "Child Participation Forum",
+    description: "Children sharing their views during a rights-based participation forum.",
+  },
+  {
+    image: photo3,
+    title: "Eco Justice Club Launch",
+    description: "Learners at an Eco Justice Club planting the school's first eco-garden.",
+  },
+  {
+    image: photo4,
+    title: "Field Visit, Garissa",
+    description: "The EACHRights team meeting with community leaders in Garissa County.",
+  },
+];
+
+const PHOTO_INTERVAL = 5000;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,28 +191,54 @@ function getYouTubeVideoId(url) {
   }
 }
 
-function Eyebrow({ children, dark = false }) {
-  return (
-    <span
-      className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${
-        dark ? "text-forest-dark" : "text-accent"
-      }`}
-    >
-      {children}
-    </span>
-  );
-}
-
 function Gallery() {
-  const [activeCategory, setActiveCategory] = useState("All");
   const [activeVideo, setActiveVideo] = useState(null);
+  const [currentPhoto, setCurrentPhoto] = useState(0);
+  const photoTimerRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  const categories = ["All", "Videos"];
+  // --- Photo carousel: auto-advance + manual controls that reset the timer ---
+  const startPhotoTimer = () => {
+    clearInterval(photoTimerRef.current);
+    photoTimerRef.current = setInterval(() => {
+      setCurrentPhoto((prev) => (prev + 1) % photos.length);
+    }, PHOTO_INTERVAL);
+  };
 
-  const filteredVideos = useMemo(() => {
-    if (activeCategory === "All") return videos;
-    return videos;
-  }, [activeCategory]);
+  useEffect(() => {
+    startPhotoTimer();
+    return () => clearInterval(photoTimerRef.current);
+  }, []);
+
+  useEffect(() => {
+    photos.forEach((photo) => {
+      const img = new Image();
+      img.src = photo.image;
+    });
+  }, []);
+
+  const goToPhoto = (index) => {
+    setCurrentPhoto(index);
+    startPhotoTimer();
+  };
+  const prevPhoto = () => goToPhoto((currentPhoto - 1 + photos.length) % photos.length);
+  const nextPhoto = () => goToPhoto((currentPhoto + 1) % photos.length);
+
+  const activePhoto = photos[currentPhoto];
+
+  const photoMotion = prefersReducedMotion
+    ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        exit: { opacity: 1 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, scale: 1.05 },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: 0.98 },
+        transition: { duration: 0.9, ease: "easeInOut" },
+      };
 
   return (
     <main className="min-h-screen bg-paper font-sans text-ink">
@@ -192,9 +256,10 @@ function Gallery() {
 
         <Link
           to="/"
-          className="absolute left-4 top-4 z-20 text-xs font-medium text-white/85 transition hover:text-white sm:left-6 sm:top-6 sm:text-sm lg:left-8 lg:top-8"
+          className="absolute left-4 top-4 z-20 inline-flex items-center gap-1.5 text-xs font-medium text-white/85 transition hover:text-white sm:left-6 sm:top-6 sm:text-sm lg:left-8 lg:top-8"
         >
-          ← Back to Home
+          <ArrowLeft size={14} />
+          Back to Home
         </Link>
 
         <h1 className="sr-only">
@@ -242,9 +307,7 @@ function Gallery() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <Eyebrow dark>Our Gallery</Eyebrow>
-
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-forest sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-forest sm:text-4xl">
             Watch our work in action.
           </h2>
 
@@ -256,20 +319,96 @@ function Gallery() {
         </motion.div>
       </section>
 
-      {/* FILTER */}
+      {/* QUICK NAV — a straightforward jump-to-section row. (This used to
+          be a category filter with "All"/"Videos" buttons, but there was
+          only ever one dataset to show — the buttons didn't actually
+          filter anything. Two real sections now exist, so linking to them
+          directly is the honest version of the same idea.) */}
       <section className="border-y border-forest/10 bg-forest-light">
-        <div className="mx-auto flex max-w-7xl flex-wrap gap-3 px-6 py-5 lg:px-8">
-          {categories.map((category) => (
+        <div className="mx-auto flex max-w-7xl gap-8 px-6 py-4 text-sm font-semibold text-forest-dark lg:px-8">
+          <a href="#photos" className="transition hover:text-forest">
+            Photos
+          </a>
+          <a href="#videos" className="transition hover:text-forest">
+            Videos
+          </a>
+        </div>
+      </section>
+
+      {/* PHOTOS */}
+      <section id="photos" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <div className="mb-10 max-w-2xl">
+          <h2 className="font-display text-3xl font-bold text-forest sm:text-4xl">
+            Moments from the field
+          </h2>
+        </div>
+
+        <div className="group relative mx-auto max-w-3xl overflow-hidden bg-forest-dark shadow-xl">
+          <div className="relative aspect-[16/9] overflow-hidden">
+            <AnimatePresence initial={false} mode="sync">
+              <motion.img
+                key={currentPhoto}
+                src={activePhoto.image}
+                alt={activePhoto.title}
+                className="absolute inset-0 h-full w-full object-cover"
+                {...photoMotion}
+              />
+            </AnimatePresence>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPhoto}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="absolute bottom-0 left-0 right-0 p-5 sm:p-6"
+              >
+                <h3 className="font-display text-lg font-bold text-white sm:text-xl">
+                  {activePhoto.title}
+                </h3>
+                <p className="mt-1 max-w-xl text-sm leading-6 text-white/75">
+                  {activePhoto.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
             <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-5 py-2.5 text-sm font-semibold transition ${
-                activeCategory === category
-                  ? "bg-forest text-paper"
-                  : "bg-white text-forest-dark ring-1 ring-forest/15 hover:bg-white/70"
-              }`}
+              type="button"
+              onClick={prevPhoto}
+              aria-label="Previous photo"
+              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
             >
-              {category}
+              <ArrowLeft size={18} />
+            </button>
+
+            <button
+              type="button"
+              onClick={nextPhoto}
+              aria-label="Next photo"
+              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-4 flex justify-center gap-2">
+          {photos.map((photo, index) => (
+            <button
+              key={photo.title}
+              type="button"
+              onClick={() => goToPhoto(index)}
+              aria-label={`Go to photo ${index + 1}`}
+              className="group/dot flex items-center justify-center p-1"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-300 ${
+                  currentPhoto === index ? "w-7 bg-accent" : "w-1.5 bg-forest/25 group-hover/dot:bg-forest/50"
+                }`}
+              />
             </button>
           ))}
         </div>
@@ -281,15 +420,13 @@ function Gallery() {
         className="mx-auto max-w-7xl px-6 py-20 lg:px-8"
       >
         <div className="mb-10">
-          <Eyebrow dark>Videos</Eyebrow>
-
-          <h2 className="mt-2 font-display text-3xl font-bold text-forest">
+          <h2 className="font-display text-3xl font-bold text-forest sm:text-4xl">
             From our work
           </h2>
         </div>
 
         <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {filteredVideos.map((video, index) => {
+          {videos.map((video, index) => {
             const videoId = getYouTubeVideoId(video.url);
             const isActive = activeVideo === index;
 
@@ -390,9 +527,7 @@ function Gallery() {
 
         <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
           <div>
-            <Eyebrow>Stay Connected</Eyebrow>
-
-            <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold sm:text-4xl">
               Follow our work.
             </h2>
 
