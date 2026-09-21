@@ -45,6 +45,31 @@ const PHOTO_INTERVAL = 5000;
 
 /*
 |--------------------------------------------------------------------------
+| ADD YOUR FACEBOOK POSTS HERE
+|--------------------------------------------------------------------------
+| On Facebook, open a post, click its timestamp, and copy the address from
+| the browser bar. The post must be public. Add "height" (in pixels) if a
+| post is cut off or has too much empty space — posts with photos usually
+| need 500–650, text-only posts 250–350. Posts scroll inside the column.
+|
+| While this list is empty, the page's latest posts are shown instead.
+*/
+
+const FACEBOOK_PAGE_URL = "https://www.facebook.com/EACHRights";
+
+const facebookPosts = [
+  // { url: "https://www.facebook.com/EACHRights/posts/PASTE_POST_ID", height: 650 },
+];
+
+const facebookPostSrc = (url) =>
+  `https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=350`;
+
+const facebookPageSrc = `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
+  FACEBOOK_PAGE_URL
+)}&tabs=timeline&width=350&height=480&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false`;
+
+/*
+|--------------------------------------------------------------------------
 | ADD YOUR YOUTUBE VIDEOS HERE
 |--------------------------------------------------------------------------
 */
@@ -343,74 +368,129 @@ function Gallery() {
           </h2>
         </div>
 
-        <div className="group relative mx-auto max-w-3xl overflow-hidden bg-forest-dark shadow-xl">
-          <div className="relative aspect-[16/9] overflow-hidden">
-            <AnimatePresence initial={false} mode="sync">
-              <motion.img
-                key={currentPhoto}
-                src={activePhoto.image}
-                alt={activePhoto.title}
-                className="absolute inset-0 h-full w-full object-cover"
-                {...photoMotion}
-              />
-            </AnimatePresence>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_350px] lg:items-start">
+          {/* PHOTO CAROUSEL */}
+          <div>
+            <div className="group relative overflow-hidden bg-forest-dark shadow-xl">
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <AnimatePresence initial={false} mode="sync">
+                  <motion.img
+                    key={currentPhoto}
+                    src={activePhoto.image}
+                    alt={activePhoto.title}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    {...photoMotion}
+                  />
+                </AnimatePresence>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentPhoto}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="absolute bottom-0 left-0 right-0 p-5 sm:p-6"
-              >
-                <h3 className="font-display text-lg font-bold text-white sm:text-xl">
-                  {activePhoto.title}
-                </h3>
-                <p className="mt-1 max-w-xl text-sm leading-6 text-white/75">
-                  {activePhoto.description}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentPhoto}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                    className="absolute bottom-0 left-0 right-0 p-5 sm:p-6"
+                  >
+                    <h3 className="font-display text-lg font-bold text-white sm:text-xl">
+                      {activePhoto.title}
+                    </h3>
+                    <p className="mt-1 max-w-xl text-sm leading-6 text-white/75">
+                      {activePhoto.description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
 
-            <button
-              type="button"
-              onClick={prevPhoto}
-              aria-label="Previous photo"
-              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
-            >
-              <ArrowLeft size={18} />
-            </button>
+                <button
+                  type="button"
+                  onClick={prevPhoto}
+                  aria-label="Previous photo"
+                  className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
+                >
+                  <ArrowLeft size={18} />
+                </button>
 
-            <button
-              type="button"
-              onClick={nextPhoto}
-              aria-label="Next photo"
-              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
-            >
-              <ArrowRight size={18} />
-            </button>
+                <button
+                  type="button"
+                  onClick={nextPhoto}
+                  aria-label="Next photo"
+                  className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
+                >
+                  <ArrowRight size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-4 flex justify-center gap-2">
+              {photos.map((photo, index) => (
+                <button
+                  key={photo.title}
+                  type="button"
+                  onClick={() => goToPhoto(index)}
+                  aria-label={`Go to photo ${index + 1}`}
+                  className="group/dot flex items-center justify-center p-1"
+                >
+                  <span
+                    className={`block h-1.5 rounded-full transition-all duration-300 ${
+                      currentPhoto === index ? "w-7 bg-[#8DC63F]" : "w-1.5 bg-forest/25 group-hover/dot:bg-forest/50"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="mt-4 flex justify-center gap-2">
-          {photos.map((photo, index) => (
-            <button
-              key={photo.title}
-              type="button"
-              onClick={() => goToPhoto(index)}
-              aria-label={`Go to photo ${index + 1}`}
-              className="group/dot flex items-center justify-center p-1"
-            >
-              <span
-                className={`block h-1.5 rounded-full transition-all duration-300 ${
-                  currentPhoto === index ? "w-7 bg-[#8DC63F]" : "w-1.5 bg-forest/25 group-hover/dot:bg-forest/50"
-                }`}
+          {/* FACEBOOK — sits beside the carousel on large screens */}
+          <aside>
+            <div className="mb-3 flex items-baseline justify-between gap-3">
+              <h3 className="font-display text-lg font-bold text-forest">
+                From our Facebook page
+              </h3>
+
+              <a
+                href={FACEBOOK_PAGE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-forest-dark underline underline-offset-4 transition hover:text-forest"
+              >
+                Follow us
+              </a>
+            </div>
+
+            {facebookPosts.length > 0 ? (
+              <div className="h-[480px] space-y-4 overflow-y-auto">
+                {facebookPosts.map((post) => (
+                  <iframe
+                    key={post.url}
+                    title="EACHRights Facebook post"
+                    src={facebookPostSrc(post.url)}
+                    width="100%"
+                    height={post.height ?? 500}
+                    className="w-full bg-white shadow-sm"
+                    style={{ border: "none", overflow: "hidden" }}
+                    scrolling="no"
+                    loading="lazy"
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  />
+                ))}
+              </div>
+            ) : (
+              <iframe
+                title="EACHRights on Facebook"
+                src={facebookPageSrc}
+                width="100%"
+                height="480"
+                className="w-full bg-white shadow-sm"
+                style={{ border: "none", overflow: "hidden" }}
+                scrolling="no"
+                loading="lazy"
+                allow="encrypted-media"
               />
-            </button>
-          ))}
+            )}
+          </aside>
         </div>
       </section>
 
