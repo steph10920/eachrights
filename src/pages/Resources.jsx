@@ -1,16 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Document, Page, pdfjs } from "react-pdf";
-import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-
-import strategicPlan2026 from "../assets/publications/STRATEGIC PLAN 2026-2030.pdf";
-import educationSchools from "../assets/publications/Build Us More Schools (Full Version).pdf";
-import surveyReport from "../assets/publications/EACHRights Perception Survey Report.pdf";
-import strategicPlan2023 from "../assets/publications/EACHRights Trust Strategic Plan 4 (2019-2023).pdf";
-import strategicPlan2011 from "../assets/publications/EACHRights_Trust_Strategic_Plan_2011-2012.pdf";
-import annualReport2020 from "../assets/publications/EACHRights-Annual-Report-2020.pdf";
-import ssnfgm from "../assets/publications/PRINT Updated  VERSION SSN and PA with FGM 27102025.pdf";
 import {
   FileText,
   Download,
@@ -22,65 +12,38 @@ import {
   Search,
 } from "lucide-react";
 
-/* =========================================================
-   PDF.js worker — bundled by Vite from node_modules so the
-   worker always matches the exact pdfjs-dist version that
-   react-pdf ships with. Must be set once, outside the
-   component, before any <Document> renders.
-========================================================= */
-pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
+// PDFs — used only as the download/view targets, never parsed in the browser
+import strategicPlan2026 from "../assets/publications/STRATEGIC PLAN 2026-2030.pdf";
+import educationSchools from "../assets/publications/Build Us More Schools (Full Version).pdf";
+import surveyReport from "../assets/publications/EACHRights Perception Survey Report.pdf";
+import strategicPlan2023 from "../assets/publications/EACHRights Trust Strategic Plan 4 (2019-2023).pdf";
+import strategicPlan2011 from "../assets/publications/EACHRights_Trust_Strategic_Plan_2011-2012.pdf";
+import annualReport2020 from "../assets/publications/EACHRights-Annual-Report-2020.pdf";
+import ssnfgm from "../assets/publications/PRINT Updated  VERSION SSN and PA with FGM 27102025.pdf";
+
+// Thumbnails — pre-rendered page-1 images (see scripts/generate-pdf-thumbnails.mjs)
+// Run `npm run generate:thumbnails` after adding or replacing a PDF above.
+import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 2026-2030.png";
+import educationSchoolsThumb from "../assets/publication-thumbs/Build Us More Schools (Full Version).png";
+import surveyReportThumb from "../assets/publication-thumbs/EACHRights Perception Survey Report.png";
+import strategicPlan2023Thumb from "../assets/publication-thumbs/EACHRights Trust Strategic Plan 4 (2019-2023).png";
+import strategicPlan2011Thumb from "../assets/publication-thumbs/EACHRights_Trust_Strategic_Plan_2011-2012.png";
+import annualReport2020Thumb from "../assets/publication-thumbs/EACHRights-Annual-Report-2020.png";
+import ssnfgmThumb from "../assets/publication-thumbs/PRINT Updated  VERSION SSN and PA with FGM 27102025.png";
 
 /* =========================================================
-   LOAD QUEUE
-   Parsing a whole PDF client-side (just to show a page as a
-   thumbnail) is expensive, and this page can have several in
-   play at once (the hero slide plus the grid below). This
-   queue caps how many can be parsing at the same time; the
-   rest wait their turn rather than all hitting the main
-   thread together.
+   PUBLICATION THUMBNAIL
+   A plain, lazily-loaded <img> pointing at a pre-rendered
+   page-1 image. No PDF is parsed in the browser: the image
+   is generated once at build time by
+   scripts/generate-pdf-thumbnails.mjs. Falls back to a
+   document icon if the image is missing or fails to load.
 ========================================================= */
-const MAX_CONCURRENT_PDF_LOADS = 2;
-let activeLoads = 0;
-const loadQueue = [];
-
-function requestLoadSlot() {
-  return new Promise((resolve) => {
-    const tryStart = () => {
-      if (activeLoads < MAX_CONCURRENT_PDF_LOADS) {
-        activeLoads += 1;
-        resolve();
-      } else {
-        loadQueue.push(tryStart);
-      }
-    };
-    tryStart();
-  });
-}
-
-function releaseLoadSlot() {
-  activeLoads = Math.max(0, activeLoads - 1);
-  const next = loadQueue.shift();
-  if (next) next();
-}
-
-/* =========================================================
-   PDF THUMBNAIL
-   Renders page 1 of a PDF as a preview at the given width.
-   Falls back to a plain document icon while loading or if
-   rendering fails (e.g. a corrupt file, or the worker failing
-   to load).
-========================================================= */
-function PdfThumbnail({ file, onSettled, width = 220 }) {
+function PublicationThumb({ src, alt }) {
+  const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
-  const settledRef = useRef(false);
 
-  const settle = () => {
-    if (settledRef.current) return;
-    settledRef.current = true;
-    onSettled?.();
-  };
-
-  if (failed) {
+  if (failed || !src) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-forest-soft">
         <FileText size={32} className="text-forest/40" strokeWidth={1.5} />
@@ -89,105 +52,36 @@ function PdfThumbnail({ file, onSettled, width = 220 }) {
   }
 
   return (
-    <Document
-      file={file}
-      loading={
-        <div className="flex h-full w-full items-center justify-center bg-forest-soft">
-          <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
-        </div>
-      }
-      onLoadError={() => {
-        setFailed(true);
-        settle();
-      }}
-      className="flex h-full w-full items-center justify-center overflow-hidden bg-gray-50"
-    >
-      <Page
-        pageNumber={1}
-        width={width}
-        renderTextLayer={false}
-        renderAnnotationLayer={false}
-        onLoadError={() => {
-          setFailed(true);
-          settle();
-        }}
-        onRenderSuccess={settle}
-      />
-    </Document>
-  );
-}
-
-/* =========================================================
-   LAZY PDF THUMBNAIL
-   Wraps PdfThumbnail so the underlying PDF isn't fetched or
-   parsed until the card is close to entering the viewport,
-   and waits for a free slot in the load queue above.
-========================================================= */
-function LazyPdfThumbnail({ file, width }) {
-  const containerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [canLoad, setCanLoad] = useState(false);
-
-  useEffect(() => {
-    if (isVisible) return undefined;
-    const node = containerRef.current;
-    if (!node) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "300px" }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [isVisible]);
-
-  useEffect(() => {
-    if (!isVisible) return undefined;
-    let cancelled = false;
-    let gotSlot = false;
-
-    requestLoadSlot().then(() => {
-      if (cancelled) {
-        releaseLoadSlot();
-        return;
-      }
-      gotSlot = true;
-      setCanLoad(true);
-    });
-
-    return () => {
-      cancelled = true;
-      if (gotSlot) releaseLoadSlot();
-    };
-  }, [isVisible]);
-
-  return (
-    <div ref={containerRef} className="h-full w-full">
-      {canLoad ? (
-        <PdfThumbnail file={file} width={width} onSettled={releaseLoadSlot} />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center bg-forest-soft">
+    <div className="relative h-full w-full bg-gray-50">
+      {!loaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-forest-soft">
           <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
         </div>
       )}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
+        className={`h-full w-full object-cover transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
     </div>
   );
 }
 
 const publications = [
-   {
+  {
     title: "STRATEGIC PLAN 2026-2030",
     category: "Strategy & Planning",
     year: "2026",
     description:
       "EACHRights Strategic Plan 2026-2030 is a 5-year roadmap to create a just society that upholds human rights and dignity.Its mission is to protect social and economic rights for vulnerable and marginalized communities, focusing on health, education, gender equality, and climate change.",
     pdf: strategicPlan2026,
+    thumb: strategicPlan2026Thumb,
   },
   {
     title: "Build Us More Schools (Full Version)",
@@ -196,48 +90,53 @@ const publications = [
     description:
       "'Build Us More Schools!' - June 2024 research report on the lack of quality free public schools in Mabatini & Ngei Wards, Mathare, Nairobi.Community voices calling on the government to build more public schools.",
     pdf: educationSchools,
+    thumb: educationSchoolsThumb,
   },
   {
     title: "EACHRights Perception Survey Report",
     category: "Programme Publications",
     year: "2026",
     description:
-    "A 2011 survey by EACHRights on how well Kenyans (govt, NGOs, public in Kibera, Kawangware, Jericho) understand ECOSOC rights - finds awareness is low, civil/political rights get more attention than economic/social rights, and most people don't know how to claim ECOSOC rights.",
+      "A 2011 survey by EACHRights on how well Kenyans (govt, NGOs, public in Kibera, Kawangware, Jericho) understand ECOSOC rights - finds awareness is low, civil/political rights get more attention than economic/social rights, and most people don't know how to claim ECOSOC rights.",
     pdf: surveyReport,
+    thumb: surveyReportThumb,
   },
   {
     title: "EACHRights Trust Strategic Plan 4 (2019-2023)",
     category: "Strategy & Planning",
     year: "2023",
     description:
-    "Strategic Plan 2019-2023 - EACHRights 4th plan.Goal: A society that respects human rights & dignity.Focused on 5 pillars: ECOSOC rights advocacy, capacity building, knowledge management, partnerships, and institutional growth to promote ECOSOC rights for vulnerable groups in Kenya, Uganda & Tanzania.",
+      "Strategic Plan 2019-2023 - EACHRights 4th plan.Goal: A society that respects human rights & dignity.Focused on 5 pillars: ECOSOC rights advocacy, capacity building, knowledge management, partnerships, and institutional growth to promote ECOSOC rights for vulnerable groups in Kenya, Uganda & Tanzania.",
     pdf: strategicPlan2023,
+    thumb: strategicPlan2023Thumb,
   },
   {
     title: "EACHRights_Trust_Strategic_Plan_2011-2012",
     category: "Strategy & Planning",
     year: "2012",
     description:
-    "First-ever EACHRights plan (2011).Vision: To be the leading human rights org in East Africa.Mission: Promote human rights with focus on economic, social & cultural rights for social justice.Goals: 1) Build visibility nationally/regionally/internationally 2) Institutional strengthening & capacity building.",
+      "First-ever EACHRights plan (2011).Vision: To be the leading human rights org in East Africa.Mission: Promote human rights with focus on economic, social & cultural rights for social justice.Goals: 1) Build visibility nationally/regionally/internationally 2) Institutional strengthening & capacity building.",
     pdf: strategicPlan2011,
+    thumb: strategicPlan2011Thumb,
   },
   {
     title: "EACHRights-Annual-Report-2020",
     category: "Annual Reports",
     year: "2020",
     description:
-    "Annual Report 2020 - EACHRights first ever annual report.Despite COVID-19, delivered on Strategic Plan 2019-2023: child rights advocacy, education barazas in Homa Bay, #TunzaWatotoWetu campaign on teen pregnancies/FGM, UPR reports, ACERWC engagement, and partnerships with U of Stirling, GI-ESCR, ERIKS & OSF.",
+      "Annual Report 2020 - EACHRights first ever annual report.Despite COVID-19, delivered on Strategic Plan 2019-2023: child rights advocacy, education barazas in Homa Bay, #TunzaWatotoWetu campaign on teen pregnancies/FGM, UPR reports, ACERWC engagement, and partnerships with U of Stirling, GI-ESCR, ERIKS & OSF.",
     pdf: annualReport2020,
+    thumb: annualReport2020Thumb,
   },
   {
     title: "PRINT Updated  VERSION SSN and PA with FGM 27102025",
     category: "Programme Publications",
     year: "2025",
     description:
-    "July 2025 Study: Shifts in Social Norms on FGM/C in Garissa County.16 FGDs found FGM/C still widespread due to beliefs on purity/marriageability, but shifting from severe Type III (Pharaonic) to Type I (Sunna) and medicalized cuts. Older generations defend it; younger, educated urban youth increasingly oppose. Recommends community dialogue, youth advocacy, religious engagement.",
+      "July 2025 Study: Shifts in Social Norms on FGM/C in Garissa County.16 FGDs found FGM/C still widespread due to beliefs on purity/marriageability, but shifting from severe Type III (Pharaonic) to Type I (Sunna) and medicalized cuts. Older generations defend it; younger, educated urban youth increasingly oppose. Recommends community dialogue, youth advocacy, religious engagement.",
     pdf: ssnfgm,
+    thumb: ssnfgmThumb,
   },
-  
 ];
 
 const categories = [
@@ -248,8 +147,7 @@ const categories = [
 ];
 
 // A handful of publications to rotate through in the hero. Keeping this
-// short (not the whole list) keeps the carousel quick to cycle and keeps
-// the load queue light on a page that's already parsing PDFs below.
+// short (not the whole list) keeps the carousel quick to cycle.
 const heroPublications = publications.slice(0, 4);
 
 const HERO_PUB_INTERVAL = 5000;
@@ -371,7 +269,10 @@ export default function Publications() {
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-50">
                   <AnimatePresence initial={false} mode="sync">
                     <motion.div key={currentHeroPub} {...heroPubMotion} className="absolute inset-0">
-                      <LazyPdfThumbnail file={activeHeroPub.pdf} width={190} />
+                      <PublicationThumb
+                        src={activeHeroPub.thumb}
+                        alt={activeHeroPub.title}
+                      />
                     </motion.div>
                   </AnimatePresence>
 
@@ -526,7 +427,10 @@ export default function Publications() {
                   {/* PDF PAGE-1 PREVIEW */}
 
                   <div className="relative aspect-[4/3] w-full border-b border-gray-100">
-                    <LazyPdfThumbnail file={publication.pdf} width={220} />
+                    <PublicationThumb
+                      src={publication.thumb}
+                      alt={publication.title}
+                    />
 
                     <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-600 shadow-sm">
                       PDF
