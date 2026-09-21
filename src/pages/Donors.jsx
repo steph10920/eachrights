@@ -25,19 +25,19 @@ const currentDonors = [
 const pastDonors = [
   {
     name: "Amkeni Wakenya",
-    logo: "/donors/amkeni-wakenya.png",
+    logo: "/donors/amkeni_wakenya_donor.png",
     description:
       "A former development partner that supported initiatives contributing to stronger communities and human rights.",
   },
   {
     name: "Global Initiative for Economic, Social and Cultural Rights",
-    logo: "/donors/gi-escr.png",
+    logo: "/donors/global initiative.png",
     description:
       "A former partner whose work aligns with the advancement and realization of economic, social and cultural rights.",
   },
   {
     name: "Wellspring Philanthropic Fund",
-    logo: "/donors/wellspring-philanthropic-fund.png",
+    logo: "/donors/Wellspring.png",
     description:
       "A former philanthropic partner that supported initiatives advancing equity, justice and community empowerment.",
   },
