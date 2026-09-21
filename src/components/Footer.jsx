@@ -1,11 +1,25 @@
-const ABOUT_LINKS = ["Who we are", "Leadership", "Our team", "Strategic plan"];
-const WORK_LINKS = [
-  "Programmes",
-  "Universal Periodic Review",
-  "Publications",
-  "News",
+import { Link } from "react-router-dom";
+
+const ABOUT_LINKS = [
+  { name: "Who we are", path: "/about" },
+  { name: "Leadership", path: "/about/team" },
+  { name: "Our team", path: "/about/team" },
+  { name: "Strategic plan", path: "/resources" },
 ];
-const CONNECT_LINKS = ["Contact us", "Facebook", "LinkedIn", "Instagram"];
+
+const WORK_LINKS = [
+  { name: "Programmes", path: "/our-work" },
+  { name: "Universal Periodic Review", path: "/processes/universal-periodic-review" },
+  { name: "Publications", path: "/resources" },
+];
+
+const CONNECT_LINKS = [
+  { name: "Contact us", path: "/contact" },
+  // Social URLs not yet supplied — swap "#" for the real profile links.
+  { name: "Facebook", path: "#", external: true },
+  { name: "LinkedIn", path: "#", external: true },
+  { name: "Instagram", path: "#", external: true },
+];
 
 export default function Footer() {
   return (
@@ -41,13 +55,13 @@ export default function Footer() {
 
             <ul className="space-y-1">
               {ABOUT_LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
                     className="text-xs text-ink transition-colors hover:text-forest"
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -61,13 +75,13 @@ export default function Footer() {
 
             <ul className="space-y-1">
               {WORK_LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
                     className="text-xs text-ink transition-colors hover:text-forest"
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,16 +94,29 @@ export default function Footer() {
             </h5>
 
             <ul className="space-y-1">
-              {CONNECT_LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-xs text-ink transition-colors hover:text-forest"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
+              {CONNECT_LINKS.map((link) =>
+                link.external ? (
+                  <li key={link.name}>
+                    <a
+                      href={link.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-ink transition-colors hover:text-forest"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ) : (
+                  <li key={link.name}>
+                    <Link
+                      to={link.path}
+                      className="text-xs text-ink transition-colors hover:text-forest"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

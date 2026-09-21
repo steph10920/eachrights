@@ -22,7 +22,7 @@ const programmeLinks = [
   { name: "Gender Justice Programme", path: "/our-work/programmes/gender-justice" },
   { name: "Health Justice Programme", path: "/our-work/programmes/health-justice" },
   { name: "Environmental & Climate Justice Programme", path: "/our-work/programmes/environmental-climate-justice" },
-  { name: "Economic Justice", path: "/our-work/programmes/economic-justice" },
+  { name: "Economic Justice, Business and Human Rights Programme", path: "/our-work/programmes/economic-justice" },
   { name: "Theory of Change", path: "/our-work/programmes/theory-of-change" },
 ];
 
