@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import heroImage from "/donors/donors-hero.png";
 
 const currentDonors = [
   {
@@ -63,9 +64,7 @@ function DonorCard({ donor }) {
 
       {/* CONTENT */}
       <div className="flex flex-1 flex-col p-7">
-        <h3 className="text-xl font-bold text-ink">
-          {donor.name}
-        </h3>
+        <h3 className="text-xl font-bold text-ink">{donor.name}</h3>
 
         <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">
           {donor.description}
@@ -81,17 +80,47 @@ function DonorCard({ donor }) {
   );
 }
 
+function DonorGrid({ donors }) {
+  return (
+    <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+      {donors.map((donor, index) => (
+        <motion.div
+          key={donor.name}
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+          <DonorCard donor={donor} />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 function Donors() {
   return (
     <main className="min-h-screen bg-white">
-
       {/* HERO */}
-      <section className="relative overflow-hidden bg-forest py-20 text-white lg:py-28">
+      <section className="relative overflow-hidden bg-gray-900 py-20 text-white lg:py-28">
+        {/* Background image */}
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
+        {/* Neutral overlay keeps the text readable; darkest on the text side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/20" />
+
+        {/* Decorative circles */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[40px] border-white" />
           <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full border-[50px] border-white" />
         </div>
 
+        {/* Content */}
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -154,11 +183,9 @@ function Donors() {
       {/* CURRENT DONORS */}
       <section className="bg-forest-soft py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
           <div className="mb-10 max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="h-1 w-12 rounded-full bg-forest" />
-
               <span className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
                 Current Partners
               </span>
@@ -174,33 +201,16 @@ function Donors() {
             </p>
           </div>
 
-          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {currentDonors.map((donor, index) => (
-              <motion.div
-                key={donor.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                }}
-              >
-                <DonorCard donor={donor} />
-              </motion.div>
-            ))}
-          </div>
+          <DonorGrid donors={currentDonors} />
         </div>
       </section>
 
       {/* PAST DONORS */}
       <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
           <div className="mb-10 max-w-2xl">
             <div className="flex items-center gap-3">
               <span className="h-1 w-12 rounded-full bg-forest" />
-
               <span className="text-sm font-bold uppercase tracking-[0.18em] text-forest">
                 Previous Partnerships
               </span>
@@ -217,33 +227,15 @@ function Donors() {
             </p>
           </div>
 
-          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {pastDonors.map((donor, index) => (
-              <motion.div
-                key={donor.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                }}
-              >
-                <DonorCard donor={donor} />
-              </motion.div>
-            ))}
-          </div>
+          <DonorGrid donors={pastDonors} />
         </div>
       </section>
 
       {/* PARTNERSHIP MESSAGE */}
       <section className="border-t border-gray-100 bg-gray-50 py-16 lg:py-20">
         <div className="mx-auto max-w-5xl px-6 lg:px-8">
-
           <div className="rounded-3xl bg-forest p-8 text-white shadow-xl sm:p-12 lg:p-14">
-
             <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
-
               <div>
                 <p className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-white/70">
                   Strategic Partnerships
@@ -266,10 +258,8 @@ function Donors() {
               >
                 Get in Touch →
               </Link>
-
             </div>
           </div>
-
         </div>
       </section>
 
@@ -283,7 +273,6 @@ function Donors() {
           </p>
         </div>
       </section>
-
     </main>
   );
 }
