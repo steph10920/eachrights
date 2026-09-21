@@ -12,12 +12,15 @@ import { ArrowLeft, ArrowRight, Handshake, Mail } from "lucide-react";
 */
 
 const board = [
-  { name: "Margaret Wanjiru", role: "Board Chairperson", photo: null },
-  { name: "Samuel Kiptoo", role: "Vice Chairperson", photo: null },
-  { name: "Esther Nyambura", role: "Treasurer", photo: null },
-  { name: "Daniel Omollo", role: "Secretary", photo: null },
-  { name: "Fatuma Hassan", role: "Board Member", photo: null },
-  { name: "Robert Mutiso", role: "Board Member", photo: null },
+  { name: "Okero Otieno", role: "Board Chairperson", photo: null },
+  { name: "Florence Annan Waka", role: "Vice Chairperson", photo: null },
+  { name: "Fredrick Kinama", role: "Treasurer", photo: null },
+  { name: "Gilbert Onyango", role: "Secretary", photo: null },
+  { name: "Christine Alai", role: "Trustee", photo: null },
+  { name: "Julie Mukami Kubai", role: "Board Member", photo: null },
+  { name: "Martin Mavenjina", role: "Board Member", photo: null },
+  { name: "Allan Oginga", role: "Board Member", photo: null },
+
 ];
 
 /*
@@ -30,62 +33,75 @@ const board = [
 
 const leadership = [
   {
-    name: "Jane Doe",
-    role: "Executive Director",
-    bio: "Leads EACHRights' strategic direction, partnerships and organisational governance.",
-    photo: null,
-    email: "",
-  },
-  {
-    name: "John Smith",
-    role: "Deputy Director, Programmes",
-    bio: "Oversees programme design, delivery and impact across all thematic areas.",
-    photo: null,
-    email: "",
+  name: "Gilbert Onyango",
+  role: "Executive Director",
+  bio: "Mr. Gilbert Onyango is the Founder and a member of the Board of Trustees at EACHRights. His journey in the non-governmental sector began in 2002 as a legal intern with The CRADLE – The Children's Foundation, where he later became the Deputy Director. He then served as the Regional Deputy Director for the Canadian Bar Association's Strengthening Access to Justice in Eastern Africa (SAJEA) Programme in Dar es Salaam, Tanzania, from June to December 2010. Following this, Mr. Onyango assumed the role of Regional Director at EACHRights from December 2010 to May 2015, after which he joined UPR Info, a Swiss NGO, as the Regional Director for Africa from June 2015 to December 2020. He resumed his position as Executive Director of EACHRights in November 2022. Mr. Onyango holds an LL.B. degree from Dr. BAM University, Aurangabad, India, and was admitted to the Kenyan Bar in 2002. He also obtained a Master's of Science (M.Sc.) Degree in Management and Organisational Development from United States International University, Africa (USIU-A) in 2008, and a Master's of Arts (M.A.) Degree in Development Studies with a major in Human Rights, Development, and Social Justice from the International Institute of Social Studies (ISS) at Erasmus University, Rotterdam, in 2012. Throughout his career, Mr. Onyango has pursued professional development in various areas, including child rights, human rights, law, development, strategic planning and management, human resource management, project evaluation, and grant making. His steadfast dedication to human rights and substantial contributions to the development sector underscore Mr. Onyango's commitment to driving positive change, guiding EACHRights' growth and impact through his leadership.",
+  photo: null,
+  email: "director@eachrights.or.ke",
   },
 ];
 
 const staff = [
   {
-    name: "Amara Otieno",
-    role: "Head of Advocacy",
-    bio: "Leads policy engagement and advocacy campaigns across East Africa.",
-    photo: null,
+  name: "Marcelino Thuku",
+  role: "Programme Manager",
+  bio: "Mr. Marcelino Thuku is a human rights and peacebuilding practitioner with expertise in land, labour and child rights, transitional justice, gender equality, devolution, and conflict management. He has extensive experience in mediation and community peacebuilding, including resolving water-resource disputes between the Kamba and Maasai communities in Taveta under a USAID-funded peacebuilding project. Mr. Thuku holds a Bachelor of Arts in Anthropology from the University of Nairobi, with additional training in MERL, data management, resource mobilization, peacebuilding, conflict management, and grants management. His work spans communities across several counties in Kenya, advancing human rights, peace, and inclusive development.",
+  photo: null,
+  email: "marcelino@eachrights.or.ke",
   },
   {
-    name: "David Mwangi",
-    role: "Legal & Litigation Officer",
-    bio: "Coordinates public interest litigation and legal support for partner communities.",
-    photo: null,
+  name: "Johnstone Shisanya",
+  role: "Programme Manager",
+  bio: "Mr. Johnstone Shisanya is a human rights and community development professional with over 7 years of experience in the NGO sector. His expertise includes education, child protection, safeguarding, project management, gender healing and reconciliation, leadership development, research, and training. He holds a Master of Arts in African Studies, a Bachelor of Arts in Philosophy and Religious Studies, and is a Master Practitioner in Neuro-Linguistic Programming. He has held managerial roles with organizations including Edmund Rice Advocacy Network East Africa, Omni One Limited, and L'Arche Kenya. Mr. Shisanya is committed to advancing human rights, strengthening communities, and building partnerships that contribute to EACHRights' growth and impact.",
+  photo: null,
+  email: "",
   },
   {
-    name: "Grace Achieng",
-    role: "Research & Evidence Lead",
-    bio: "Designs and manages research that informs EACHRights' advocacy and programming.",
-    photo: null,
+  name: "Madina Mohamed",
+  role: "Project Officer",
+  bio: "Ms. Madina Mohamed is a gender development, governance, and human rights professional with over six years of experience in community development, advocacy, and programme implementation. Her expertise includes inclusive education, gender equality, prevention of gender-based violence, governance, human rights, and community empowerment. She previously served as a Programmes Officer at the Centre for Community Development and Human Rights, working with the Kenya Parliamentary Caucus on Human Rights and Sustainable Development Goals. Ms. Mohamed also serves on the boards of Uweza Foundation and Edmund Rice Centre Nairobi and represents EACHRights as Kenya Equity and Inclusion Thematic Co-lead at the RELI Africa network. Her work is focused on advancing equitable education, gender justice, and the rights of vulnerable and marginalized communities.",
+  photo: null,
+  email: "",
   },
   {
-    name: "Peter Kariuki",
-    role: "Programmes Officer",
-    bio: "Manages field programmes, partner relationships and community engagement.",
-    photo: null,
+  name: "Lois Mwaniki",
+  role: "Project Officer",
+  bio: "Lois Mwaniki is a legal professional and human rights advocate serving as a Project Officer under the Health Justice Programme at EACHRights. She holds an LLB, a Diploma in Law from the Kenya School of Law, and is an Advocate of the High Court of Kenya. Her expertise includes Sexual and Reproductive Health and Rights (SRHR), health justice, project management, policy advocacy, monitoring, and programme implementation. At EACHRights, she coordinates project activities, supports partners, and contributes to evidence-based advocacy and reporting. Lois is committed to advancing health justice, equity, and the economic, social, and cultural rights of marginalized communities.",
+  photo: null,
+  email: "",
   },
   {
-    name: "Sarah Nabirye",
-    role: "Communications Officer",
-    bio: "Leads storytelling, media relations and public communications.",
-    photo: null,
+  name: "Jane Otieno",
+  role: "Project Officer",
+  bio: "Ms. Jane Otieno is a human rights practitioner and qualified Nursing Officer specializing in Sexual and Reproductive Health and Rights (SRHR), social justice, policy advocacy, and community engagement. As a Project Officer under the Health Justice Programme at EACHRights, she coordinates stakeholder engagements, supports SRHR advocacy, conducts policy analysis, and contributes to evidence-based programme implementation. Her clinical and community-based experience enables her to connect health service delivery with rights-based approaches, particularly for vulnerable and marginalized communities. Jane is passionate about expanding access to comprehensive SRHR services, youth-friendly healthcare, and equitable health systems.",
+  photo: null,
+  email: "",
   },
   {
-    name: "Michael Ouma",
-    role: "Finance & Operations Manager",
-    bio: "Manages finance, compliance and organisational operations.",
-    photo: null,
+  name: "Samson Mutange",
+  role: "Finance and Operations Officer",
+  bio: "Mr. Samson Mutange is a finance and operations professional with over 15 years of experience in the NGO sector. He serves as the Finance, Administration and Operations Officer at EACHRights, overseeing financial management, administration, procurement, human resources, logistics, and office operations. He holds a Certified Public Accountants (CPA) qualification and ensures compliance with organizational and donor requirements while supporting effective financial reporting and good governance. Mr. Mutange is committed to strengthening efficient, accountable, and well-managed operations at EACHRights.",
+  photo: null,
+  email: "",
+  },
+  {
+  name: "Mirriam Mwongela",
+  role: "Communications Officer",
+  bio: "Ms. Mirriam Mwongela is a strategic communications and public relations professional with expertise in media relations, digital communication, community engagement, event coordination, and multimedia production. As Communications Officer at EACHRights, she leads the organization's digital presence, develops communication campaigns, creates engaging multimedia content, and manages stakeholder engagement across digital platforms. She is also a member of the Association of Women in Media in Kenya (AMWIK), supporting gender-responsive media practices and promoting social justice and gender equality. Ms. Mwongela is committed to strengthening EACHRights' visibility, storytelling, and public engagement through effective and innovative communication.",
+  photo: null,
+  email: "",
+  },
+  {
+  name: "Pachu Ibrahim",
+  role: "Administrative Assistant",
+  bio: "Pachu Ibrahim is an Administrative Assistant at EACHRights, supporting managers and staff while ensuring the smooth and efficient running of daily office operations. Her expertise includes office management, organization, time management, multitasking, problem-solving, and administrative support. She also manages office equipment and helps maintain an organized and productive work environment. Pachu's attention to detail and commitment to efficiency contribute to the effective delivery of EACHRights' day-to-day operations.",
+  photo: null,
+  email: "",
   },
 ];
 
 /* =========================================================
-   SHARED HELPERS — match Home.jsx / About.jsx design language
+   SHARED HELPERS
 ========================================================= */
 
 function getInitials(name) {
@@ -117,6 +133,18 @@ function Avatar({ name, photo, large = false }) {
     </div>
   );
 }
+
+// One reveal per grid, staggered across its children, instead of each
+// card independently computing its own animation delay.
+const gridVariants = {
+  hidden: {},
+  shown: { transition: { staggerChildren: 0.07 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  shown: { opacity: 1, y: 0 },
+};
 
 export default function Team() {
   return (
@@ -167,42 +195,43 @@ export default function Team() {
           </h2>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2">
-          {leadership.map((person, index) => (
+        <motion.div
+          initial="hidden"
+          whileInView="shown"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={gridVariants}
+          className="grid gap-8"
+        >
+          {leadership.map((person) => (
             <motion.article
               key={person.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="grid gap-6 bg-white p-6 shadow-sm sm:grid-cols-[160px_1fr] sm:p-7"
+              variants={cardVariants}
+              className="grid gap-8 bg-white p-8 shadow-sm sm:grid-cols-[220px_1fr] sm:p-10"
             >
-              <div className="w-full max-w-[160px]">
+              <div className="w-full max-w-[220px]">
                 <Avatar name={person.name} photo={person.photo} large />
               </div>
 
               <div className="flex flex-col justify-center">
-                <h3 className="text-xl font-bold text-forest font-display">{person.name}</h3>
-                <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-forest-dark">
-                  {person.role}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-ink/65">{person.bio}</p>
+                <h3 className="text-2xl font-bold text-forest font-display sm:text-3xl">{person.name}</h3>
+                <p className="mt-1.5 text-base font-medium text-accent">{person.role}</p>
+                <p className="mt-4 max-w-[68ch] text-base leading-8 text-ink/65">{person.bio}</p>
 
                 {person.email && (
-                  <div className="mt-4 flex gap-3">
+                  <div className="mt-5 flex gap-3">
                     <a
                       href={`mailto:${person.email}`}
                       aria-label={`Email ${person.name}`}
-                      className="flex h-9 w-9 items-center justify-center bg-forest-light text-forest-dark transition hover:bg-forest hover:text-paper"
+                      className="flex h-10 w-10 items-center justify-center bg-forest-light text-forest-dark transition hover:bg-forest hover:text-paper"
                     >
-                      <Mail size={16} />
+                      <Mail size={18} />
                     </a>
                   </div>
                 )}
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mb-10 mt-20 max-w-2xl sm:mt-24">
           <h2 className="text-3xl font-bold tracking-tight text-forest sm:text-4xl font-display">
@@ -214,14 +243,17 @@ export default function Team() {
           </p>
         </div>
 
-        <div className="grid gap-x-12 border-t border-forest/10 sm:grid-cols-2">
-          {board.map((person, index) => (
+        <motion.div
+          initial="hidden"
+          whileInView="shown"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={gridVariants}
+          className="grid gap-x-12 border-t border-forest/10 sm:grid-cols-2"
+        >
+          {board.map((person) => (
             <motion.div
               key={person.name}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.35, delay: index * 0.05 }}
+              variants={cardVariants}
               className="flex items-center gap-4 border-b border-forest/10 py-5"
             >
               {person.photo ? (
@@ -238,11 +270,11 @@ export default function Team() {
 
               <div>
                 <h3 className="text-base font-bold text-forest font-display">{person.name}</h3>
-                <p className="text-xs font-semibold uppercase tracking-wide text-forest-dark">{person.role}</p>
+                <p className="text-sm font-medium text-accent">{person.role}</p>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* =====================================================
@@ -261,14 +293,17 @@ export default function Team() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {staff.map((person, index) => (
+          <motion.div
+            initial="hidden"
+            whileInView="shown"
+            viewport={{ once: true, amount: 0.05 }}
+            variants={gridVariants}
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {staff.map((person) => (
               <motion.article
                 key={person.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                variants={cardVariants}
                 whileHover={{ y: -6 }}
                 className="group overflow-hidden bg-white shadow-sm transition hover:shadow-xl"
               >
@@ -276,14 +311,12 @@ export default function Team() {
 
                 <div className="p-5">
                   <h3 className="text-lg font-bold text-forest font-display">{person.name}</h3>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-forest-dark">
-                    {person.role}
-                  </p>
+                  <p className="mt-1 text-sm font-medium text-accent">{person.role}</p>
                   <p className="mt-3 text-sm leading-6 text-ink/65">{person.bio}</p>
                 </div>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

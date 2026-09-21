@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, ExternalLink } from "lucide-react";
 import logo from "../assets/logo.jpeg";
 
 /* =========================================================
@@ -29,6 +29,14 @@ const programmeLinks = [
 const processLinks = [
   { name: "Universal Periodic Review", path: "/processes/universal-periodic-review" },
 ];
+
+// External destination — opens in a new tab rather than being routed
+// through React Router, since it lives on a separate site entirely.
+const srhrAdvocacyLink = {
+  name: "SRHR Advocacy",
+  description: "Visit our dedicated SRHR advocacy portal",
+  url: "https://thrift-borg.github.io/eachrights-srhr-portal/",
+};
 
 function navLinkClasses({ isActive }) {
   return `relative text-sm font-semibold transition ${
@@ -144,6 +152,22 @@ function Navbar() {
                     </div>
                   </div>
                 </div>
+
+                {/* SRHR ADVOCACY — external site, opens in a new tab */}
+                <a
+                  href={srhrAdvocacyLink.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition hover:bg-forest-light/60"
+                >
+                  <div>
+                    <p className="text-sm font-semibold text-forest">{srhrAdvocacyLink.name}</p>
+                    <p className="mt-0.5 text-xs leading-snug text-ink/55">
+                      {srhrAdvocacyLink.description}
+                    </p>
+                  </div>
+                  <ExternalLink size={16} className="mt-0.5 shrink-0 text-forest-dark/50" />
+                </a>
               </div>
             </div>
           </div>
@@ -273,6 +297,18 @@ function Navbar() {
                       ))}
                     </div>
                   )}
+
+                  {/* SRHR ADVOCACY — external site, opens in a new tab */}
+                  <a
+                    href={srhrAdvocacyLink.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                    className="flex w-full items-center justify-between py-2.5 text-sm font-semibold text-forest"
+                  >
+                    {srhrAdvocacyLink.name}
+                    <ExternalLink size={16} className="shrink-0 text-forest-dark/40" />
+                  </a>
                 </div>
               )}
             </div>

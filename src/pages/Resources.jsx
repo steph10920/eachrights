@@ -146,9 +146,16 @@ const categories = [
   "Strategy & Planning",
 ];
 
-// A handful of publications to rotate through in the hero. Keeping this
-// short (not the whole list) keeps the carousel quick to cycle.
-const heroPublications = publications.slice(0, 4);
+// Newest first. Sorted once here so adding a publication above, in any
+// order, is enough — no need to also re-order the array by hand.
+const publicationsByYear = [...publications].sort(
+  (a, b) => Number(b.year) - Number(a.year)
+);
+
+// A handful of the most current publications to rotate through in the
+// hero. Keeping this short (not the whole list) keeps the carousel quick
+// to cycle.
+const heroPublications = publicationsByYear.slice(0, 4);
 
 const HERO_PUB_INTERVAL = 5000;
 
@@ -195,7 +202,7 @@ export default function Publications() {
         transition: { duration: 0.6, ease: "easeInOut" },
       };
 
-  const filteredPublications = publications.filter((publication) => {
+  const filteredPublications = publicationsByYear.filter((publication) => {
     const matchesCategory =
       activeCategory === "All" ||
       publication.category === activeCategory;
@@ -408,7 +415,7 @@ export default function Publications() {
 
           {filteredPublications.length > 0 ? (
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
               {filteredPublications.map((publication, index) => (
 
@@ -421,43 +428,43 @@ export default function Publications() {
                     duration: 0.45,
                     delay: index * 0.04,
                   }}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
 
                   {/* PDF PAGE-1 PREVIEW */}
 
-                  <div className="relative aspect-[4/3] w-full border-b border-gray-100">
+                  <div className="relative aspect-[16/10] w-full border-b border-gray-100">
                     <PublicationThumb
                       src={publication.thumb}
                       alt={publication.title}
                     />
 
-                    <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-600 shadow-sm">
+                    <span className="absolute right-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-gray-600 shadow-sm">
                       PDF
                     </span>
                   </div>
 
-                  <div className="flex flex-1 flex-col p-6">
+                  <div className="flex flex-1 flex-col p-4">
 
                     {/* CATEGORY */}
 
-                    <p className="text-xs font-semibold uppercase tracking-[0.15em] text-forest">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-forest">
                       {publication.category}
                     </p>
 
 
                     {/* TITLE */}
 
-                    <h3 className="mt-3 text-xl font-bold leading-snug text-ink">
+                    <h3 className="mt-1.5 line-clamp-2 text-sm font-bold leading-snug text-ink">
                       {publication.title}
                     </h3>
 
 
                     {/* DATE */}
 
-                    <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                    <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-500">
 
-                      <CalendarDays size={16} />
+                      <CalendarDays size={13} />
 
                       <span>{publication.year}</span>
 
@@ -466,31 +473,31 @@ export default function Publications() {
 
                     {/* DESCRIPTION */}
 
-                    <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+                    <p className="mt-2.5 line-clamp-3 flex-1 text-xs leading-5 text-gray-600">
                       {publication.description}
                     </p>
 
 
                     {/* ACTIONS */}
 
-                    <div className="mt-7 flex flex-wrap gap-3 border-t border-gray-100 pt-5">
+                    <div className="mt-4 flex flex-wrap gap-2 border-t border-gray-100 pt-3">
 
                       <a
                         href={publication.pdf}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-lg bg-forest px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-forest-dark"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-forest px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-forest-dark"
                       >
-                        <ExternalLink size={16} />
-                        View PDF
+                        <ExternalLink size={13} />
+                        View
                       </a>
 
                       <a
                         href={publication.pdf}
                         download
-                        className="inline-flex items-center gap-2 rounded-lg border border-forest/20 px-4 py-2.5 text-sm font-semibold text-forest transition hover:bg-forest-soft"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-forest/20 px-3 py-1.5 text-xs font-semibold text-forest transition hover:bg-forest-soft"
                       >
-                        <Download size={16} />
+                        <Download size={13} />
                         Download
                       </a>
 
