@@ -19,7 +19,7 @@ import surveyReport from "../assets/publications/EACHRights Perception Survey Re
 import strategicPlan2023 from "../assets/publications/EACHRights Trust Strategic Plan 4 (2019-2023).pdf";
 import strategicPlan2011 from "../assets/publications/EACHRights_Trust_Strategic_Plan_2011-2012.pdf";
 import annualReport2020 from "../assets/publications/EACHRights-Annual-Report-2020.pdf";
-import ssnfgm from "../assets/publications/PRINT Updated  VERSION SSN and PA with FGM 27102025.pdf";
+import ssnfgm from "../assets/publications/Shifts in Social Norms Around FGMC in Garissa County.pdf";
 
 // Thumbnails — pre-rendered page-1 images (see scripts/generate-pdf-thumbnails.mjs)
 // Run `npm run generate:thumbnails` after adding or replacing a PDF above.
@@ -29,7 +29,7 @@ import surveyReportThumb from "../assets/publication-thumbs/EACHRights Perceptio
 import strategicPlan2023Thumb from "../assets/publication-thumbs/EACHRights Trust Strategic Plan 4 (2019-2023).png";
 import strategicPlan2011Thumb from "../assets/publication-thumbs/EACHRights_Trust_Strategic_Plan_2011-2012.png";
 import annualReport2020Thumb from "../assets/publication-thumbs/EACHRights-Annual-Report-2020.png";
-import ssnfgmThumb from "../assets/publication-thumbs/PRINT Updated  VERSION SSN and PA with FGM 27102025.png";
+import ssnfgmThumb from "../assets/publication-thumbs/Shifts in Social Norms Around FGMC in Garissa County.png";
 
 /* =========================================================
    PUBLICATION THUMBNAIL
@@ -129,7 +129,7 @@ const publications = [
     thumb: annualReport2020Thumb,
   },
   {
-    title: "PRINT Updated  VERSION SSN and PA with FGM 27102025",
+    title: "Shifts in Social Norms Around FGMC in Garissa County",
     category: "Programme Publications",
     year: "2025",
     description:

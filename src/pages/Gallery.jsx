@@ -21,23 +21,23 @@ import photo4 from "../assets/gallery/photo-4.jpg";
 const photos = [
   {
     image: photo1,
-    title: "Community Dialogue Session",
-    description: "Community members and EACHRights staff discussing local rights priorities.",
+    title: "Kenya Children's Assemblies Launch",
+    description: "The launch of the Kenya Children's Assemblies (KCA) in Marsabit County.",
   },
   {
     image: photo2,
-    title: "Child Participation Forum",
-    description: "Children sharing their views during a rights-based participation forum.",
+    title: "Field Visit, Kibiko Primary School",
+    description: "Field visit by ERIKS Development Partners to assess the ECO Gardens established under the Eco Justice Clubs at Kibiko Primary School in Nairobi.",
   },
   {
     image: photo3,
-    title: "Eco Justice Club Launch",
-    description: "Learners at an Eco Justice Club planting the school's first eco-garden.",
+    title: "Baseline Survey Validation",
+    description: "Meeting for the validation of the Baseline Survey Report for SRHR under the Strengthening Grant.",
   },
   {
     image: photo4,
-    title: "Field Visit, Garissa",
-    description: "The EACHRights team meeting with community leaders in Garissa County.",
+    title: "Field Visit, Marsabit",
+    description: "The EACHRights team meeting with community leaders in Marsabit County.",
   },
 ];
 

@@ -102,7 +102,7 @@ export default function EnvironmentalClimateJustice() {
             </div>
 
             <h1 className="mt-5 text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl">
-              Environmental &amp; Climate Justice
+              Environmental &amp; Climate Justice Programme
             </h1>
 
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
