@@ -41,7 +41,7 @@ const srhrAdvocacyLink = {
 function navLinkClasses({ isActive }) {
   return `relative text-sm font-semibold transition ${
     isActive ? "text-forest" : "text-ink/70 hover:text-forest"
-  } after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-accent after:transition-all ${
+  } after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-[#8DC63F] after:transition-all ${
     isActive ? "after:w-full" : "after:w-0"
   }`;
 }
@@ -180,7 +180,7 @@ function Navbar() {
 
           <Link
             to="/contact"
-            className="bg-accent px-5 py-2.5 text-sm font-bold text-forest transition hover:brightness-105"
+            className="bg-[#8DC63F] px-5 py-2.5 text-sm font-bold text-forest transition hover:brightness-105"
           >
             Get Involved
           </Link>
@@ -330,7 +330,7 @@ function Navbar() {
           <Link
             to="/contact"
             onClick={closeMobileMenu}
-            className="mt-4 block bg-accent px-5 py-3 text-center text-sm font-bold text-forest transition hover:brightness-105"
+            className="mt-4 block bg-[#8DC63F] px-5 py-3 text-center text-sm font-bold text-forest transition hover:brightness-105"
           >
             Get Involved
           </Link>

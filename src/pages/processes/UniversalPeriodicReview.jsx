@@ -16,7 +16,7 @@ import {
 
 function Eyebrow({ children, dark = false }) {
   return (
-    <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-accent"}`}>
+    <span className={`inline-block text-xs font-semibold uppercase tracking-[0.2em] ${dark ? "text-forest-dark" : "text-[#8DC63F]"}`}>
       {children}
     </span>
   );
@@ -26,7 +26,7 @@ function IconBox({ icon: Icon, large = false, onDark = false }) {
   return (
     <div
       className={`flex items-center justify-center rounded-full ${
-        onDark ? "bg-paper/10 text-accent" : "bg-accent/10 text-accent"
+        onDark ? "bg-paper/10 text-[#8DC63F]" : "bg-[#8DC63F]/10 text-[#8DC63F]"
       } ${large ? "h-20 w-20" : "h-14 w-14"}`}
     >
       <Icon size={large ? 36 : 26} strokeWidth={1.7} />
@@ -62,9 +62,9 @@ export default function UniversalPeriodicReview() {
     <main className="bg-paper font-sans text-ink">
       {/* HERO */}
       <section className="relative overflow-hidden bg-forest text-paper">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-accent/10" />
+        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-[#8DC63F]/10" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
-        <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-accent" />
+        <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-[#8DC63F]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
           <Link
@@ -78,7 +78,7 @@ export default function UniversalPeriodicReview() {
 
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
             Universal Periodic
-            <span className="block text-accent">Review.</span>
+            <span className="block text-[#8DC63F]">Review.</span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
@@ -160,7 +160,7 @@ export default function UniversalPeriodicReview() {
                 transition={{ duration: 0.4, delay: index * 0.06 }}
                 className="bg-white p-6 shadow-sm"
               >
-                <span className="font-display text-3xl font-bold text-accent">{cycle.year}</span>
+                <span className="font-display text-3xl font-bold text-[#8DC63F]">{cycle.year}</span>
                 <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-forest-dark">
                   {cycle.label}
                 </p>
@@ -257,7 +257,7 @@ export default function UniversalPeriodicReview() {
                 transition={{ duration: 0.4, delay: index * 0.04 }}
                 className="flex gap-4 bg-white p-6 shadow-sm"
               >
-                <span className="font-display text-2xl font-bold text-accent">
+                <span className="font-display text-2xl font-bold text-[#8DC63F]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <p className="text-sm leading-7 text-ink/70">{item}</p>
@@ -269,7 +269,7 @@ export default function UniversalPeriodicReview() {
 
       {/* WHY IT MATTERS */}
       <section className="relative overflow-hidden bg-forest px-6 py-20 text-paper">
-        <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full border-[25px] border-accent/10" />
+        <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full border-[25px] border-[#8DC63F]/10" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.3fr_0.7fr] lg:items-start">
             <IconBox icon={TrendingUp} large onDark />
@@ -291,7 +291,7 @@ export default function UniversalPeriodicReview() {
       {/* CONTACT CTA */}
       <section className="bg-forest px-6 py-24 text-center text-paper">
         <div className="mx-auto max-w-3xl">
-          <Handshake size={48} strokeWidth={1.3} className="mx-auto text-accent" />
+          <Handshake size={48} strokeWidth={1.3} className="mx-auto text-[#8DC63F]" />
           <h2 className="mt-6 text-4xl font-bold sm:text-5xl font-display">Get involved in the Universal Periodic Review process.</h2>
           <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
             Learn how your organisation can join Kenya's Stakeholders Coalition on the Universal Periodic Review and contribute to
@@ -300,14 +300,14 @@ export default function UniversalPeriodicReview() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
+              className="inline-flex items-center gap-2 bg-[#8DC63F] px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
             >
               Contact EACHRights
               <ArrowRight size={18} />
             </Link>
             <Link
               to="/resources"
-              className="inline-flex items-center gap-2 border-2 border-dashed border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
+              className="inline-flex items-center gap-2 border-2 border-dashed border-[#8DC63F] px-7 py-3.5 font-bold text-[#8DC63F] transition hover:bg-[#8DC63F]/10"
             >
               Explore More Resources
             </Link>

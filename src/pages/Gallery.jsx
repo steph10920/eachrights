@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { PlayCircle, ArrowLeft, ArrowRight } from "lucide-react";
 
-import storiesHero from "../assets/gallery/stories-voices-moments.png";
+import storiesHero from "../assets/gallery/stories-voices-moments.jpeg";
 
 /*
 |--------------------------------------------------------------------------
@@ -252,7 +252,7 @@ function Gallery() {
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-        <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-accent" />
+        <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-[#8DC63F]" />
 
         <Link
           to="/"
@@ -282,7 +282,7 @@ function Gallery() {
             <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
               <a
                 href="#videos"
-                className="inline-flex items-center gap-2 bg-accent px-4 py-2 text-xs font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105 sm:px-6 sm:py-3 sm:text-sm"
+                className="inline-flex items-center gap-2 bg-[#8DC63F] px-4 py-2 text-xs font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105 sm:px-6 sm:py-3 sm:text-sm"
               >
                 Explore Videos
               </a>
@@ -406,7 +406,7 @@ function Gallery() {
             >
               <span
                 className={`block h-1.5 rounded-full transition-all duration-300 ${
-                  currentPhoto === index ? "w-7 bg-accent" : "w-1.5 bg-forest/25 group-hover/dot:bg-forest/50"
+                  currentPhoto === index ? "w-7 bg-[#8DC63F]" : "w-1.5 bg-forest/25 group-hover/dot:bg-forest/50"
                 }`}
               />
             </button>
@@ -469,7 +469,7 @@ function Gallery() {
 
                       {/* PLAY BUTTON */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-forest shadow-xl transition duration-300 group-hover:scale-110 sm:h-16 sm:w-16">
+                        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#8DC63F] text-forest shadow-xl transition duration-300 group-hover:scale-110 sm:h-16 sm:w-16">
                           <PlayCircle
                             size={30}
                             strokeWidth={2}
@@ -498,7 +498,7 @@ function Gallery() {
                 {/* VIDEO DETAILS */}
                 <div className="p-5">
                   <div className="mb-2 flex items-center justify-between gap-3">
-                    <span className="bg-accent/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-forest-dark">
+                    <span className="bg-[#8DC63F]/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-forest-dark">
                       Video
                     </span>
 
@@ -542,7 +542,7 @@ function Gallery() {
               href="https://www.youtube.com/@eachrights7"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 font-bold text-forest shadow-lg transition hover:brightness-105"
+              className="inline-flex items-center gap-2 bg-[#8DC63F] px-6 py-3.5 font-bold text-forest shadow-lg transition hover:brightness-105"
             >
               <PlayCircle size={18} />
               Visit YouTube Channel

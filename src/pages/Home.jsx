@@ -140,7 +140,7 @@ const IMPACT_INTERVAL = 5000;
 
 function IconBox({ icon: Icon, large = false }) {
   return (
-    <div className={`flex items-center justify-center rounded-full bg-accent/10 text-accent ${large ? "h-16 w-16" : "h-14 w-14"}`}>
+    <div className={`flex items-center justify-center rounded-full bg-[#8DC63F]/10 text-[#8DC63F] ${large ? "h-16 w-16" : "h-14 w-14"}`}>
       <Icon size={large ? 30 : 26} strokeWidth={1.7} />
     </div>
   );
@@ -288,13 +288,13 @@ export default function Home() {
         <div className="relative z-20 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-8">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={currentSlide} {...heroTextMotion} className="max-w-2xl">
-              <span className="inline-block border-l-2 border-accent pl-3 text-sm font-medium text-white/80">
+              <span className="inline-block border-l-2 border-[#8DC63F] pl-3 text-sm font-medium text-white/80">
                 {slide.label}
               </span>
 
               <h1 className="mt-5 max-w-2xl font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
                 {slide.title}
-                <span className="block text-accent">{slide.highlight}</span>
+                <span className="block text-[#8DC63F]">{slide.highlight}</span>
               </h1>
 
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/85 sm:text-base">{slide.description}</p>
@@ -302,7 +302,7 @@ export default function Home() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   to="/our-work"
-                  className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
+                  className="inline-flex items-center gap-2 bg-[#8DC63F] px-6 py-3 text-sm font-bold text-forest shadow-lg transition hover:-translate-y-0.5 hover:brightness-105"
                 >
                   Explore our work
                   <ArrowRight size={16} />
@@ -321,7 +321,7 @@ export default function Home() {
         <button
           type="button"
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/35 bg-black/20 text-white backdrop-blur-md transition hover:border-accent hover:bg-black/40 hover:text-accent sm:flex lg:left-6"
+          className="absolute left-4 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/35 bg-black/20 text-white backdrop-blur-md transition hover:border-[#8DC63F] hover:bg-black/40 hover:text-[#8DC63F] sm:flex lg:left-6"
           aria-label="Previous slide"
         >
           <ArrowLeft size={18} />
@@ -330,7 +330,7 @@ export default function Home() {
         <button
           type="button"
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/35 bg-black/20 text-white backdrop-blur-md transition hover:border-accent hover:bg-black/40 hover:text-accent sm:flex lg:right-6"
+          className="absolute right-4 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center border border-white/35 bg-black/20 text-white backdrop-blur-md transition hover:border-[#8DC63F] hover:bg-black/40 hover:text-[#8DC63F] sm:flex lg:right-6"
           aria-label="Next slide"
         >
           <ArrowRight size={18} />
@@ -347,7 +347,7 @@ export default function Home() {
             >
               <span
                 className={`block h-1 transition-all duration-500 ${
-                  currentSlide === index ? "w-10 bg-accent" : "w-5 bg-white/45 group-hover:bg-white/80"
+                  currentSlide === index ? "w-10 bg-[#8DC63F]" : "w-5 bg-white/45 group-hover:bg-white/80"
                 }`}
               />
             </button>
@@ -392,7 +392,7 @@ export default function Home() {
             <div className="mt-6 flex items-start gap-5 border-t border-forest/15 pt-6">
               <span className="shrink-0 font-display text-4xl font-bold text-forest-dark">2010</span>
               <p className="text-sm leading-6 text-ink/65">
-                <ShieldCheck size={15} className="mb-0.5 mr-1 inline text-accent" />
+                <ShieldCheck size={15} className="mb-0.5 mr-1 inline text-[#8DC63F]" />
                 The year EACHRights was founded — the starting point for the research, advocacy and litigation that follow.
               </p>
             </div>
@@ -415,7 +415,7 @@ export default function Home() {
               <div className="grid grid-cols-2 divide-x divide-y divide-paper/15 border border-paper/15 sm:divide-y-0">
                 {impactStats.map((stat) => (
                   <div key={stat.label} className="px-5 py-6">
-                    <div className="font-display text-2xl font-bold text-accent sm:text-3xl">
+                    <div className="font-display text-2xl font-bold text-[#8DC63F] sm:text-3xl">
                       <CountUp end={stat.value} duration={2} separator={stat.separator || ""} />
                       {stat.suffix}
                     </div>
@@ -448,7 +448,7 @@ export default function Home() {
                         transition={{ duration: 0.4, delay: 0.1 }}
                         className="absolute bottom-0 left-0 right-0 p-4"
                       >
-                        <p className="text-xs font-medium text-accent">{impactSlide.caption}</p>
+                        <p className="text-xs font-medium text-[#8DC63F]">{impactSlide.caption}</p>
                         <h3 className="mt-0.5 text-base font-bold font-display text-white sm:text-lg">
                           {impactSlide.title}
                         </h3>
@@ -486,7 +486,7 @@ export default function Home() {
                     >
                       <span
                         className={`block h-1.5 rounded-full transition-all duration-300 ${
-                          currentImpactImage === index ? "w-7 bg-accent" : "w-1.5 bg-paper/30 group-hover:bg-paper/60"
+                          currentImpactImage === index ? "w-7 bg-[#8DC63F]" : "w-1.5 bg-paper/30 group-hover:bg-paper/60"
                         }`}
                       />
                     </button>
@@ -539,7 +539,7 @@ export default function Home() {
                 <p className="mt-4 text-base leading-7 text-paper/75">{featuredArea.description}</p>
                 <Link
                   to={featuredArea.link}
-                  className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-accent pb-1 font-semibold text-accent transition hover:gap-3"
+                  className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-[#8DC63F] pb-1 font-semibold text-[#8DC63F] transition hover:gap-3"
                 >
                   Learn more
                   <ArrowRight size={16} />
@@ -559,7 +559,7 @@ export default function Home() {
                     transition={{ duration: 0.35, delay: index * 0.06 }}
                     className="group flex items-start gap-5 py-6 first:pt-0"
                   >
-                    <Icon size={24} className="mt-1 shrink-0 text-forest-dark transition group-hover:text-accent" strokeWidth={1.7} />
+                    <Icon size={24} className="mt-1 shrink-0 text-forest-dark transition group-hover:text-[#8DC63F]" strokeWidth={1.7} />
                     <div className="flex-1">
                       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                         <h3 className="text-lg font-bold text-forest font-display">{area.title}</h3>
@@ -603,7 +603,7 @@ export default function Home() {
                   return (
                     <div key={item.title} className="flex items-start gap-5 py-6 first:pt-0">
                       <div className="flex shrink-0 flex-col items-center gap-2 pt-0.5">
-                        <span className="font-display text-sm font-bold text-accent">
+                        <span className="font-display text-sm font-bold text-[#8DC63F]">
                           {String(index + 1).padStart(2, "0")}
                         </span>
                         <Icon size={20} className="text-forest-dark" strokeWidth={1.7} />
@@ -671,7 +671,7 @@ export default function Home() {
         {/* FINAL CTA */}
         <section className="bg-forest px-6 py-24 text-center text-paper">
           <div className="mx-auto max-w-3xl">
-            <Handshake size={44} strokeWidth={1.3} className="mx-auto text-accent" />
+            <Handshake size={44} strokeWidth={1.3} className="mx-auto text-[#8DC63F]" />
             <h2 className="mt-6 text-4xl font-bold sm:text-5xl font-display">Be part of the change.</h2>
             <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
               Whether through partnership, advocacy, research or support, there is a role for everyone in advancing human rights and social justice.
@@ -679,14 +679,14 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
+                className="inline-flex items-center gap-2 bg-[#8DC63F] px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
               >
                 Get involved
                 <ArrowRight size={18} />
               </Link>
               <Link
                 to="/donors"
-                className="inline-flex items-center gap-2 border-2 border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
+                className="inline-flex items-center gap-2 border-2 border-[#8DC63F] px-7 py-3.5 font-bold text-[#8DC63F] transition hover:bg-[#8DC63F]/10"
               >
                 Support our work
               </Link>

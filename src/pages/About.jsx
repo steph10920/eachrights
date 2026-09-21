@@ -21,7 +21,7 @@ function IconBox({ icon: Icon, large = false, onDark = false }) {
   return (
     <div
       className={`flex items-center justify-center rounded-full ${
-        onDark ? "bg-paper/10 text-accent" : "bg-accent/10 text-accent"
+        onDark ? "bg-paper/10 text-[#8DC63F]" : "bg-[#8DC63F]/10 text-[#8DC63F]"
       } ${large ? "h-20 w-20" : "h-14 w-14"}`}
     >
       <Icon size={large ? 36 : 26} strokeWidth={1.7} />
@@ -98,14 +98,14 @@ export default function About() {
     <main className="bg-paper font-sans text-ink">
       {/* PAGE HERO — mirrors Home's forest hero band, kept compact */}
       <section className="relative overflow-hidden bg-forest text-paper">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-accent/10" />
+        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-[#8DC63F]/10" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
           <div className="max-w-3xl">
             <h1 className="font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
               Advancing human rights,
-              <span className="block text-accent">justice and human dignity.</span>
+              <span className="block text-[#8DC63F]">justice and human dignity.</span>
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
               The East African Centre for Human Rights works to promote and protect human dignity through the
@@ -202,7 +202,7 @@ export default function About() {
 
       {/* GOAL STATEMENT */}
       <section className="relative overflow-hidden bg-forest px-6 py-20 text-paper">
-        <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full border-[25px] border-accent/10" />
+        <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full border-[25px] border-[#8DC63F]/10" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.3fr_0.7fr] lg:items-start">
             <IconBox icon={Target} large onDark />
@@ -285,7 +285,7 @@ export default function About() {
                 >
                   <div className="flex items-center justify-between">
                     <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
-                    <span className="font-display text-sm font-bold text-accent">
+                    <span className="font-display text-sm font-bold text-[#8DC63F]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -327,7 +327,7 @@ export default function About() {
       {/* CONTACT CTA — mirrors Home's final CTA */}
       <section className="bg-forest px-6 py-24 text-center text-paper">
         <div className="mx-auto max-w-3xl">
-          <Handshake size={48} strokeWidth={1.3} className="mx-auto text-accent" />
+          <Handshake size={48} strokeWidth={1.3} className="mx-auto text-[#8DC63F]" />
           <h2 className="mt-6 text-4xl font-bold sm:text-5xl font-display">Work with us to advance justice.</h2>
           <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
             We welcome collaboration with communities, organisations, institutions and partners who share our
@@ -335,7 +335,7 @@ export default function About() {
           </p>
           <Link
             to="/contact"
-            className="mt-8 inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
+            className="mt-8 inline-flex items-center gap-2 bg-[#8DC63F] px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
           >
             Contact EACHRights
             <ArrowRight size={18} />

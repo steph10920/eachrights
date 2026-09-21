@@ -226,7 +226,7 @@ export default function TheoryOfChange() {
                     <ul className="mt-5 space-y-3">
                       {programme.points.map((point) => (
                         <li key={point} className="flex gap-3 leading-7 text-gray-600">
-                          <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                          <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8DC63F]" />
                           <span>{point}</span>
                         </li>
                       ))}
