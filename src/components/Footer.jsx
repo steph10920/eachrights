@@ -15,10 +15,10 @@ const WORK_LINKS = [
 
 const CONNECT_LINKS = [
   { name: "Contact us", path: "/contact" },
-  // Social URLs not yet supplied — swap "#" for the real profile links.
-  { name: "Facebook", path: "#", external: true },
-  { name: "LinkedIn", path: "#", external: true },
-  { name: "Instagram", path: "#", external: true },
+  { name: "Facebook", path: "https://www.facebook.com/EACHRights", external: true },
+  { name: "LinkedIn", path: "https://www.linkedin.com/company/100748351/", external: true },
+  { name: "Instagram", path: "https://www.instagram.com/eachrights/", external: true },
+  { name: "X", path: "https://x.com/EACHRights", external: true },
 ];
 
 export default function Footer() {
@@ -134,9 +134,6 @@ export default function Footer() {
             </a>
             <a href="#" className="hover:text-forest">
               Terms
-            </a>
-            <a href="#" className="hover:text-forest">
-              Safeguarding
             </a>
           </span>
         </div>
