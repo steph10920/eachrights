@@ -29,7 +29,7 @@ import gilbertOnyango from "../assets/team/Gilbert.jpg";
 // Staff
 import marcelinoThuku from "../assets/team/Marcelino.jpg";
 import johnstoneShisanya from "../assets/team/Johnstone.jpg";
-import madinaMohamed from "../assets/team/download.jpg";
+import madinaMohamed from "../assets/team/Madina.jpeg";
 import loisMwaniki from "../assets/team/Lois.jpg";
 import janeOtieno from "../assets/team/Jane.jpg";
 import samsonMutange from "../assets/team/Samson.jpg";
