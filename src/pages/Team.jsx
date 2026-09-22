@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Handshake, Mail } from "lucide-react";
@@ -182,6 +183,27 @@ const staff = [
 ];
 
 /* =========================================================
+   PRELOAD HELPER
+   ---------------------------------------------------------
+   Every photo across board, leadership and staff is fetched
+   via a JS Image() before the page reveals its content, so
+   nothing pops in as the visitor scrolls.
+========================================================= */
+
+const allPhotos = [...board, ...leadership, ...staff]
+  .map((person) => person.photo)
+  .filter(Boolean);
+
+function preloadImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = resolve;
+    img.onerror = resolve; // don't block the page forever on one bad file
+    img.src = src;
+  });
+}
+
+/* =========================================================
    SHARED HELPERS
 ========================================================= */
 
@@ -199,7 +221,6 @@ function Avatar({ name, photo, large = false }) {
       <img
         src={photo}
         alt={name}
-        loading="lazy"
         decoding="async"
         className={`w-full object-cover ${large ? "aspect-[4/5]" : "aspect-square"}`}
       />
@@ -229,7 +250,49 @@ const cardVariants = {
   shown: { opacity: 1, y: 0 },
 };
 
+/* =========================================================
+   PAGE LOADER
+   ---------------------------------------------------------
+   Full-screen splash shown until every photo has finished
+   downloading. Uses the same palette as the hero so the
+   transition into the real header feels seamless.
+========================================================= */
+
+function PageLoader() {
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-forest text-paper">
+      <div className="h-10 w-10 animate-spin rounded-full border-[3px] border-paper/25 border-t-accent" />
+      <p className="text-sm font-medium tracking-wide text-paper/70">Loading team…</p>
+    </div>
+  );
+}
+
 export default function Team() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    Promise.all(allPhotos.map(preloadImage)).then(() => {
+      if (!cancelled) setReady(true);
+    });
+
+    // Safety net: reveal the page even if something hangs, so a slow
+    // or failed image can never trap a visitor on the loader forever.
+    const fallback = setTimeout(() => {
+      if (!cancelled) setReady(true);
+    }, 8000);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
+
+  if (!ready) {
+    return <PageLoader />;
+  }
+
   return (
     <main className="min-h-screen bg-paper font-sans text-ink">
 
