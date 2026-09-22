@@ -4,31 +4,64 @@ import { ArrowLeft, ArrowRight, Handshake, Mail } from "lucide-react";
 
 /*
 |--------------------------------------------------------------------------
+| LOCAL IMAGE IMPORTS
+|--------------------------------------------------------------------------
+| Drop each person's photo into src/assets/team/ using the filenames below
+| (kebab-case of their name), then these imports will resolve. Rename the
+| import paths here if your actual filenames differ. Any photo you don't
+| have yet: comment out its import line and set that person's `photo` back
+| to `null` — the Avatar component will show an initials badge instead.
+*/
+
+// Board
+import okeroOtieno from "../assets/team/Isaack.jpg";
+import florenceAnnanWaka from "../assets/team/Florence.jpg";
+import fredrickKinama from "../assets/team/Fredrick.jpg";
+import gilbertOnyangoBoard from "../assets/team/Gilbert.jpg";
+import christineAlai from "../assets/team/Christine.jpg";
+import julieMukamiKubai from "../assets/team/Julie.jpg";
+import martinMavenjina from "../assets/team/Martin.jpg";
+import allanOginga from "../assets/team/Allan.jpg";
+
+// Leadership
+import gilbertOnyango from "../assets/team/Gilbert.jpg";
+
+// Staff
+import marcelinoThuku from "../assets/team/Marcelino.jpg";
+import johnstoneShisanya from "../assets/team/Johnstone.jpg";
+import madinaMohamed from "../assets/team/download.jpg";
+import loisMwaniki from "../assets/team/Lois.jpg";
+import janeOtieno from "../assets/team/Jane.jpg";
+import samsonMutange from "../assets/team/Samson.jpg";
+import mirriamMwongela from "../assets/team/Mirriam.jpg";
+import pachuIbrahim from "../assets/team/Pachu.jpg";
+
+/*
+|--------------------------------------------------------------------------
 | ADD YOUR BOARD MEMBERS HERE
 |--------------------------------------------------------------------------
 | Board members are volunteer governance leaders, shown separately from
-| paid Leadership/Staff below. photo: same convention as staff — an
-| imported image path, or leave null for an initials badge.
+| paid Leadership/Staff below. photo: an imported image (see imports
+| above), or null for an initials badge.
 */
 
 const board = [
-  { name: "Okero Otieno", role: "Board Chairperson", photo: null },
-  { name: "Florence Annan Waka", role: "Vice Chairperson", photo: null },
-  { name: "Fredrick Kinama", role: "Treasurer", photo: null },
-  { name: "Gilbert Onyango", role: "Secretary", photo: null },
-  { name: "Christine Alai", role: "Trustee", photo: null },
-  { name: "Julie Mukami Kubai", role: "Board Member", photo: null },
-  { name: "Martin Mavenjina", role: "Board Member", photo: null },
-  { name: "Allan Oginga", role: "Board Member", photo: null },
-
+  { name: "Okero Otieno", role: "Board Chairperson", photo: okeroOtieno },
+  { name: "Florence Annan Waka", role: "Vice Chairperson", photo: florenceAnnanWaka },
+  { name: "Fredrick Kinama", role: "Treasurer", photo: fredrickKinama },
+  { name: "Gilbert Onyango", role: "Secretary", photo: gilbertOnyangoBoard },
+  { name: "Christine Alai", role: "Trustee", photo: christineAlai },
+  { name: "Julie Mukami Kubai", role: "Board Member", photo: julieMukamiKubai },
+  { name: "Martin Mavenjina", role: "Board Member", photo: martinMavenjina },
+  { name: "Allan Oginga", role: "Board Member", photo: allanOginga },
 ];
 
 /*
 |--------------------------------------------------------------------------
 | ADD YOUR STAFF MEMBERS HERE
 |--------------------------------------------------------------------------
-| photo: path to an imported image (e.g. import photo1 from "../assets/team/jane-doe.jpg")
-|        leave null to show a placeholder initial instead
+| photo: an imported image (see imports above), or null for a placeholder
+| initial instead.
 */
 
 const leadership = [
@@ -36,7 +69,7 @@ const leadership = [
   name: "Gilbert Onyango",
   role: "Executive Director",
   bio: "Mr. Gilbert Onyango is the Founder and a member of the Board of Trustees at EACHRights. His journey in the non-governmental sector began in 2002 as a legal intern with The CRADLE – The Children's Foundation, where he later became the Deputy Director. He then served as the Regional Deputy Director for the Canadian Bar Association's Strengthening Access to Justice in Eastern Africa (SAJEA) Programme in Dar es Salaam, Tanzania, from June to December 2010. Following this, Mr. Onyango assumed the role of Regional Director at EACHRights from December 2010 to May 2015, after which he joined UPR Info, a Swiss NGO, as the Regional Director for Africa from June 2015 to December 2020. He resumed his position as Executive Director of EACHRights in November 2022. Mr. Onyango holds an LL.B. degree from Dr. BAM University, Aurangabad, India, and was admitted to the Kenyan Bar in 2002. He also obtained a Master's of Science (M.Sc.) Degree in Management and Organisational Development from United States International University, Africa (USIU-A) in 2008, and a Master's of Arts (M.A.) Degree in Development Studies with a major in Human Rights, Development, and Social Justice from the International Institute of Social Studies (ISS) at Erasmus University, Rotterdam, in 2012. Throughout his career, Mr. Onyango has pursued professional development in various areas, including child rights, human rights, law, development, strategic planning and management, human resource management, project evaluation, and grant making. His steadfast dedication to human rights and substantial contributions to the development sector underscore Mr. Onyango's commitment to driving positive change, guiding EACHRights' growth and impact through his leadership.",
-  photo: null,
+  photo: gilbertOnyango,
   email: "director@eachrights.or.ke",
   },
 ];
@@ -46,56 +79,56 @@ const staff = [
   name: "Marcelino Thuku",
   role: "Programme Manager",
   bio: "Mr. Marcelino Thuku is a human rights and peacebuilding practitioner with expertise in land, labour and child rights, transitional justice, gender equality, devolution, and conflict management. He has extensive experience in mediation and community peacebuilding, including resolving water-resource disputes between the Kamba and Maasai communities in Taveta under a USAID-funded peacebuilding project. Mr. Thuku holds a Bachelor of Arts in Anthropology from the University of Nairobi, with additional training in MERL, data management, resource mobilization, peacebuilding, conflict management, and grants management. His work spans communities across several counties in Kenya, advancing human rights, peace, and inclusive development.",
-  photo: null,
+  photo: marcelinoThuku,
   email: "marcelino@eachrights.or.ke",
   },
   {
   name: "Johnstone Shisanya",
   role: "Programme Manager",
   bio: "Mr. Johnstone Shisanya is a human rights and community development professional with over 7 years of experience in the NGO sector. His expertise includes education, child protection, safeguarding, project management, gender healing and reconciliation, leadership development, research, and training. He holds a Master of Arts in African Studies, a Bachelor of Arts in Philosophy and Religious Studies, and is a Master Practitioner in Neuro-Linguistic Programming. He has held managerial roles with organizations including Edmund Rice Advocacy Network East Africa, Omni One Limited, and L'Arche Kenya. Mr. Shisanya is committed to advancing human rights, strengthening communities, and building partnerships that contribute to EACHRights' growth and impact.",
-  photo: null,
+  photo: johnstoneShisanya,
   email: "",
   },
   {
   name: "Madina Mohamed",
   role: "Project Officer",
   bio: "Ms. Madina Mohamed is a gender development, governance, and human rights professional with over six years of experience in community development, advocacy, and programme implementation. Her expertise includes inclusive education, gender equality, prevention of gender-based violence, governance, human rights, and community empowerment. She previously served as a Programmes Officer at the Centre for Community Development and Human Rights, working with the Kenya Parliamentary Caucus on Human Rights and Sustainable Development Goals. Ms. Mohamed also serves on the boards of Uweza Foundation and Edmund Rice Centre Nairobi and represents EACHRights as Kenya Equity and Inclusion Thematic Co-lead at the RELI Africa network. Her work is focused on advancing equitable education, gender justice, and the rights of vulnerable and marginalized communities.",
-  photo: null,
+  photo: madinaMohamed,
   email: "",
   },
   {
   name: "Lois Mwaniki",
   role: "Project Officer",
   bio: "Lois Mwaniki is a legal professional and human rights advocate serving as a Project Officer under the Health Justice Programme at EACHRights. She holds an LLB, a Diploma in Law from the Kenya School of Law, and is an Advocate of the High Court of Kenya. Her expertise includes Sexual and Reproductive Health and Rights (SRHR), health justice, project management, policy advocacy, monitoring, and programme implementation. At EACHRights, she coordinates project activities, supports partners, and contributes to evidence-based advocacy and reporting. Lois is committed to advancing health justice, equity, and the economic, social, and cultural rights of marginalized communities.",
-  photo: null,
+  photo: loisMwaniki,
   email: "",
   },
   {
   name: "Jane Otieno",
   role: "Project Officer",
   bio: "Ms. Jane Otieno is a human rights practitioner and qualified Nursing Officer specializing in Sexual and Reproductive Health and Rights (SRHR), social justice, policy advocacy, and community engagement. As a Project Officer under the Health Justice Programme at EACHRights, she coordinates stakeholder engagements, supports SRHR advocacy, conducts policy analysis, and contributes to evidence-based programme implementation. Her clinical and community-based experience enables her to connect health service delivery with rights-based approaches, particularly for vulnerable and marginalized communities. Jane is passionate about expanding access to comprehensive SRHR services, youth-friendly healthcare, and equitable health systems.",
-  photo: null,
+  photo: janeOtieno,
   email: "",
   },
   {
   name: "Samson Mutange",
   role: "Finance and Operations Officer",
   bio: "Mr. Samson Mutange is a finance and operations professional with over 15 years of experience in the NGO sector. He serves as the Finance, Administration and Operations Officer at EACHRights, overseeing financial management, administration, procurement, human resources, logistics, and office operations. He holds a Certified Public Accountants (CPA) qualification and ensures compliance with organizational and donor requirements while supporting effective financial reporting and good governance. Mr. Mutange is committed to strengthening efficient, accountable, and well-managed operations at EACHRights.",
-  photo: null,
+  photo: samsonMutange,
   email: "",
   },
   {
   name: "Mirriam Mwongela",
   role: "Communications Officer",
   bio: "Ms. Mirriam Mwongela is a strategic communications and public relations professional with expertise in media relations, digital communication, community engagement, event coordination, and multimedia production. As Communications Officer at EACHRights, she leads the organization's digital presence, develops communication campaigns, creates engaging multimedia content, and manages stakeholder engagement across digital platforms. She is also a member of the Association of Women in Media in Kenya (AMWIK), supporting gender-responsive media practices and promoting social justice and gender equality. Ms. Mwongela is committed to strengthening EACHRights' visibility, storytelling, and public engagement through effective and innovative communication.",
-  photo: null,
+  photo: mirriamMwongela,
   email: "",
   },
   {
   name: "Pachu Ibrahim",
   role: "Administrative Assistant",
   bio: "Pachu Ibrahim is an Administrative Assistant at EACHRights, supporting managers and staff while ensuring the smooth and efficient running of daily office operations. Her expertise includes office management, organization, time management, multitasking, problem-solving, and administrative support. She also manages office equipment and helps maintain an organized and productive work environment. Pachu's attention to detail and commitment to efficiency contribute to the effective delivery of EACHRights' day-to-day operations.",
-  photo: null,
+  photo: pachuIbrahim,
   email: "",
   },
 ];
