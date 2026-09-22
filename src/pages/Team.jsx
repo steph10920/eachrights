@@ -15,11 +15,11 @@ import { ArrowLeft, ArrowRight, Handshake, Mail } from "lucide-react";
 
 // Board
 import okeroOtieno from "../assets/team/Isaack.jpg";
-import florenceAnnanWaka from "../assets/team/Florence.jpg";
+import florenceAnnan from "../assets/team/Florence.jpg";
 import fredrickKinama from "../assets/team/Fredrick.jpg";
 import gilbertOnyangoBoard from "../assets/team/Gilbert.jpg";
 import christineAlai from "../assets/team/Christine.jpg";
-import julieMukamiKubai from "../assets/team/Julie.jpg";
+import julieKubai from "../assets/team/Julie.jpg";
 import martinMavenjina from "../assets/team/Martin.jpg";
 import allanOginga from "../assets/team/Allan.jpg";
 
@@ -46,14 +46,62 @@ import pachuIbrahim from "../assets/team/Pachu.jpg";
 */
 
 const board = [
-  { name: "Okero Otieno", role: "Board Chairperson", photo: okeroOtieno },
-  { name: "Florence Annan Waka", role: "Vice Chairperson", photo: florenceAnnanWaka },
-  { name: "Fredrick Kinama", role: "Treasurer", photo: fredrickKinama },
-  { name: "Gilbert Onyango", role: "Secretary", photo: gilbertOnyangoBoard },
-  { name: "Christine Alai", role: "Trustee", photo: christineAlai },
-  { name: "Julie Mukami Kubai", role: "Board Member", photo: julieMukamiKubai },
-  { name: "Martin Mavenjina", role: "Board Member", photo: martinMavenjina },
-  { name: "Allan Oginga", role: "Board Member", photo: allanOginga },
+  {
+    name: "Okero Otieno",
+    role: "Board Chairperson",
+    photo: okeroOtieno,
+    bio: "Mr. Okero Otieno is a democratic governance and public policy expert with over 22 years' experience across state, non-state, academic, and donor organizations in more than 15 sub-Saharan African countries. He currently serves as Chief Technical Advisor–Elections with UNDP Malawi, having previously held senior roles with UNDP Nigeria, IFES, UNDP Kenya, and Kenya's Ministry of Justice. A PhD candidate with advanced degrees in political science and development studies, he brings deep expertise in electoral systems, human rights, and institutional strengthening to his role as Board Chairperson.",
+    email: "",
+  },
+{
+    name: "Florence Annan",
+    role: "Vice Chair, Board of Directors",
+    photo: florenceAnnan,
+    bio: "Ms. Florence Annan is a human rights and governance practitioner with over 18 years' experience in civil society and government, specializing in partnerships and fundraising, organizational development, and policy advocacy. Her work spans land governance, gender and child protection, and devolution, including campaigns such as Keeping Girls in School, ShuleYangu Alliance, and the Nyandarua County Titling Program. She has contributed to the enactment of key human rights frameworks in Kenya and Somalia, including The Children Act and the Protection Against Domestic Violence Act. She currently serves as Fundraising and Partnership Manager at Amnesty International Kenya, and sits on the boards of The Change Trust and The Sports Development Trust.",
+    email: "",
+  },
+{
+    name: "Fredrick K. Kinama",
+    role: "Treasurer, Board of Directors",
+    photo: fredrickKinama,
+    bio: "Mr. Fredrick K. Kinama is a seasoned finance advisor with extensive experience managing financial systems and compliance across Africa, including roles with USDA/USAID in South Sudan, the Aga Khan Foundation in East Africa, Tearfund UK's West Africa WASH programs in Liberia, and Ignite the Orphan Africa-Kenya. He holds a Diploma in Business Management from Sigalagala Polytechnic College and a Bachelor of Business Administration from the Switzerland Centre for Management University, and is a Certified Public Accountant (CPA-K) accredited by KASNEB.",
+    email: "",
+  },
+  {
+    name: "Gilbert Onyango",
+    role: "Executive Director and Founder",
+    photo: gilbertOnyangoBoard,
+    bio: "Mr. Gilbert Onyango is the Founder and a member of the Board of Trustees at EACHRights. His career began in 2002 as a legal intern with The CRADLE, rising to Deputy Director, before serving as Regional Deputy Director for the Canadian Bar Association's SAJEA Programme in Tanzania, Regional Director at EACHRights (2010–2015), and Regional Director for Africa at UPR Info (2015–2020). He resumed as Executive Director of EACHRights in November 2022. He holds an LL.B from Dr. BAM University, India, an M.Sc. in Management and Organisational Development from USIU-Africa, and an M.A. in Development Studies from Erasmus University Rotterdam, and was admitted to the Kenyan Bar in 2002.",
+    email: "director@eachrights.or.ke",
+  },
+  {
+    name: "Christine Alai",
+    role: "Board Member",
+    photo: christineAlai,
+    bio: "Ms. Christine Alai is a human rights lawyer with 15 years' experience advancing equality, non-discrimination, and access to justice for victims of gross human rights violations and atrocity crimes across Kenya, South Sudan, and East and Central Africa. She is presently Transitional Justice Advisor to the UN Commission on Human Rights in South Sudan, and co-founder of Utu Wetu Trust, which focuses on preventing and responding to conflict-related sexual and gender-based violence.",
+    email: "",
+  },
+  {
+    name: "Julie M. Kubai",
+    role: "Board Member",
+    photo: julieKubai,
+    bio: "Ms. Julie M. Kubai is an Auditor at the Office of the Auditor-General (OAG), where she has served since 2015, including five years in the Human Resource Department. She previously worked at the Kenya Trade Network Agency (KENTRADE) as a Trade Facilitator, contributing to the development and roll-out of the Kenya Single Window System (KESWS). She holds a Master of Arts in International Relations from the University of Nairobi and a Bachelor of Science in Hospitality Management from Strathmore University, and is currently pursuing CHRP certification.",
+    email: "",
+  },
+  {
+    name: "Martin Ray T. Mavenjina",
+    role: "Board Member",
+    photo: martinMavenjina,
+    bio: "Mr. Martin Mavenjina is a Constitutional and Human Rights lawyer specializing in Civic Space, Security Governance, Counter Terrorism, and Transitional Justice. He currently serves as Senior Program Advisor for Transitional Justice at the Kenya Human Rights Commission, and has engaged with peer review mechanisms including the UN Human Rights Council and the African Commission on Human and Peoples' Rights. He holds a Bachelor of Laws from Nkumba University, a Post Graduate Diploma in Legal Practice from the Kenya School of Law, and is pursuing a Master of Laws at the University of Nairobi. He chairs Democracy Without Borders-Kenya and is a member of the Law Society of Kenya, the East African Law Society, and the International Commission of Jurists.",
+    email: "",
+  },
+  {
+    name: "Allan Oginga",
+    role: "Board Member",
+    photo: allanOginga,
+    bio: "Allan has over 25 years' experience working with non-state actors in the health sector, in senior management roles at Living Goods, The Fred Hollows Foundation, IntraHealth International, and AMREF Health Africa, having begun his career in corporate banking at Citibank N.A. Kenya. He is currently Chief Executive Officer at No Malaria Kenya, and holds board positions at Basic Needs Basic Rights Kenya and No Taps Foundation-Australia. He holds a postgraduate degree in Social and Applied Economics from Wright State University, Dayton, Ohio.",
+    email: "",
+},
 ];
 
 /*
@@ -78,7 +126,7 @@ const staff = [
   {
   name: "Marcelino Thuku",
   role: "Programme Manager",
-  bio: "Mr. Marcelino Thuku is a human rights and peacebuilding practitioner with expertise in land, labour and child rights, transitional justice, gender equality, devolution, and conflict management. He has extensive experience in mediation and community peacebuilding, including resolving water-resource disputes between the Kamba and Maasai communities in Taveta under a USAID-funded peacebuilding project. Mr. Thuku holds a Bachelor of Arts in Anthropology from the University of Nairobi, with additional training in MERL, data management, resource mobilization, peacebuilding, conflict management, and grants management. His work spans communities across several counties in Kenya, advancing human rights, peace, and inclusive development.",
+  bio: "Marcelino Waithaka Thuku manages the Watoto Wetu project under the Gender Justice Programme at EACHRights. He is a Community Development Professional with over 20 years' experience managing donor-funded human rights and peacebuilding programs in Kenya, spanning land, labour, and child rights, transitional justice, devolution, and gender-based violence prevention across Nairobi's informal settlements and counties including Garissa, Kajiado, Kilifi, and Turkana. Under his stewardship, EACHRights has partnered with the Directorate of Children's Services and County Governments to develop key policies, including the Kajiado FGM Eradication Policy 2019 and the Marsabit County Integrated Child Policy 2024. He holds a Bachelor of Arts in Anthropology from the University of Nairobi and extensive training in MERL, resource mobilization, and conflict management.",
   photo: marcelinoThuku,
   email: "marcelino@eachrights.or.ke",
   },
@@ -239,16 +287,16 @@ export default function Team() {
             <motion.article
               key={person.name}
               variants={cardVariants}
-              className="grid gap-8 bg-white p-8 shadow-sm sm:grid-cols-[220px_1fr] sm:p-10"
+              className="grid gap-8 bg-white p-8 shadow-sm sm:grid-cols-[380px_1fr] sm:p-10 lg:grid-cols-[440px_1fr]"
             >
-              <div className="w-full max-w-[220px]">
+              <div className="w-full">
                 <Avatar name={person.name} photo={person.photo} large />
               </div>
 
               <div className="flex flex-col justify-center">
                 <h3 className="text-2xl font-bold text-forest font-display sm:text-3xl">{person.name}</h3>
                 <p className="mt-1.5 text-base font-medium text-accent">{person.role}</p>
-                <p className="mt-4 max-w-[68ch] text-base leading-8 text-ink/65">{person.bio}</p>
+                <p className="mt-4 max-w-none text-base leading-8 text-ink/65">{person.bio}</p>
 
                 {person.email && (
                   <div className="mt-5 flex gap-3">
@@ -281,31 +329,25 @@ export default function Team() {
           whileInView="shown"
           viewport={{ once: true, amount: 0.15 }}
           variants={gridVariants}
-          className="grid gap-x-12 border-t border-forest/10 sm:grid-cols-2"
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {board.map((person) => (
-            <motion.div
+            <motion.article
               key={person.name}
               variants={cardVariants}
-              className="flex items-center gap-4 border-b border-forest/10 py-5"
+              whileHover={{ y: -6 }}
+              className="group overflow-hidden bg-white shadow-sm transition hover:shadow-xl"
             >
-              {person.photo ? (
-                <img
-                  src={person.photo}
-                  alt={person.name}
-                  className="h-12 w-12 shrink-0 rounded-full object-cover"
-                />
-              ) : (
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-forest-light text-sm font-bold text-forest-dark font-display">
-                  {getInitials(person.name)}
-                </div>
-              )}
+              <Avatar name={person.name} photo={person.photo} />
 
-              <div>
-                <h3 className="text-base font-bold text-forest font-display">{person.name}</h3>
-                <p className="text-sm font-medium text-accent">{person.role}</p>
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-forest font-display">{person.name}</h3>
+                <p className="mt-1 text-sm font-medium text-accent">{person.role}</p>
+                {person.bio && (
+                  <p className="mt-3 text-sm leading-6 text-ink/65">{person.bio}</p>
+                )}
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </motion.div>
       </section>
