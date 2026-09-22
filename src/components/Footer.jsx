@@ -18,7 +18,7 @@ const CONNECT_LINKS = [
   { name: "Facebook", path: "https://www.facebook.com/EACHRights", external: true },
   { name: "LinkedIn", path: "https://www.linkedin.com/company/100748351/", external: true },
   { name: "Instagram", path: "https://www.instagram.com/eachrights/", external: true },
-  { name: "X", path: "https://x.com/EACHRights", external: true },
+  { name: "X(twitter)", path: "https://x.com/EACHRights", external: true },
 ];
 
 export default function Footer() {
