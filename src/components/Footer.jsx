@@ -31,7 +31,7 @@ export default function Footer() {
           {/* Organisation */}
           <div className="col-span-2 md:col-span-1">
             <div className="mb-2 font-display text-lg font-semibold">
-              EACH<span className="text-forest">Rights</span>
+              EACH<span className="text-lime-600">Rights</span>
             </div>
 
             <p className="mb-1 text-xs text-gray-500">
