@@ -34,7 +34,7 @@ import {
   Landmark,
 } from "lucide-react";
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import CountUp from "../components/CountUp.jsx";
 
 const focusAreas = [
