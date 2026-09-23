@@ -168,57 +168,49 @@ const staff = [
   {
     name: "Marcelino Thuku",
     role: "Programme Manager",
-    bio: "Marcelino Waithaka Thuku manages the Watoto Wetu project under the Gender Justice Programme at EACHRights. He is a Community Development Professional with over 20 years' experience managing donor-funded human rights and peacebuilding programs in Kenya, spanning land, labour, and child rights, transitional justice, devolution, and gender-based violence prevention across Nairobi's informal settlements and counties including Garissa, Kajiado, Kilifi, and Turkana. Under his stewardship, EACHRights has partnered with the Directorate of Children's Services and County Governments to develop key policies, including the Kajiado FGM Eradication Policy 2019 and the Marsabit County Integrated Child Policy 2024. He holds a Bachelor of Arts in Anthropology from the University of Nairobi and extensive training in MERL, resource mobilization, and conflict management.",
-    photo: getPhoto("Marcelino.jpg"),
+    bio: "Marcelino Waithaka Thuku manages the Watoto Wetu project under the Gender Justice Programme in EACHRights. He is a seasoned Community Development Professional with 20+ years of experience managing and implementing donor-funded programs on human rights and peacebuilding in Kenya. His expertise spans various areas, including land, labour, and child rights, transitional justice, devolution, gender equality, and the prevention of gender-based violence and harmful cultural practices. His professional reach extends across diverse landscapes, from the urban informal settlements in Nairobi to Counties such as Garissa, Kajiado, Kilifi, Kwale, Lamu, Marsabit, Mombasa, Taita Taveta, Turkana, and Uasin Gishu. A graduate of the University of Nairobi with a Bachelor of Arts degree in Anthropology, Marcelino has enriched his academic foundation with extensive training in monitoring, evaluation, reporting, and learning (MERL), data quality management, resource mobilization, peace-building, conflict management, and finance & grants management. Under his stewardship of the Watoto Wetu project, Marcelino has overseen critical partnerships between EACHRights, the Directorate of Children's Services, County Governments and Civil Society Organizations that have contributed to the development of several important policies towards addressing harmful cultural practices in Kenya. These include the Kajiado Eradication of Female Genital Mutilation Policy 2019, the Marsabit County Integrated Child Policy 2024 and Guidelines for Management of Missing and Found Children in Kenya 2024. Marcelino is also a dedicated advocate for human rights and peace-building, and has demonstrated remarkable expertise in mediating complex disputes and fostering collaboration. During his impactful tenure at the Mombasa Catholic Justice and Peace Commission (MCJPC), Marcelino spearheaded the successful resolution of a water dispute between the Kamba and Maasai communities over the crucial River Njukini water resources in Taveta Sub County, a notable achievement under the USAID – funded Kilifi – Taveta Peace – Building Project. His unwavering commitment to human rights advocacy and peacebuilding continues to make a profound impact on communities throughout Kenya. For inquiries, Mr. Marcelino Thuku can be reached at marcelino@eachrights.or.ke",    photo: getPhoto("Marcelino.jpg"),
     email: "marcelino@eachrights.or.ke",
   },
   {
     name: "Johnstone Shisanya",
     role: "Programme Manager",
-    bio: "Mr. Johnstone Shisanya is a human rights and community development professional with over 7 years of experience in the NGO sector. His expertise includes education, child protection, safeguarding, project management, gender healing and reconciliation, leadership development, research, and training. He holds a Master of Arts in African Studies, a Bachelor of Arts in Philosophy and Religious Studies, and is a Master Practitioner in Neuro-Linguistic Programming. He has held managerial roles with organizations including Edmund Rice Advocacy Network East Africa, Omni One Limited, and L'Arche Kenya. Mr. Shisanya is committed to advancing human rights, strengthening communities, and building partnerships that contribute to EACHRights' growth and impact.",
-    photo: getPhoto("Johnstone.jpg"),
+    bio: "Mr. Johnstone S. Shisanya is a seasoned professional with a Master of Arts Degree in African Studies from the MaryKnoll Institute of African Studies, MN/USA, and Tangaza University College. He also holds credentials as a Master Practitioner in Neuro-Linguistic Programming, along with a Bachelor of Arts degree in Philosophy and Religious Studies. With over 7 years of experience in community empowerment, development, and the NGO sector, Mr Shisanya is a strong advocate for human rights, with a particular focus on education, child protection, and safeguarding. His skills encompass project management, gender healing and reconciliation, leadership development, team nurturing, programmatic research, as well as training and facilitation. Throughout his career, Mr. Shisanya has held managerial roles at distinguished organizations such as Edmund Rice Advocacy Network East Africa, Omni One Limited, and L'Arche Kenya, showcasing his commitment to driving positive change. His passion, adaptability, and continuous quest for knowledge highlight his dedication to making significant contributions to EACHRights' growth and strengthening existing partnerships. For enquiries, Mr. Johnstone S. Shisanya can be reached at johnstone@eachrights.or.ke",    photo: getPhoto("Johnstone.jpg"),
     email: "",
   },
   {
     name: "Madina Mohamed",
     role: "Project Officer",
-    bio: "Ms. Madina Mohamed is a gender development, governance, and human rights professional with over six years of experience in community development, advocacy, and programme implementation. Her expertise includes inclusive education, gender equality, prevention of gender-based violence, governance, human rights, and community empowerment. She previously served as a Programmes Officer at the Centre for Community Development and Human Rights, working with the Kenya Parliamentary Caucus on Human Rights and Sustainable Development Goals. Ms. Mohamed also serves on the boards of Uweza Foundation and Edmund Rice Centre Nairobi and represents EACHRights as Kenya Equity and Inclusion Thematic Co-lead at the RELI Africa network. Her work is focused on advancing equitable education, gender justice, and the rights of vulnerable and marginalized communities.",
-    photo: getPhoto("Madina.jpeg"),
+    bio: "Ms. Madina Mohamed is a highly accomplished professional with a dynamic background and extensive experience specializing in Gender Development, Governance, and Human Rights, demonstrating an unwavering commitment to fostering social and gender justice. Before joining EACHRights, Ms. Mohamed served as a Programmes Officer at the Centre for Community Development and Human Rights where she led initiatives in Human Rights, Governance, and Peace and Cohesion. She actively collaborated with Members of Parliament through the Kenya Parliamentary Caucus on Human Rights, managing crucial CSO - Caucus linkages and administrative responsibilities. Ms. Mohamed's commitment to driving social change extends to her involvement with the Parliamentary Caucus on Sustainable Development Goals (SDG Caucus). Ms. Mohamed stands out as a passionate advocate, particularly focused on quality and inclusive education and eradicating gender-based violence, especially against vulnerable and marginalized girls and young women. Ms. Mohamed's six-year career in the challenging environment of Kibra informal settlement has equipped her with a unique perspective and practical understanding of community issues. Her work in implementing gender transformative programs reflects not only her expertise but also her genuine dedication to creating positive and lasting change. Currently, Ms. Mohamed serves on the Board of Directors at Uweza Foundation, empowering children and youth in Kibra for a better future, and on the Board of Edmund Rice Centre Nairobi, focusing on children with disabilities in informal settlements. Additionally, she represents EACHRights as the Kenya Equity and Inclusion Thematic co-lead at the Regional Education Learning Initiative (RELI) Africa network, comprising 70+ East African organizations working towards inclusive learning. In Ms. Mohamed, the realm of Equitable & Inclusive Education, Gender Development, Governance, and Human Rights finds a luminary whose passion, expertise, and diverse experience converge to create a force for positive transformation. Her journey reflects a deep-seated belief in advocacy and program implementation's power to shape a more just and equitable society. For enquiries, Ms. Madina Mohamed can be reached at madina@eachrights.or.ke",    photo: getPhoto("Madina.jpeg"),
     email: "",
   },
   {
     name: "Lois Mwaniki",
     role: "Project Officer",
-    bio: "Lois Mwaniki is a legal professional and human rights advocate serving as a Project Officer under the Health Justice Programme at EACHRights. She holds an LLB, a Diploma in Law from the Kenya School of Law, and is an Advocate of the High Court of Kenya. Her expertise includes Sexual and Reproductive Health and Rights (SRHR), health justice, project management, policy advocacy, monitoring, and programme implementation. At EACHRights, she coordinates project activities, supports partners, and contributes to evidence-based advocacy and reporting. Lois is committed to advancing health justice, equity, and the economic, social, and cultural rights of marginalized communities.",
-    photo: getPhoto("Lois.jpg"),
+    bio: "Lois Mwaniki is a dynamic advocate and legal professional serving as a Project Officer under the Health Justice Programme at EACHRights. She holds an LLB, a Diploma in Law from the Kenya School of Law, and is an Advocate of the High Court of Kenya. She brings a strong mix of legal expertise, project management skills, and rights-based advocacy to her role, supporting the advancement of Sexual and Reproductive Health and Rights (SRHR) and broader health justice initiatives across the region. At EACHRights, Lois coordinates project activities, supports downstream partners, contributes to policy advocacy, and ensures alignment with donor requirements. She plays a key role in driving evidence-based implementation through baseline assessments, reporting frameworks, and monitoring tools that enhance programme delivery and impact. A commitment to equity, transparency, and the realization of economic, social, and cultural rights for marginalized communities guides her work.",    photo: getPhoto("Lois.jpg"),
     email: "",
   },
   {
     name: "Jane Otieno",
     role: "Project Officer",
-    bio: "Ms. Jane Otieno is a human rights practitioner and qualified Nursing Officer specializing in Sexual and Reproductive Health and Rights (SRHR), social justice, policy advocacy, and community engagement. As a Project Officer under the Health Justice Programme at EACHRights, she coordinates stakeholder engagements, supports SRHR advocacy, conducts policy analysis, and contributes to evidence-based programme implementation. Her clinical and community-based experience enables her to connect health service delivery with rights-based approaches, particularly for vulnerable and marginalized communities. Jane is passionate about expanding access to comprehensive SRHR services, youth-friendly healthcare, and equitable health systems.",
-    photo: getPhoto("Jane.jpg"),
+    bio: "Ms Jane Otieno is a dedicated human rights practitioner and a qualified Nursing Officer with strong expertise in Sexual and Reproductive Health and Rights (SRHR), social justice, legal and policy advocacy and community-driven advocacy. Her clinical training enhances her ability to connect health service delivery with rights-based programming, strengthening her work with vulnerable and marginalized populations. In her role as Project Officer under the Health Justice Programme at EACHRights, Ms Otieno leads county and national-level engagements aimed at strengthening SRHR advocacy, amplifying the voices of social movements, and supporting accountability for rights-based health policies. She plays a central role in coordinating stakeholder dialogues, conducting legal and policy analysis, and facilitating evidence generation to inform programme decision-making. Before joining EACHRights, Ms Otieno worked extensively in community-centred health and rights initiatives, applying her nursing background to improve awareness, service linkages, and advocacy on health and human rights. Her experience working with civil society organizations, county duty-bearers, and grassroots networks has given her a deep understanding of local health systems, community needs, and the systemic barriers affecting rights realization. Ms Otieno is particularly passionate about expanding access to comprehensive SRHR, promoting youth-friendly health services, and addressing inequalities affecting vulnerable and marginalized groups. Her commitment is demonstrated through her work supporting county-level advocacy coalitions, facilitating participatory dialogues, and documenting evidence that drives policy reform. Her growing leadership in the Health Justice Programme reflects a strong foundation in programme management, health systems understanding, and rights-based advocacy. She remains committed to strengthening community resilience, improving policy implementation, and contributing to a more equitable and just health system in Kenya.",    photo: getPhoto("Jane.jpg"),
     email: "",
   },
   {
     name: "Samson Mutange",
     role: "Finance and Operations Officer",
-    bio: "Mr. Samson Mutange is a finance and operations professional with over 15 years of experience in the NGO sector. He serves as the Finance, Administration and Operations Officer at EACHRights, overseeing financial management, administration, procurement, human resources, logistics, and office operations. He holds a Certified Public Accountants (CPA) qualification and ensures compliance with organizational and donor requirements while supporting effective financial reporting and good governance. Mr. Mutange is committed to strengthening efficient, accountable, and well-managed operations at EACHRights.",
-    photo: getPhoto("Samson.jpg"),
+    bio: "Mr. Samson Mutange is the Finance, Administration and Operations Officer at EACHRights, where he plays a pivotal role in coordinating financial administration in alignment with donor and organizational regulations, emphasizing good governance practices. His responsibilities include planning, organizing, coordinating, and monitoring finance, human resources, administration, fieldwork logistics, supplies and procurement, security, and office management activities. Mr. Mutange ensures the proper implementation of EACHRights' policies and procedures, including Finance Management, Administration and Human Resources, Purchases, and Procurement Manuals. He oversees the availability of required cash for operational needs, facilitates the preparation of regular reports for project management, government entities, and other stakeholders. Mr. Mutange is known for his results-driven approach and meticulous attention to detail. With a Certified Public Accountants Certification and over 15 years of experience in the NGO sector, Mr. Mutange brings a wealth of expertise to his role. For inquiries, he can be reached at samson@eachrights.or.ke",    photo: getPhoto("Samson.jpg"),
     email: "",
   },
   {
     name: "Mirriam Mwongela",
     role: "Communications Officer",
-    bio: "Ms. Mirriam Mwongela is a strategic communications and public relations professional with expertise in media relations, digital communication, community engagement, event coordination, and multimedia production. As Communications Officer at EACHRights, she leads the organization's digital presence, develops communication campaigns, creates engaging multimedia content, and manages stakeholder engagement across digital platforms. She is also a member of the Association of Women in Media in Kenya (AMWIK), supporting gender-responsive media practices and promoting social justice and gender equality. Ms. Mwongela is committed to strengthening EACHRights' visibility, storytelling, and public engagement through effective and innovative communication.",
-    photo: getPhoto("Mirriam.jpg"),
+    bio: "Mirriam is an experienced communication professional with a passion for using the power of communication through mass media and public relations to inform the public through journalism, broadcasting and public relations with the community. A strategic communication and public relations officer, offering proven leadership in creating comprehensive public relations and communication strategies to advance companies' visions and goals. Adept in all aspects of public relations, including media relations, internal communications, event planning and community programming. She is an experienced videographer and photographer with top-notch editing skills. In addition, she is a member of the Association of Women in Media in Kenya (AMWIK), which brings together over 300 women in media across the 47 counties to pool their professional skills in giving visibility to women's concerns. AMWIK recognizes that gender inequality and inequity undermine development and that media is a powerful tool for social change and agenda-setting, which is used to create awareness around key issues affecting women to ensure public support and appreciation. As a communications officer at EACHRights, Mirriam plays a vital role in managing the organization's online presence by developing and implementing its social media strategy. She leads campaigns and projects across a range of social media channels, producing and engaging content, analyzing usage data and facilitating customer service.",    photo: getPhoto("Mirriam.jpg"),
     email: "",
   },
   {
     name: "Pachu Ibrahim",
     role: "Administrative Assistant",
-    bio: "Pachu Ibrahim is an Administrative Assistant at EACHRights, supporting managers and staff while ensuring the smooth and efficient running of daily office operations. Her expertise includes office management, organization, time management, multitasking, problem-solving, and administrative support. She also manages office equipment and helps maintain an organized and productive work environment. Pachu's attention to detail and commitment to efficiency contribute to the effective delivery of EACHRights' day-to-day operations.",
-    photo: getPhoto("Pachu.jpg"),
+    bio: "As an Administrative Assistant at EACHRights, Ms. Pachu Ibrahim plays a crucial role in ensuring that the office operates smoothly. Her responsibilities include providing dedicated support to other staff, optimizing daily office functions for increased efficiency, and managing the organization's general administrative tasks. Ms. Ibrahim brings a robust skill set in office management and procedures, exceptional time management, strong organizational skills, and the capacity to handle multiple tasks effectively. Her attention to detail and proficiency in problem-solving underscore her commitment to maintaining a seamless workflow. Ms. Ibrahim is proficient in using various office equipment like printers and photocopying machines. All the aforementioned highlight her versatility and adaptability in administrative duties thereby significantly enhancing EACHRights' overall effectiveness and productivity. For inquiries, Ms. Pachu Ibrahim can be reached at pachu@eachrights.or.ke",    photo: getPhoto("Pachu.jpg"),
     email: "",
   },
 ];
@@ -265,7 +257,9 @@ function Avatar({ name, photo, large = false }) {
         src={photo}
         alt={name}
         decoding="async"
-        className={`w-full object-cover ${large ? "aspect-[4/5]" : "aspect-square"}`}
+        className={`w-full object-cover ${
+          large ? "aspect-[4/5] object-top sm:h-full sm:aspect-auto" : "aspect-square"
+        }`}
       />
     );
   }
@@ -273,7 +267,7 @@ function Avatar({ name, photo, large = false }) {
   return (
     <div
       className={`flex w-full items-center justify-center bg-forest-light text-forest-dark ${
-        large ? "aspect-[4/5]" : "aspect-square"
+        large ? "aspect-[4/5] sm:h-full sm:aspect-auto" : "aspect-square"
       }`}
     >
       <span className="font-display text-4xl font-bold">{getInitials(name)}</span>
@@ -355,35 +349,40 @@ function ProfileModal({ person, onClose }) {
             exit={{ opacity: 0, scale: 0.95, y: 12 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
-            className="relative grid max-h-[92vh] w-full max-w-5xl grid-cols-1 overflow-y-auto bg-white shadow-2xl sm:grid-cols-[320px_1fr] sm:overflow-hidden"
+            className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-y-auto bg-white shadow-2xl sm:h-[85vh] sm:max-h-[85vh] sm:flex-row sm:overflow-hidden"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label="Close profile"
-              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-forest shadow transition hover:bg-white"
+              className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-forest shadow transition hover:bg-white"
             >
               <X size={18} />
             </button>
 
-            <div className="w-full sm:h-full">
+            <div className="w-full sm:h-full sm:w-[320px] sm:flex-shrink-0">
               <Avatar name={person.name} photo={person.photo} large />
             </div>
 
-            <div className="flex flex-col justify-center p-8 sm:h-full sm:min-h-0 sm:overflow-y-auto sm:p-10">
-              <h3 className="font-display text-2xl font-bold text-forest sm:text-3xl">{person.name}</h3>
-              <p className="mt-1.5 text-base font-medium text-accent">{person.role}</p>
-              <p className="mt-5 max-w-none whitespace-pre-line text-base leading-8 text-ink/70">{person.bio}</p>
+            <div className="flex flex-col sm:h-full sm:min-h-0 sm:flex-1">
+              <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                <h3 className="font-display text-2xl font-bold text-forest sm:text-3xl">{person.name}</h3>
+                <p className="mt-1.5 text-base font-medium text-accent">{person.role}</p>
+              </div>
 
-              {person.email && (
-                <a
-                  href={`mailto:${person.email}`}
-                  className="mt-6 inline-flex w-fit items-center gap-2 bg-forest-light px-4 py-2.5 text-sm font-medium text-forest-dark transition hover:bg-forest hover:text-paper"
-                >
-                  <Mail size={16} />
-                  {person.email}
-                </a>
-              )}
+              <div className="px-8 pb-8 sm:min-h-0 sm:flex-1 sm:overflow-y-auto sm:px-10 sm:pb-10">
+                <p className="mt-5 max-w-none whitespace-pre-line text-base leading-8 text-ink/70">{person.bio}</p>
+
+                {person.email && (
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="mt-6 inline-flex w-fit items-center gap-2 bg-forest-light px-4 py-2.5 text-sm font-medium text-forest-dark transition hover:bg-forest hover:text-paper"
+                  >
+                    <Mail size={16} />
+                    {person.email}
+                  </a>
+                )}
+              </div>
             </div>
           </motion.div>
         </motion.div>
