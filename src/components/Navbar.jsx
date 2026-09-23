@@ -35,7 +35,7 @@ const processLinks = [
 const srhrAdvocacyLink = {
   name: "SRHR Advocacy",
   description: "Visit our dedicated SRHR advocacy portal",
-  url: "https://thrift-borg.github.io/eachrights-srhr-portal/",
+  url: "https://eachrights.github.io/srhr/",
 };
 
 function navLinkClasses({ isActive }) {

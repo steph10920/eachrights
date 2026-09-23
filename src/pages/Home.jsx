@@ -125,7 +125,7 @@ const impactStats = [
   { value: 120, suffix: "+", label: "Volunteers engaged" },
   { value: 4500, suffix: "", label: "Learners reached", separator: "," },
   { value: 32, suffix: "", label: "Projects funded" },
-  { value: 98, suffix: "%", label: "Community satisfaction" },
+  { value: 67, suffix: "%", label: "Policy developed/Implemented" },
 ];
 
 const impactImages = [
