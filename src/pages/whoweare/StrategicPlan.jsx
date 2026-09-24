@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  Target,
   Handshake,
   Users,
   GraduationCap,
@@ -13,35 +12,29 @@ import {
   Building2,
 } from "lucide-react";
 
-// Loads whichever images exist in src/assets/strategicplan/ so a missing
-// file no longer breaks the build. Name files gender, education, health,
-// environment, economic, upr, institutional (.jpeg, .jpg, .png or .webp).
-const imageFiles = import.meta.glob("../../assets/strategicplan/*.{jpeg,jpg,png,webp}", {
+// Loads whatever files are in src/assets/strategicplan/ and matches each
+// focus area by file name, ignoring capital letters and the extension.
+// Expected names: gender, education, health, environment, economic, upr,
+// institutional (for example Health.JPG or health.jpeg both work).
+const imageFiles = import.meta.glob("../../assets/strategicplan/*", {
   eager: true,
   import: "default",
 });
 
 function getImage(name) {
-  const match = Object.keys(imageFiles).find((path) =>
-    new RegExp(`/${name}\\.(jpeg|jpg|png|webp)$`).test(path)
-  );
+  const match = Object.keys(imageFiles).find((path) => {
+    const file = path.split("/").pop().toLowerCase();
+    return file.startsWith(name);
+  });
+
+  if (!match && import.meta.env.DEV) {
+    console.warn(
+      `StrategicPlan: no image found for "${name}". Files found:`,
+      Object.keys(imageFiles).map((path) => path.split("/").pop())
+    );
+  }
+
   return match ? imageFiles[match] : null;
-}
-
-/* =========================================================
-   SHARED HELPERS — match WhoWeAre.jsx's design language
-========================================================= */
-
-function IconBox({ icon: Icon, large = false, onDark = false }) {
-  return (
-    <div
-      className={`flex items-center justify-center rounded-full ${
-        onDark ? "bg-paper/10 text-[#8DC63F]" : "bg-[#8DC63F]/10 text-[#8DC63F]"
-      } ${large ? "h-20 w-20" : "h-14 w-14"}`}
-    >
-      <Icon size={large ? 36 : 26} strokeWidth={1.7} />
-    </div>
-  );
 }
 
 /* =========================================================
@@ -152,187 +145,218 @@ const outcomes = [
 ========================================================= */
 
 export default function StrategicPlan() {
+  const reduce = useReducedMotion();
+
   return (
     <main className="bg-paper font-sans text-ink">
-      {/* PAGE HERO */}
+      {/* HERO */}
       <section className="relative overflow-hidden bg-forest text-paper">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-[#8DC63F]/10" />
-        <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
+        <div className="pointer-events-none absolute -right-32 -top-32 h-[28rem] w-[28rem] rounded-full border-[28px] border-[#8DC63F]/10" />
+        <div className="pointer-events-none absolute -bottom-48 -left-40 h-96 w-96 rounded-full border-[28px] border-paper/5" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
-          <div className="max-w-3xl">
-            <h1 className="font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Strategic Plan 2026 – 2030,
-              <span className="block text-[#8DC63F]">promoting social and economic rights in East Africa.</span>
-            </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
-              Our strategic vision, mission, and ambitions, along with the intervention strategies to achieve
-              them.
-            </p>
-          </div>
-        </div>
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"
+        >
+          <div className="mb-6 h-1 w-20 bg-[#8DC63F]" />
+          <h1 className="max-w-5xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Strategic Plan 2026 – 2030
+          </h1>
+          <p className="mt-6 max-w-3xl font-display text-2xl leading-snug text-[#8DC63F] sm:text-3xl">
+            Promoting social and economic rights in East Africa.
+          </p>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-white/75 sm:text-lg">
+            Our strategic vision, mission, and ambitions, along with the intervention strategies to achieve
+            them.
+          </p>
+        </motion.div>
       </section>
 
-      {/* OVERVIEW */}
-      <section className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 sm:py-28 lg:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, x: -25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-        >
+      {/* OVERVIEW + INDEX */}
+      <section className="mx-auto grid max-w-7xl gap-14 px-6 py-24 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:px-12 lg:py-32">
+        <div>
           <h2 className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
             A bold vision and a focused framework.
           </h2>
-          <p className="mt-6 text-base leading-8 text-ink/75">
+          <p className="mt-8 text-lg leading-8 text-ink/80">
             This Strategic Plan articulates a bold vision and provides a focused framework to guide The East
             African Centre for Human Rights (EACHRights). By clearly defining the thematic priorities,
             strategic approaches, and institutional objectives, the Plan positions the organization to deliver
             targeted, effective interventions across Kenya and the wider East African region.
           </p>
-          <p className="mt-4 text-base leading-8 text-ink/75">
+          <p className="mt-5 leading-8 text-ink/70">
             This Plan was developed through a highly participatory and consultative process, involving
             EACHRights’ staff and stakeholders who took part in structured workshops and dialogue sessions.
           </p>
-          <p className="mt-4 text-base leading-8 text-ink/75">
+          <p className="mt-5 leading-8 text-ink/70">
             These engagements shaped forward-looking goals aimed at fostering organizational growth,
             resilience, and long-term impact.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 25 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="bg-forest-light p-8 sm:p-10"
-        >
-          <IconBox icon={Target} large />
-          <h3 className="mt-6 text-2xl font-bold leading-snug text-forest sm:text-3xl font-display">
+        <aside className="self-start bg-forest-light p-8 sm:p-10 lg:sticky lg:top-28">
+          <h3 className="font-display text-2xl font-bold leading-snug text-forest">
             Anchored on seven strategic focus areas.
           </h3>
-          <p className="mt-5 leading-7 text-ink/70">
+          <p className="mt-4 text-sm leading-7 text-ink/70">
             The strategic focus areas are largely informed by the lessons learnt, conclusions, and
             recommendations from the analysis of EACHRights’ operating context, as well as a reflection on the
             organisational past performance and track record.
           </p>
-          <div className="mt-6 h-1 w-16 bg-forest-dark" />
-        </motion.div>
+          <ol className="mt-6 border-t border-forest/15">
+            {focusAreas.map((item, index) => (
+              <li key={item.title} className="border-b border-forest/15">
+                <a
+                  href={`#focus-${index + 1}`}
+                  className="flex items-baseline gap-4 py-3 text-forest transition hover:text-forest-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8DC63F]"
+                >
+                  <span className="w-5 shrink-0 font-display text-sm font-bold text-[#8DC63F]">
+                    {index + 1}
+                  </span>
+                  <span className="font-semibold leading-snug">{item.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </aside>
       </section>
 
-      {/* STRATEGIC FOCUS AREAS */}
-      <section className="bg-forest-light px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
-              Our strategic focus areas.
-            </h2>
-            <p className="mt-4 leading-7 text-ink/65">
-              Each focus area has a programme goal and the interventions we will pursue to reach it.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {focusAreas.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.45, delay: (index % 2) * 0.05 }}
-                  className="overflow-hidden bg-paper shadow-sm"
-                >
-                  {item.image && (
+      {/* FOCUS AREAS: one full-width row each, alternating sides */}
+      <div>
+        {focusAreas.map((item, index) => {
+          const Icon = item.icon;
+          const imageFirst = index % 2 === 0;
+          return (
+            <section
+              key={item.title}
+              id={`focus-${index + 1}`}
+              className={`scroll-mt-20 ${index % 2 === 0 ? "bg-white" : "bg-forest-light"}`}
+            >
+              <div className="mx-auto grid max-w-7xl items-stretch lg:grid-cols-2">
+                <div className={imageFirst ? "" : "lg:order-2"}>
+                  {item.image ? (
                     <img
                       src={item.image}
                       alt={item.alt}
                       loading="lazy"
-                      className="h-56 w-full object-cover"
+                      className="h-72 w-full object-cover sm:h-96 lg:h-full lg:min-h-[520px]"
                     />
-                  )}
-                  <div className="p-6 sm:p-8">
-                    <div className="flex items-center justify-between">
-                      <Icon size={30} className="text-forest-dark" strokeWidth={1.7} />
-                      <span className="font-display text-sm font-bold text-[#8DC63F]">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                  ) : (
+                    <div className="flex h-72 w-full items-center justify-center bg-forest text-[#8DC63F] sm:h-96 lg:h-full lg:min-h-[520px]">
+                      <Icon size={72} strokeWidth={1.2} />
                     </div>
-                    <h3 className="mt-5 text-xl font-bold text-forest font-display">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-ink/75">
-                      <span className="font-bold text-forest">Programme goal: </span>
-                      {item.goal}
-                    </p>
-                    <p className="mt-5 text-sm font-bold text-forest">Intervention focus areas</p>
-                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-ink/65">
-                      {item.interventions.map((line) => (
-                        <li key={line}>{line}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                  )}
+                </div>
 
-      {/* THEORY OF CHANGE */}
-      <section className="relative overflow-hidden bg-forest px-6 py-24 text-paper">
-        <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full border-[25px] border-[#8DC63F]/10" />
+                <div className="px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+                  <div className="flex items-center gap-3 text-[#8DC63F]">
+                    <Icon size={26} strokeWidth={1.8} />
+                    <span className="font-display text-lg font-bold">Focus area {index + 1}</span>
+                  </div>
+                  <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">
+                    {item.title}
+                  </h2>
+
+                  <div className="mt-8 border-l-4 border-[#8DC63F] pl-5">
+                    <p className="text-sm font-bold text-forest-dark">Programme goal</p>
+                    <p className="mt-2 font-display text-xl leading-snug text-forest">{item.goal}</p>
+                  </div>
+
+                  <h3 className="mt-10 text-sm font-bold text-forest-dark">Intervention focus areas</h3>
+                  <ul className="mt-3 divide-y divide-forest/15 border-y border-forest/15">
+                    {item.interventions.map((line) => (
+                      <li key={line} className="flex gap-3 py-3 text-sm leading-6 text-ink/75">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[#8DC63F]" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      {/* THEORY OF CHANGE: four connected stages */}
+      <section className="relative overflow-hidden bg-forest px-6 py-24 text-paper sm:px-8 lg:px-12 lg:py-32">
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full border-[25px] border-[#8DC63F]/10" />
         <div className="relative z-10 mx-auto max-w-7xl">
-          <h2 className="max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl font-display">
+          <h2 className="max-w-3xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
             Our theory of change.
           </h2>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-2">
-            <div>
-              <h3 className="text-lg font-bold text-[#8DC63F] font-display">Problem statement</h3>
-              <p className="mt-3 leading-8 text-paper/80">
-                Systemic inequalities limit the ability of vulnerable and marginalized groups and communities
-                to access basic rights and influence decision-making processes in Kenya.
-              </p>
-
-              <h3 className="mt-10 text-lg font-bold text-[#8DC63F] font-display">Assumption</h3>
-              <p className="mt-3 leading-8 text-paper/80">
-                If vulnerable and marginalized groups and communities are empowered with knowledge, resources,
-                and platforms to advocate for their rights, and if structural barriers are addressed through
-                coordinated, rights-based interventions, then these groups and communities can become
-                effective agents of change, driving social justice.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold text-[#8DC63F] font-display">Outcomes (short to medium term)</h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-paper/80">
-                {outcomes.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-
-              <h3 className="mt-10 text-lg font-bold text-[#8DC63F] font-display">Impact (long-term goal)</h3>
-              <p className="mt-3 leading-8 text-paper/80">
-                Therefore, EACHRights’ long-term goal is a just and equitable society where vulnerable and
-                marginalized groups and communities are empowered to advocate for and enjoy equitable access
-                to education, healthcare, climate resilience, and economic and gender justice.
-              </p>
-            </div>
-          </div>
+          <ol className="mt-16 grid gap-12 lg:grid-cols-4 lg:gap-8">
+            {[
+              {
+                label: "Problem statement",
+                body: (
+                  <p>
+                    Systemic inequalities limit the ability of vulnerable and marginalized groups and
+                    communities to access basic rights and influence decision-making processes in Kenya.
+                  </p>
+                ),
+              },
+              {
+                label: "Assumption",
+                body: (
+                  <p>
+                    If vulnerable and marginalized groups and communities are empowered with knowledge,
+                    resources, and platforms to advocate for their rights, and if structural barriers are
+                    addressed through coordinated, rights-based interventions, then these groups and
+                    communities can become effective agents of change, driving social justice.
+                  </p>
+                ),
+              },
+              {
+                label: "Outcomes (short to medium term)",
+                body: (
+                  <ul className="list-disc space-y-2 pl-5">
+                    {outcomes.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                ),
+              },
+              {
+                label: "Impact (long-term goal)",
+                body: (
+                  <p>
+                    Therefore, EACHRights’ long-term goal is a just and equitable society where vulnerable and
+                    marginalized groups and communities are empowered to advocate for and enjoy equitable
+                    access to education, healthcare, climate resilience, and economic and gender justice.
+                  </p>
+                ),
+              },
+            ].map((stage, index) => (
+              <li key={stage.label} className="relative border-t-2 border-[#8DC63F]/50 pt-8">
+                <span className="absolute -top-[9px] left-0 h-4 w-4 rounded-full bg-[#8DC63F]" />
+                <span className="font-display text-sm font-bold text-[#8DC63F]">Stage {index + 1}</span>
+                <h3 className="mt-2 font-display text-xl font-bold text-white">{stage.label}</h3>
+                <div className="mt-4 text-sm leading-7 text-paper/80">{stage.body}</div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* CONTACT CTA — mirrors WhoWeAre's final CTA */}
-      <section className="bg-paper px-6 py-24 text-center">
-        <div className="mx-auto max-w-3xl">
-          <Handshake size={48} strokeWidth={1.3} className="mx-auto text-[#8DC63F]" />
-          <h2 className="mt-6 text-4xl font-bold text-forest sm:text-5xl font-display">Help us deliver this plan.</h2>
-          <p className="mx-auto mt-5 max-w-xl leading-8 text-ink/70">
-            We look forward to vibrant collaborations as we work to deliver the goals contained herein.
-          </p>
+      {/* CONTACT CTA */}
+      <section className="bg-paper px-6 py-24 sm:px-8 lg:px-12">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <Handshake size={44} strokeWidth={1.3} className="text-[#8DC63F]" />
+            <h2 className="mt-5 font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
+              Help us deliver this plan.
+            </h2>
+            <p className="mt-5 leading-8 text-ink/70">
+              We look forward to vibrant collaborations as we work to deliver the goals contained herein.
+            </p>
+          </div>
           <Link
             to="/contact"
-            className="mt-8 inline-flex items-center gap-2 bg-[#8DC63F] px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
+            className="inline-flex shrink-0 items-center gap-2 self-start bg-[#8DC63F] px-7 py-3.5 font-bold text-forest transition hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest lg:self-auto"
           >
             Contact EACHRights
             <ArrowRight size={18} />
