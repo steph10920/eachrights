@@ -10,6 +10,8 @@ import impact1 from "../assets/impact/impact-1.jpg";
 import impact2 from "../assets/impact/impact-2.jpg";
 import impact3 from "../assets/impact/impact-3.jpg";
 import impact4 from "../assets/impact/impact-4.jpg";
+import impact5 from "../assets/impact/impact-5.jpg";
+import impact6 from "../assets/impact/impact-6.jpg";
 
 import commitmentVideo from "../assets/videos/commitment.mp4";
 import educationJusticeVideo from "../assets/videos/education-justice.mp4";
@@ -120,23 +122,18 @@ const heroSlides = [
 
 /* NOTE: impact figures (volunteers, learners, projects, satisfaction) below
    are placeholders carried over from the previous draft — swap in verified
-   numbers from the programmes team before this goes live. */
+   numbers from the programmes team before this goes live. Each stat now
+   carries its own image instead of sharing a single carousel. */
 const impactStats = [
-  { value: 120, suffix: "+", label: "Volunteers engaged" },
-  { value: 4500, suffix: "", label: "Learners reached", separator: "," },
-  { value: 32, suffix: "", label: "Projects funded" },
-  { value: 67, suffix: "%", label: "Policy developed/Implemented" },
-];
-
-const impactImages = [
-  { image: impact1, caption: "Community impact", title: "Creating change through action." },
-  { image: impact2, caption: "Empowering communities", title: "Putting rights into practice." },
-  { image: impact3, caption: "Building opportunities", title: "Strengthening communities." },
-  { image: impact4, caption: "Advancing justice", title: "Working together for lasting change." },
+  { value: 120, suffix: "+", label: "Research", separator: ",", image: impact1 },
+  { value: 4500, suffix: "", label: "Networking, collaboration, and partnerships", separator: ",", image: impact2 },
+  { value: 32, suffix: "", label: "Social movement building and grassroots community mobilization", image: impact3 },
+  { value: 67, suffix: "%", label: "Training and capacity building", image: impact4 },
+  { value: 67, suffix: "%", label: "Lobbying and advocacy", image: impact5 },
+  { value: 67, suffix: "%", label: "Community and public awareness creation", image: impact6 },
 ];
 
 const HERO_INTERVAL = 6000;
-const IMPACT_INTERVAL = 5000;
 
 function IconBox({ icon: Icon, large = false }) {
   return (
@@ -148,12 +145,10 @@ function IconBox({ icon: Icon, large = false }) {
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentImpactImage, setCurrentImpactImage] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
   const heroTimerRef = useRef(null);
-  const impactTimerRef = useRef(null);
 
   // --- Hero slider: auto-advance + manual controls that reset the timer ---
   const startHeroTimer = useCallback(() => {
@@ -175,27 +170,6 @@ export default function Home() {
   const prevSlide = () => goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length);
   const nextSlide = () => goToSlide((currentSlide + 1) % heroSlides.length);
 
-  // --- Impact carousel: auto-advance + manual controls that reset the timer ---
-  const startImpactTimer = useCallback(() => {
-    clearInterval(impactTimerRef.current);
-    impactTimerRef.current = setInterval(() => {
-      setCurrentImpactImage((prev) => (prev + 1) % impactImages.length);
-    }, IMPACT_INTERVAL);
-  }, []);
-
-  useEffect(() => {
-    startImpactTimer();
-    return () => clearInterval(impactTimerRef.current);
-  }, [startImpactTimer]);
-
-  const goToImpactImage = (index) => {
-    setCurrentImpactImage(index);
-    startImpactTimer();
-  };
-  const prevImpactImage = () =>
-    goToImpactImage((currentImpactImage - 1 + impactImages.length) % impactImages.length);
-  const nextImpactImage = () => goToImpactImage((currentImpactImage + 1) % impactImages.length);
-
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -205,14 +179,13 @@ export default function Home() {
   // Preload every hero/impact image up front so the transition never shows
   // a blank frame while the browser is still fetching the next photo.
   useEffect(() => {
-    [...heroSlides.map((s) => s.image), ...impactImages.map((i) => i.image)].forEach((src) => {
+    [...heroSlides.map((s) => s.image), ...impactStats.map((s) => s.image)].forEach((src) => {
       const img = new Image();
       img.src = src;
     });
   }, []);
 
   const slide = heroSlides[currentSlide];
-  const impactSlide = impactImages[currentImpactImage];
 
   const [featuredArea, ...secondaryAreas] = focusAreas;
   const FeaturedIcon = featuredArea.icon;
@@ -242,20 +215,6 @@ export default function Home() {
         animate: { opacity: 1, x: 0 },
         exit: { opacity: 0, x: -16 },
         transition: { duration: 0.5, delay: 0.25 },
-      };
-
-  const impactImageMotion = prefersReducedMotion
-    ? {
-        initial: { opacity: 1 },
-        animate: { opacity: 1 },
-        exit: { opacity: 1 },
-        transition: { duration: 0 },
-      }
-    : {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: { duration: 0.7, ease: "easeInOut" },
       };
 
   return (
@@ -362,7 +321,7 @@ export default function Home() {
           <div>
             <p className="text-sm font-medium text-forest-dark/70">Who we are</p>
             <h2 className="mt-3 text-4xl font-bold leading-tight text-forest sm:text-5xl font-display">
-              Human rights, made real in daily life.
+              Human rights, made real in daily life
             </h2>
             <p className="mt-6 text-base leading-8 text-ink/75">
               The East African Centre for Human Rights (EACHRights) is a non-partisan regional non-governmental organisation. We work to promote, protect and advance Economic, Social and Cultural Rights for vulnerable and marginalized communities.
@@ -399,7 +358,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* OUR IMPACT — figures as a ledger, not a grid of cards */}
+        {/* OUR IMPACT — each stat paired with its own image */}
         <section className="bg-forest px-6 py-16 text-paper">
           <div className="mx-auto max-w-6xl">
             <div className="mx-auto max-w-2xl text-center">
@@ -411,170 +370,35 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-9 grid items-center gap-10 lg:grid-cols-2">
-              <div className="grid grid-cols-2 divide-x divide-y divide-paper/15 border border-paper/15 sm:divide-y-0">
-                {impactStats.map((stat) => (
-                  <div key={stat.label} className="px-5 py-6">
+            <div className="mt-9 grid grid-cols-1 gap-px overflow-hidden border border-paper/15 bg-paper/15 sm:grid-cols-2 lg:grid-cols-3">
+              {impactStats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="group relative flex flex-col bg-forest"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src={stat.image}
+                      alt={stat.label}
+                      className="h-full w-full object-cover grayscale-[15%] transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/10 to-transparent" />
+                  </div>
+
+                  <div className="relative px-5 py-5">
+                    <span className="absolute -top-4 left-5 h-px w-8 bg-[#8DC63F]" />
                     <div className="font-display text-2xl font-bold text-[#8DC63F] sm:text-3xl">
                       <CountUp end={stat.value} duration={2} separator={stat.separator || ""} />
                       {stat.suffix}
                     </div>
                     <p className="mt-1.5 text-sm text-paper/65">{stat.label}</p>
                   </div>
-                ))}
-              </div>
-
-              <div className="relative">
-                <div className="group relative overflow-hidden bg-forest-dark">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <AnimatePresence initial={false} mode="sync">
-                      <motion.img
-                        key={currentImpactImage}
-                        src={impactSlide.image}
-                        alt={impactSlide.title}
-                        className="absolute inset-0 h-full w-full object-cover"
-                        {...impactImageMotion}
-                      />
-                    </AnimatePresence>
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent" />
-
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentImpactImage}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 6 }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
-                        className="absolute bottom-0 left-0 right-0 p-4"
-                      >
-                        <p className="text-xs font-medium text-[#8DC63F]">{impactSlide.caption}</p>
-                        <h3 className="mt-0.5 text-base font-bold font-display text-white sm:text-lg">
-                          {impactSlide.title}
-                        </h3>
-                      </motion.div>
-                    </AnimatePresence>
-
-                    <button
-                      type="button"
-                      onClick={prevImpactImage}
-                      aria-label="Previous impact image"
-                      className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
-                    >
-                      <ArrowLeft size={16} />
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={nextImpactImage}
-                      aria-label="Next impact image"
-                      className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition hover:bg-black/60 group-hover:opacity-100"
-                    >
-                      <ArrowRight size={16} />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="mt-3 flex justify-center gap-2">
-                  {impactImages.map((item, index) => (
-                    <button
-                      key={item.title}
-                      type="button"
-                      onClick={() => goToImpactImage(index)}
-                      aria-label={`Go to impact image ${index + 1}`}
-                      className="group flex items-center justify-center p-1"
-                    >
-                      <span
-                        className={`block h-1.5 rounded-full transition-all duration-300 ${
-                          currentImpactImage === index ? "w-7 bg-[#8DC63F]" : "w-1.5 bg-paper/30 group-hover:bg-paper/60"
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* OUR WORK — one featured area, the rest as a divided list */}
-        <section className="mx-auto max-w-7xl px-6 py-24 sm:py-28">
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold text-forest sm:text-5xl font-display">Six areas. One purpose.</h2>
-            <p className="mx-auto mt-4 max-w-2xl leading-7 text-ink/65">
-              We work across interconnected areas of Economic, Social and Cultural Rights to address the realities faced by vulnerable and marginalized communities.
-            </p>
-          </div>
-
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-14">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5 }}
-              className="relative flex min-h-[380px] flex-col justify-end overflow-hidden bg-forest text-paper lg:min-h-[440px]"
-            >
-              {featuredArea.video && (
-                <>
-                  <video
-                    src={featuredArea.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest via-forest/70 to-forest/10" />
-                </>
-              )}
-
-              {!featuredArea.video && (
-                <div className="absolute left-8 top-8 lg:left-10 lg:top-10">
-                  <IconBox icon={FeaturedIcon} large />
-                </div>
-              )}
-
-              <div className="relative z-10 p-8 lg:p-10">
-                <h3 className="text-2xl font-bold font-display sm:text-3xl">{featuredArea.title}</h3>
-                <p className="mt-4 text-base leading-7 text-paper/75">{featuredArea.description}</p>
-                <Link
-                  to={featuredArea.link}
-                  className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-[#8DC63F] pb-1 font-semibold text-[#8DC63F] transition hover:gap-3"
-                >
-                  Learn more
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-            </motion.div>
-
-            <div className="divide-y divide-forest/10 border-t border-forest/10 lg:border-t-0">
-              {secondaryAreas.map((area, index) => {
-                const Icon = area.icon;
-                return (
-                  <motion.div
-                    key={area.title}
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.35, delay: index * 0.06 }}
-                    className="group flex items-start gap-5 py-6 first:pt-0"
-                  >
-                    <Icon size={24} className="mt-1 shrink-0 text-forest-dark transition group-hover:text-[#8DC63F]" strokeWidth={1.7} />
-                    <div className="flex-1">
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                        <h3 className="text-lg font-bold text-forest font-display">{area.title}</h3>
-                        <Link
-                          to={area.link}
-                          className="text-sm font-semibold text-forest-dark underline decoration-transparent underline-offset-4 transition group-hover:decoration-forest-dark"
-                        >
-                          Learn more
-                        </Link>
-                      </div>
-                      <p className="mt-1.5 text-sm leading-6 text-ink/65">{area.description}</p>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

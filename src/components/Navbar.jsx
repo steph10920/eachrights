@@ -7,9 +7,13 @@ import logo from "../assets/logo.jpeg";
    MAIN NAVIGATION
 ========================================================= */
 
+const whoWeAreLinks = [
+  { name: "Our Story", path: "/who-we-are/our-story" },
+  { name: "Strategic Plan", path: "/who-we-are/strategic-plan" },
+  { name: "Meet Our Team", path: "/who-we-are/team" },
+];
+
 const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
   { name: "Resources", path: "/resources" },
   { name: "Gallery", path: "/gallery" },
   { name: "Opportunities", path: "/opportunities" },
@@ -48,12 +52,14 @@ function navLinkClasses({ isActive }) {
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileWhoWeAreOpen, setMobileWhoWeAreOpen] = useState(false);
   const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
   const [mobileProgrammesOpen, setMobileProgrammesOpen] = useState(false);
   const [mobileProcessesOpen, setMobileProcessesOpen] = useState(false);
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
+    setMobileWhoWeAreOpen(false);
     setMobileWorkOpen(false);
     setMobileProgrammesOpen(false);
     setMobileProcessesOpen(false);
@@ -62,117 +68,57 @@ function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-forest/10 bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
-        {/* LOGO */}
-        <Link to="/" onClick={closeMobileMenu} className="shrink-0">
+        {/* LOGO — doubles as the Home link */}
+        <NavLink
+          to="/"
+          end
+          onClick={closeMobileMenu}
+          aria-label="Home"
+          className={({ isActive }) =>
+            `shrink-0 transition ${isActive ? "opacity-100" : "opacity-90 hover:opacity-100"}`
+          }
+        >
           <img src={logo} alt="EACHRights" className="h-13 w-auto object-contain" />
-        </Link>
+        </NavLink>
 
         {/* DESKTOP NAVIGATION */}
         <nav className="hidden items-center gap-8 md:flex">
-          <NavLink to="/" className={navLinkClasses}>
-            Home
-          </NavLink>
-          <NavLink to="/about" className={navLinkClasses}>
-            About
-          </NavLink>
-
-          {/* OUR WORK — hover flyout, not itself a link */}
-          <div className="group/work relative">
+          {/* WHO WE ARE — hover flyout, not itself a link */}
+          <div className="group/who relative">
             <button
               type="button"
-              className="flex items-center gap-1 text-sm font-semibold text-ink/70 transition group-hover/work:text-forest"
+              className="flex items-center gap-1 text-sm font-semibold text-ink/70 transition group-hover/who:text-forest"
               aria-haspopup="true"
             >
-              Our Work
-              <ChevronDown size={16} className="transition group-hover/work:rotate-180" />
+              Who We Are
+              <ChevronDown size={16} className="transition group-hover/who:rotate-180" />
             </button>
 
-            <div className="invisible absolute left-0 top-full w-[420px] pt-3 opacity-0 transition duration-150 group-hover/work:visible group-hover/work:opacity-100">
+            <div className="invisible absolute left-0 top-full w-64 pt-3 opacity-0 transition duration-150 group-hover/who:visible group-hover/who:opacity-100">
               <div className="border border-forest/10 bg-white p-2 shadow-xl">
-                {/* PROGRAMMES flyout */}
-                <div className="group/prog relative">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition hover:bg-forest-light/60"
-                    aria-haspopup="true"
+                {whoWeAreLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-ink/75 transition hover:bg-forest-light/60 hover:text-forest"
                   >
-                    <div>
-                      <p className="text-sm font-semibold text-forest">Programmes</p>
-                      <p className="mt-0.5 text-xs leading-snug text-ink/55">
-                        Our thematic programmes and areas of intervention
-                      </p>
-                    </div>
-                    <ChevronRight size={16} className="mt-0.5 shrink-0 text-forest-dark/50" />
-                  </button>
-
-                  <div className="invisible absolute left-full top-0 w-80 pl-3 opacity-0 transition duration-150 group-hover/prog:visible group-hover/prog:opacity-100">
-                    <div className="border border-forest/10 bg-white p-2 shadow-xl">
-                      {programmeLinks.map((programme) => (
-                        <Link
-                          key={programme.path}
-                          to={programme.path}
-                          className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-ink/75 transition hover:bg-forest-light/60 hover:text-forest"
-                        >
-                          <span>{programme.name}</span>
-                          <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* PROCESSES flyout */}
-                <div className="group/proc relative">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition hover:bg-forest-light/60"
-                    aria-haspopup="true"
-                  >
-                    <div>
-                      <p className="text-sm font-semibold text-forest">Processes</p>
-                      <p className="mt-0.5 text-xs leading-snug text-ink/55">
-                        How we work to advance human rights and justice
-                      </p>
-                    </div>
-                    <ChevronRight size={16} className="mt-0.5 shrink-0 text-forest-dark/50" />
-                  </button>
-
-                  <div className="invisible absolute left-full top-0 w-80 pl-3 opacity-0 transition duration-150 group-hover/proc:visible group-hover/proc:opacity-100">
-                    <div className="border border-forest/10 bg-white p-2 shadow-xl">
-                      {processLinks.map((process) => (
-                        <Link
-                          key={process.path}
-                          to={process.path}
-                          className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-ink/75 transition hover:bg-forest-light/60 hover:text-forest"
-                        >
-                          <span>{process.name}</span>
-                          <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* SRHR ADVOCACY — external site, opens in a new tab */}
-                <a
-                  href={srhrAdvocacyLink.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition hover:bg-forest-light/60"
-                >
-                  <div>
-                    <p className="text-sm font-semibold text-forest">{srhrAdvocacyLink.name}</p>
-                    <p className="mt-0.5 text-xs leading-snug text-ink/55">
-                      {srhrAdvocacyLink.description}
-                    </p>
-                  </div>
-                  <ExternalLink size={16} className="mt-0.5 shrink-0 text-forest-dark/50" />
-                </a>
+                    <span>{link.name}</span>
+                    <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
 
-          {navLinks.slice(2).map((link) => (
+        {/* HOW WE WORK — direct navigation link */}
+        <NavLink
+          to="/how-we-work"
+          className={navLinkClasses}
+        >
+          How We Work
+        </NavLink>
+
+          {navLinks.map((link) => (
             <NavLink key={link.path} to={link.path} className={navLinkClasses}>
               {link.name}
             </NavLink>
@@ -202,24 +148,37 @@ function Navbar() {
       {mobileMenuOpen && (
         <div className="border-t border-forest/10 bg-paper px-6 py-4 md:hidden">
           <div className="flex flex-col divide-y divide-forest/10">
-            <NavLink
-              to="/"
-              onClick={closeMobileMenu}
-              className={({ isActive }) =>
-                `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/about"
-              onClick={closeMobileMenu}
-              className={({ isActive }) =>
-                `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
-              }
-            >
-              About
-            </NavLink>
+            {/* WHO WE ARE ACCORDION */}
+            <div>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between py-3 text-sm font-semibold text-ink/70"
+                onClick={() => setMobileWhoWeAreOpen(!mobileWhoWeAreOpen)}
+                aria-expanded={mobileWhoWeAreOpen}
+              >
+                Who We Are
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform duration-200 ${mobileWhoWeAreOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {mobileWhoWeAreOpen && (
+                <div className="flex flex-col pb-2 pl-3">
+                  {whoWeAreLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={closeMobileMenu}
+                      className="flex items-center justify-between py-2 text-sm text-ink/65"
+                    >
+                      <span>{link.name}</span>
+                      <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* OUR WORK ACCORDION */}
             <div>
@@ -313,7 +272,7 @@ function Navbar() {
               )}
             </div>
 
-            {navLinks.slice(2).map((link) => (
+            {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}

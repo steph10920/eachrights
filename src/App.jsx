@@ -5,14 +5,17 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Team from "./pages/Team";
-import OurWork from "./pages/OurWork";
+import HowWeWork from "./pages/HowWeWork";
 import Resources from "./pages/Resources";
 import Gallery from "./pages/Gallery";
 import Opportunities from "./pages/Opportunities";
 import Donors from "./pages/Donors";
 import Contact from "./pages/Contact";
+
+// Who We Are
+import OurStory from "./pages/whoweare/OurStory";
+import StrategicPlan from "./pages/whoweare/StrategicPlan";
+import OurTeam from "./pages/whoweare/OurTeam";
 
 // Programmes
 import EducationJustice from "./pages/programmes/EducationJustice";
@@ -34,45 +37,40 @@ function App() {
       <Routes>
         {/* Main Pages */}
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/about/team" element={<Team />} />
-        <Route path="/our-work" element={<OurWork />} />
-        <Route path="/resources" element={<Resources />} />
+        <Route path="/how-we-work" element={<HowWeWork />} />        <Route path="/resources" element={<Resources />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/opportunities" element={<Opportunities />} />
         <Route path="/donors" element={<Donors />} />
         <Route path="/contact" element={<Contact />} />
 
-        {/* Our Work / Programmes */}
+        {/* Who We Are */}
+        <Route path="/who-we-are/our-story" element={<OurStory />} />
+        <Route path="/who-we-are/strategic-plan" element={<StrategicPlan />} />
+        <Route path="/who-we-are/team" element={<OurTeam />} />
+
+        {/* Programmes */}
         <Route
-          path="/our-work/programmes/education-justice"
+          path="/programmes/education-justice"
           element={<EducationJustice />}
         />
-
         <Route
-          path="/our-work/programmes/gender-justice"
+          path="/programmes/gender-justice"
           element={<GenderJustice />}
         />
-
         <Route
-          path="/our-work/programmes/health-justice"
+          path="/programmes/health-justice"
           element={<HealthJustice />}
         />
-
         <Route
-          path="/our-work/programmes/environmental-climate-justice"
+          path="/programmes/environmental-climate-justice"
           element={<EnvironmentalClimateJustice />}
         />
-
         <Route
-          path="/our-work/programmes/economic-justice"
+          path="/programmes/economic-justice"
           element={<EconomicJustice />}
         />
-
-        
-
         <Route
-          path="/our-work/programmes/theory-of-change"
+          path="/programmes/theory-of-change"
           element={<TheoryOfChange />}
         />
 
