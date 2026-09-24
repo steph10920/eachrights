@@ -17,6 +17,9 @@ import OurStory from "./pages/whoweare/OurStory";
 import StrategicPlan from "./pages/whoweare/StrategicPlan";
 import OurTeam from "./pages/whoweare/OurTeam";
 
+// what we do
+import WhatWeDo from "./pages/WhatWeDo";
+
 // Programmes
 import EducationJustice from "./pages/programmes/EducationJustice";
 import GenderJustice from "./pages/programmes/GenderJustice";
@@ -47,6 +50,8 @@ function App() {
         <Route path="/who-we-are/our-story" element={<OurStory />} />
         <Route path="/who-we-are/strategic-plan" element={<StrategicPlan />} />
         <Route path="/who-we-are/team" element={<OurTeam />} />
+        {/*what we do*/}
+        <Route path="/what-we-do" element={<WhatWeDo />} />
 
         {/* Programmes */}
         <Route

@@ -21,13 +21,16 @@ const navLinks = [
   { name: "Contact", path: "/contact" },
 ];
 
+// Kept for any page (e.g. the "/what-we-do" overview) that still wants to
+// list programmes, processes, or the external SRHR portal — no longer
+// rendered as a navbar dropdown.
 const programmeLinks = [
-  { name: "Education Justice Programme", path: "/our-work/programmes/education-justice" },
-  { name: "Gender Justice Programme", path: "/our-work/programmes/gender-justice" },
-  { name: "Health Justice Programme", path: "/our-work/programmes/health-justice" },
-  { name: "Environmental & Climate Justice Programme", path: "/our-work/programmes/environmental-climate-justice" },
-  { name: "Economic Justice, Business and Human Rights Programme", path: "/our-work/programmes/economic-justice" },
-  { name: "Theory of Change", path: "/our-work/programmes/theory-of-change" },
+  { name: "Education Justice Programme", path: "/programmes/education-justice" },
+  { name: "Gender Justice Programme", path: "/programmes/gender-justice" },
+  { name: "Health Justice Programme", path: "/programmes/health-justice" },
+  { name: "Environmental & Climate Justice Programme", path: "/programmes/environmental-climate-justice" },
+  { name: "Economic Justice, Business and Human Rights Programme", path: "/programmes/economic-justice" },
+  { name: "Theory of Change", path: "/programmes/theory-of-change" },
 ];
 
 const processLinks = [
@@ -53,16 +56,10 @@ function navLinkClasses({ isActive }) {
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileWhoWeAreOpen, setMobileWhoWeAreOpen] = useState(false);
-  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
-  const [mobileProgrammesOpen, setMobileProgrammesOpen] = useState(false);
-  const [mobileProcessesOpen, setMobileProcessesOpen] = useState(false);
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setMobileWhoWeAreOpen(false);
-    setMobileWorkOpen(false);
-    setMobileProgrammesOpen(false);
-    setMobileProcessesOpen(false);
   };
 
   return (
@@ -110,13 +107,15 @@ function Navbar() {
             </div>
           </div>
 
-        {/* HOW WE WORK — direct navigation link */}
-        <NavLink
-          to="/how-we-work"
-          className={navLinkClasses}
-        >
-          How We Work
-        </NavLink>
+          {/* HOW WE WORK — direct navigation link */}
+          <NavLink to="/how-we-work" className={navLinkClasses}>
+            How We Work
+          </NavLink>
+
+          {/* WHAT WE DO — direct navigation link, no dropdown */}
+          <NavLink to="/what-we-do" className={navLinkClasses}>
+            What We Do
+          </NavLink>
 
           {navLinks.map((link) => (
             <NavLink key={link.path} to={link.path} className={navLinkClasses}>
@@ -180,97 +179,27 @@ function Navbar() {
               )}
             </div>
 
-            {/* OUR WORK ACCORDION */}
-            <div>
-              <button
-                type="button"
-                className="flex w-full items-center justify-between py-3 text-sm font-semibold text-ink/70"
-                onClick={() => setMobileWorkOpen(!mobileWorkOpen)}
-                aria-expanded={mobileWorkOpen}
-              >
-                Our Work
-                <ChevronDown
-                  size={18}
-                  className={`transition-transform duration-200 ${mobileWorkOpen ? "rotate-180" : ""}`}
-                />
-              </button>
+            {/* HOW WE WORK */}
+            <NavLink
+              to="/how-we-work"
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
+              }
+            >
+              How We Work
+            </NavLink>
 
-              {mobileWorkOpen && (
-                <div className="pb-2 pl-3">
-                  {/* PROGRAMMES ACCORDION */}
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between py-2.5 text-sm font-semibold text-forest"
-                    onClick={() => setMobileProgrammesOpen(!mobileProgrammesOpen)}
-                    aria-expanded={mobileProgrammesOpen}
-                  >
-                    Programmes
-                    <ChevronRight
-                      size={16}
-                      className={`transition-transform duration-200 ${mobileProgrammesOpen ? "rotate-90" : ""}`}
-                    />
-                  </button>
-
-                  {mobileProgrammesOpen && (
-                    <div className="flex flex-col pb-1 pl-3">
-                      {programmeLinks.map((programme) => (
-                        <Link
-                          key={programme.path}
-                          to={programme.path}
-                          onClick={closeMobileMenu}
-                          className="flex items-center justify-between py-2 text-sm text-ink/65"
-                        >
-                          <span>{programme.name}</span>
-                          <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* PROCESSES ACCORDION */}
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between py-2.5 text-sm font-semibold text-forest"
-                    onClick={() => setMobileProcessesOpen(!mobileProcessesOpen)}
-                    aria-expanded={mobileProcessesOpen}
-                  >
-                    Processes
-                    <ChevronRight
-                      size={16}
-                      className={`transition-transform duration-200 ${mobileProcessesOpen ? "rotate-90" : ""}`}
-                    />
-                  </button>
-
-                  {mobileProcessesOpen && (
-                    <div className="flex flex-col pb-1 pl-3">
-                      {processLinks.map((process) => (
-                        <Link
-                          key={process.path}
-                          to={process.path}
-                          onClick={closeMobileMenu}
-                          className="flex items-center justify-between py-2 text-sm text-ink/65"
-                        >
-                          <span>{process.name}</span>
-                          <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* SRHR ADVOCACY — external site, opens in a new tab */}
-                  <a
-                    href={srhrAdvocacyLink.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeMobileMenu}
-                    className="flex w-full items-center justify-between py-2.5 text-sm font-semibold text-forest"
-                  >
-                    {srhrAdvocacyLink.name}
-                    <ExternalLink size={16} className="shrink-0 text-forest-dark/40" />
-                  </a>
-                </div>
-              )}
-            </div>
+            {/* WHAT WE DO */}
+            <NavLink
+              to="/what-we-do"
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
+              }
+            >
+              What We Do
+            </NavLink>
 
             {navLinks.map((link) => (
               <NavLink
