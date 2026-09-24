@@ -18,7 +18,7 @@ import StrategicPlan from "./pages/whoweare/StrategicPlan";
 import OurTeam from "./pages/whoweare/OurTeam";
 
 // What We Do
-import WhatweDo from "./pages/Whatwedo";
+import WhatweDo from "./pages/whatwedo";
 
 // Programmes
 import EducationJustice from "./pages/programmes/EducationJustice";
