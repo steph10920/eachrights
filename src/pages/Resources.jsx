@@ -75,7 +75,7 @@ function PublicationThumb({ src, alt }) {
 
 const publications = [
   {
-    title: "STRATEGIC PLAN 2026-2030",
+    title: "Strategic PlaN 2026-2030",
     category: "Strategy & Planning",
     year: "2026",
     description:

@@ -98,7 +98,7 @@ const videos = [
     url: "https://www.youtube.com/watch?v=KG_930uAXpQ",
   },
   {
-    title: "MARSABIT INTEGRATED CHILD POLICY",
+    title: "Marsabit Integrated Child Policy",
     description:
       "Stories, conversations and activities from EACHRights' work across East Africa.",
     date: "2026",
@@ -151,21 +151,21 @@ const videos = [
     url: "https://www.youtube.com/watch?v=paIm8O_MOvw",
   },
   {
-    title: "ENCHORRO ENKAI ECO JUSTICE CLUB",
+    title: "Enchoro Enkai Eco Justice Club",
     description:
       "EACHRights held a two-day workshop at Enchorro Enkai Primary School in Kajiado South, empowering learners on environmental stewardship and supporting the launch of an Eco Justice Club.",
     date: "Oct 18, 2024",
     url: "https://www.youtube.com/watch?v=HHrP9cCvo5U",
   },
   {
-    title: "KIKAMBALA ECO JUSTICE CLUB",
+    title: "Kikambala Eco Justice Club",
     description:
       "Eco-Justice Clubs empower learners to understand environmental challenges and adopt eco-friendly practices. This documentary highlights Kikambala Primary School’s Eco-Justice Club as they create an eco-garden and promote environmental stewardship.",
     date: "Oct 18, 2024",
     url: "https://www.youtube.com/watch?v=ZDb-C8ryo2M",
   },
   {
-    title: "CHILD PARTICIPATION FORUM.",
+    title: "Child Participation Forum",
     description:
       "Children have the right to participate in matters affecting their lives. Their inclusion in programs addressing their needs is crucial. This documentary illustrates children educating their children against Child marriage in Bubisa,Marsabit county. Transcript and supporting the launch of an Eco Justice Club.",
     date: "Oct 18, 2024",
