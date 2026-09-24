@@ -11,7 +11,6 @@ import {
   Leaf,
   Mail,
   Quote,
-  Scale,
   Users,
 } from "lucide-react";
 
@@ -87,14 +86,6 @@ const programmes = [
       "Holding business and state actors accountable for the economic and social rights of communities, and advancing responsible business conduct across the region.",
   },
 ];
-
-const theoryOfChange = {
-  name: "Theory of Change",
-  path: "/programmes/theory-of-change",
-  icon: Scale,
-  blurb:
-    "The model underpinning how our programmes translate research and advocacy into lasting impact.",
-};
 
 const processes = [
   {
@@ -222,12 +213,10 @@ function ProgrammeRow({
   );
 }
 
-
-
 /* =========================================================
    SIMPLE CARD
    ---------------------------------------------------------
-   Used for Theory of Change, Processes, and SRHR Advocacy.
+   Used for Processes and SRHR Advocacy.
 ========================================================= */
 
 function SimpleCard({
@@ -448,10 +437,8 @@ export default function WhatWeDo() {
               amount: 0.15,
             }}
             variants={gridVariants}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-6 sm:grid-cols-2"
           >
-            <SimpleCard {...theoryOfChange} />
-
             {processes.map((process) => (
               <SimpleCard
                 key={process.path}
