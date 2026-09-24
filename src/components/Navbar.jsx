@@ -9,7 +9,6 @@ import logo from "../assets/logo.jpeg";
 
 const whoWeAreLinks = [
   { name: "Our Story", path: "/who-we-are/our-story" },
-  { name: "Strategic Plan", path: "/who-we-are/strategic-plan" },
   { name: "Meet Our Team", path: "/who-we-are/team" },
 ];
 

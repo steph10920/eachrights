@@ -20,11 +20,7 @@ import {
 | PROGRAMME PHOTO IMPORTS
 |--------------------------------------------------------------------------
 | Photos live in src/assets/programmes/ and are imported directly, same
-| pattern as the team photos in Team.jsx. Every file listed here must
-| exist with exactly this name and extension, or Vite shows "Failed to
-| resolve import" and the page will not load. If a photo isn't ready yet,
-| delete its import line and remove `photo` from that programme's object
-| below — the row will fall back to the icon block automatically.
+| pattern as the team photos in Team.jsx.
 */
 
 import educationPhoto from "../assets/programmes/education-justice.jpeg";
@@ -37,14 +33,6 @@ import economicPhoto from "../assets/programmes/economic-justice.jpeg";
 |--------------------------------------------------------------------------
 | DATA
 |--------------------------------------------------------------------------
-| Mirrors the programmeLinks / processLinks / srhrAdvocacyLink arrays in
-| Navbar.jsx. If you add or rename a programme there, update it here too
-| (or better, move these arrays to a shared file both components import
-| from, so they can never drift apart).
-|
-| `stat` is a short, punchy line under each programme name in the feature
-| rows below — replace the placeholders with real figures or drop the
-| prop entirely once you have them.
 */
 
 const programmes = [
@@ -104,7 +92,8 @@ const theoryOfChange = {
   name: "Theory of Change",
   path: "/programmes/theory-of-change",
   icon: Scale,
-  blurb: "The model underpinning how our programmes translate research and advocacy into lasting impact.",
+  blurb:
+    "The model underpinning how our programmes translate research and advocacy into lasting impact.",
 };
 
 const processes = [
@@ -112,14 +101,16 @@ const processes = [
     name: "Universal Periodic Review",
     path: "/processes/universal-periodic-review",
     icon: Globe2,
-    blurb: "Our engagement with the UN's Universal Periodic Review mechanism to advance human rights accountability.",
+    blurb:
+      "Our engagement with the UN's Universal Periodic Review mechanism to advance human rights accountability.",
   },
 ];
 
 const srhrAdvocacyLink = {
   name: "SRHR Advocacy",
   url: "https://eachrights.github.io/srhr/",
-  blurb: "Visit our dedicated portal tracking Sexual and Reproductive Health and Rights advocacy across the region.",
+  blurb:
+    "Visit our dedicated portal tracking Sexual and Reproductive Health and Rights advocacy across the region.",
 };
 
 /* =========================================================
@@ -128,109 +119,151 @@ const srhrAdvocacyLink = {
 
 const gridVariants = {
   hidden: {},
-  shown: { transition: { staggerChildren: 0.07 } },
+  shown: {
+    transition: {
+      staggerChildren: 0.07,
+    },
+  },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  shown: { opacity: 1, y: 0 },
-};
-
-const rowVariants = {
-  hidden: { opacity: 0, y: 28 },
-  shown: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  shown: {
+    opacity: 1,
+    y: 0,
+  },
 };
 
 /* =========================================================
-   PROGRAMME FEATURE ROW
+   PROGRAMME GRID CARD
    ---------------------------------------------------------
-   Large, alternating-side editorial rows for the five core
-   programmes rather than a plain card grid — a big index
-   number and icon block on one side, copy and a CTA on the
-   other, flipping sides every other row.
+   Each programme uses its photo as the full background.
+   Text sits over a dark gradient overlay for readability.
 ========================================================= */
 
-function ProgrammeRow({ index, name, blurb, icon: Icon, photo, stat, path, reverse }) {
+function ProgrammeRow({
+  index,
+  name,
+  blurb,
+  icon: Icon,
+  photo,
+  stat,
+  path,
+}) {
   return (
     <motion.article
-      initial="hidden"
-      whileInView="shown"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={rowVariants}
-      className={`grid items-center gap-10 border-t border-forest/10 py-14 first:border-t-0 first:pt-0 lg:grid-cols-2 lg:gap-16 ${
-        reverse ? "lg:[&>*:first-child]:order-2" : ""
-      }`}
+      variants={cardVariants}
+      className="group"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-forest-light">
+      <Link
+        to={path}
+        className="relative block min-h-[390px] overflow-hidden bg-forest shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:min-h-[430px]"
+      >
+        {/* Background image */}
         {photo ? (
-          <img src={photo} alt={name} className="h-full w-full object-cover" />
+          <img
+            src={photo}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
         ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <div className="flex h-20 w-20 items-center justify-center bg-white text-forest shadow-sm">
-              <Icon size={32} />
+          <div className="absolute inset-0 bg-forest-light" />
+        )}
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/15 transition-all duration-500 group-hover:from-black/95 group-hover:via-black/60" />
+
+        {/* Card content */}
+        <div className="relative z-10 flex min-h-[390px] h-full flex-col justify-between p-6 text-white sm:min-h-[430px] sm:p-8">
+
+          {/* Top section */}
+          <div className="flex items-start justify-between">
+            <span className="font-display text-5xl font-bold leading-none text-white/90 sm:text-6xl">
+              {index}
+            </span>
+
+            <div className="flex h-11 w-11 items-center justify-center bg-white/90 text-forest shadow-sm backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+              <Icon size={20} />
             </div>
           </div>
-        )}
 
-        <span
-          className={`absolute left-4 top-4 font-display text-5xl font-bold sm:text-6xl ${
-            photo
-              ? "text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]"
-              : "text-forest/15"
-          }`}
-        >
-          {index}
-        </span>
+          {/* Bottom section */}
+          <div>
+            {stat && (
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+                {stat}
+              </p>
+            )}
 
-        {photo && (
-          <div className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center bg-white/90 text-forest shadow-sm backdrop-blur">
-            <Icon size={20} />
+            <h3 className="mt-3 max-w-xl font-display text-2xl font-bold leading-tight sm:text-3xl">
+              {name}
+            </h3>
+
+            <p className="mt-4 max-w-xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
+              {blurb}
+            </p>
+
+            {/* Clickable indication */}
+            <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white underline-offset-4 transition-colors group-hover:text-accent group-hover:underline">
+              Learn more about this programme
+              <ArrowRight
+                size={15}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </span>
           </div>
-        )}
-      </div>
-
-      <div>
-        {stat && (
-          <p className="text-xs font-bold uppercase tracking-widest text-accent">{stat}</p>
-        )}
-        <h3 className="mt-3 text-2xl font-bold text-forest font-display sm:text-3xl">{name}</h3>
-        <p className="mt-4 max-w-xl text-base leading-7 text-ink/65">{blurb}</p>
-        <Link
-          to={path}
-          className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-forest underline-offset-4 transition hover:underline"
-        >
-          Learn more about this programme
-          <ArrowRight size={15} />
-        </Link>
-      </div>
+        </div>
+      </Link>
     </motion.article>
   );
 }
 
+
+
 /* =========================================================
    SIMPLE CARD
    ---------------------------------------------------------
-   Used for Theory of Change, Processes, and SRHR Advocacy —
-   secondary items that don't need the full feature-row
-   treatment.
+   Used for Theory of Change, Processes, and SRHR Advocacy.
 ========================================================= */
 
-function SimpleCard({ name, blurb, icon: Icon, path, external }) {
+function SimpleCard({
+  name,
+  blurb,
+  icon: Icon,
+  path,
+  external,
+}) {
   const content = (
     <>
       <div className="flex h-11 w-11 items-center justify-center bg-forest-light text-forest-dark">
         <Icon size={20} />
       </div>
-      <h3 className="mt-5 text-lg font-bold text-forest font-display">{name}</h3>
-      <p className="mt-2 text-sm leading-6 text-ink/65">{blurb}</p>
+
+      <h3 className="mt-5 font-display text-lg font-bold text-forest">
+        {name}
+      </h3>
+
+      <p className="mt-2 text-sm leading-6 text-ink/65">
+        {blurb}
+      </p>
+
       <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest underline-offset-2 group-hover:underline">
         Learn more
-        {external ? <ExternalLink size={14} /> : <ArrowRight size={14} />}
+        {external ? (
+          <ExternalLink size={14} />
+        ) : (
+          <ArrowRight size={14} />
+        )}
       </span>
     </>
   );
 
-  const className = "group block h-full bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl";
+  const className =
+    "group block h-full bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl";
 
   if (external) {
     return (
@@ -255,6 +288,10 @@ function SimpleCard({ name, blurb, icon: Icon, path, external }) {
   );
 }
 
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
 export default function WhatWeDo() {
   return (
     <main className="min-h-screen bg-paper font-sans text-ink">
@@ -265,7 +302,9 @@ export default function WhatWeDo() {
 
       <header className="relative overflow-hidden bg-forest text-paper">
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-accent/10" />
+
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
+
         <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-accent" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
@@ -277,17 +316,20 @@ export default function WhatWeDo() {
             Back to Home
           </Link>
 
-          <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-accent">Our Programmes</p>
+          <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-accent">
+            Our Programmes
+          </p>
 
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
             What we do.
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
-            Our objectives are to develop, strengthen and protect the principles of the rule of law, the
-            enjoyment of human rights, and the promotion of Economic, Social and Cultural Rights across East
-            Africa — delivered through five focus programmes and our engagement with regional and international
-            human rights processes.
+            Our objectives are to develop, strengthen and protect the
+            principles of the rule of law, the enjoyment of human rights, and
+            the promotion of Economic, Social and Cultural Rights across East
+            Africa — delivered through five focus programmes and our engagement
+            with regional and international human rights processes.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -298,6 +340,7 @@ export default function WhatWeDo() {
               Explore Our Programmes
               <ArrowRight size={16} />
             </a>
+
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 border-2 border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white/10"
@@ -309,26 +352,47 @@ export default function WhatWeDo() {
       </header>
 
       {/* =====================================================
-          PROGRAMMES — alternating feature rows
+          PROGRAMMES — IMAGE BACKGROUND GRID
       ===================================================== */}
 
-      <section id="programmes" className="mx-auto max-w-6xl px-6 py-24 sm:py-28">
+      <section
+        id="programmes"
+        className="mx-auto max-w-7xl px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
+      >
         <div className="mb-4 max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-accent">01 — 05</p>
-          <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
+          <p className="text-xs font-bold uppercase tracking-widest text-accent">
+            01 — 05
+          </p>
+
+          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
             Five focus areas, one mission.
           </h2>
+
           <p className="mt-4 leading-7 text-ink/65">
-            Each programme pairs research and evidence with direct advocacy, coalition-building and legal
-            support, working alongside communities, county governments and regional partners.
+            Each programme pairs research and evidence with direct advocacy,
+            coalition-building and legal support, working alongside
+            communities, county governments and regional partners.
           </p>
         </div>
 
-        <div>
-          {programmes.map((programme, i) => (
-            <ProgrammeRow key={programme.path} {...programme} reverse={i % 2 === 1} />
+        {/* Programme grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="shown"
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          variants={gridVariants}
+          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {programmes.map((programme) => (
+            <ProgrammeRow
+              key={programme.path}
+              {...programme}
+            />
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* =====================================================
@@ -337,11 +401,20 @@ export default function WhatWeDo() {
 
       <section className="bg-forest px-6 py-20 text-paper">
         <div className="mx-auto max-w-4xl text-center">
-          <Quote size={36} className="mx-auto text-accent" strokeWidth={1.5} />
+          <Quote
+            size={36}
+            className="mx-auto text-accent"
+            strokeWidth={1.5}
+          />
+
           <p className="mt-6 font-display text-2xl font-medium leading-relaxed sm:text-3xl">
-            Every programme starts from the same premise: rights are only real when people can exercise them.
+            Every programme starts from the same premise: rights are only real
+            when people can exercise them.
           </p>
-          <p className="mt-5 text-sm font-semibold uppercase tracking-widest text-white/50">EACHRights</p>
+
+          <p className="mt-5 text-sm font-semibold uppercase tracking-widest text-white/50">
+            EACHRights
+          </p>
         </div>
       </section>
 
@@ -352,27 +425,40 @@ export default function WhatWeDo() {
       <section className="bg-forest-light px-6 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-accent">Our Approach</p>
-            <h2 className="mt-3 text-4xl font-bold tracking-tight text-forest sm:text-5xl font-display">
+            <p className="text-xs font-bold uppercase tracking-widest text-accent">
+              Our Approach
+            </p>
+
+            <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
               How it all fits together.
             </h2>
+
             <p className="mt-4 leading-7 text-ink/65">
-              Alongside our five programmes, we work through regional and international mechanisms to hold
-              states accountable to their human rights commitments.
+              Alongside our five programmes, we work through regional and
+              international mechanisms to hold states accountable to their
+              human rights commitments.
             </p>
           </div>
 
           <motion.div
             initial="hidden"
             whileInView="shown"
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{
+              once: true,
+              amount: 0.15,
+            }}
             variants={gridVariants}
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             <SimpleCard {...theoryOfChange} />
+
             {processes.map((process) => (
-              <SimpleCard key={process.path} {...process} />
+              <SimpleCard
+                key={process.path}
+                {...process}
+              />
             ))}
+
             <SimpleCard
               name={srhrAdvocacyLink.name}
               blurb={srhrAdvocacyLink.blurb}
@@ -389,12 +475,18 @@ export default function WhatWeDo() {
       ===================================================== */}
 
       <section className="relative overflow-hidden bg-forest px-6 py-24 text-center text-paper">
-        <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full border-[25px] border-paper/5" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full border-[25px] border-paper/5" />
+
         <div className="relative z-10 mx-auto max-w-3xl">
-          <h2 className="text-4xl font-bold sm:text-5xl font-display">Want to know more?</h2>
+          <h2 className="font-display text-4xl font-bold sm:text-5xl">
+            Want to know more?
+          </h2>
+
           <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
-            Reach out to learn more about any of our programmes, or to explore how we could work together.
+            Reach out to learn more about any of our programmes, or to explore
+            how we could work together.
           </p>
+
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               to="/contact"
@@ -403,6 +495,7 @@ export default function WhatWeDo() {
               <Mail size={18} />
               Contact Us
             </Link>
+
             <Link
               to="/who-we-are/team"
               className="inline-flex items-center gap-2 border-2 border-dashed border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"

@@ -14,7 +14,6 @@ import Contact from "./pages/Contact";
 
 // Who We Are
 import OurStory from "./pages/whoweare/OurStory";
-import StrategicPlan from "./pages/whoweare/StrategicPlan";
 import OurTeam from "./pages/whoweare/OurTeam";
 
 // What We Do
@@ -49,10 +48,7 @@ function App() {
 
         {/* Who We Are */}
         <Route path="/who-we-are/our-story" element={<OurStory />} />
-        <Route
-          path="/who-we-are/strategic-plan"
-          element={<StrategicPlan />}
-        />
+        
         <Route path="/who-we-are/team" element={<OurTeam />} />
 
         {/* What We Do */}
