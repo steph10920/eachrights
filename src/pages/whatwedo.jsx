@@ -104,6 +104,13 @@ const srhrAdvocacyLink = {
     "Visit our dedicated portal tracking Sexual and Reproductive Health and Rights advocacy across the region.",
 };
 
+// Credibility strip under the hero — drawn only from facts already on the page
+const heroFacts = [
+  { value: "05", label: "Focus programmes" },
+  { value: "East Africa", label: "Regional reach" },
+  { value: "UPR", label: "UN engagement" },
+];
+
 /* =========================================================
    ANIMATION VARIANTS
 ========================================================= */
@@ -151,7 +158,7 @@ function ProgrammeRow({
     >
       <Link
         to={path}
-        className="relative block min-h-[390px] overflow-hidden bg-forest shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:min-h-[430px]"
+        className="relative block min-h-[390px] overflow-hidden bg-forest shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:min-h-[430px]"
       >
         {/* Background image */}
         {photo ? (
@@ -166,26 +173,25 @@ function ProgrammeRow({
         )}
 
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/15 transition-all duration-500 group-hover:from-black/95 group-hover:via-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/50 to-black/10" />
 
         {/* Card content */}
         <div className="relative z-10 flex min-h-[390px] h-full flex-col justify-between p-6 text-white sm:min-h-[430px] sm:p-8">
 
           {/* Top section */}
-          <div className="flex items-start justify-between">
-            <span className="font-display text-5xl font-bold leading-none text-white/90 sm:text-6xl">
+          <div className="flex items-start justify-between border-b border-white/15 pb-4">
+            <span className="font-display text-4xl font-bold leading-none text-white/70 sm:text-5xl">
               {index}
             </span>
 
-            <div className="flex h-11 w-11 items-center justify-center bg-white/90 text-forest shadow-sm backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-              <Icon size={20} />
-            </div>
+            <Icon size={20} className="mt-1 text-accent" strokeWidth={1.75} />
           </div>
 
           {/* Bottom section */}
           <div>
             {stat && (
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+              <p className="flex items-center gap-2 text-sm font-semibold text-accent">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 {stat}
               </p>
             )}
@@ -228,9 +234,7 @@ function SimpleCard({
 }) {
   const content = (
     <>
-      <div className="flex h-11 w-11 items-center justify-center bg-forest-light text-forest-dark">
-        <Icon size={20} />
-      </div>
+      <Icon size={22} className="text-forest" strokeWidth={1.75} />
 
       <h3 className="mt-5 font-display text-lg font-bold text-forest">
         {name}
@@ -240,19 +244,19 @@ function SimpleCard({
         {blurb}
       </p>
 
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest underline-offset-2 group-hover:underline">
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest">
         Learn more
         {external ? (
           <ExternalLink size={14} />
         ) : (
-          <ArrowRight size={14} />
+          <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
         )}
       </span>
     </>
   );
 
   const className =
-    "group block h-full bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl";
+    "group block h-full border border-ink/10 bg-white p-7 transition-colors duration-300 hover:border-forest";
 
   if (external) {
     return (
@@ -289,14 +293,10 @@ export default function WhatWeDo() {
           HERO
       ===================================================== */}
 
-      <header className="relative overflow-hidden bg-forest text-paper">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full border-[25px] border-accent/10" />
+      <header className="relative bg-forest text-paper">
+        <div className="absolute left-0 right-0 top-0 h-1 bg-accent" />
 
-        <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full border-[25px] border-paper/5" />
-
-        <div className="absolute left-0 right-0 top-0 z-20 h-1 bg-accent" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
           <Link
             to="/"
             className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-white/75 transition hover:text-white"
@@ -305,9 +305,12 @@ export default function WhatWeDo() {
             Back to Home
           </Link>
 
-          <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-accent">
-            Our Programmes
-          </p>
+          <div className="mt-8 flex items-center gap-2.5">
+            <span className="h-1.5 w-1.5 bg-accent" />
+            <p className="text-sm font-semibold text-white/70">
+              Our programmes
+            </p>
+          </div>
 
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
             What we do.
@@ -317,8 +320,9 @@ export default function WhatWeDo() {
             Our objectives are to develop, strengthen and protect the
             principles of the rule of law, the enjoyment of human rights, and
             the promotion of Economic, Social and Cultural Rights across East
-            Africa — delivered through five focus programmes and our engagement
-            with regional and international human rights processes.
+            Africa — delivered through five focus programmes and our
+            engagement with regional and international human rights
+            processes.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -326,16 +330,28 @@ export default function WhatWeDo() {
               href="#programmes"
               className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm font-bold text-forest transition hover:brightness-105"
             >
-              Explore Our Programmes
+              Explore our programmes
               <ArrowRight size={16} />
             </a>
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 border-2 border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white/10"
+              className="inline-flex items-center gap-2 border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white/10"
             >
-              Get Involved
+              Get involved
             </Link>
+          </div>
+
+          {/* Credibility strip */}
+          <div className="mt-14 flex max-w-2xl flex-wrap gap-x-10 gap-y-6 border-t border-white/15 pt-8">
+            {heroFacts.map((fact) => (
+              <div key={fact.label}>
+                <p className="font-display text-2xl font-bold text-white sm:text-3xl">
+                  {fact.value}
+                </p>
+                <p className="mt-1 text-sm text-white/60">{fact.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </header>
@@ -349,11 +365,7 @@ export default function WhatWeDo() {
         className="mx-auto max-w-7xl px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
       >
         <div className="mb-4 max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-accent">
-            01 — 05
-          </p>
-
-          <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
+          <h2 className="font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
             Five focus areas, one mission.
           </h2>
 
@@ -391,17 +403,17 @@ export default function WhatWeDo() {
       <section className="bg-forest px-6 py-20 text-paper">
         <div className="mx-auto max-w-4xl text-center">
           <Quote
-            size={36}
+            size={32}
             className="mx-auto text-accent"
             strokeWidth={1.5}
           />
 
           <p className="mt-6 font-display text-2xl font-medium leading-relaxed sm:text-3xl">
-            Every programme starts from the same premise: rights are only real
-            when people can exercise them.
+            Every programme starts from the same premise: rights are only
+            real when people can exercise them.
           </p>
 
-          <p className="mt-5 text-sm font-semibold uppercase tracking-widest text-white/50">
+          <p className="mt-5 text-sm font-semibold text-white/50">
             EACHRights
           </p>
         </div>
@@ -414,11 +426,7 @@ export default function WhatWeDo() {
       <section className="bg-forest-light px-6 py-24 sm:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-widest text-accent">
-              Our Approach
-            </p>
-
-            <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
+            <h2 className="font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
               How it all fits together.
             </h2>
 
@@ -461,17 +469,15 @@ export default function WhatWeDo() {
           FINAL CTA
       ===================================================== */}
 
-      <section className="relative overflow-hidden bg-forest px-6 py-24 text-center text-paper">
-        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full border-[25px] border-paper/5" />
-
-        <div className="relative z-10 mx-auto max-w-3xl">
+      <section className="bg-forest px-6 py-24 text-center text-paper">
+        <div className="mx-auto max-w-3xl">
           <h2 className="font-display text-4xl font-bold sm:text-5xl">
             Want to know more?
           </h2>
 
           <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
-            Reach out to learn more about any of our programmes, or to explore
-            how we could work together.
+            Reach out to learn more about any of our programmes, or to
+            explore how we could work together.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -480,14 +486,14 @@ export default function WhatWeDo() {
               className="inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
             >
               <Mail size={18} />
-              Contact Us
+              Contact us
             </Link>
 
             <Link
               to="/who-we-are/team"
-              className="inline-flex items-center gap-2 border-2 border-dashed border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
+              className="inline-flex items-center gap-2 border border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
             >
-              Meet Our Team
+              Meet our team
               <ArrowRight size={18} />
             </Link>
           </div>

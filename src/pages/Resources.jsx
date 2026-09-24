@@ -159,6 +159,13 @@ const heroPublications = publicationsByYear.slice(0, 4);
 
 const HERO_PUB_INTERVAL = 5000;
 
+// External portal tracking SRHR advocacy, surfaced alongside the PDF
+// library since it isn't one of the downloadable publications above.
+const srhrAdvocacyLink = {
+  name: "SRHR Advocacy Portal",
+  url: "https://eachrights.github.io/srhr/",
+};
+
 export default function Publications() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -247,7 +254,7 @@ export default function Publications() {
             Resources
           </Link>
 
-          <div className="mt-4 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="mt-4 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
 
             <div className="max-w-3xl">
 
@@ -270,65 +277,98 @@ export default function Publications() {
 
             </div>
 
-            {/* PDF PREVIEW CAROUSEL */}
-            <div className="mx-auto w-full max-w-[200px]">
-              <div className="group relative bg-white p-2 shadow-xl">
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-50">
-                  <AnimatePresence initial={false} mode="sync">
-                    <motion.div key={currentHeroPub} {...heroPubMotion} className="absolute inset-0">
-                      <PublicationThumb
-                        src={activeHeroPub.thumb}
-                        alt={activeHeroPub.title}
+            {/* PDF PREVIEW CAROUSEL + SRHR CARD */}
+            <div className="mx-auto flex w-full max-w-md flex-wrap justify-center gap-4">
+
+              <div className="w-full max-w-[200px]">
+                <div className="group relative bg-white p-2 shadow-xl">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-50">
+                    <AnimatePresence initial={false} mode="sync">
+                      <motion.div key={currentHeroPub} {...heroPubMotion} className="absolute inset-0">
+                        <PublicationThumb
+                          src={activeHeroPub.thumb}
+                          alt={activeHeroPub.title}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+
+                    <button
+                      type="button"
+                      onClick={prevHeroPub}
+                      aria-label="Previous publication"
+                      className="absolute left-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+                    >
+                      <ArrowLeft size={13} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={nextHeroPub}
+                      aria-label="Next publication"
+                      className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+                    >
+                      <ArrowRight size={13} />
+                    </button>
+                  </div>
+
+                  <div className="p-2.5">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-forest/60">
+                      {activeHeroPub.category}
+                    </p>
+                    <h3 className="mt-1 text-xs font-bold leading-snug text-forest">
+                      {activeHeroPub.title}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="mt-2 flex justify-center gap-2">
+                  {heroPublications.map((publication, index) => (
+                    <button
+                      key={publication.title}
+                      type="button"
+                      onClick={() => goToHeroPub(index)}
+                      aria-label={`Go to publication ${index + 1}`}
+                      className="group/dot flex items-center justify-center p-1"
+                    >
+                      <span
+                        className={`block h-1.5 rounded-full transition-all duration-300 ${
+                          currentHeroPub === index ? "w-6 bg-accent" : "w-1.5 bg-white/30 group-hover/dot:bg-white/60"
+                        }`}
                       />
-                    </motion.div>
-                  </AnimatePresence>
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-                  <button
-                    type="button"
-                    onClick={prevHeroPub}
-                    aria-label="Previous publication"
-                    className="absolute left-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
-                  >
-                    <ArrowLeft size={13} />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={nextHeroPub}
-                    aria-label="Next publication"
-                    className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
-                  >
-                    <ArrowRight size={13} />
-                  </button>
+              <a
+                href={srhrAdvocacyLink.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block w-full max-w-[200px] bg-white p-2 shadow-xl transition hover:-translate-y-0.5"
+              >
+                <div className="relative flex aspect-[3/4] w-full flex-col items-center justify-center gap-3 bg-forest-soft px-5 text-center">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-white">
+                    <ExternalLink size={17} strokeWidth={1.75} />
+                  </div>
+                  <p className="text-xs leading-snug text-forest/70">
+                    SRHR advocacy tracking portal
+                  </p>
                 </div>
 
                 <div className="p-2.5">
                   <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-forest/60">
-                    {activeHeroPub.category}
+                    External Resource
                   </p>
-                  <h3 className="mt-1 text-xs font-bold leading-snug text-forest">
-                    {activeHeroPub.title}
+                  <h3 className="mt-1 flex items-center gap-1 text-xs font-bold leading-snug text-forest">
+                    {srhrAdvocacyLink.name}
+                    <ArrowRight
+                      size={12}
+                      className="transition group-hover:translate-x-0.5"
+                    />
                   </h3>
                 </div>
-              </div>
+              </a>
 
-              <div className="mt-2 flex justify-center gap-2">
-                {heroPublications.map((publication, index) => (
-                  <button
-                    key={publication.title}
-                    type="button"
-                    onClick={() => goToHeroPub(index)}
-                    aria-label={`Go to publication ${index + 1}`}
-                    className="group/dot flex items-center justify-center p-1"
-                  >
-                    <span
-                      className={`block h-1.5 rounded-full transition-all duration-300 ${
-                        currentHeroPub === index ? "w-6 bg-accent" : "w-1.5 bg-white/30 group-hover/dot:bg-white/60"
-                      }`}
-                    />
-                  </button>
-                ))}
-              </div>
             </div>
 
           </div>
