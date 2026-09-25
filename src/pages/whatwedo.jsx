@@ -303,19 +303,19 @@ export default function WhatWeDo() {
           HERO
       ===================================================== */}
 
-      <header className="relative overflow-hidden bg-forest text-paper">
+      <header className="relative isolate min-h-[560px] overflow-hidden bg-forest text-paper sm:min-h-[520px] lg:min-h-[640px]">
         <div className="absolute left-0 right-0 top-0 z-10 h-1 bg-accent" />
 
         <img
           src={heroPhoto}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-18 lg:px-12 lg:py-24">
+        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-6 py-14 sm:min-h-[520px] sm:px-8 sm:py-18 lg:min-h-[640px] lg:px-12 lg:py-24">
 
           <Link
             to="/"
@@ -361,7 +361,7 @@ export default function WhatWeDo() {
           </div>
 
           {/* Credibility strip */}
-          <div className="mt-14 flex max-w-3xl flex-wrap gap-x-12 gap-y-6 border-t border-white/15 pt-8">
+          <div className="mt-14 grid max-w-3xl grid-cols-3 gap-x-4 gap-y-6 border-t border-white/15 pt-8 sm:flex sm:flex-wrap sm:gap-x-12">
             {heroFacts.map((fact) => (
               <div key={fact.label}>
                 <p className="font-display text-2xl font-bold text-white sm:text-3xl">

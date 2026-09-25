@@ -316,7 +316,7 @@ export default function Publications() {
           HERO
       ====================================================== */}
 
-      <section className="relative isolate overflow-hidden bg-forest text-black">
+      <section className="relative isolate flex min-h-[720px] flex-col justify-center overflow-hidden bg-forest text-black sm:min-h-[600px] lg:min-h-[540px]">
 
         {/* Background image */}
 
@@ -324,7 +324,7 @@ export default function Publications() {
           src={publicationsHero}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
         />
 
         {/* Decorative circles */}
@@ -339,7 +339,7 @@ export default function Publications() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
+        <div className="relative mx-auto w-full max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-12 lg:py-10">
 
           {/* Back link */}
 
