@@ -473,40 +473,7 @@ export default function WhatWeDo() {
         </div>
       </section>
 
-      {/* =====================================================
-          FINAL CTA
-      ===================================================== */}
 
-      <section className="bg-forest px-6 py-24 text-center text-paper">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="font-display text-4xl font-bold sm:text-5xl">
-            Want to know more?
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-xl leading-8 text-paper/65">
-            Reach out to learn more about any of our programmes, or to
-            explore how we could work together.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-accent px-7 py-3.5 font-bold text-forest transition hover:brightness-105"
-            >
-              <Mail size={18} />
-              Contact us
-            </Link>
-
-            <Link
-              to="/who-we-are/team"
-              className="inline-flex items-center gap-2 border border-accent px-7 py-3.5 font-bold text-accent transition hover:bg-accent/10"
-            >
-              Meet our team
-              <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

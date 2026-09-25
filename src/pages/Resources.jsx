@@ -626,53 +626,6 @@ export default function Publications() {
         </div>
 
       </section>
-
-
-      {/* =====================================================
-          CTA
-      ===================================================== */}
-
-      <section className="bg-forest px-6 py-20 text-center text-white sm:px-8 lg:px-12">
-
-        <div className="mx-auto max-w-3xl">
-
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
-            Stay Connected
-          </p>
-
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-            Looking for more resources?
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-            Explore our other resources or get in touch with EACHRights for
-            more information about our work.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-
-            <Link
-              to="/resources"
-              className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-forest transition hover:bg-forest-light"
-            >
-              All Resources
-              <ArrowRight size={18} />
-            </Link>
-
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/40 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-            >
-              Contact Us
-              <ArrowRight size={18} />
-            </Link>
-
-          </div>
-
-        </div>
-
-      </section>
-
     </main>
   );
 }

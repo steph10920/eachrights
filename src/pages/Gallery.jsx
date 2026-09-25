@@ -628,12 +628,6 @@ function Gallery() {
               Visit YouTube Channel
             </a>
 
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 border-2 border-paper/70 px-6 py-3.5 font-bold text-paper transition hover:bg-paper hover:text-forest-dark"
-            >
-              Contact EACHRights
-            </Link>
           </div>
         </div>
       </section>
