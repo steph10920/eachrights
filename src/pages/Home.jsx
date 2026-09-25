@@ -22,7 +22,6 @@ import {
   FileText,
   Quote,
   Landmark,
-  HandHeart,
 } from "lucide-react";
 
 import CountUp from "../components/CountUp.jsx";
@@ -54,7 +53,7 @@ import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 
    CONTENT
 ========================================================= */
 
-const HERO_INTERVAL = 5000;
+const HERO_INTERVAL = 3000;
 const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
 
 const heroSlides = [
@@ -221,25 +220,19 @@ const challengeGroups = [
   "Communities on the frontline of environmental and climate harm.",
 ];
 
-/** Three ways we move rights from principle to practice. */
-const pillars = [
+/** The three outcomes the Strategic Plan 2026–2030 is built to deliver. */
+const strategicAims = [
   {
     icon: Users,
-    title: "Stronger rights awareness",
-    text:
-      "People cannot claim rights they do not know they have. We work directly with communities so they can name violations, organise and act.",
+    text: "Communities equipped to know, claim and defend their economic, social and cultural rights.",
   },
   {
     icon: Landmark,
-    title: "Stronger institutions and accountability",
-    text:
-      "Government and public institutions carry the primary duty to protect rights. We push for the reforms, rulings and reporting that hold that duty in place.",
+    text: "Institutions across Kenya, Uganda and Tanzania held to their human rights obligations.",
   },
   {
-    icon: HandHeart,
-    title: "Stronger movements and partnerships",
-    text:
-      "Lasting change outlasts any single case or campaign. We convene civil society, researchers and grassroots groups to keep the pressure for justice moving.",
+    icon: ShieldCheck,
+    text: "A resilient, well-governed organisation with the capacity to sustain this work long-term.",
   },
 ];
 
@@ -326,7 +319,7 @@ function usePreload(sources) {
    SHARED
 ========================================================= */
 
-const SECTION = "px-6 py-24 sm:px-8 lg:px-12 lg:py-28";
+const SECTION = "px-6 py-16 sm:px-8 lg:px-12 lg:py-20";
 const CONTAINER = "mx-auto max-w-7xl";
 
 function SectionHeading({ title, children, light = false }) {
@@ -406,9 +399,9 @@ function Hero() {
       </AnimatePresence>
 
       {/* Legibility overlays */}
-      <div className="absolute inset-0 -z-10 bg-black/40" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-black/15" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
       {/* Message */}
       <div className="mx-auto flex min-h-[460px] max-w-7xl flex-col items-start justify-center gap-8 px-6 pb-24 pt-14 sm:px-8 lg:min-h-[540px] lg:px-12">
@@ -502,7 +495,7 @@ function Platforms() {
   return (
     <section
       aria-labelledby="platforms-title"
-      className="bg-white px-6 py-20 sm:px-8 lg:px-12 lg:py-24"
+      className="bg-white px-6 py-14 sm:px-8 lg:px-12 lg:py-16"
     >
       <div className={CONTAINER}>
         <div className="max-w-2xl">
@@ -604,7 +597,7 @@ function Introduction() {
   return (
     <section
       aria-labelledby="intro-title"
-      className="bg-paper px-6 py-20 sm:px-8 lg:px-12 lg:py-24"
+      className="bg-paper px-6 py-14 sm:px-8 lg:px-12 lg:py-16"
     >
       <div className={`${CONTAINER} grid gap-8 lg:grid-cols-[0.55fr_1.45fr] lg:gap-20`}>
         <div>
@@ -648,7 +641,7 @@ function Introduction() {
 function Challenge() {
   return (
     <section className="bg-white" aria-labelledby="challenge-title">
-      <div className={`${CONTAINER} grid gap-12 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-12 lg:py-28`}>
+      <div className={`${CONTAINER} grid gap-12 px-6 py-14 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-12 lg:py-16`}>
         <div>
           <p className="flex items-center gap-3 text-sm font-semibold text-forest/60">
             <span className="h-px w-10 bg-[#8DC63F]" />
@@ -701,91 +694,66 @@ function Challenge() {
   );
 }
 
-/** How we respond: three durable pillars, not isolated projects. */
-function Pillars() {
-  return (
-    <section className={`bg-forest-light ${SECTION}`} aria-labelledby="pillars-title">
-      <div className={CONTAINER}>
-        <div className="max-w-2xl">
-          <h2
-            id="pillars-title"
-            className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl"
-          >
-            How we drive change
-          </h2>
-          <p className="mt-5 text-lg leading-8 text-ink/65">
-            Lasting change doesn&apos;t come from isolated projects. It comes
-            from strengthening the conditions that make rights realizable, in
-            communities, institutions and the wider civic space.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
-          {pillars.map((pillar) => {
-            const Icon = pillar.icon;
-            return (
-              <article key={pillar.title} className="bg-white p-8">
-                <span className="flex h-14 w-14 items-center justify-center bg-forest-light">
-                  <Icon size={26} strokeWidth={1.7} className="text-forest" />
-                </span>
-                <h3 className="mt-6 font-display text-xl font-bold text-forest">
-                  {pillar.title}
-                </h3>
-                <p className="mt-3 leading-7 text-ink/65">{pillar.text}</p>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** Short excerpt from the Strategic Plan 2026-2030, linking through to the full document. */
+/** Short excerpt from the Strategic Plan 2026-2030, with the plan's three headline aims. */
 function StrategicPlanHighlight() {
   return (
     <section
       aria-labelledby="strategic-plan-title"
-      className="bg-forest px-6 py-20 text-white sm:px-8 lg:px-12 lg:py-24"
+      className="bg-forest px-6 py-14 sm:px-8 lg:px-12 lg:py-16 text-white"
     >
-      <div
-        className={`${CONTAINER} grid gap-10 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16`}
-      >
-        <span className="flex h-16 w-16 shrink-0 items-center justify-center bg-white/10">
-          <FileText size={30} strokeWidth={1.6} className="text-[#8DC63F]" />
-        </span>
+      <div className={CONTAINER}>
+        <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16">
+          <span className="flex h-16 w-16 shrink-0 items-center justify-center bg-white/10">
+            <FileText size={30} strokeWidth={1.6} className="text-[#8DC63F]" />
+          </span>
 
-        <div>
-          <p className="flex items-center gap-3 text-sm font-semibold text-white/70">
-            <span className="h-px w-10 bg-[#8DC63F]" />
-            Strategic Plan 2026 &ndash; 2030
-          </p>
+          <div>
+            <p className="flex items-center gap-3 text-sm font-semibold text-white/70">
+              <span className="h-px w-10 bg-[#8DC63F]" />
+              Strategic Plan 2026 &ndash; 2030
+            </p>
 
-          <h2
-            id="strategic-plan-title"
-            className="mt-4 font-display text-3xl font-bold italic leading-snug sm:text-4xl"
-          >
-            &ldquo;A just society that respects and upholds human rights and
-            inherent dignity.&rdquo;
-          </h2>
+            <h2
+              id="strategic-plan-title"
+              className="mt-4 font-display text-3xl font-bold italic leading-snug sm:text-4xl"
+            >
+              &ldquo;A just society that respects and upholds human rights and
+              inherent dignity.&rdquo;
+            </h2>
 
-          <p className="mt-4 max-w-2xl leading-7 text-white/75">
-            Our vision anchors a five-year plan built around seven strategic
-            focus areas &mdash; from gender and education justice to
-            institutional sustainability &mdash; developed through a
-            participatory process with our staff and stakeholders.
-          </p>
+            <p className="mt-4 max-w-2xl leading-7 text-white/75">
+              Our vision anchors a five-year plan built around seven strategic
+              focus areas &mdash; from gender and education justice to
+              institutional sustainability &mdash; developed through a
+              participatory process with our staff and stakeholders.
+            </p>
 
-          <a
-            href={strategicPlan2026}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 bg-[#8DC63F] px-6 py-3.5 text-sm font-bold text-forest transition hover:brightness-105"
-          >
-            Read the full Strategic Plan
-            <ArrowUpRight size={17} />
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
+            <a
+              href={strategicPlan2026}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex items-center gap-2 bg-[#8DC63F] px-6 py-3.5 text-sm font-bold text-forest transition hover:brightness-105"
+            >
+              Read the full Strategic Plan
+              <ArrowUpRight size={17} />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
+        </div>
+
+        <p className="mt-10 border-t border-white/15 pt-8 text-sm font-semibold text-white/70">
+          Over the next five years, we&apos;re working toward:
+        </p>
+        <div className="mt-6 grid gap-8 sm:grid-cols-3 sm:gap-6">
+          {strategicAims.map((aim) => {
+            const Icon = aim.icon;
+            return (
+              <div key={aim.text} className="flex gap-4 border-t border-[#8DC63F] pt-5">
+                <Icon size={22} strokeWidth={1.7} className="mt-0.5 shrink-0 text-[#8DC63F]" />
+                <p className="leading-7 text-white/85">{aim.text}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -854,7 +822,7 @@ function Programmes() {
           </Link>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <ul className="divide-y divide-forest/15 border-y border-forest/15">
             {programmes.map((programme, index) => {
               const Icon = programme.icon;
@@ -941,7 +909,16 @@ function Programmes() {
 
 function Impact() {
   return (
-    <section className="bg-forest px-6 py-14 text-white sm:px-8 lg:px-12 lg:py-16">
+    <section className="relative isolate overflow-hidden bg-ink px-6 py-12 text-white sm:px-8 lg:px-12 lg:py-14">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-[#8DC63F]/15 blur-[100px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-32 -left-32 -z-10 h-96 w-96 rounded-full bg-[#8DC63F]/10 blur-[100px]"
+      />
+
       <div className={CONTAINER}>
         <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end md:gap-10">
           <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">
@@ -959,7 +936,7 @@ function Impact() {
               key={stat.label}
               className="border-b border-white/15 py-5 sm:pr-6 lg:[&:not(:nth-child(3n+1))]:border-l lg:[&:not(:nth-child(3n+1))]:pl-6"
             >
-              <dd className="font-display text-3xl font-bold text-[#8DC63F] sm:text-4xl">
+              <dd className="font-display text-3xl font-bold text-white sm:text-4xl">
                 <CountUp end={stat.value} duration={2} separator="," />
                 {stat.suffix}
               </dd>
@@ -969,6 +946,17 @@ function Impact() {
             </div>
           ))}
         </dl>
+
+        <a
+          href={strategicPlan2026}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-10 inline-flex items-center gap-2 text-sm font-bold text-white/80 underline decoration-[#8DC63F] decoration-2 underline-offset-4 transition hover:text-white"
+        >
+          Read the full Strategic Plan
+          <ArrowUpRight size={16} />
+          <span className="sr-only">(opens in a new tab)</span>
+        </a>
       </div>
     </section>
   );
@@ -977,14 +965,14 @@ function Impact() {
 /** Full-bleed pull-quote, anchoring the vision behind the day-to-day work. */
 function QuoteBanner() {
   return (
-    <section className="relative isolate overflow-hidden bg-forest-dark px-6 py-24 text-white sm:px-8 lg:px-12">
+    <section className="relative isolate overflow-hidden bg-forest-dark px-6 py-16 text-white sm:px-8 lg:px-12">
       <img
         src={commitmentImage}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest-dark via-forest-dark/80 to-forest-dark/60" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
 
       <div className={`${CONTAINER} max-w-3xl`}>
         <Quote size={32} className="text-[#8DC63F]" strokeWidth={1.5} />
@@ -1049,7 +1037,7 @@ function Approach() {
           </Link>
         </div>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {approaches.map((item) => {
             const Icon = item.icon;
             return (
@@ -1073,7 +1061,7 @@ function StoryAndChange() {
   return (
     <section className="bg-white">
       <div className={`${CONTAINER} grid lg:grid-cols-2`}>
-        <div className="flex flex-col justify-center px-6 py-20 sm:px-8 lg:px-12">
+        <div className="flex flex-col justify-center px-6 py-14 sm:px-8 lg:px-12">
           <h2 className="font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">
             A decade-plus of turning rights into action
           </h2>
@@ -1104,7 +1092,7 @@ function StoryAndChange() {
           aria-hidden="true"
           className="order-2 aspect-video h-full w-full object-cover lg:order-1 lg:aspect-auto"
         />
-        <div className="order-1 flex flex-col justify-center px-6 py-20 sm:px-8 lg:order-2 lg:px-12">
+        <div className="order-1 flex flex-col justify-center px-6 py-14 sm:px-8 lg:order-2 lg:px-12">
           <h2 className="font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">
             From evidence to lasting change
           </h2>
@@ -1131,7 +1119,7 @@ function WhereWeWork() {
       <div className={CONTAINER}>
         <SectionHeading title="East African in scope Community-rooted in practice" />
 
-        <div className="mt-14 grid gap-px bg-forest/15 md:grid-cols-3">
+        <div className="mt-10 grid gap-px bg-forest/15 md:grid-cols-3">
           {regions.map((region) => (
             <article key={region.country} className="bg-paper py-8 md:px-8 md:first:pl-0">
               <h3 className="font-display text-4xl font-bold text-forest">
@@ -1189,12 +1177,18 @@ export default function Home() {
         />
       </Helmet>
 
+      <a
+        href="#main-content"
+        className="sr-only fixed left-4 top-4 z-[60] bg-white px-5 py-3 text-sm font-bold text-forest focus:not-sr-only"
+      >
+        Skip to content
+      </a>
+
       <Hero />
 
-      <main>
+      <main id="main-content">
         <Introduction />
         <Challenge />
-        <Pillars />
         <Programmes />
         <StrategicPlanHighlight />
         <Impact />
