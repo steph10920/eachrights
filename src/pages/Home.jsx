@@ -53,7 +53,7 @@ import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 
    CONTENT
 ========================================================= */
 
-const HERO_INTERVAL = 3000;
+const HERO_INTERVAL = 2000;
 const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
 
 const heroSlides = [
@@ -986,39 +986,6 @@ function QuoteBanner() {
   );
 }
 
-/** Closing call to action: an invitation to partners, funders and communities alike. */
-function Invitation() {
-  return (
-    <section className={`bg-paper ${SECTION}`}>
-      <div className={`${CONTAINER} max-w-3xl`}>
-        <h2 className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
-          Your invitation
-        </h2>
-        <p className="mt-5 text-lg leading-8 text-ink/70">
-          Whether you are a partner organisation, a researcher, a funder or a
-          member of the communities we work alongside, you are part of the
-          ecosystem that makes these rights real.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Link
-            to="/what-we-do"
-            className="inline-flex items-center gap-2 bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest-dark"
-          >
-            Explore our work
-            <ArrowRight size={17} />
-          </Link>
-          <Link
-            to="/who-we-are/our-story"
-            className="inline-flex items-center gap-2 border border-forest px-6 py-3.5 text-sm font-bold text-forest transition hover:bg-forest hover:text-white"
-          >
-            Learn our story
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Approach() {
   return (
     <section className={`bg-paper ${SECTION}`}>
@@ -1193,7 +1160,6 @@ export default function Home() {
         <StrategicPlanHighlight />
         <Impact />
         <QuoteBanner />
-        <Invitation />
         <Approach />
         <FocusAreas />
         <StoryAndChange />
