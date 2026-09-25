@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
 const ABOUT_LINKS = [
-  { name: "Who we are", path: "/about" },
-  { name: "Leadership", path: "/about/team" },
-  { name: "Our team", path: "/about/team" },
+  { name: "Who we are", path: "/who-we-are/our-story" },
+  { name: "Leadership", path: "/who-we-are/team" },
+  { name: "Our team", path: "/who-we-are/team" },
   { name: "Strategic plan", path: "/resources" },
 ];
 
 const WORK_LINKS = [
-  { name: "Programmes", path: "/our-work" },
+  { name: "Programmes", path: "/what-we-do" },
   { name: "Universal Periodic Review", path: "/processes/universal-periodic-review" },
   { name: "Publications", path: "/resources" },
 ];

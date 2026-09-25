@@ -346,13 +346,23 @@ export default function Publications() {
                 rel="noopener noreferrer"
                 className="group block w-full max-w-[200px] bg-white p-2 shadow-xl transition hover:-translate-y-0.5"
               >
-                <div className="relative flex aspect-[3/4] w-full flex-col items-center justify-center gap-3 bg-forest-soft px-5 text-center">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-white">
-                    <ExternalLink size={17} strokeWidth={1.75} />
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-forest-soft">
+                  {/* Live, non-interactive preview of the portal, rendered
+                      at 3x size and scaled down so the page's real layout
+                      shows rather than a mobile-width sliver. */}
+                  <iframe
+                    src={srhrAdvocacyLink.url}
+                    title=""
+                    tabIndex={-1}
+                    loading="lazy"
+                    className="pointer-events-none absolute left-0 top-0 h-[300%] w-[300%] origin-top-left scale-[0.3333] border-0"
+                  />
+
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/70 via-forest/0 to-forest/0" />
+
+                  <div className="pointer-events-none absolute bottom-2 left-2 flex h-8 w-8 items-center justify-center rounded-full bg-white text-forest shadow-sm">
+                    <ExternalLink size={14} strokeWidth={1.9} />
                   </div>
-                  <p className="text-xs leading-snug text-forest/70">
-                    SRHR advocacy tracking portal
-                  </p>
                 </div>
 
                 <div className="p-2.5">
