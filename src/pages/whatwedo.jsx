@@ -35,10 +35,11 @@ const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
 /* =========================================================
    PROGRAMMES
 ========================================================= */
+// Not a sequence — a set of focus areas — so cards below are
+// unordered and identified by name, not by a numeric marker.
 
 const programmes = [
   {
-    index: "01",
     name: "Education Justice Programme",
     path: "/programmes/education-justice",
     icon: BookOpenCheck,
@@ -48,7 +49,6 @@ const programmes = [
       "Advancing equitable access to quality education and strengthening the right to learn, working with schools, communities and duty-bearers to address barriers to education.",
   },
   {
-    index: "02",
     name: "Gender Justice Programme",
     path: "/programmes/gender-justice",
     icon: Users,
@@ -58,7 +58,6 @@ const programmes = [
       "Promoting gender equality, dignity and protection for women, girls and vulnerable groups while challenging harmful practices and gender-based violence.",
   },
   {
-    index: "03",
     name: "Health Justice Programme",
     path: "/programmes/health-justice",
     icon: HeartPulse,
@@ -68,7 +67,6 @@ const programmes = [
       "Advocating for equitable access to health services and the realization of the right to health, including Sexual and Reproductive Health and Rights.",
   },
   {
-    index: "04",
     name: "Environmental & Climate Justice Programme",
     path: "/programmes/environmental-climate-justice",
     icon: Leaf,
@@ -78,7 +76,6 @@ const programmes = [
       "Supporting communities to address environmental challenges and climate-related injustices while promoting rights-based approaches to environmental protection.",
   },
   {
-    index: "05",
     name: "Economic Justice, Business and Human Rights Programme",
     path: "/programmes/economic-justice",
     icon: Briefcase,
@@ -88,7 +85,6 @@ const programmes = [
       "Advancing economic and social rights while promoting responsible business conduct and accountability for human rights impacts affecting communities.",
   },
   {
-    index: "06",
     name: "Institutional Growth and Sustainability",
     path: "/programmes/institutional-growth-sustainability",
     icon: ShieldCheck,
@@ -97,8 +93,7 @@ const programmes = [
     blurb:
       "Strengthening organisational capacity, governance, partnerships and resource mobilisation to sustain EACHRights' long-term impact and effectiveness.",
   },
-   {
-    index: "07",
+  {
     name: "Universal Periodic Review",
     path: "/processes/universal-periodic-review",
     icon: Globe2,
@@ -162,7 +157,7 @@ const gridVariants = {
   hidden: {},
   shown: {
     transition: {
-      staggerChildren: 0.07,
+      staggerChildren: 0.06,
     },
   },
 };
@@ -170,13 +165,13 @@ const gridVariants = {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    y: 16,
   },
   shown: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.4,
     },
   },
 };
@@ -184,83 +179,59 @@ const cardVariants = {
 /* =========================================================
    PROGRAMME CARD
 ========================================================= */
+// Photo (or icon panel, when no photo exists) sits in a fixed
+// frame at the top; name and blurb live in a legible panel
+// below it. Border + icon-shift on hover, not a full recolor —
+// the same restrained language as ProcessCard, so the two
+// sections read as one system rather than two different kits.
 
-function ProgrammeCard({
-  index,
-  name,
-  blurb,
-  icon: Icon,
-  photo,
-  stat,
-  path,
-}) {
+function ProgrammeCard({ name, blurb, icon: Icon, photo, stat, path }) {
   return (
-    <motion.article variants={cardVariants} className="group">
+    <motion.article variants={cardVariants} className="h-full">
       <Link
         to={path}
-        className="relative block min-h-[390px] overflow-hidden bg-forest shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:min-h-[430px]"
+        className="group flex h-full flex-col overflow-hidden border border-forest/12 bg-white transition-colors duration-300 hover:border-forest"
       >
-        {/* Background image */}
-        {photo ? (
-          <img
-            src={photo}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover grayscale-[55%] contrast-[1.05] transition-all duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-forest-dark">
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border border-accent/30" />
-              <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full border border-white/10" />
-            </div>
-          </div>
-        )}
-
-        {/* Brand colour overlay */}
-        <div className="absolute inset-0 bg-forest-dark/35 mix-blend-multiply" />
-
-        {/* Text readability overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-
-        {/* Content */}
-        <div className="relative z-10 flex min-h-[390px] h-full flex-col justify-between p-6 text-white sm:min-h-[430px] sm:p-8">
-          <div className="flex items-start justify-between border-b border-white/15 pb-4">
-            <span className="font-display text-4xl font-bold leading-none text-white/70 sm:text-5xl">
-              {index}
-            </span>
-
-            <Icon
-              size={22}
-              className="mt-1 text-accent"
-              strokeWidth={1.75}
-            />
-          </div>
-
-          <div>
-            {stat && (
-              <p className="flex items-center gap-2 text-sm font-semibold text-accent">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                {stat}
-              </p>
-            )}
-
-            <h3 className="mt-3 max-w-xl font-display text-2xl font-bold leading-tight sm:text-3xl">
-              {name}
-            </h3>
-
-            <p className="mt-4 max-w-xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
-              {blurb}
-            </p>
-
-            <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors group-hover:text-accent group-hover:underline group-hover:underline-offset-4">
-              Explore programme
-              <ArrowRight
-                size={15}
-                className="transition-transform duration-300 group-hover:translate-x-1"
+        <div className="relative aspect-[4/3] w-full overflow-hidden bg-forest-light">
+          {photo ? (
+            <>
+              <img
+                src={photo}
+                alt=""
+                aria-hidden="true"
+                className="h-full w-full object-cover grayscale-[30%] transition-all duration-500 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
               />
+              <span className="pointer-events-none absolute inset-0 bg-forest/15 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-0" />
+            </>
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-forest">
+              <Icon size={32} strokeWidth={1.4} className="text-accent" />
+            </div>
+          )}
+
+          {photo && (
+            <span className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center bg-white text-forest shadow-sm">
+              <Icon size={17} strokeWidth={1.8} />
             </span>
-          </div>
+          )}
+        </div>
+
+        <div className="flex flex-1 flex-col p-6 sm:p-7">
+          <p className="text-sm font-semibold text-forest/55">{stat}</p>
+
+          <h3 className="mt-2 font-display text-xl font-bold leading-snug text-forest sm:text-2xl">
+            {name}
+          </h3>
+
+          <p className="mt-3 flex-1 text-sm leading-7 text-ink/65">{blurb}</p>
+
+          <span className="mt-6 inline-flex items-center gap-2 border-t border-forest/10 pt-5 text-sm font-bold text-forest transition-colors duration-300 group-hover:text-forest-dark">
+            Explore programme
+            <ArrowRight
+              size={15}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </span>
         </div>
       </Link>
     </motion.article>
@@ -468,7 +439,7 @@ export default function WhatWeDo() {
             amount: 0.1,
           }}
           variants={gridVariants}
-          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid gap-px bg-forest/12 sm:grid-cols-2 lg:grid-cols-3"
         >
           {programmes.map((programme) => (
             <ProgrammeCard
