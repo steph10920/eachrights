@@ -22,19 +22,19 @@ import {
 
 import CountUp from "../components/CountUp.jsx";
 
-import hero1 from "../assets/hero/hero-1.jpg";
-import hero2 from "../assets/hero/hero-2.jpg";
-import hero3 from "../assets/hero/hero-3.jpg";
+import hero1 from "../assets/hero/hero-1.png";
+import hero2 from "../assets/hero/hero-2.png";
+import hero3 from "../assets/hero/hero-3.png";
 
-import impact1 from "../assets/impact/impact-1.jpg";
-import impact2 from "../assets/impact/impact-2.jpg";
-import impact3 from "../assets/impact/impact-3.jpg";
-import impact4 from "../assets/impact/impact-4.jpg";
-import impact5 from "../assets/impact/impact-5.jpg";
-import impact6 from "../assets/impact/impact-6.jpg";
+import impact1 from "../assets/impact/impact-1.png";
+import impact2 from "../assets/impact/impact-2.png";
+import impact3 from "../assets/impact/impact-3.png";
+import impact4 from "../assets/impact/impact-4.png";
+import impact5 from "../assets/impact/impact-5.png";
+import impact6 from "../assets/impact/impact-6.png";
 
-import commitmentVideo from "../assets/videos/commitment.mp4";
-import educationJusticeVideo from "../assets/videos/education-justice.mp4";
+import commitmentImage from "../assets/videos/evidence.png";
+import educationJusticeImage from "../assets/videos/rightsintoaction.png";
 
 /* =========================================================
    CONTENT
@@ -790,7 +790,7 @@ function Approach() {
   );
 }
 
-/** Founding story and Theory of Change, each anchored by a video. */
+/** Founding story and Theory of Change, each anchored by a static image. */
 function StoryAndChange() {
   return (
     <section className="bg-white">
@@ -811,25 +811,19 @@ function StoryAndChange() {
             <ArrowRight size={17} />
           </Link>
         </div>
-        <video
-          src={commitmentVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        <img
+          src={commitmentImage}
+          alt=""
+          aria-hidden="true"
           className="aspect-video h-full w-full object-cover lg:aspect-auto"
         />
       </div>
 
       <div className={`${CONTAINER} grid lg:grid-cols-2`}>
-        <video
-          src={educationJusticeVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        <img
+          src={educationJusticeImage}
+          alt=""
+          aria-hidden="true"
           className="order-2 aspect-video h-full w-full object-cover lg:order-1 lg:aspect-auto"
         />
         <div className="order-1 flex flex-col justify-center px-6 py-20 sm:px-8 lg:order-2 lg:px-12">
