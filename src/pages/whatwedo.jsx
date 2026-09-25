@@ -18,15 +18,21 @@ import {
 |--------------------------------------------------------------------------
 | PROGRAMME PHOTO IMPORTS
 |--------------------------------------------------------------------------
-| Photos live in src/assets/programmes/ and are imported directly, same
-| pattern as the team photos in Team.jsx.
+| Reuses the same photos as the "Six programmes" section on the Home
+| page (src/pages/Home.jsx), so a programme looks the same wherever it
+| appears on the site. Home has six images (Business & Human Rights gets
+| its own, impact6); this page has five cards, since Economic Justice and
+| Business & Human Rights are combined into a single card here — that
+| combined card uses impact5. impact6 is reused below as the hero
+| background photo.
 */
 
-import educationPhoto from "../assets/programmes/education-justice.jpeg";
-import genderPhoto from "../assets/programmes/gender-justice.jpeg";
-import healthPhoto from "../assets/programmes/health-justice.jpeg";
-import environmentalPhoto from "../assets/programmes/environmental-climate-justice.jpeg";
-import economicPhoto from "../assets/programmes/economic-justice.jpeg";
+import educationPhoto from "../assets/impact/impact-1.png";
+import genderPhoto from "../assets/impact/impact-2.png";
+import healthPhoto from "../assets/impact/impact-3.png";
+import environmentalPhoto from "../assets/impact/impact-4.png";
+import economicPhoto from "../assets/impact/impact-5.png";
+import heroPhoto from "../assets/impact/heroImpact.png";
 
 /*
 |--------------------------------------------------------------------------
@@ -160,20 +166,23 @@ function ProgrammeRow({
         to={path}
         className="relative block min-h-[390px] overflow-hidden bg-forest shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:min-h-[430px]"
       >
-        {/* Background image */}
+        {/* Background image — desaturated by default, revealing full color on hover */}
         {photo ? (
           <img
             src={photo}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover grayscale-[55%] contrast-[1.05] transition-all duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0"
           />
         ) : (
           <div className="absolute inset-0 bg-forest-light" />
         )}
 
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/50 to-black/10" />
+        {/* Colour grade — ties every photo to the brand palette rather than a flat black wash */}
+        <div className="absolute inset-0 bg-forest-dark/35 mix-blend-multiply" />
+
+        {/* Legibility fade — just enough contrast for the text, most of the photo left clear */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
 
         {/* Card content */}
         <div className="relative z-10 flex min-h-[390px] h-full flex-col justify-between p-6 text-white sm:min-h-[430px] sm:p-8">
@@ -293,10 +302,21 @@ export default function WhatWeDo() {
           HERO
       ===================================================== */}
 
-      <header className="relative bg-forest text-paper">
-        <div className="absolute left-0 right-0 top-0 h-1 bg-accent" />
+      <header className="relative overflow-hidden bg-forest text-paper">
+        <div className="absolute left-0 right-0 top-0 z-10 h-1 bg-accent" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
+        {/* Background photo */}
+        <img
+          src={heroPhoto}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
+        {/* Legibility fade for the copy — neutral dark, no colour tint */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <Link
             to="/"
             className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-white/75 transition hover:text-white"

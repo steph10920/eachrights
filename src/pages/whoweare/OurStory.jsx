@@ -11,8 +11,8 @@ import {
   HeartPulse,
 } from "lucide-react";
 
-import heroImg from "../../assets/ourstory/hero.jpeg";
-import missionImg from "../../assets/ourstory/mission.jpeg";
+import heroImg from "../../assets/ourstory/hero.png";
+import missionImg from "../../assets/ourstory/mission.png";
 
 /* =========================================================
    CONTENT
@@ -102,14 +102,14 @@ export default function OurStory() {
           HERO
       ===================================================== */}
 
-      <section className="relative isolate flex min-h-[520px] items-end overflow-hidden bg-forest text-paper lg:min-h-[640px]">
+      <section className="relative isolate flex min-h-[520px] items-end overflow-hidden bg-ink text-paper lg:min-h-[640px]">
         <img
           src={heroImg}
           alt="The EACHRights team together outdoors"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest via-forest/70 to-forest/10" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/55 to-black/10" />
 
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}

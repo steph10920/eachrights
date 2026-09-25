@@ -1,9 +1,9 @@
-import researchImg from "../assets/whatwedo/research.jpeg";
-import partnershipsImg from "../assets/whatwedo/partnerships.jpeg";
-import movementsImg from "../assets/whatwedo/movements.jpeg";
-import trainingImg from "../assets/whatwedo/training.jpeg";
-import advocacyImg from "../assets/whatwedo/advocacy.jpeg";
-import awarenessImg from "../assets/whatwedo/awareness.jpeg";
+import researchImg from "../assets/whatwedo/research.png";
+import partnershipsImg from "../assets/whatwedo/partnerships.png";
+import movementsImg from "../assets/whatwedo/movements.png";
+import trainingImg from "../assets/whatwedo/training.png";
+import advocacyImg from "../assets/whatwedo/advocacy.png";
+import awarenessImg from "../assets/whatwedo/awareness.png";
 
 const approaches = [
   {
