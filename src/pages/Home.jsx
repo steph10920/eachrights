@@ -19,6 +19,7 @@ import {
   Megaphone,
   Users,
   Gavel,
+  FileText,
 } from "lucide-react";
 
 import CountUp from "../components/CountUp.jsx";
@@ -43,6 +44,16 @@ import educationJusticeImage from "../assets/videos/rightsintoaction.png";
 
 const HERO_INTERVAL = 5000;
 const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
+
+/*
+|--------------------------------------------------------------------------
+| STRATEGIC PLAN
+|--------------------------------------------------------------------------
+| Update this path once the Strategic Plan 2026-2030 PDF has a permanent
+| home (e.g. dropped into `src/assets/documents/` and imported, uploaded
+| to Drive, or served from a `/documents` route).
+*/
+const STRATEGIC_PLAN_URL = "/documents/EACHRights-Strategic-Plan-2026-2030.pdf";
 
 const heroSlides = [
   {
@@ -601,6 +612,57 @@ function Introduction() {
   );
 }
 
+/** Short excerpt from the Strategic Plan 2026-2030, linking through to the full document. */
+function StrategicPlanHighlight() {
+  return (
+    <section
+      aria-labelledby="strategic-plan-title"
+      className="bg-forest px-6 py-20 text-white sm:px-8 lg:px-12 lg:py-24"
+    >
+      <div
+        className={`${CONTAINER} grid gap-10 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16`}
+      >
+        <span className="flex h-16 w-16 shrink-0 items-center justify-center bg-white/10">
+          <FileText size={30} strokeWidth={1.6} className="text-[#8DC63F]" />
+        </span>
+
+        <div>
+          <p className="flex items-center gap-3 text-sm font-semibold text-white/70">
+            <span className="h-px w-10 bg-[#8DC63F]" />
+            Strategic Plan 2026 &ndash; 2030
+          </p>
+
+          <h2
+            id="strategic-plan-title"
+            className="mt-4 font-display text-3xl font-bold italic leading-snug sm:text-4xl"
+          >
+            &ldquo;A just society that respects and upholds human rights and
+            inherent dignity.&rdquo;
+          </h2>
+
+          <p className="mt-4 max-w-2xl leading-7 text-white/75">
+            Our vision anchors a five-year plan built around seven strategic
+            focus areas &mdash; from gender and education justice to
+            institutional sustainability &mdash; developed through a
+            participatory process with our staff and stakeholders.
+          </p>
+
+          <a
+            href={STRATEGIC_PLAN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-7 inline-flex items-center gap-2 bg-[#8DC63F] px-6 py-3.5 text-sm font-bold text-forest transition hover:brightness-105"
+          >
+            Read the full Strategic Plan
+            <ArrowUpRight size={17} />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FocusAreas() {
   return (
     <section className={`bg-white ${SECTION}`} aria-labelledby="focus-title">
@@ -946,6 +1008,7 @@ export default function Home() {
       <main>
         <Platforms />
         <Introduction />
+        <StrategicPlanHighlight />
         <FocusAreas />
         <Programmes />
         <Impact />
