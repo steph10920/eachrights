@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
@@ -317,7 +316,16 @@ export default function Publications() {
           HERO
       ====================================================== */}
 
-      <section className="relative isolate overflow-hidden bg-forest text-white">
+      <section className="relative isolate overflow-hidden bg-forest text-black">
+
+        {/* Background image */}
+
+        <img
+          src={publicationsHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
 
         {/* Decorative circles */}
 
@@ -337,7 +345,7 @@ export default function Publications() {
 
           <a
             href="/resources"
-            className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-medium text-black/70 transition hover:text-black"
           >
             <ArrowLeft size={16} />
             Resources
@@ -356,7 +364,7 @@ export default function Publications() {
                 />
               </div>
 
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-black/60">
                 Resources
               </p>
 
@@ -364,7 +372,7 @@ export default function Publications() {
                 Publications
               </h1>
 
-              <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">
+              <p className="mt-4 max-w-xl text-sm leading-7 text-black text-bold sm:text-base">
                 Explore research, reports, strategic documents and
                 programme publications produced by EACHRights to
                 advance human rights, social justice and human
@@ -469,7 +477,7 @@ export default function Publications() {
                           className={`block h-1.5 rounded-full transition-all duration-300 ${
                             currentHeroPub === index
                               ? "w-6 bg-accent"
-                              : "w-1.5 bg-white/30 group-hover/dot:bg-white/60"
+                              : "w-1.5 bg-black/20 group-hover/dot:bg-black/40"
                           }`}
                         />
                       </button>
@@ -552,6 +560,7 @@ export default function Publications() {
 
       </section>
 
+
       {/* ======================================================
           PUBLICATIONS SECTION
       ====================================================== */}
@@ -566,15 +575,15 @@ export default function Publications() {
 
             <div>
 
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
-                Knowledge Resources
-              </p>
+              <span className="block h-1 w-14 bg-forest" />
 
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-                Our Publications
+              <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                Browse the archive
               </h2>
 
-              <div className="mt-4 h-1 w-16 rounded-full bg-forest" />
+              <p className="mt-2 max-w-md text-sm leading-6 text-ink/60">
+                Search or filter by category to find what you need.
+              </p>
 
             </div>
 
@@ -596,7 +605,7 @@ export default function Publications() {
                 }
                 placeholder="Search publications..."
                 aria-label="Search publications"
-                className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
+                className="w-full border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
               />
 
             </div>
@@ -620,7 +629,7 @@ export default function Publications() {
                     setActiveCategory(category)
                   }
                   aria-pressed={isActive}
-                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  className={`px-4 py-2 text-sm font-semibold transition ${
                     isActive
                       ? "bg-forest text-white shadow-sm"
                       : "bg-forest-soft text-forest hover:bg-forest/10"
@@ -817,21 +826,17 @@ export default function Publications() {
 
         <div className="mx-auto max-w-5xl">
 
-          <div className="rounded-2xl border border-forest/10 bg-white p-8 shadow-sm sm:p-10">
+          <div className="border border-forest/10 bg-white p-8 shadow-sm sm:p-10">
 
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
 
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-forest text-white">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center bg-forest text-white">
                 <Download size={23} />
               </div>
 
               <div>
 
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest">
-                  Knowledge & Evidence
-                </p>
-
-                <h2 className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+                <h2 className="font-display text-xl font-bold text-ink sm:text-2xl">
                   Access our publications
                 </h2>
 
