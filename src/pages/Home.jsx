@@ -13,7 +13,8 @@ import {
   HeartPulse,
   Leaf,
   BriefcaseBusiness,
-  Building2,
+  ShieldCheck,
+  Globe2,
   Search,
   Megaphone,
   Users,
@@ -94,6 +95,17 @@ const focusAreas = [
   },
 ];
 
+/*
+|--------------------------------------------------------------------------
+| PROGRAMMES
+|--------------------------------------------------------------------------
+| Institutional Growth and Sustainability has no dedicated photo yet, so
+| `image` is left unset for it — the preview panel below falls back to a
+| solid background when a programme has no image. Add an
+| `../assets/impact/impact-7.png` (or similar) and set it here once one
+| exists.
+*/
+
 const programmes = [
   {
     title: "Education Justice",
@@ -128,7 +140,7 @@ const programmes = [
     link: "/programmes/environmental-climate-justice",
   },
   {
-    title: "Economic Justice",
+    title: "Economic Justice, Business and Human Rights",
     description:
       "Advancing economic and social rights for vulnerable and marginalized communities.",
     icon: BriefcaseBusiness,
@@ -136,12 +148,19 @@ const programmes = [
     link: "/programmes/economic-justice",
   },
   {
-    title: "Business & Human Rights",
+    title: "Universal Periodic Review",
     description:
-      "Promoting responsible business practices and respect for human rights.",
-    icon: Building2,
+      "Our engagement with the UN's Universal Periodic Review mechanism to advance human rights accountability.",
+    icon: Globe2,
     image: impact6,
-    link: "/programmes/business-human-rights",
+    link: "/processes/universal-periodic-review",
+  },
+  {
+    title: "Institutional Growth and Sustainability",
+    description:
+      "Strengthening our organisational capacity, governance and resource base to sustain long-term impact.",
+    icon: ShieldCheck,
+    link: "/programmes/institutional-growth-sustainability",
   },
 ];
 
@@ -215,7 +234,7 @@ const platforms = [
 
 const preloadSources = [
   ...heroSlides.map((s) => s.image),
-  ...programmes.map((p) => p.image),
+  ...programmes.map((p) => p.image).filter(Boolean),
 ];
 
 /* =========================================================
@@ -631,7 +650,7 @@ function Programmes() {
     <section className={`bg-forest-light ${SECTION}`}>
       <div className={CONTAINER}>
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading title="Six programmes. One commitment to justice.">
+          <SectionHeading title="Seven programmes. One commitment to justice.">
             Our programmes address the structural barriers that prevent
             communities from fully realizing their rights.
           </SectionHeading>
@@ -694,17 +713,28 @@ function Programmes() {
 
           <div className="relative hidden min-h-[520px] overflow-hidden bg-forest lg:block">
             <AnimatePresence initial={false}>
-              <motion.img
-                key={selected.title}
-                src={selected.image}
-                alt=""
-                aria-hidden="true"
-                initial={{ opacity: reduce ? 1 : 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: reduce ? 1 : 0 }}
-                transition={{ duration: reduce ? 0 : 0.5 }}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+              {selected.image ? (
+                <motion.img
+                  key={selected.title}
+                  src={selected.image}
+                  alt=""
+                  aria-hidden="true"
+                  initial={{ opacity: reduce ? 1 : 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: reduce ? 1 : 0 }}
+                  transition={{ duration: reduce ? 0 : 0.5 }}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <motion.div
+                  key={selected.title}
+                  initial={{ opacity: reduce ? 1 : 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: reduce ? 1 : 0 }}
+                  transition={{ duration: reduce ? 0 : 0.5 }}
+                  className="absolute inset-0 h-full w-full bg-forest-dark"
+                />
+              )}
             </AnimatePresence>
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-8 pt-24">
               <p className="font-display text-2xl font-bold text-white">

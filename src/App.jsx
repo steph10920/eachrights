@@ -26,6 +26,7 @@ import HealthJustice from "./pages/programmes/HealthJustice";
 import EnvironmentalClimateJustice from "./pages/programmes/EnvironmentalClimateJustice";
 import EconomicJustice from "./pages/programmes/EconomicJustice";
 import TheoryOfChange from "./pages/programmes/TheoryOfChange";
+import InstitutionalGrowthSustainability from "./pages/programmes/InstitutionalGrowthSustainability";
 
 // Processes
 import UniversalPeriodicReview from "./pages/processes/UniversalPeriodicReview";
@@ -77,6 +78,10 @@ function App() {
         <Route
           path="/programmes/theory-of-change"
           element={<TheoryOfChange />}
+        />
+        <Route
+          path="/programmes/institutional-growth-sustainability"
+          element={<InstitutionalGrowthSustainability />}
         />
 
         {/* Processes */}

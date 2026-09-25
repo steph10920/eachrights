@@ -20,11 +20,10 @@ import {
 |--------------------------------------------------------------------------
 | Reuses the same photos as the "Six programmes" section on the Home
 | page (src/pages/Home.jsx), so a programme looks the same wherever it
-| appears on the site. Home has six images (Business & Human Rights gets
-| its own, impact6); this page has five cards, since Economic Justice and
-| Business & Human Rights are combined into a single card here — that
-| combined card uses impact5. impact6 is reused below as the hero
-| background photo.
+| appears on the site. Economic Justice and Business & Human Rights are
+| combined into a single card here, using impact5. The Universal Periodic
+| Review card has no dedicated photo and falls back to a solid colour
+| background. The hero uses its own separate photo (heroImpact.png).
 */
 
 import educationPhoto from "../assets/impact/impact-1.png";
@@ -91,15 +90,14 @@ const programmes = [
     blurb:
       "Holding business and state actors accountable for the economic and social rights of communities, and advancing responsible business conduct across the region.",
   },
-];
-
-const processes = [
   {
+    index: "06",
     name: "Universal Periodic Review",
     path: "/processes/universal-periodic-review",
     icon: Globe2,
+    stat: "UN engagement",
     blurb:
-      "Our engagement with the UN's Universal Periodic Review mechanism to advance human rights accountability.",
+      "Our engagement with the UN's Universal Periodic Review mechanism to advance human rights accountability across the region.",
   },
 ];
 
@@ -112,7 +110,7 @@ const srhrAdvocacyLink = {
 
 // Credibility strip under the hero — drawn only from facts already on the page
 const heroFacts = [
-  { value: "05", label: "Focus programmes" },
+  { value: "06", label: "Focus programmes" },
   { value: "East Africa", label: "Regional reach" },
   { value: "UPR", label: "UN engagement" },
 ];
@@ -231,7 +229,7 @@ function ProgrammeRow({
 /* =========================================================
    SIMPLE CARD
    ---------------------------------------------------------
-   Used for Processes and SRHR Advocacy.
+   Used for the SRHR Advocacy link-out.
 ========================================================= */
 
 function SimpleCard({
@@ -340,9 +338,7 @@ export default function WhatWeDo() {
             Our objectives are to develop, strengthen and protect the
             principles of the rule of law, the enjoyment of human rights, and
             the promotion of Economic, Social and Cultural Rights across East
-            Africa — delivered through five focus programmes and our
-            engagement with regional and international human rights
-            processes.
+            Africa — delivered through six focus programmes.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -386,7 +382,7 @@ export default function WhatWeDo() {
       >
         <div className="mb-4 max-w-2xl">
           <h2 className="font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
-            Five focus areas, one mission.
+            Six focus areas, one mission.
           </h2>
 
           <p className="mt-4 leading-7 text-ink/65">
@@ -447,13 +443,12 @@ export default function WhatWeDo() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl">
             <h2 className="font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
-              How it all fits together.
+              Track our SRHR advocacy.
             </h2>
 
             <p className="mt-4 leading-7 text-ink/65">
-              Alongside our five programmes, we work through regional and
-              international mechanisms to hold states accountable to their
-              human rights commitments.
+              A dedicated portal follows our Sexual and Reproductive Health
+              and Rights work across the region in more depth.
             </p>
           </div>
 
@@ -467,13 +462,6 @@ export default function WhatWeDo() {
             variants={gridVariants}
             className="grid gap-6 sm:grid-cols-2"
           >
-            {processes.map((process) => (
-              <SimpleCard
-                key={process.path}
-                {...process}
-              />
-            ))}
-
             <SimpleCard
               name={srhrAdvocacyLink.name}
               blurb={srhrAdvocacyLink.blurb}
