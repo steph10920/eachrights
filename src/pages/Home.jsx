@@ -20,6 +20,9 @@ import {
   Users,
   Gavel,
   FileText,
+  Quote,
+  Landmark,
+  HandHeart,
 } from "lucide-react";
 
 import CountUp from "../components/CountUp.jsx";
@@ -207,6 +210,36 @@ const approaches = [
     description:
       "Using strategic legal action to protect rights and seek justice.",
     icon: Gavel,
+  },
+];
+
+/** Who bears the weight when rights guaranteed on paper aren't realized in practice. */
+const challengeGroups = [
+  "Communities living in poverty, with the least power to demand accountability.",
+  "Women and girls facing gender-based discrimination and exclusion.",
+  "Informal workers with little legal protection or bargaining power.",
+  "Communities on the frontline of environmental and climate harm.",
+];
+
+/** Three ways we move rights from principle to practice. */
+const pillars = [
+  {
+    icon: Users,
+    title: "Stronger rights awareness",
+    text:
+      "People cannot claim rights they do not know they have. We work directly with communities so they can name violations, organise and act.",
+  },
+  {
+    icon: Landmark,
+    title: "Stronger institutions and accountability",
+    text:
+      "Government and public institutions carry the primary duty to protect rights. We push for the reforms, rulings and reporting that hold that duty in place.",
+  },
+  {
+    icon: HandHeart,
+    title: "Stronger movements and partnerships",
+    text:
+      "Lasting change outlasts any single case or campaign. We convene civil society, researchers and grassroots groups to keep the pressure for justice moving.",
   },
 ];
 
@@ -611,6 +644,103 @@ function Introduction() {
   );
 }
 
+/** The problem this work responds to: rights on paper vs. rights in practice. */
+function Challenge() {
+  return (
+    <section className="bg-white" aria-labelledby="challenge-title">
+      <div className={`${CONTAINER} grid gap-12 px-6 py-20 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-12 lg:py-28`}>
+        <div>
+          <p className="flex items-center gap-3 text-sm font-semibold text-forest/60">
+            <span className="h-px w-10 bg-[#8DC63F]" />
+            The challenge
+          </p>
+          <h2
+            id="challenge-title"
+            className="mt-5 font-display text-3xl font-bold leading-tight text-forest sm:text-4xl"
+          >
+            Rights guaranteed on paper are still out of reach in daily life.
+          </h2>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-ink/70">
+            Constitutions and international treaties across East Africa
+            recognize economic, social and cultural rights. But recognition on
+            its own does not put food on a table, keep a clinic stocked, or
+            protect land from being taken.
+          </p>
+          <p className="mt-4 max-w-xl leading-7 text-ink/65">
+            This is not because these rights are aspirational. It is because
+            the institutions meant to deliver them are under-resourced,
+            under-monitored, or not held to account.
+          </p>
+
+          <ul className="mt-8 space-y-3 border-t border-forest/10 pt-6">
+            {challengeGroups.map((line) => (
+              <li key={line} className="flex gap-3 leading-7 text-ink/70">
+                <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8DC63F]" />
+                {line}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="relative">
+          <img
+            src={impact3}
+            alt=""
+            aria-hidden="true"
+            className="aspect-[4/5] w-full max-w-md object-cover"
+          />
+          <img
+            src={impact2}
+            alt=""
+            aria-hidden="true"
+            className="absolute -bottom-8 -left-8 hidden aspect-square w-40 border-4 border-white object-cover shadow-xl sm:block lg:w-48"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** How we respond: three durable pillars, not isolated projects. */
+function Pillars() {
+  return (
+    <section className={`bg-forest-light ${SECTION}`} aria-labelledby="pillars-title">
+      <div className={CONTAINER}>
+        <div className="max-w-2xl">
+          <h2
+            id="pillars-title"
+            className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl"
+          >
+            How we drive change
+          </h2>
+          <p className="mt-5 text-lg leading-8 text-ink/65">
+            Lasting change doesn&apos;t come from isolated projects. It comes
+            from strengthening the conditions that make rights realizable, in
+            communities, institutions and the wider civic space.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+          {pillars.map((pillar) => {
+            const Icon = pillar.icon;
+            return (
+              <article key={pillar.title} className="bg-white p-8">
+                <span className="flex h-14 w-14 items-center justify-center bg-forest-light">
+                  <Icon size={26} strokeWidth={1.7} className="text-forest" />
+                </span>
+                <h3 className="mt-6 font-display text-xl font-bold text-forest">
+                  {pillar.title}
+                </h3>
+                <p className="mt-3 leading-7 text-ink/65">{pillar.text}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /** Short excerpt from the Strategic Plan 2026-2030, linking through to the full document. */
 function StrategicPlanHighlight() {
   return (
@@ -844,6 +974,63 @@ function Impact() {
   );
 }
 
+/** Full-bleed pull-quote, anchoring the vision behind the day-to-day work. */
+function QuoteBanner() {
+  return (
+    <section className="relative isolate overflow-hidden bg-forest-dark px-6 py-24 text-white sm:px-8 lg:px-12">
+      <img
+        src={commitmentImage}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest-dark via-forest-dark/80 to-forest-dark/60" />
+
+      <div className={`${CONTAINER} max-w-3xl`}>
+        <Quote size={32} className="text-[#8DC63F]" strokeWidth={1.5} />
+        <p className="mt-6 font-display text-2xl font-bold leading-snug sm:text-3xl">
+          Success looks like communities who know their rights, institutions
+          that answer to the people they serve, and a region where dignity is
+          not conditional on circumstance.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/** Closing call to action: an invitation to partners, funders and communities alike. */
+function Invitation() {
+  return (
+    <section className={`bg-paper ${SECTION}`}>
+      <div className={`${CONTAINER} max-w-3xl`}>
+        <h2 className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
+          Your invitation
+        </h2>
+        <p className="mt-5 text-lg leading-8 text-ink/70">
+          Whether you are a partner organisation, a researcher, a funder or a
+          member of the communities we work alongside, you are part of the
+          ecosystem that makes these rights real.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link
+            to="/what-we-do"
+            className="inline-flex items-center gap-2 bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest-dark"
+          >
+            Explore our work
+            <ArrowRight size={17} />
+          </Link>
+          <Link
+            to="/who-we-are/our-story"
+            className="inline-flex items-center gap-2 border border-forest px-6 py-3.5 text-sm font-bold text-forest transition hover:bg-forest hover:text-white"
+          >
+            Learn our story
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Approach() {
   return (
     <section className={`bg-paper ${SECTION}`}>
@@ -1005,15 +1192,19 @@ export default function Home() {
       <Hero />
 
       <main>
-        <Platforms />
         <Introduction />
-        <StrategicPlanHighlight />
-        <FocusAreas />
+        <Challenge />
+        <Pillars />
         <Programmes />
+        <StrategicPlanHighlight />
         <Impact />
+        <QuoteBanner />
+        <Invitation />
         <Approach />
+        <FocusAreas />
         <StoryAndChange />
         <WhereWeWork />
+        <Platforms />
       </main>
 
       <ScrollToTop visible={showScrollTop} />
