@@ -246,13 +246,13 @@ export default function Publications() {
 
         <div className="relative mx-auto max-w-7xl px-6 py-7 sm:px-8 sm:py-9 lg:px-12 lg:py-10">
 
-          <Link
-            to="/resources"
+          <a
+            href="/resources"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
           >
             <ArrowLeft size={16} />
             Resources
-          </Link>
+          </a>
 
           <div className="mt-4 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
 

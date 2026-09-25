@@ -1,10 +1,19 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, ChevronRight, ExternalLink } from "lucide-react";
 import logo from "../assets/logo.jpeg";
 
 /* =========================================================
    MAIN NAVIGATION
+
+   Every link below is a plain <a>, not a React Router
+   <Link>/<NavLink>. That's deliberate: clicking any nav item
+   — including the one for the page you're already on —
+   triggers a full page reload and lands at the top of the
+   page, rather than a client-side route swap that leaves
+   your scroll position untouched. Active-state styling is
+   done by hand (isActivePath) since <a> has no built-in
+   concept of the current route.
 ========================================================= */
 
 const whoWeAreLinks = [
@@ -44,17 +53,20 @@ const srhrAdvocacyLink = {
   url: "https://eachrights.github.io/srhr/",
 };
 
-function navLinkClasses({ isActive }) {
+function navLinkClasses(active) {
   return `relative text-sm font-semibold transition ${
-    isActive ? "text-forest" : "text-ink/70 hover:text-forest"
+    active ? "text-forest" : "text-ink/70 hover:text-forest"
   } after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-[#8DC63F] after:transition-all ${
-    isActive ? "after:w-full" : "after:w-0"
+    active ? "after:w-full" : "after:w-0"
   }`;
 }
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileWhoWeAreOpen, setMobileWhoWeAreOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  const isActivePath = (path) => pathname === path;
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
@@ -65,17 +77,15 @@ function Navbar() {
     <header className="sticky top-0 z-50 border-b border-forest/10 bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
         {/* LOGO — doubles as the Home link */}
-        <NavLink
-          to="/"
-          end
-          onClick={closeMobileMenu}
+        <a
+          href="/"
           aria-label="Home"
-          className={({ isActive }) =>
-            `shrink-0 transition ${isActive ? "opacity-100" : "opacity-90 hover:opacity-100"}`
-          }
+          className={`shrink-0 transition ${
+            isActivePath("/") ? "opacity-100" : "opacity-90 hover:opacity-100"
+          }`}
         >
           <img src={logo} alt="EACHRights" className="h-13 w-auto object-contain" />
-        </NavLink>
+        </a>
 
         {/* DESKTOP NAVIGATION */}
         <nav className="hidden items-center gap-8 md:flex">
@@ -93,41 +103,41 @@ function Navbar() {
             <div className="invisible absolute left-0 top-full w-64 pt-3 opacity-0 transition duration-150 group-hover/who:visible group-hover/who:opacity-100">
               <div className="border border-forest/10 bg-white p-2 shadow-xl">
                 {whoWeAreLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.path}
-                    to={link.path}
+                    href={link.path}
                     className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm text-ink/75 transition hover:bg-forest-light/60 hover:text-forest"
                   >
                     <span>{link.name}</span>
                     <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
           </div>
 
           {/* HOW WE WORK — direct navigation link */}
-          <NavLink to="/how-we-work" className={navLinkClasses}>
+          <a href="/how-we-work" className={navLinkClasses(isActivePath("/how-we-work"))}>
             How We Work
-          </NavLink>
+          </a>
 
           {/* WHAT WE DO — direct navigation link, no dropdown */}
-          <NavLink to="/what-we-do" className={navLinkClasses}>
+          <a href="/what-we-do" className={navLinkClasses(isActivePath("/what-we-do"))}>
             What We Do
-          </NavLink>
+          </a>
 
           {navLinks.map((link) => (
-            <NavLink key={link.path} to={link.path} className={navLinkClasses}>
+            <a key={link.path} href={link.path} className={navLinkClasses(isActivePath(link.path))}>
               {link.name}
-            </NavLink>
+            </a>
           ))}
 
-          <Link
-            to="/contact"
+          <a
+            href="/contact"
             className="bg-[#8DC63F] px-5 py-2.5 text-sm font-bold text-forest transition hover:brightness-105"
           >
             Get Involved
-          </Link>
+          </a>
         </nav>
 
         {/* MOBILE MENU BUTTON */}
@@ -164,63 +174,63 @@ function Navbar() {
               {mobileWhoWeAreOpen && (
                 <div className="flex flex-col pb-2 pl-3">
                   {whoWeAreLinks.map((link) => (
-                    <Link
+                    <a
                       key={link.path}
-                      to={link.path}
+                      href={link.path}
                       onClick={closeMobileMenu}
                       className="flex items-center justify-between py-2 text-sm text-ink/65"
                     >
                       <span>{link.name}</span>
                       <ChevronRight size={14} className="shrink-0 text-forest-dark/40" />
-                    </Link>
+                    </a>
                   ))}
                 </div>
               )}
             </div>
 
             {/* HOW WE WORK */}
-            <NavLink
-              to="/how-we-work"
+            <a
+              href="/how-we-work"
               onClick={closeMobileMenu}
-              className={({ isActive }) =>
-                `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
-              }
+              className={`py-3 text-sm font-semibold ${
+                isActivePath("/how-we-work") ? "text-forest" : "text-ink/70"
+              }`}
             >
               How We Work
-            </NavLink>
+            </a>
 
             {/* WHAT WE DO */}
-            <NavLink
-              to="/what-we-do"
+            <a
+              href="/what-we-do"
               onClick={closeMobileMenu}
-              className={({ isActive }) =>
-                `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
-              }
+              className={`py-3 text-sm font-semibold ${
+                isActivePath("/what-we-do") ? "text-forest" : "text-ink/70"
+              }`}
             >
               What We Do
-            </NavLink>
+            </a>
 
             {navLinks.map((link) => (
-              <NavLink
+              <a
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 onClick={closeMobileMenu}
-                className={({ isActive }) =>
-                  `py-3 text-sm font-semibold ${isActive ? "text-forest" : "text-ink/70"}`
-                }
+                className={`py-3 text-sm font-semibold ${
+                  isActivePath(link.path) ? "text-forest" : "text-ink/70"
+                }`}
               >
                 {link.name}
-              </NavLink>
+              </a>
             ))}
           </div>
 
-          <Link
-            to="/contact"
+          <a
+            href="/contact"
             onClick={closeMobileMenu}
             className="mt-4 block bg-[#8DC63F] px-5 py-3 text-center text-sm font-bold text-forest transition hover:brightness-105"
           >
             Get Involved
-          </Link>
+          </a>
         </div>
       )}
     </header>
