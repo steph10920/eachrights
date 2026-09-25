@@ -37,6 +37,8 @@ import impact6 from "../assets/impact/impact-6.png";
 
 import commitmentImage from "../assets/videos/evidence.png";
 import educationJusticeImage from "../assets/videos/rightsintoaction.png";
+import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 2026-2030.png";
+
 
 /* =========================================================
    CONTENT
@@ -712,7 +714,7 @@ function Programmes() {
     <section className={`bg-forest-light ${SECTION}`}>
       <div className={CONTAINER}>
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading title="Seven programmes. One commitment to justice.">
+          <SectionHeading title="Seven Strategic Focus Areas. One commitment to justice.">
             Our programmes address the structural barriers that prevent
             communities from fully realizing their rights.
           </SectionHeading>

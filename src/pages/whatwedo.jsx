@@ -362,7 +362,7 @@ export default function WhatWeDo() {
           </div>
 
           <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-7xl">
-            What we do.
+            What we do
           </h1>
 
           <p className="mt-7 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
@@ -416,14 +416,14 @@ export default function WhatWeDo() {
             <span className="block h-1 w-14 bg-accent" />
 
             <h2 className="mt-5 font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
-              Rights into action.
+              Rights into action
             </h2>
           </div>
 
           <div className="max-w-3xl">
             <p className="font-display text-2xl font-bold leading-snug text-forest sm:text-3xl">
               We work to create an environment where people can claim their
-              rights and live with dignity.
+              rights and live with dignity
             </p>
 
             <p className="mt-6 text-lg leading-8 text-ink/70">
@@ -449,7 +449,7 @@ export default function WhatWeDo() {
           <span className="block h-1 w-14 bg-accent" />
 
           <h2 className="mt-5 font-display text-4xl font-bold tracking-tight text-forest sm:text-5xl">
-            Seven programmes. One commitment to justice.
+            Seven Strategic Focus Areas, One commitment to justice
           </h2>
 
           <p className="mt-5 text-lg leading-8 text-ink/65">
