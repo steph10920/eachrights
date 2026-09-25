@@ -870,7 +870,7 @@ function Programmes() {
             })}
           </ul>
 
-          <div className="relative hidden min-h-[520px] overflow-hidden bg-forest lg:block">
+          <div className="relative order-first min-h-[220px] overflow-hidden bg-forest sm:min-h-[300px] lg:order-none lg:min-h-[520px]">
             <AnimatePresence initial={false}>
               {selected.image ? (
                 <motion.img
