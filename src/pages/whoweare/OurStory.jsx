@@ -47,13 +47,9 @@ const statements = [
   {
     icon: Handshake,
     label: "Goal Statement",
-    text: "Building a more just and equitable society.",
+    text: "To achieve a just and equitable society where vulnerable and marginalized groups and communities can fully realize their rights to education and health, challenge gender and economic inequalities, and reduce the impact of environmental and climate vulnerabilities.",
   },
-  {
-    icon: Handshake,
-    label: "Our Values",
-    text: "Building a more just and equitable society.",
-  },
+  
 ];
 
 const coreValues = [

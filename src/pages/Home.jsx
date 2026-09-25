@@ -37,8 +37,15 @@ import impact6 from "../assets/impact/impact-6.png";
 
 import commitmentImage from "../assets/videos/evidence.png";
 import educationJusticeImage from "../assets/videos/rightsintoaction.png";
-import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 2026-2030.png";
 
+// ============================================================
+// STRATEGIC PLAN PDF
+// ============================================================
+// Bundled the same way Publications.jsx links its PDFs: imported
+// as a static asset so Vite resolves it to a real, hashed URL at
+// build time instead of relying on a /documents/... path in public/.
+import strategicPlan2026 from "../assets/publications/STRATEGIC PLAN 2026-2030.pdf";
+import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 2026-2030.png";
 
 /* =========================================================
    CONTENT
@@ -46,16 +53,6 @@ import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 
 
 const HERO_INTERVAL = 5000;
 const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
-
-/*
-|--------------------------------------------------------------------------
-| STRATEGIC PLAN
-|--------------------------------------------------------------------------
-| Update this path once the Strategic Plan 2026-2030 PDF has a permanent
-| home (e.g. dropped into `src/assets/documents/` and imported, uploaded
-| to Drive, or served from a `/documents` route).
-*/
-const STRATEGIC_PLAN_URL = "/documents/EACHRights-Strategic-Plan-2026-2030.pdf";
 
 const heroSlides = [
   {
@@ -650,7 +647,7 @@ function StrategicPlanHighlight() {
           </p>
 
           <a
-            href={STRATEGIC_PLAN_URL}
+            href={strategicPlan2026}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-7 inline-flex items-center gap-2 bg-[#8DC63F] px-6 py-3.5 text-sm font-bold text-forest transition hover:brightness-105"
@@ -945,7 +942,7 @@ function WhereWeWork() {
   return (
     <section className={`bg-paper ${SECTION}`}>
       <div className={CONTAINER}>
-        <SectionHeading title="East African in scope. Community-rooted in practice." />
+        <SectionHeading title="East African in scope Community-rooted in practice" />
 
         <div className="mt-14 grid gap-px bg-forest/15 md:grid-cols-3">
           {regions.map((region) => (
