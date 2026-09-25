@@ -141,7 +141,7 @@ const srhrAdvocacyLink = {
 
 const heroFacts = [
   {
-    value: "06",
+    value: "07",
     label: "Core programmes",
   },
   {

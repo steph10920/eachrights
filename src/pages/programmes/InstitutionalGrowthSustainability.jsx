@@ -31,6 +31,21 @@ const interventions = [
     title: "Invest in people and systems",
     text: "Build staff capacity, knowledge management and operational systems that keep the organisation effective as it grows.",
   },
+  {
+    icon: Users2,
+    title: "Communication and visibility",
+    text: "Enhance our communication strategies and visibility to increase awareness and support for our work.",
+  },
+  {
+    icon: Users2,
+    title: "Data and Information System Management and Security",
+    text: "Data and information system management and security is a critical aspect of institutional growth and sustainability. It involves implementing robust data management practices, ensuring data privacy and security, and leveraging technology to enhance operational efficiency.",
+  },
+  {
+    icon: Users2,
+    title: "Monitoring, Evaluation and Learning",
+    text: "Monitoring, evaluation, and learning (MEL) is a crucial component of institutional growth and sustainability. It involves systematically tracking progress, assessing the effectiveness of programs and initiatives, and using insights gained to inform decision-making and continuous improvement.",
+  },
 ];
 
 export default function InstitutionalGrowthSustainability() {

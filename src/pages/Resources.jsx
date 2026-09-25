@@ -1,6 +1,6 @@
+
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
   FileText,
   Download,
@@ -12,7 +12,12 @@ import {
   Search,
 } from "lucide-react";
 
-// PDFs — used only as the download/view targets, never parsed in the browser
+import publicationsHero from "../assets/publications/publications-hero.png";
+
+// ============================================================
+// PUBLICATION PDFs
+// ============================================================
+
 import strategicPlan2026 from "../assets/publications/STRATEGIC PLAN 2026-2030.pdf";
 import educationSchools from "../assets/publications/Build Us More Schools (Full Version).pdf";
 import surveyReport from "../assets/publications/EACHRights Perception Survey Report.pdf";
@@ -21,8 +26,10 @@ import strategicPlan2011 from "../assets/publications/EACHRights_Trust_Strategic
 import annualReport2020 from "../assets/publications/EACHRights-Annual-Report-2020.pdf";
 import ssnfgm from "../assets/publications/Shifts in Social Norms Around FGMC in Garissa County.pdf";
 
-// Thumbnails — pre-rendered page-1 images (see scripts/generate-pdf-thumbnails.mjs)
-// Run `npm run generate:thumbnails` after adding or replacing a PDF above.
+// ============================================================
+// PUBLICATION THUMBNAILS
+// ============================================================
+
 import strategicPlan2026Thumb from "../assets/publication-thumbs/STRATEGIC PLAN 2026-2030.png";
 import educationSchoolsThumb from "../assets/publication-thumbs/Build Us More Schools (Full Version).png";
 import surveyReportThumb from "../assets/publication-thumbs/EACHRights Perception Survey Report.png";
@@ -31,33 +38,41 @@ import strategicPlan2011Thumb from "../assets/publication-thumbs/EACHRights_Trus
 import annualReport2020Thumb from "../assets/publication-thumbs/EACHRights-Annual-Report-2020.png";
 import ssnfgmThumb from "../assets/publication-thumbs/Shifts in Social Norms Around FGMC in Garissa County.png";
 
-/* =========================================================
-   PUBLICATION THUMBNAIL
-   A plain, lazily-loaded <img> pointing at a pre-rendered
-   page-1 image. No PDF is parsed in the browser: the image
-   is generated once at build time by
-   scripts/generate-pdf-thumbnails.mjs. Falls back to a
-   document icon if the image is missing or fails to load.
-========================================================= */
+// ============================================================
+// PUBLICATION THUMBNAIL COMPONENT
+// ============================================================
+
 function PublicationThumb({ src, alt }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
 
   if (failed || !src) {
     return (
-      <div className="flex h-full w-full items-center justify-center bg-forest-soft">
-        <FileText size={32} className="text-forest/40" strokeWidth={1.5} />
+      <div
+        className="flex h-full w-full items-center justify-center bg-forest-soft"
+        aria-label="Publication preview unavailable"
+      >
+        <FileText
+          size={34}
+          className="text-forest/40"
+          strokeWidth={1.5}
+        />
       </div>
     );
   }
 
   return (
-    <div className="relative h-full w-full bg-gray-50">
+    <div className="relative h-full w-full overflow-hidden bg-gray-50">
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-forest-soft">
-          <FileText size={32} className="text-forest/30" strokeWidth={1.5} />
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-forest-soft">
+          <FileText
+            size={34}
+            className="text-forest/30"
+            strokeWidth={1.5}
+          />
         </div>
       )}
+
       <img
         src={src}
         alt={alt}
@@ -65,7 +80,7 @@ function PublicationThumb({ src, alt }) {
         decoding="async"
         onLoad={() => setLoaded(true)}
         onError={() => setFailed(true)}
-        className={`h-full w-full object-cover transition-opacity duration-300 ${
+        className={`h-full w-full object-cover transition-opacity duration-500 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
       />
@@ -73,71 +88,85 @@ function PublicationThumb({ src, alt }) {
   );
 }
 
+// ============================================================
+// PUBLICATIONS DATA
+// ============================================================
+
 const publications = [
   {
-    title: "Strategic PlaN 2026-2030",
+    title: "Strategic Plan 2026–2030",
     category: "Strategy & Planning",
     year: "2026",
     description:
-      "EACHRights Strategic Plan 2026-2030 is a 5-year roadmap to create a just society that upholds human rights and dignity.Its mission is to protect social and economic rights for vulnerable and marginalized communities, focusing on health, education, gender equality, and climate change.",
+      "EACHRights Strategic Plan 2026–2030 provides a five-year roadmap for advancing human rights, dignity and social justice, with a focus on vulnerable and marginalized communities.",
     pdf: strategicPlan2026,
     thumb: strategicPlan2026Thumb,
   },
+
   {
-    title: "Build Us More Schools (Full Version)",
+    title: "Build Us More Schools!",
     category: "Programme Publications",
-    year: "2026",
+    year: "2024",
     description:
-      "'Build Us More Schools!' - June 2024 research report on the lack of quality free public schools in Mabatini & Ngei Wards, Mathare, Nairobi.Community voices calling on the government to build more public schools.",
+      "A research report examining the need for quality, free public schools in Mabatini and Ngei Wards in Mathare, Nairobi, highlighting community voices and calls for improved access to education.",
     pdf: educationSchools,
     thumb: educationSchoolsThumb,
   },
+
   {
     title: "EACHRights Perception Survey Report",
     category: "Programme Publications",
-    year: "2026",
+    year: "2011",
     description:
-      "A 2011 survey by EACHRights on how well Kenyans (govt, NGOs, public in Kibera, Kawangware, Jericho) understand ECOSOC rights - finds awareness is low, civil/political rights get more attention than economic/social rights, and most people don't know how to claim ECOSOC rights.",
+      "A survey exploring public awareness and understanding of economic, social and cultural rights among government actors, civil society and communities in selected areas of Nairobi.",
     pdf: surveyReport,
     thumb: surveyReportThumb,
   },
+
   {
-    title: "EACHRights Trust Strategic Plan 4 (2019-2023)",
+    title: "Strategic Plan 2019–2023",
     category: "Strategy & Planning",
-    year: "2023",
+    year: "2019",
     description:
-      "Strategic Plan 2019-2023 - EACHRights 4th plan.Goal: A society that respects human rights & dignity.Focused on 5 pillars: ECOSOC rights advocacy, capacity building, knowledge management, partnerships, and institutional growth to promote ECOSOC rights for vulnerable groups in Kenya, Uganda & Tanzania.",
+      "EACHRights' fourth strategic plan focused on strengthening advocacy, capacity building, knowledge management, partnerships and institutional development to advance economic, social and cultural rights.",
     pdf: strategicPlan2023,
     thumb: strategicPlan2023Thumb,
   },
+
   {
-    title: "EACHRights_Trust_Strategic_Plan_2011-2012",
+    title: "Strategic Plan 2011–2012",
     category: "Strategy & Planning",
-    year: "2012",
+    year: "2011",
     description:
-      "First-ever EACHRights plan (2011).Vision: To be the leading human rights org in East Africa.Mission: Promote human rights with focus on economic, social & cultural rights for social justice.Goals: 1) Build visibility nationally/regionally/internationally 2) Institutional strengthening & capacity building.",
+      "EACHRights' first strategic plan established the organisation's direction for promoting human rights, with particular emphasis on economic, social and cultural rights and social justice.",
     pdf: strategicPlan2011,
     thumb: strategicPlan2011Thumb,
   },
+
   {
-    title: "EACHRights-Annual-Report-2020",
+    title: "EACHRights Annual Report 2020",
     category: "Annual Reports",
     year: "2020",
     description:
-      "Annual Report 2020 - EACHRights first ever annual report.Despite COVID-19, delivered on Strategic Plan 2019-2023: child rights advocacy, education barazas in Homa Bay, #TunzaWatotoWetu campaign on teen pregnancies/FGM, UPR reports, ACERWC engagement, and partnerships with U of Stirling, GI-ESCR, ERIKS & OSF.",
+      "The 2020 annual report highlights EACHRights' work in child rights advocacy, education, prevention of harmful practices, Universal Periodic Review engagement and partnerships during the COVID-19 period.",
     pdf: annualReport2020,
     thumb: annualReport2020Thumb,
   },
+
   {
-    title: "Shifts in Social Norms Around FGMC in Garissa County",
+    title: "Shifts in Social Norms Around FGM/C in Garissa County",
     category: "Programme Publications",
     year: "2025",
     description:
-      "July 2025 Study: Shifts in Social Norms on FGM/C in Garissa County.16 FGDs found FGM/C still widespread due to beliefs on purity/marriageability, but shifting from severe Type III (Pharaonic) to Type I (Sunna) and medicalized cuts. Older generations defend it; younger, educated urban youth increasingly oppose. Recommends community dialogue, youth advocacy, religious engagement.",
+      "A 2025 study examining changing social norms around FGM/C in Garissa County and highlighting the role of community dialogue, youth engagement, religious leaders and education.",
     pdf: ssnfgm,
     thumb: ssnfgmThumb,
   },
 ];
+
+// ============================================================
+// FILTER CATEGORIES
+// ============================================================
 
 const categories = [
   "All",
@@ -146,54 +175,83 @@ const categories = [
   "Strategy & Planning",
 ];
 
-// Newest first. Sorted once here so adding a publication above, in any
-// order, is enough — no need to also re-order the array by hand.
+// Sort newest publications first.
 const publicationsByYear = [...publications].sort(
   (a, b) => Number(b.year) - Number(a.year)
 );
 
-// A handful of the most current publications to rotate through in the
-// hero. Keeping this short (not the whole list) keeps the carousel quick
-// to cycle.
+// Publications featured in the hero carousel.
 const heroPublications = publicationsByYear.slice(0, 4);
 
 const HERO_PUB_INTERVAL = 5000;
 
-// External portal tracking SRHR advocacy, surfaced alongside the PDF
-// library since it isn't one of the downloadable publications above.
+// ============================================================
+// EXTERNAL RESOURCE
+// ============================================================
+
 const srhrAdvocacyLink = {
   name: "SRHR Advocacy Portal",
   url: "https://eachrights.github.io/srhr/",
 };
 
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
+
 export default function Publications() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentHeroPub, setCurrentHeroPub] = useState(0);
+
   const heroPubTimerRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // ----------------------------------------------------------
+  // HERO CAROUSEL
+  // ----------------------------------------------------------
+
   const startHeroPubTimer = () => {
     clearInterval(heroPubTimerRef.current);
+
     heroPubTimerRef.current = setInterval(() => {
-      setCurrentHeroPub((prev) => (prev + 1) % heroPublications.length);
+      setCurrentHeroPub(
+        (previous) =>
+          (previous + 1) % heroPublications.length
+      );
     }, HERO_PUB_INTERVAL);
   };
 
   useEffect(() => {
     startHeroPubTimer();
-    return () => clearInterval(heroPubTimerRef.current);
+
+    return () => {
+      clearInterval(heroPubTimerRef.current);
+    };
   }, []);
 
   const goToHeroPub = (index) => {
     setCurrentHeroPub(index);
     startHeroPubTimer();
   };
-  const prevHeroPub = () =>
-    goToHeroPub((currentHeroPub - 1 + heroPublications.length) % heroPublications.length);
-  const nextHeroPub = () => goToHeroPub((currentHeroPub + 1) % heroPublications.length);
+
+  const goToPreviousHeroPub = () => {
+    goToHeroPub(
+      (currentHeroPub - 1 + heroPublications.length) %
+        heroPublications.length
+    );
+  };
+
+  const goToNextHeroPub = () => {
+    goToHeroPub(
+      (currentHeroPub + 1) % heroPublications.length
+    );
+  };
 
   const activeHeroPub = heroPublications[currentHeroPub];
+
+  // ----------------------------------------------------------
+  // HERO ANIMATION
+  // ----------------------------------------------------------
 
   const heroPubMotion = prefersReducedMotion
     ? {
@@ -203,36 +261,65 @@ export default function Publications() {
         transition: { duration: 0 },
       }
     : {
-        initial: { opacity: 0, scale: 1.04 },
-        animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 0.98 },
-        transition: { duration: 0.6, ease: "easeInOut" },
+        initial: {
+          opacity: 0,
+          scale: 1.03,
+        },
+        animate: {
+          opacity: 1,
+          scale: 1,
+        },
+        exit: {
+          opacity: 0,
+          scale: 0.98,
+        },
+        transition: {
+          duration: 0.55,
+          ease: "easeInOut",
+        },
       };
 
-  const filteredPublications = publicationsByYear.filter((publication) => {
-    const matchesCategory =
-      activeCategory === "All" ||
-      publication.category === activeCategory;
+  // ----------------------------------------------------------
+  // SEARCH + CATEGORY FILTER
+  // ----------------------------------------------------------
 
-    const matchesSearch =
-      publication.title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      publication.description
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+  const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return matchesCategory && matchesSearch;
-  });
+  const filteredPublications = publicationsByYear.filter(
+    (publication) => {
+      const matchesCategory =
+        activeCategory === "All" ||
+        publication.category === activeCategory;
+
+      const searchableText = `
+        ${publication.title}
+        ${publication.description}
+        ${publication.category}
+        ${publication.year}
+      `.toLowerCase();
+
+      const matchesSearch =
+        normalizedSearch === "" ||
+        searchableText.includes(normalizedSearch);
+
+      return matchesCategory && matchesSearch;
+    }
+  );
+
+  // ----------------------------------------------------------
+  // RENDER
+  // ----------------------------------------------------------
 
   return (
     <main className="bg-white font-sans text-ink">
 
-      {/* =====================================================
+      {/* ======================================================
           HERO
-      ===================================================== */}
+      ====================================================== */}
 
       <section className="relative isolate overflow-hidden bg-forest text-white">
+
+        {/* Decorative circles */}
 
         <div
           className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full border border-white/10"
@@ -244,7 +331,9 @@ export default function Publications() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-7 sm:px-8 sm:py-9 lg:px-12 lg:py-10">
+        <div className="relative mx-auto max-w-7xl px-6 py-8 sm:px-8 lg:px-12 lg:py-10">
+
+          {/* Back link */}
 
           <a
             href="/resources"
@@ -254,160 +343,229 @@ export default function Publications() {
             Resources
           </a>
 
-          <div className="mt-4 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="mt-5 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
 
-            <div className="max-w-3xl">
+            {/* HERO CONTENT */}
 
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
-                <BookOpen size={18} strokeWidth={1.7} />
+            <div className="max-w-2xl">
+
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
+                <BookOpen
+                  size={20}
+                  strokeWidth={1.7}
+                />
               </div>
 
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 Resources
               </p>
 
-              <h1 className="mt-2 text-2xl font-bold leading-[1.1] tracking-tight sm:text-3xl lg:text-4xl">
+              <h1 className="mt-2 text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
                 Publications
               </h1>
 
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
-                Explore publications, reports and programme documents produced
-                by EACHRights to advance human rights, justice and human dignity.
+              <p className="mt-4 max-w-xl text-sm leading-7 text-white/75 sm:text-base">
+                Explore research, reports, strategic documents and
+                programme publications produced by EACHRights to
+                advance human rights, social justice and human
+                dignity.
               </p>
 
             </div>
 
-            {/* PDF PREVIEW CAROUSEL + SRHR CARD */}
-            <div className="mx-auto flex w-full max-w-md flex-wrap justify-center gap-4">
+            {/* HERO RESOURCES */}
 
-              <div className="w-full max-w-[200px]">
+            <div className="mx-auto flex w-full max-w-lg flex-wrap justify-center gap-5">
+
+              {/* PUBLICATION CAROUSEL */}
+
+              <div className="w-full max-w-[210px]">
+
                 <div className="group relative bg-white p-2 shadow-xl">
+
                   <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-50">
-                    <AnimatePresence initial={false} mode="sync">
-                      <motion.div key={currentHeroPub} {...heroPubMotion} className="absolute inset-0">
+
+                    <AnimatePresence
+                      initial={false}
+                      mode="sync"
+                    >
+                      <motion.div
+                        key={activeHeroPub.title}
+                        {...heroPubMotion}
+                        className="absolute inset-0"
+                      >
                         <PublicationThumb
                           src={activeHeroPub.thumb}
-                          alt={activeHeroPub.title}
+                          alt={`${activeHeroPub.title} publication cover`}
                         />
                       </motion.div>
                     </AnimatePresence>
 
-                    <button
-                      type="button"
-                      onClick={prevHeroPub}
-                      aria-label="Previous publication"
-                      className="absolute left-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
-                    >
-                      <ArrowLeft size={13} />
-                    </button>
+                    {/* Previous */}
 
                     <button
                       type="button"
-                      onClick={nextHeroPub}
-                      aria-label="Next publication"
-                      className="absolute right-1.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center border border-forest/10 bg-white/90 text-forest opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+                      onClick={goToPreviousHeroPub}
+                      aria-label="Previous featured publication"
+                      className="absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-forest/10 bg-white/95 text-forest opacity-0 shadow-sm transition hover:bg-white focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-forest group-hover:opacity-100"
                     >
-                      <ArrowRight size={13} />
+                      <ArrowLeft size={14} />
                     </button>
+
+                    {/* Next */}
+
+                    <button
+                      type="button"
+                      onClick={goToNextHeroPub}
+                      aria-label="Next featured publication"
+                      className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-forest/10 bg-white/95 text-forest opacity-0 shadow-sm transition hover:bg-white focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-forest group-hover:opacity-100"
+                    >
+                      <ArrowRight size={14} />
+                    </button>
+
                   </div>
 
-                  <div className="p-2.5">
+                  <div className="p-3">
+
                     <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-forest/60">
                       {activeHeroPub.category}
                     </p>
-                    <h3 className="mt-1 text-xs font-bold leading-snug text-forest">
+
+                    <h2 className="mt-1 text-xs font-bold leading-snug text-forest">
                       {activeHeroPub.title}
-                    </h3>
+                    </h2>
+
+                    <p className="mt-1 text-[10px] text-gray-500">
+                      {activeHeroPub.year}
+                    </p>
+
                   </div>
+
                 </div>
 
-                <div className="mt-2 flex justify-center gap-2">
-                  {heroPublications.map((publication, index) => (
-                    <button
-                      key={publication.title}
-                      type="button"
-                      onClick={() => goToHeroPub(index)}
-                      aria-label={`Go to publication ${index + 1}`}
-                      className="group/dot flex items-center justify-center p-1"
-                    >
-                      <span
-                        className={`block h-1.5 rounded-full transition-all duration-300 ${
-                          currentHeroPub === index ? "w-6 bg-accent" : "w-1.5 bg-white/30 group-hover/dot:bg-white/60"
-                        }`}
-                      />
-                    </button>
-                  ))}
+                {/* Carousel indicators */}
+
+                <div
+                  className="mt-3 flex justify-center gap-2"
+                  aria-label="Featured publications"
+                >
+                  {heroPublications.map(
+                    (publication, index) => (
+                      <button
+                        key={publication.title}
+                        type="button"
+                        onClick={() =>
+                          goToHeroPub(index)
+                        }
+                        aria-label={`Show ${publication.title}`}
+                        aria-current={
+                          currentHeroPub === index
+                            ? "true"
+                            : undefined
+                        }
+                        className="group/dot flex items-center justify-center p-1"
+                      >
+                        <span
+                          className={`block h-1.5 rounded-full transition-all duration-300 ${
+                            currentHeroPub === index
+                              ? "w-6 bg-accent"
+                              : "w-1.5 bg-white/30 group-hover/dot:bg-white/60"
+                          }`}
+                        />
+                      </button>
+                    )
+                  )}
                 </div>
+
               </div>
+
+              {/* SRHR PORTAL */}
 
               <a
                 href={srhrAdvocacyLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block w-full max-w-[200px] bg-white p-2 shadow-xl transition hover:-translate-y-0.5"
+                aria-label="Open SRHR Advocacy Portal in a new tab"
+                className="group block w-full max-w-[210px] bg-white p-2 shadow-xl transition hover:-translate-y-1"
               >
+
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-forest-soft">
-                  {/* Live, non-interactive preview of the portal, rendered
-                      at 3x size and scaled down so the page's real layout
-                      shows rather than a mobile-width sliver. */}
+
                   <iframe
                     src={srhrAdvocacyLink.url}
-                    title=""
+                    title="SRHR Advocacy Portal preview"
                     tabIndex={-1}
                     loading="lazy"
+                    aria-hidden="true"
                     className="pointer-events-none absolute left-0 top-0 h-[300%] w-[300%] origin-top-left scale-[0.3333] border-0"
                   />
 
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/70 via-forest/0 to-forest/0" />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/70 via-forest/5 to-transparent"
+                    aria-hidden="true"
+                  />
 
                   <div className="pointer-events-none absolute bottom-2 left-2 flex h-8 w-8 items-center justify-center rounded-full bg-white text-forest shadow-sm">
-                    <ExternalLink size={14} strokeWidth={1.9} />
+                    <ExternalLink
+                      size={14}
+                      strokeWidth={1.9}
+                    />
                   </div>
+
                 </div>
 
-                <div className="p-2.5">
+                <div className="p-3">
+
                   <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-forest/60">
                     External Resource
                   </p>
-                  <h3 className="mt-1 flex items-center gap-1 text-xs font-bold leading-snug text-forest">
+
+                  <h2 className="mt-1 flex items-center gap-1 text-xs font-bold leading-snug text-forest">
                     {srhrAdvocacyLink.name}
+
                     <ArrowRight
                       size={12}
-                      className="transition group-hover:translate-x-0.5"
+                      className="transition-transform group-hover:translate-x-0.5"
                     />
-                  </h3>
+                  </h2>
+
                 </div>
+
               </a>
 
             </div>
 
           </div>
+
         </div>
+
+        {/* Angled bottom edge */}
 
         <div
           className="absolute bottom-0 left-0 h-6 w-full bg-white"
           style={{
-            clipPath: "polygon(0 100%, 100% 0, 100% 100%)",
+            clipPath:
+              "polygon(0 100%, 100% 0, 100% 100%)",
           }}
           aria-hidden="true"
         />
 
       </section>
 
-
-      {/* =====================================================
-          PUBLICATIONS
-      ===================================================== */}
+      {/* ======================================================
+          PUBLICATIONS SECTION
+      ====================================================== */}
 
       <section className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
 
         <div className="mx-auto max-w-7xl">
 
-          {/* SEARCH */}
+          {/* SECTION HEADER + SEARCH */}
 
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 
             <div>
+
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">
                 Knowledge Resources
               </p>
@@ -417,166 +575,231 @@ export default function Publications() {
               </h2>
 
               <div className="mt-4 h-1 w-16 rounded-full bg-forest" />
+
             </div>
+
+            {/* SEARCH */}
 
             <div className="relative w-full lg:max-w-sm">
 
               <Search
                 size={18}
+                aria-hidden="true"
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
               />
 
               <input
                 type="search"
-                placeholder="Search publications..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/10"
+                onChange={(event) =>
+                  setSearchTerm(event.target.value)
+                }
+                placeholder="Search publications..."
+                aria-label="Search publications"
+                className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm outline-none transition placeholder:text-gray-400 focus:border-forest focus:ring-2 focus:ring-forest/10"
               />
 
             </div>
 
           </div>
 
-
-          {/* CATEGORY FILTER */}
+          {/* CATEGORY FILTERS */}
 
           <div className="mt-10 flex flex-wrap gap-2">
 
-            {categories.map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  activeCategory === category
-                    ? "bg-forest text-white"
-                    : "bg-forest-soft text-forest hover:bg-forest/10"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+            {categories.map((category) => {
+
+              const isActive =
+                activeCategory === category;
+
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() =>
+                    setActiveCategory(category)
+                  }
+                  aria-pressed={isActive}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                    isActive
+                      ? "bg-forest text-white shadow-sm"
+                      : "bg-forest-soft text-forest hover:bg-forest/10"
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
 
           </div>
 
+          {/* RESULTS COUNT */}
+
+          <div className="mt-8 text-sm text-gray-500">
+            Showing{" "}
+            <span className="font-semibold text-forest">
+              {filteredPublications.length}
+            </span>{" "}
+            {filteredPublications.length === 1
+              ? "publication"
+              : "publications"}
+          </div>
 
           {/* PUBLICATION GRID */}
 
           {filteredPublications.length > 0 ? (
 
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-              {filteredPublications.map((publication, index) => (
+              {filteredPublications.map(
+                (publication, index) => (
 
-                <motion.article
-                  key={publication.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.04,
-                  }}
-                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
-                >
+                  <motion.article
+                    key={publication.title}
+                    initial={{
+                      opacity: 0,
+                      y: 20,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{
+                      once: true,
+                      amount: 0.15,
+                    }}
+                    transition={{
+                      duration: 0.45,
+                      delay: Math.min(
+                        index * 0.04,
+                        0.2
+                      ),
+                    }}
+                    className="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
 
-                  {/* PDF PAGE-1 PREVIEW */}
+                    {/* THUMBNAIL */}
 
-                  <div className="relative aspect-[16/10] w-full border-b border-gray-100">
-                    <PublicationThumb
-                      src={publication.thumb}
-                      alt={publication.title}
-                    />
+                    <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-gray-100">
 
-                    <span className="absolute right-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-gray-600 shadow-sm">
-                      PDF
-                    </span>
-                  </div>
+                      <PublicationThumb
+                        src={publication.thumb}
+                        alt={`${publication.title} publication cover`}
+                      />
 
-                  <div className="flex flex-1 flex-col p-4">
-
-                    {/* CATEGORY */}
-
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-forest">
-                      {publication.category}
-                    </p>
-
-
-                    {/* TITLE */}
-
-                    <h3 className="mt-1.5 line-clamp-2 text-sm font-bold leading-snug text-ink">
-                      {publication.title}
-                    </h3>
-
-
-                    {/* DATE */}
-
-                    <div className="mt-2 flex items-center gap-1.5 text-xs text-gray-500">
-
-                      <CalendarDays size={13} />
-
-                      <span>{publication.year}</span>
+                      <span className="absolute right-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-gray-600 shadow-sm">
+                        PDF
+                      </span>
 
                     </div>
 
+                    {/* CONTENT */}
 
-                    {/* DESCRIPTION */}
+                    <div className="flex flex-1 flex-col p-5">
 
-                    <p className="mt-2.5 line-clamp-3 flex-1 text-xs leading-5 text-gray-600">
-                      {publication.description}
-                    </p>
+                      {/* CATEGORY */}
 
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-forest">
+                        {publication.category}
+                      </p>
 
-                    {/* ACTIONS */}
+                      {/* TITLE */}
 
-                    <div className="mt-4 flex flex-wrap gap-2 border-t border-gray-100 pt-3">
+                      <h3 className="mt-2 line-clamp-2 text-sm font-bold leading-snug text-ink">
+                        {publication.title}
+                      </h3>
 
-                      <a
-                        href={publication.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-forest px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-forest-dark"
-                      >
-                        <ExternalLink size={13} />
-                        View
-                      </a>
+                      {/* YEAR */}
 
-                      <a
-                        href={publication.pdf}
-                        download
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-forest/20 px-3 py-1.5 text-xs font-semibold text-forest transition hover:bg-forest-soft"
-                      >
-                        <Download size={13} />
-                        Download
-                      </a>
+                      <div className="mt-3 flex items-center gap-1.5 text-xs text-gray-500">
+
+                        <CalendarDays
+                          size={13}
+                          aria-hidden="true"
+                        />
+
+                        <span>
+                          Published {publication.year}
+                        </span>
+
+                      </div>
+
+                      {/* DESCRIPTION */}
+
+                      <p className="mt-3 line-clamp-4 flex-1 text-xs leading-5 text-gray-600">
+                        {publication.description}
+                      </p>
+
+                      {/* ACTIONS */}
+
+                      <div className="mt-5 flex flex-wrap gap-2 border-t border-gray-100 pt-4">
+
+                        <a
+                          href={publication.pdf}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-lg bg-forest px-3.5 py-2 text-xs font-semibold text-white transition hover:bg-forest-dark focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                        >
+                          <ExternalLink size={13} />
+                          View
+                        </a>
+
+                        <a
+                          href={publication.pdf}
+                          download
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-forest/20 px-3.5 py-2 text-xs font-semibold text-forest transition hover:bg-forest-soft focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2"
+                        >
+                          <Download size={13} />
+                          Download
+                        </a>
+
+                      </div>
 
                     </div>
 
-                  </div>
+                  </motion.article>
 
-                </motion.article>
-
-              ))}
+                )
+              )}
 
             </div>
 
           ) : (
 
+            /* EMPTY STATE */
+
             <div className="mt-12 rounded-2xl border border-gray-200 bg-gray-50 px-6 py-16 text-center">
 
-              <FileText
-                size={40}
-                className="mx-auto text-gray-400"
-              />
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-forest-soft">
+
+                <FileText
+                  size={28}
+                  className="text-forest/60"
+                />
+
+              </div>
 
               <h3 className="mt-5 text-xl font-bold text-ink">
                 No publications found
               </h3>
 
-              <p className="mt-2 text-sm text-gray-500">
-                Try another search term or publication category.
+              <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
+                We couldn't find publications matching
+                your search or selected category. Try
+                another search term or choose a different
+                category.
               </p>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchTerm("");
+                  setActiveCategory("All");
+                }}
+                className="mt-5 rounded-lg bg-forest px-4 py-2 text-sm font-semibold text-white transition hover:bg-forest-dark"
+              >
+                Clear filters
+              </button>
 
             </div>
 
@@ -586,16 +809,15 @@ export default function Publications() {
 
       </section>
 
-
-      {/* =====================================================
-          DOWNLOAD INFORMATION
-      ===================================================== */}
+      {/* ======================================================
+          ACCESS INFORMATION
+      ====================================================== */}
 
       <section className="bg-forest-soft px-6 py-16 sm:px-8 lg:px-12">
 
         <div className="mx-auto max-w-5xl">
 
-          <div className="rounded-2xl border border-forest/10 bg-white p-8 sm:p-10">
+          <div className="rounded-2xl border border-forest/10 bg-white p-8 shadow-sm sm:p-10">
 
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
 
@@ -605,16 +827,25 @@ export default function Publications() {
 
               <div>
 
-                <h2 className="text-xl font-bold text-ink sm:text-2xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest">
+                  Knowledge & Evidence
+                </p>
+
+                <h2 className="mt-2 text-xl font-bold text-ink sm:text-2xl">
                   Access our publications
                 </h2>
 
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 sm:text-base">
-                  Our publications provide research, evidence, programme
-                  information and knowledge that contribute to discussions on
-                  human rights, social justice and sustainable development.
-                  Publications are available in PDF format for viewing and
-                  download.
+                  Our publications provide research, evidence,
+                  programme information and institutional
+                  knowledge that contribute to discussions on
+                  human rights, social justice and sustainable
+                  development.
+                </p>
+
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 sm:text-base">
+                  Publications are available in PDF format for
+                  online viewing and download.
                 </p>
 
               </div>
@@ -626,6 +857,7 @@ export default function Publications() {
         </div>
 
       </section>
+
     </main>
   );
 }

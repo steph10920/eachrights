@@ -41,7 +41,7 @@ import educationJusticeImage from "../assets/videos/rightsintoaction.png";
    CONTENT
 ========================================================= */
 
-const HERO_INTERVAL = 6000;
+const HERO_INTERVAL = 5000;
 const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
 
 const heroSlides = [
