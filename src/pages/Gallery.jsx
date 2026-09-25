@@ -333,7 +333,7 @@ function Gallery() {
           className="max-w-2xl"
         >
           <h2 className="font-display text-3xl font-bold tracking-tight text-forest sm:text-4xl">
-            Watch our work in action.
+            Watch our work in action
           </h2>
 
           <p className="mt-5 leading-8 text-ink/70">

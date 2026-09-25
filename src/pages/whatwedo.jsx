@@ -501,7 +501,7 @@ export default function WhatWeDo() {
               </p>
 
               <h2 className="mt-3 max-w-xl font-display text-3xl font-bold leading-tight sm:text-4xl">
-                Sexual and Reproductive Health and Rights advocacy.
+                Sexual and Reproductive Health and Rights advocacy
               </h2>
 
               <p className="mt-5 max-w-xl leading-7 text-white/70">
@@ -529,7 +529,7 @@ export default function WhatWeDo() {
 
                 <h3 className="mt-3 font-display text-2xl font-bold text-forest">
                   Health, dignity and informed choice are central to human
-                  rights.
+                  rights
                 </h3>
 
                 <p className="mt-5 leading-7 text-ink/65">

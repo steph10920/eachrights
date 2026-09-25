@@ -60,8 +60,8 @@ const STRATEGIC_PLAN_URL = "/documents/EACHRights-Strategic-Plan-2026-2030.pdf";
 const heroSlides = [
   {
     label: "Advancing human rights since 2010",
-    title: "Rights, realized.",
-    highlight: "Not just recognized.",
+    title: "Rights, realized",
+    highlight: "Not just recognized",
     description:
       "EACHRights works to promote, protect and advance Economic, Social and Cultural Rights across East Africa.",
     image: hero1,
@@ -69,7 +69,7 @@ const heroSlides = [
   {
     label: "Communities at the centre",
     title: "Dignity begins",
-    highlight: "with equal opportunity.",
+    highlight: "with equal opportunity",
     description:
       "We work with vulnerable and marginalized communities to build an environment where people can claim their rights and live with dignity.",
     image: hero2,
@@ -77,7 +77,7 @@ const heroSlides = [
   {
     label: "Evidence into action",
     title: "Research becomes",
-    highlight: "action for justice.",
+    highlight: "action for justice",
     description:
       "Through research, advocacy, capacity building and public interest litigation, we turn human rights principles into action.",
     image: hero3,
@@ -674,7 +674,7 @@ function FocusAreas() {
             id="focus-title"
             className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl"
           >
-            Where we focus our efforts.
+            Where we focus our efforts
           </h2>
           <p className="mt-5 max-w-md text-lg leading-8 text-ink/65">
             Four areas where we help communities claim their rights.
@@ -714,7 +714,7 @@ function Programmes() {
     <section className={`bg-forest-light ${SECTION}`}>
       <div className={CONTAINER}>
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading title="Seven Strategic Focus Areas. One commitment to justice.">
+          <SectionHeading title="Seven Strategic Focus Areas, One commitment to justice">
             Our programmes address the structural barriers that prevent
             communities from fully realizing their rights.
           </SectionHeading>
@@ -818,7 +818,7 @@ function Impact() {
       <div className={CONTAINER}>
         <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end md:gap-10">
           <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">
-            Evidence of work. Stories of change.
+            Evidence of work, Stories of change
           </h2>
           <p className="max-w-md leading-7 text-white/70">
             Our work connects evidence, communities, institutions and
@@ -891,7 +891,7 @@ function StoryAndChange() {
       <div className={`${CONTAINER} grid lg:grid-cols-2`}>
         <div className="flex flex-col justify-center px-6 py-20 sm:px-8 lg:px-12">
           <h2 className="font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">
-            A decade-plus of turning rights into action.
+            A decade-plus of turning rights into action
           </h2>
           <p className="mt-5 max-w-lg leading-8 text-ink/70">
             Since 2010, our work has been rooted in the belief that dignity,
@@ -922,7 +922,7 @@ function StoryAndChange() {
         />
         <div className="order-1 flex flex-col justify-center px-6 py-20 sm:px-8 lg:order-2 lg:px-12">
           <h2 className="font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">
-            From evidence to lasting change.
+            From evidence to lasting change
           </h2>
           <p className="mt-5 max-w-lg leading-8 text-ink/70">
             Our Theory of Change connects the work we do today with the more

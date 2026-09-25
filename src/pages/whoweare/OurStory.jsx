@@ -120,7 +120,7 @@ export default function OurStory() {
           <div className="mb-6 h-1 w-20 bg-[#8DC63F]" />
 
           <h1 className="max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Our story, rooted in justice and dignity.
+            Our story, rooted in justice and dignity
           </h1>
         </motion.div>
       </section>
@@ -152,7 +152,7 @@ export default function OurStory() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.42fr_0.58fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <h2 className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
-              A story still being written.
+              A story still being written
             </h2>
 
             <p className="mt-6 max-w-md text-lg leading-8 text-ink/70">
@@ -231,7 +231,7 @@ export default function OurStory() {
 
           <div>
             <h2 className="font-display text-4xl font-bold leading-tight text-forest sm:text-5xl">
-              Where our work is focused.
+              Where our work is focused
             </h2>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-ink/75">
@@ -316,7 +316,7 @@ export default function OurStory() {
             </p>
 
             <h2 className="mt-3 font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">
-              Explore our Theory of Change.
+              Explore our Theory of Change
             </h2>
 
             <p className="mt-4 leading-7 text-ink/70">
