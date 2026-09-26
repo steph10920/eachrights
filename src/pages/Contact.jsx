@@ -1,19 +1,27 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Handshake } from "lucide-react";
+import heroImage from "../assets/hero/contact-hero.png";
 
 function Contact() {
   return (
     <main className="min-h-screen bg-white">
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-forest py-20 text-white lg:py-28">
+      <section className="relative flex min-h-[560px] items-center overflow-hidden bg-forest py-20 text-white lg:min-h-[680px] lg:py-28">
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent" />
         <div className="absolute inset-0 opacity-10">
           <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[40px] border-white" />
           <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full border-[50px] border-white" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
