@@ -9,20 +9,20 @@ import {
   ArrowUp,
   ArrowUpRight,
   GraduationCap,
-  Scale,
-  HeartPulse,
+  Scales,
+  Heartbeat,
   Leaf,
-  BriefcaseBusiness,
+  Briefcase,
   ShieldCheck,
-  Globe2,
-  Search,
+  Globe,
+  MagnifyingGlass,
   Megaphone,
   Users,
   Gavel,
   FileText,
-  Quote,
-  Landmark,
-} from "lucide-react";
+  Quotes,
+  Bank,
+} from "@phosphor-icons/react";
 
 import CountUp from "../components/CountUp.jsx";
 
@@ -36,6 +36,9 @@ import impact3 from "../assets/impact/impact-3.png";
 import impact4 from "../assets/impact/impact-4.png";
 import impact5 from "../assets/impact/impact-5.png";
 import impact6 from "../assets/impact/impact-6.png";
+import impact7 from "../assets/impact/impact-7.png";
+import impact8 from "../assets/impact/impact-8.png";
+import impact9 from "../assets/impact/impact-9.png";
 
 import commitmentImage from "../assets/videos/evidence.png";
 import educationJusticeImage from "../assets/videos/rightsintoaction.png";
@@ -87,21 +90,25 @@ const heroSlides = [
 const focusAreas = [
   {
     icon: GraduationCap,
+    color: "sky",
     title: "Education",
     text: "Enabling communities to fully realize their right to education.",
   },
   {
-    icon: HeartPulse,
+    icon: Heartbeat,
+    color: "rose",
     title: "Health",
     text: "Enabling communities to fully realize their right to health.",
   },
   {
-    icon: Scale,
+    icon: Scales,
+    color: "violet",
     title: "Gender and economic equality",
     text: "Challenging gender and economic inequalities.",
   },
   {
     icon: Leaf,
+    color: "green",
     title: "Environment and climate",
     text: "Reducing the impact of environmental and climate change vulnerabilities.",
   },
@@ -124,6 +131,7 @@ const programmes = [
     description:
       "Advancing equitable access to quality education and strengthening the right to learn.",
     icon: GraduationCap,
+    color: "sky",
     image: impact1,
     link: "/programmes/education-justice",
   },
@@ -131,7 +139,8 @@ const programmes = [
     title: "Gender Justice",
     description:
       "Promoting gender equality, dignity and protection for women, girls and vulnerable groups.",
-    icon: Scale,
+    icon: Scales,
+    color: "violet",
     image: impact2,
     link: "/programmes/gender-justice",
   },
@@ -139,7 +148,8 @@ const programmes = [
     title: "Health Justice",
     description:
       "Advocating for equitable access to health and the realization of the right to health.",
-    icon: HeartPulse,
+    icon: Heartbeat,
+    color: "rose",
     image: impact3,
     link: "/programmes/health-justice",
   },
@@ -148,6 +158,7 @@ const programmes = [
     description:
       "Supporting communities to address environmental challenges and climate-related injustices.",
     icon: Leaf,
+    color: "green",
     image: impact4,
     link: "/programmes/environmental-climate-justice",
   },
@@ -155,7 +166,8 @@ const programmes = [
     title: "Economic Justice, Business and Human Rights",
     description:
       "Advancing economic and social rights for vulnerable and marginalized communities.",
-    icon: BriefcaseBusiness,
+    icon: Briefcase,
+    color: "amber",
     image: impact5,
     link: "/programmes/economic-justice",
   },
@@ -163,8 +175,9 @@ const programmes = [
     title: "Universal Periodic Review",
     description:
       "Our engagement with the UN's Universal Periodic Review mechanism to advance human rights accountability.",
-    icon: Globe2,
-    image: impact6,
+    icon: Globe,
+    color: "teal",
+    image: impact9,
     link: "/processes/universal-periodic-review",
   },
   {
@@ -172,6 +185,8 @@ const programmes = [
     description:
       "Strengthening our organisational capacity, governance and resource base to sustain long-term impact.",
     icon: ShieldCheck,
+    color: "forest",
+    image: impact8,
     link: "/programmes/institutional-growth-sustainability",
   },
 ];
@@ -190,25 +205,29 @@ const approaches = [
     title: "Research",
     description:
       "Generating evidence and knowledge to understand rights challenges and inform action.",
-    icon: Search,
+    icon: MagnifyingGlass,
+    color: "amber",
   },
   {
     title: "Advocacy",
     description:
       "Influencing policies, institutions and decision-makers to advance human rights.",
     icon: Megaphone,
+    color: "rose",
   },
   {
     title: "Capacity building",
     description:
       "Strengthening communities and partners with knowledge, skills and tools for action.",
     icon: Users,
+    color: "teal",
   },
   {
     title: "Public interest litigation",
     description:
       "Using strategic legal action to protect rights and seek justice.",
     icon: Gavel,
+    color: "violet",
   },
 ];
 
@@ -227,7 +246,7 @@ const strategicAims = [
     text: "Communities equipped to know, claim and defend their economic, social and cultural rights.",
   },
   {
-    icon: Landmark,
+    icon: Bank,
     text: "Institutions across Kenya, Uganda and Tanzania held to their human rights obligations.",
   },
   {
@@ -261,7 +280,8 @@ const platforms = [
     title: "SRHR Portal",
     description:
       "Explore EACHRights' Sexual and Reproductive Health and Rights portal.",
-    icon: HeartPulse,
+    icon: Heartbeat,
+    color: "rose",
     url: SRHR_PORTAL_URL,
     /* Optional: shows a live, non-interactive preview of the site in the card. */
     preview: SRHR_PORTAL_URL,
@@ -322,6 +342,18 @@ function usePreload(sources) {
 const SECTION = "px-6 py-16 sm:px-8 lg:px-12 lg:py-20";
 const CONTAINER = "mx-auto max-w-7xl";
 
+/* Maps each data item's `color` key to a tile gradient. All values stay
+   within the brand's forest-green / lime-accent palette. */
+const COLOR_GRADIENTS = {
+  sky: "from-[#8DC63F] to-lime-600",
+  rose: "from-emerald-400 to-forest",
+  violet: "from-green-500 to-forest-dark",
+  green: "from-lime-500 to-green-700",
+  amber: "from-forest to-forest-dark",
+  teal: "from-emerald-500 to-forest-dark",
+  forest: "from-[#8DC63F] to-forest-dark",
+};
+
 function SectionHeading({ title, children, light = false }) {
   return (
     <div className="max-w-3xl">
@@ -360,6 +392,32 @@ function Fade({ children, keyId, reduce, className = "" }) {
   );
 }
 
+/** Glossy gradient icon tile for light-background sections. */
+function IconTile({ icon: Icon, gradient, size = 22, tileSize = 48, className = "" }) {
+  return (
+    <span
+      className={`relative flex shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br ${gradient} shadow-lg shadow-black/15 ring-1 ring-black/5 transition-all duration-300 ${className}`}
+      style={{ width: tileSize, height: tileSize }}
+    >
+      <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/40 via-white/0 to-black/10" />
+      <Icon size={size} weight="duotone" className="relative text-white drop-shadow-sm" />
+    </span>
+  );
+}
+
+/** Translucent glass icon tile for dark forest-green sections. */
+function GlassIconTile({ icon: Icon, size = 22, tileSize = 48 }) {
+  return (
+    <span
+      className="relative flex shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white/10 shadow-lg shadow-black/20 ring-1 ring-white/15 backdrop-blur-sm"
+      style={{ width: tileSize, height: tileSize }}
+    >
+      <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 via-white/0 to-transparent" />
+      <Icon size={size} weight="duotone" className="relative text-[#8DC63F] drop-shadow-sm" />
+    </span>
+  );
+}
+
 /* =========================================================
    SECTIONS
 ========================================================= */
@@ -374,7 +432,7 @@ function Hero() {
 
   return (
     <header
-      className="relative isolate min-h-[460px] overflow-hidden bg-forest-dark text-white lg:min-h-[540px]"
+      className="relative isolate min-h-[100svh] overflow-hidden bg-black text-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -387,13 +445,10 @@ function Hero() {
           src={slide.image}
           alt=""
           aria-hidden="true"
-          initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 1.06 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: reduce ? 1 : 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: reduce ? 1 : 0 }}
-          transition={{
-            opacity: { duration: reduce ? 0 : 1.2 },
-            scale: { duration: reduce ? 0 : HERO_INTERVAL / 1000 + 1.2, ease: "linear" },
-          }}
+          transition={{ duration: reduce ? 0 : 1.2 }}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
       </AnimatePresence>
@@ -404,7 +459,7 @@ function Hero() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
       {/* Message */}
-      <div className="mx-auto flex min-h-[460px] max-w-7xl flex-col items-start justify-center gap-8 px-6 pb-24 pt-14 sm:px-8 lg:min-h-[540px] lg:px-12">
+      <div className="mx-auto flex min-h-[100svh] max-w-7xl flex-col items-start justify-center gap-8 px-6 pb-24 pt-14 sm:px-8 lg:px-12">
         <div className="max-w-3xl">
           <AnimatePresence mode="wait" initial={false}>
             <Fade keyId={current} reduce={reduce}>
@@ -432,6 +487,7 @@ function Hero() {
               Explore our work
               <ArrowRight size={17} />
             </Link>
+
             <Link
               to="/who-we-are/our-story"
               className="inline-flex items-center gap-2 border border-white/60 bg-white/5 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white hover:text-forest"
@@ -475,6 +531,7 @@ function Hero() {
             >
               <ArrowLeft size={18} />
             </button>
+
             <button
               type="button"
               onClick={() => setCurrent((current + 1) % total)}
@@ -559,9 +616,7 @@ function Platforms() {
 
                 {/* Details */}
                 <div className="flex flex-col justify-center border-t-4 border-[#8DC63F] p-8 lg:border-l lg:border-t-0 lg:p-12">
-                  <span className="flex h-12 w-12 items-center justify-center bg-forest-light">
-                    <Icon size={24} strokeWidth={1.7} className="text-forest" />
-                  </span>
+                  <IconTile icon={Icon} gradient={COLOR_GRADIENTS[platform.color]} size={24} tileSize={48} />
 
                   <p className="mt-6 text-sm font-semibold text-forest/60">
                     {platform.type}
@@ -593,14 +648,41 @@ function Platforms() {
   );
 }
 
+/** "Who we are" intro, with a supporting photo alongside the copy on large screens. */
+/** "Who we are" intro, set over a full-bleed background photo. */
+/** "Who we are" intro, anchored by a large framed photo with a floating stat card. */
 function Introduction() {
   return (
     <section
       aria-labelledby="intro-title"
-      className="bg-paper px-6 py-14 sm:px-8 lg:px-12 lg:py-16"
+      className="overflow-hidden bg-paper px-6 py-16 sm:px-8 lg:px-12 lg:py-24"
     >
-      <div className={`${CONTAINER} grid gap-8 lg:grid-cols-[0.55fr_1.45fr] lg:gap-20`}>
-        <div>
+      <div className={`${CONTAINER} grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20`}>
+        {/* Image, framed with an offset accent border and a floating stat card */}
+        <div className="relative order-1 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="absolute -right-4 -top-4 -z-10 hidden h-full w-full border-2 border-[#8DC63F] sm:block"
+          />
+          <img
+            src={impact7}
+            alt=""
+            aria-hidden="true"
+            className="aspect-[3/2] w-full object-cover shadow-2xl shadow-forest-dark/25"
+          />
+
+          <div className="absolute -bottom-7 left-4 right-4 flex items-center gap-4 bg-forest px-6 py-5 text-white shadow-xl sm:left-8 sm:right-auto sm:max-w-[260px]">
+            <span className="font-display text-4xl font-bold text-[#8DC63F]">
+              14+
+            </span>
+            <span className="text-sm leading-6 text-white/85">
+              Years advancing human rights across East Africa
+            </span>
+          </div>
+        </div>
+
+        {/* Copy */}
+        <div className="order-2 pt-10 sm:pt-12 lg:order-2 lg:pt-0">
           <span className="block h-1 w-14 bg-[#8DC63F]" />
           <h2
             id="intro-title"
@@ -608,15 +690,13 @@ function Introduction() {
           >
             Who we are
           </h2>
-        </div>
 
-        <div className="max-w-3xl">
-          <p className="font-display text-2xl font-bold leading-snug text-forest sm:text-3xl">
+          <p className="mt-6 max-w-xl font-display text-2xl font-bold leading-snug text-forest sm:text-3xl">
             The East African Centre for Human Rights promotes, protects and
             advances Economic, Social and Cultural Rights.
           </p>
 
-          <p className="mt-6 text-lg leading-8 text-ink/70">
+          <p className="mt-6 max-w-xl text-lg leading-8 text-ink/70">
             EACHRights is a non-partisan regional non-governmental organisation
             working with vulnerable and marginalized communities. Through
             research, advocacy, capacity building and public interest
@@ -624,13 +704,18 @@ function Introduction() {
             their rights and live with dignity.
           </p>
 
-          <Link
-            to="/who-we-are/our-story"
-            className="mt-8 inline-flex items-center gap-2 bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest-dark"
-          >
-            Read our story
-            <ArrowRight size={17} />
-          </Link>
+          <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Link
+              to="/who-we-are/our-story"
+              className="inline-flex items-center gap-2 bg-forest px-6 py-3.5 text-sm font-bold text-white transition hover:bg-forest-dark"
+            >
+              Read our story
+              <ArrowRight size={17} />
+            </Link>
+            <p className="text-sm font-semibold text-forest/60">
+              Working across Kenya, Uganda &amp; Tanzania
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -680,13 +765,13 @@ function Challenge() {
             src={impact3}
             alt=""
             aria-hidden="true"
-            className="aspect-[4/5] w-full max-w-md object-cover"
+            className="aspect-[3/2] w-full max-w-md object-cover"
           />
           <img
             src={impact2}
             alt=""
             aria-hidden="true"
-            className="absolute -bottom-8 -left-8 hidden aspect-square w-40 border-4 border-white object-cover shadow-xl sm:block lg:w-48"
+            className="absolute -bottom-8 -left-8 hidden aspect-[3/2] w-40 border-4 border-white object-cover shadow-xl sm:block lg:w-48"
           />
         </div>
       </div>
@@ -703,9 +788,7 @@ function StrategicPlanHighlight() {
     >
       <div className={CONTAINER}>
         <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16">
-          <span className="flex h-16 w-16 shrink-0 items-center justify-center bg-white/10">
-            <FileText size={30} strokeWidth={1.6} className="text-[#8DC63F]" />
-          </span>
+          <GlassIconTile icon={FileText} size={30} tileSize={64} />
 
           <div>
             <p className="flex items-center gap-3 text-sm font-semibold text-white/70">
@@ -749,7 +832,7 @@ function StrategicPlanHighlight() {
             const Icon = aim.icon;
             return (
               <div key={aim.text} className="flex gap-4 border-t border-[#8DC63F] pt-5">
-                <Icon size={22} strokeWidth={1.7} className="mt-0.5 shrink-0 text-[#8DC63F]" />
+                <GlassIconTile icon={Icon} size={20} tileSize={44} />
                 <p className="leading-7 text-white/85">{aim.text}</p>
               </div>
             );
@@ -781,9 +864,7 @@ function FocusAreas() {
             const Icon = area.icon;
             return (
               <div key={area.title} className="flex gap-5">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-forest-light">
-                  <Icon size={23} strokeWidth={1.7} className="text-forest" />
-                </span>
+                <IconTile icon={Icon} gradient={COLOR_GRADIENTS[area.color]} size={22} tileSize={48} />
                 <div>
                   <dt className="font-display text-xl font-bold text-forest">
                     {area.title}
@@ -841,10 +922,12 @@ function Programmes() {
                         : "border-transparent hover:bg-white/60"
                     }`}
                   >
-                    <Icon
-                      size={24}
-                      strokeWidth={1.7}
-                      className={isActive ? "text-[#8DC63F]" : "text-forest/50"}
+                    <IconTile
+                      icon={Icon}
+                      gradient={COLOR_GRADIENTS[programme.color]}
+                      size={18}
+                      tileSize={40}
+                      className={isActive ? "ring-2 ring-[#8DC63F] ring-offset-2 scale-105" : "opacity-60"}
                     />
                     <span className="font-display text-xl font-bold text-forest sm:text-2xl">
                       {programme.title}
@@ -882,7 +965,7 @@ function Programmes() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: reduce ? 1 : 0 }}
                   transition={{ duration: reduce ? 0 : 0.5 }}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-contain"
                 />
               ) : (
                 <motion.div
@@ -965,17 +1048,19 @@ function Impact() {
 /** Full-bleed pull-quote, anchoring the vision behind the day-to-day work. */
 function QuoteBanner() {
   return (
-    <section className="relative isolate overflow-hidden bg-forest-dark px-6 py-16 text-white sm:px-8 lg:px-12">
+    <section className="relative isolate overflow-hidden bg-black px-6 py-16 text-white sm:px-8 lg:px-12">
       <img
         src={commitmentImage}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 -z-10 h-full w-full object-cover"
       />
+
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
 
       <div className={`${CONTAINER} max-w-3xl`}>
-        <Quote size={32} className="text-[#8DC63F]" strokeWidth={1.5} />
+        <GlassIconTile icon={Quotes} size={26} tileSize={56} />
+
         <p className="mt-6 font-display text-2xl font-bold leading-snug sm:text-3xl">
           Success looks like communities who know their rights, institutions
           that answer to the people they serve, and a region where dignity is
@@ -985,7 +1070,6 @@ function QuoteBanner() {
     </section>
   );
 }
-
 function Approach() {
   return (
     <section className={`bg-paper ${SECTION}`}>
@@ -1009,7 +1093,7 @@ function Approach() {
             const Icon = item.icon;
             return (
               <article key={item.title} className="border-t-4 border-[#8DC63F] pt-6">
-                <Icon size={30} strokeWidth={1.6} className="text-forest" />
+                <IconTile icon={Icon} gradient={COLOR_GRADIENTS[item.color]} size={26} tileSize={52} />
                 <h3 className="mt-5 font-display text-2xl font-bold text-forest">
                   {item.title}
                 </h3>
@@ -1048,7 +1132,7 @@ function StoryAndChange() {
           src={commitmentImage}
           alt=""
           aria-hidden="true"
-          className="aspect-video h-full w-full object-cover lg:aspect-auto"
+          className="aspect-[3/2] w-full object-cover"
         />
       </div>
 
@@ -1057,7 +1141,7 @@ function StoryAndChange() {
           src={educationJusticeImage}
           alt=""
           aria-hidden="true"
-          className="order-2 aspect-video h-full w-full object-cover lg:order-1 lg:aspect-auto"
+          className="order-2 aspect-[3/2] w-full object-cover lg:order-1"
         />
         <div className="order-1 flex flex-col justify-center px-6 py-14 sm:px-8 lg:order-2 lg:px-12">
           <h2 className="font-display text-3xl font-bold leading-tight text-forest sm:text-4xl">

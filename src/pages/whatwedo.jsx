@@ -24,6 +24,8 @@ import genderPhoto from "../assets/impact/impact-2.png";
 import healthPhoto from "../assets/impact/impact-3.png";
 import environmentalPhoto from "../assets/impact/impact-4.png";
 import economicPhoto from "../assets/impact/impact-5.png";
+import institutionalPhoto from "../assets/impact/impact-8.png";
+import uprPhoto from "../assets/impact/impact-9.png";
 import heroPhoto from "../assets/impact/heroImpact.png";
 
 /* =========================================================
@@ -88,7 +90,7 @@ const programmes = [
     name: "Institutional Growth and Sustainability",
     path: "/programmes/institutional-growth-sustainability",
     icon: ShieldCheck,
-    photo: null,
+    photo: institutionalPhoto,
     stat: "Capacity & sustainability",
     blurb:
       "Strengthening organisational capacity, governance, partnerships and resource mobilisation to sustain EACHRights' long-term impact and effectiveness.",
@@ -97,7 +99,7 @@ const programmes = [
     name: "Universal Periodic Review",
     path: "/processes/universal-periodic-review",
     icon: Globe2,
-    photo: null,
+    photo: uprPhoto,
     stat: "UN human rights engagement",
     blurb:
       "Engaging with the United Nations Universal Periodic Review mechanism to contribute evidence, strengthen accountability and advance human rights commitments.",
@@ -184,6 +186,9 @@ const cardVariants = {
 // below it. Border + icon-shift on hover, not a full recolor —
 // the same restrained language as ProcessCard, so the two
 // sections read as one system rather than two different kits.
+//
+// The frame is 3:2 to match the source photos' native ratio
+// (1536×1024), so object-cover never has to crop them.
 
 function ProgrammeCard({ name, blurb, icon: Icon, photo, stat, path }) {
   return (
@@ -192,7 +197,7 @@ function ProgrammeCard({ name, blurb, icon: Icon, photo, stat, path }) {
         to={path}
         className="group flex h-full flex-col overflow-hidden border border-forest/12 bg-white transition-colors duration-300 hover:border-forest"
       >
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-forest-light">
+        <div className="relative aspect-[3/2] w-full overflow-hidden bg-forest-light">
           {photo ? (
             <>
               <img
@@ -303,7 +308,7 @@ export default function WhatWeDo() {
           HERO
       ===================================================== */}
 
-      <header className="relative isolate min-h-[560px] overflow-hidden bg-forest text-paper sm:min-h-[520px] lg:min-h-[640px]">
+      <header className="relative isolate min-h-[420px] overflow-hidden bg-forest text-paper sm:min-h-[440px] lg:min-h-[480px]">
         <div className="absolute left-0 right-0 top-0 z-10 h-1 bg-accent" />
 
         <img
@@ -315,35 +320,35 @@ export default function WhatWeDo() {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20" />
 
-        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-6 py-14 sm:min-h-[520px] sm:px-8 sm:py-18 lg:min-h-[640px] lg:px-12 lg:py-24">
+        <div className="relative z-10 mx-auto flex min-h-[420px] max-w-7xl flex-col justify-center px-6 py-10 sm:min-h-[440px] sm:px-8 sm:py-12 lg:min-h-[480px] lg:px-12 lg:py-16">
 
           <Link
             to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-white/75 transition hover:text-white"
+            className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-white/75 transition hover:text-white"
           >
             <ArrowLeft size={16} />
             Back to Home
           </Link>
 
-          <div className="mt-6 flex items-center gap-2.5">
+          <div className="mt-3 flex items-center gap-2.5">
             <span className="h-1.5 w-1.5 bg-accent" />
             <p className="text-sm font-semibold text-white/70">
               OUR WORK
             </p>
           </div>
 
-          <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-7xl">
+          <h1 className="mt-3 max-w-4xl font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-7xl">
             What we do
           </h1>
 
-          <p className="mt-7 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
+          <p className="mt-4 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
             EACHRights promotes, protects and advances Economic, Social and
             Cultural Rights across East Africa. We work with communities,
             institutions and partners to address barriers to rights,
             strengthen accountability and support lasting social justice.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-4">
+          <div className="mt-6 flex flex-wrap gap-4">
             <a
               href="#programmes"
               className="inline-flex items-center gap-2 bg-accent px-6 py-3.5 text-sm font-bold text-forest transition hover:brightness-105"
@@ -361,7 +366,7 @@ export default function WhatWeDo() {
           </div>
 
           {/* Credibility strip */}
-          <div className="mt-14 grid max-w-3xl grid-cols-3 gap-x-4 gap-y-6 border-t border-white/15 pt-8 sm:flex sm:flex-wrap sm:gap-x-12">
+          <div className="mt-8 grid max-w-3xl grid-cols-3 gap-x-4 gap-y-6 border-t border-white/15 pt-6 sm:flex sm:flex-wrap sm:gap-x-10">
             {heroFacts.map((fact) => (
               <div key={fact.label}>
                 <p className="font-display text-2xl font-bold text-white sm:text-3xl">
@@ -380,7 +385,7 @@ export default function WhatWeDo() {
           INTRODUCTION
       ===================================================== */}
 
-      <section className="bg-white px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+      <section className="bg-white px-6 py-14 sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
 
           <div>
@@ -414,7 +419,7 @@ export default function WhatWeDo() {
 
       <section
         id="programmes"
-        className="mx-auto max-w-7xl px-6 py-24 sm:px-8 sm:py-28 lg:px-12"
+        className="mx-auto max-w-7xl px-6 py-16 sm:px-8 sm:py-18 lg:px-12"
       >
         <div className="max-w-3xl">
           <span className="block h-1 w-14 bg-accent" />
@@ -439,7 +444,7 @@ export default function WhatWeDo() {
             amount: 0.1,
           }}
           variants={gridVariants}
-          className="mt-14 grid gap-px bg-forest/12 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-9 grid gap-px bg-forest/12 sm:grid-cols-2 lg:grid-cols-3"
         >
           {programmes.map((programme) => (
             <ProgrammeCard
@@ -453,12 +458,12 @@ export default function WhatWeDo() {
           SRHR PORTAL
       ===================================================== */}
 
-      <section className="bg-white px-6 py-24 sm:px-8 lg:px-12 lg:py-28">
+      <section className="bg-white px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="mx-auto max-w-7xl">
 
           <div className="grid overflow-hidden border border-forest/10 lg:grid-cols-[1.1fr_0.9fr]">
 
-            <div className="bg-forest p-8 text-white sm:p-12 lg:p-16">
+            <div className="bg-forest p-8 text-white sm:p-10 lg:p-12">
               <span className="flex h-12 w-12 items-center justify-center bg-white/10">
                 <HeartPulse
                   size={25}
@@ -492,7 +497,7 @@ export default function WhatWeDo() {
               </a>
             </div>
 
-            <div className="flex items-center bg-paper p-8 sm:p-12 lg:p-16">
+            <div className="flex items-center bg-paper p-8 sm:p-10 lg:p-12">
               <div>
                 <p className="text-sm font-semibold text-forest/60">
                   Why it matters

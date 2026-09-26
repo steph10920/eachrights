@@ -1,6 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import heroImage from "../assets/hero/opportunities-hero.png";
 import {
   BriefcaseBusiness,
   GraduationCap,
@@ -63,65 +63,88 @@ function Opportunities() {
       <section className="relative overflow-hidden bg-forest text-white">
         <div className="absolute inset-0 bg-gradient-to-br from-forest to-forest-dark" />
 
+        {/* HERO IMAGE — full-bleed, right half, edge to edge */}
+        <motion.div
+          className="hidden lg:block absolute inset-y-0 right-0 w-1/2 xl:w-[45%]"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <img
+            src={heroImage}
+            alt="EACHRights team and community members engaged in advocacy work"
+            className="w-full h-full object-cover"
+          />
+          {/* fade into the forest background on the left edge of the image */}
+          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-forest to-transparent" />
+        </motion.div>
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-          <div className="max-w-4xl">
+          <div className="grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-16 items-center">
 
-            <motion.p
-              className="text-sm md:text-base font-semibold uppercase tracking-[0.18em] text-white/70"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              Opportunities
-            </motion.p>
+            <div className="max-w-4xl">
 
-            <motion.h1
-              className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              Work With EACHRights
-            </motion.h1>
+              <motion.p
+                className="text-sm md:text-base font-semibold uppercase tracking-[0.18em] text-white/70"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Opportunities
+              </motion.p>
 
-            <motion.p
-              className="mt-6 text-lg md:text-xl leading-relaxed text-white/85 max-w-3xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-            >
-              Explore opportunities to contribute to the advancement of human
-              dignity, equality, social justice and the realization of
-              economic, social and cultural rights.
-            </motion.p>
+              <motion.h1
+                className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+              >
+                Work With EACHRights
+              </motion.h1>
 
-            {/* CURRENT STATUS */}
-            <motion.div
-              className="mt-10 max-w-3xl bg-white text-forest-dark rounded-2xl p-6 md:p-7 shadow-xl"
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.7 }}
-            >
-              <div className="flex items-start gap-4">
+              <motion.p
+                className="mt-6 text-lg md:text-xl leading-relaxed text-white/85 max-w-3xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.7 }}
+              >
+                Explore opportunities to contribute to the advancement of human
+                dignity, equality, social justice and the realization of
+                economic, social and cultural rights.
+              </motion.p>
 
-                <div className="shrink-0 w-11 h-11 rounded-full bg-forest-soft flex items-center justify-center">
-                  <Bell className="w-5 h-5 text-forest" />
+              {/* CURRENT STATUS */}
+              <motion.div
+                className="mt-10 max-w-3xl bg-white text-forest-dark rounded-2xl p-6 md:p-7 shadow-xl"
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.7 }}
+              >
+                <div className="flex items-start gap-4">
+
+                  <div className="shrink-0 w-11 h-11 rounded-full bg-forest-soft flex items-center justify-center">
+                    <Bell className="w-5 h-5 text-forest" />
+                  </div>
+
+                  <div>
+                    <h2 className="text-xl font-bold">
+                      No Current Vacancies
+                    </h2>
+
+                    <p className="mt-2 text-gray-600 leading-relaxed">
+                      EACHRights is currently not hiring. There are no open
+                      employment vacancies at this time. Please check this page
+                      regularly for future opportunities.
+                    </p>
+                  </div>
+
                 </div>
+              </motion.div>
 
-                <div>
-                  <h2 className="text-xl font-bold">
-                    No Current Vacancies
-                  </h2>
+            </div>
 
-                  <p className="mt-2 text-gray-600 leading-relaxed">
-                    EACHRights is currently not hiring. There are no open
-                    employment vacancies at this time. Please check this page
-                    regularly for future opportunities.
-                  </p>
-                </div>
-
-              </div>
-            </motion.div>
+            {/* empty column — the full-bleed image sits behind this half of the grid */}
+            <div className="hidden lg:block" aria-hidden="true" />
 
           </div>
         </div>
@@ -389,4 +412,3 @@ function Opportunities() {
 }
 
 export default Opportunities;
-
