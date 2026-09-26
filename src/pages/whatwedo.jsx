@@ -42,7 +42,7 @@ const SRHR_PORTAL_URL = "https://eachrights.github.io/srhr/";
 
 const programmes = [
   {
-    name: "Education Justice Programme",
+    name: "Education",
     path: "/programmes/education-justice",
     icon: BookOpenCheck,
     photo: educationPhoto,
@@ -51,7 +51,7 @@ const programmes = [
       "Advancing equitable access to quality education and strengthening the right to learn, working with schools, communities and duty-bearers to address barriers to education.",
   },
   {
-    name: "Gender Justice Programme",
+    name: "Gender",
     path: "/programmes/gender-justice",
     icon: Users,
     photo: genderPhoto,
@@ -60,7 +60,7 @@ const programmes = [
       "Promoting gender equality, dignity and protection for women, girls and vulnerable groups while challenging harmful practices and gender-based violence.",
   },
   {
-    name: "Health Justice Programme",
+    name: "Health",
     path: "/programmes/health-justice",
     icon: HeartPulse,
     photo: healthPhoto,
@@ -69,7 +69,7 @@ const programmes = [
       "Advocating for equitable access to health services and the realization of the right to health, including Sexual and Reproductive Health and Rights.",
   },
   {
-    name: "Environmental & Climate Justice Programme",
+    name: "Environmental & Climate",
     path: "/programmes/environmental-climate-justice",
     icon: Leaf,
     photo: environmentalPhoto,
@@ -78,7 +78,7 @@ const programmes = [
       "Supporting communities to address environmental challenges and climate-related injustices while promoting rights-based approaches to environmental protection.",
   },
   {
-    name: "Economic Justice, Business and Human Rights Programme",
+    name: "Economic Justice, Business and Human Rights",
     path: "/programmes/economic-justice",
     icon: Briefcase,
     photo: economicPhoto,
@@ -231,7 +231,7 @@ function ProgrammeCard({ name, blurb, icon: Icon, photo, stat, path }) {
           <p className="mt-3 flex-1 text-sm leading-7 text-ink/65">{blurb}</p>
 
           <span className="mt-6 inline-flex items-center gap-2 border-t border-forest/10 pt-5 text-sm font-bold text-forest transition-colors duration-300 group-hover:text-forest-dark">
-            Explore programme
+            Read more
             <ArrowRight
               size={15}
               className="transition-transform duration-300 group-hover:translate-x-1"
